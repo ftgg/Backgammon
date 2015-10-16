@@ -2,7 +2,7 @@
 public class test {
 
 	public static void main(String[] args) {
-		//zum Testenasdf
+		//zum Testen
 		System.out.println("Test");
 
 	}
