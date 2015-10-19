@@ -10,6 +10,14 @@ public class Wuerfel {
 	}
 
 	public Wuerfel(int min, int max) {
+		//max has to be greater than 0
+		if(max <= 0){
+			max = 6;
+		}
+		//min has to be less than max and greather than -1
+		if(min < 0 || min > max){
+			min = 0;
+		}
 		this.max = max;
 		this.min = min;
 	}
