@@ -10,6 +10,7 @@ public class Wuerfel {
 	}
 
 	public Wuerfel(int min, int max) {
+
 		// max has to be greater than 0
 		// min has to be less than max and greather than -1
 		if (max <= 0 || min < 0 || min > max) {
