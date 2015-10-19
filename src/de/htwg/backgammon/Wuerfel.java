@@ -6,17 +6,14 @@ public class Wuerfel {
 	private int min;
 
 	public Wuerfel() {
-		this(1,6);
+		this(1, 6);
 	}
 
 	public Wuerfel(int min, int max) {
-		//max has to be greater than 0
-		if(max <= 0){
-			max = 6;
-		}
-		//min has to be less than max and greather than -1
-		if(min < 0 || min > max){
-			min = 0;
+		// max has to be greater than 0
+		// min has to be less than max and greather than -1
+		if (max <= 0 || min < 0 || min > max) {
+			throw new IllegalArgumentException();
 		}
 		this.max = max;
 		this.min = min;
@@ -36,7 +33,5 @@ public class Wuerfel {
 	public int getMin() {
 		return min;
 	}
-	
-	
 
 }
