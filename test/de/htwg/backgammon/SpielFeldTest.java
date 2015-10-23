@@ -7,24 +7,33 @@ import org.junit.Test;
 
 public class SpielFeldTest {
 
-	private SpielFeld sf;
-	
+	private SpielFeld sfstd, sfs;
+	private int size; // size of (pitch/4)
+
 	@Before
 	public void setUp() throws Exception {
-		sf = new SpielFeld();
+		size = 2;
+		sfstd = new SpielFeld();
+		sfs = new SpielFeld(size);
 	}
 
 	@Test
 	public void testSpielFeld() {
-		assertNotNull(sf);
+		assertNotNull(sfstd);
+		assertNotNull(sfs);
 	}
-	
-	public void testGetSize(){
-		assertTrue(sf.getSize() == 24);
+
+	@Test
+	public void testGetSize() {
+		assertTrue(sfstd.getSize() == 24);
+		assertTrue(sfs.getSize() == size * 4);
 	}
-	
-	public void testGetDreieck(){
-		
+
+	@Test
+	public void testGetDreieck() {
+		for (int i = sfs.getSize() - 1; i >= 0; i--) {
+			assertNotNull(sfs.getDreiecke(i));
+		}
 	}
 
 }
