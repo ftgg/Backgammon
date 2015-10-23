@@ -23,6 +23,11 @@ public class DreieckTest {
 		assertNull(d.add(new Stein(Stein.Black)));
 		assertNull(d.add(new Stein(Stein.Black)));
 		assertNotNull(d.add(new Stein(Stein.White)));
+		
+		d.clear();
+		d.add(new Stein(Stein.Black));
+		assertNotNull(d.add(new Stein(Stein.White)));
+		
 	}
 	
 	@Test

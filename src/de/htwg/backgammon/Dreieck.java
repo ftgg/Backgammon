@@ -99,6 +99,7 @@ public class Dreieck {
 	
 	public void clear (){
 		size = 0;
+		unsecure = true;
 		content.clear();
 	}
 	
