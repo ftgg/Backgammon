@@ -37,14 +37,53 @@ public class SpielFeldTest {
 	}
 
 	@Test
-	public void testZug() {
+	public void testFill() {
+		Integer[] posw = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
+		Integer[] posb = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
+		for (int i = 0; i < 24; i++) {
+			if (sfstd.getDreiecke(i).getColor() == Stein.White)
+				assertSame(posw[i], sfstd.count_of_D(i));
+			else
+				assertSame(posb[i], sfstd.count_of_D(i));
+		}
+	}
 
+	@Test
+	public void testZug() {
+		assertSame(0,sfstd.zug(0, 1, Stein.White)); //legal
+		assertSame(-1,sfstd.zug(3, 4, Stein.White));//kein stein zu bewegen
+		assertSame(-1,sfstd.zug(0, 5, Stein.White));//5 ist rot sicher
+		assertSame(0,sfstd.zug(0, 1, Stein.White));//weiss auf weiss
+		assertSame(0,sfstd.zug(1, 6, Stein.White));//6 weiss angreifbar
+		assertTrue(sfstd.isBarEmpty(Stein.White));
+		assertSame(1,sfstd.zug(5, 6, Stein.Black));//schwarz schlägt weiss
+		assertFalse(sfstd.isBarEmpty(Stein.White));
+		assertSame(0,sfstd.zug(5, 6, Stein.Black));
+		assertSame(0,sfstd.zug(6, 7, Stein.Black));
+		assertSame(1,sfstd.zug(1, 6, Stein.White));
 	}
 
 	@Test
 	public void testIsEmpty() {
+		
+		for (int i = 0; i < size * 4; i++)
+			assertTrue(sfs.isEmpty(i));
+		
 		for (int i = 0; i < 24; i++)
-			assertTrue(sfstd.isEmpty(i));
+			switch (i) {
+			case 0:
+			case 5:
+			case 7:
+			case 11:
+			case 12:
+			case 16:
+			case 18:
+			case 23:
+				assertFalse(sfstd.isEmpty(i));
+				break;
+			default:
+				assertTrue(sfstd.isEmpty(i));
+			}
 	}
 
 	@Test

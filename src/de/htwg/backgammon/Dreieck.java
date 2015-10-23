@@ -18,7 +18,7 @@ public class Dreieck {
 		color = None;
 	}
 	
-   /*
+   /**
 	* @return a the stone for bar or null
 	*/
 	public Stein add(Stein s){

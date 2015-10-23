@@ -13,6 +13,12 @@ public class WuerfelTest extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		w = new Wuerfel();
+		try {
+			Wuerfel C = new Wuerfel(-2, 5);
+			fail("Excetion");
+		} catch (Exception e) {
+
+		}
 	}
 
 	@Test
@@ -27,11 +33,7 @@ public class WuerfelTest extends TestCase {
 		assertTrue(a[1] < 7);
 		assertTrue(a[1] > 0);
 		// w = new Wuerfel(6,1);
-		try {
-			w = new Wuerfel(-2, 1);
-		} catch (Exception name) {
-			
-		}
+
 	}
 
 	@Test
