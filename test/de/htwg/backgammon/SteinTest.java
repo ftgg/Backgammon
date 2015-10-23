@@ -31,22 +31,5 @@ public class SteinTest {
 		assertSame(Stein.White,steinW.getColor());
 	}
 	
-	@Test
-	public void setState(){
-		steinB.setState(0);
-		assertSame(0, steinB.getState());
-		
-		try{
-			steinX.setState(-1);
-		}catch (IllegalArgumentException e){
-		}
-		
-	}
-	
-	@Test
-	public void getState(){
-		steinB.setState(1);
-		assertSame(1, steinB.getState());
-	}
 
 }
