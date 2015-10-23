@@ -1,10 +1,11 @@
-package de.htwg.backgammon;
+package de.htwg.backgammon.model;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.Wuerfel;
 import junit.framework.TestCase;
 
 public class WuerfelTest extends TestCase {

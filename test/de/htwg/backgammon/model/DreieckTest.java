@@ -1,9 +1,12 @@
-package de.htwg.backgammon;
+package de.htwg.backgammon.model;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.htwg.backgammon.model.Dreieck;
+import de.htwg.backgammon.model.Stein;
 
 public class DreieckTest {
 

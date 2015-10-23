@@ -1,8 +1,9 @@
-package de.htwg.backgammon;
+package de.htwg.backgammon.model;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.Spieler;
 import junit.framework.TestCase;
 
 public class SpielerTest extends TestCase {

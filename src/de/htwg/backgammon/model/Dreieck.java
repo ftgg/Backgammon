@@ -1,4 +1,4 @@
-package de.htwg.backgammon;
+package de.htwg.backgammon.model;
 
 import java.util.EmptyStackException;
 import java.util.Set;
