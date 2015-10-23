@@ -6,16 +6,16 @@ import java.util.TreeSet;
 import java.util.Stack;
 public class Dreieck {
 	
-	
+	public static final int None = -1;
 	private Stack<Stein> content;
 	private int size;
 	private int color;
 	private boolean unsecure = true;
 	
 	Dreieck(){
-		content = new Stack<>();
+		content = new Stack<Stein>();
 		size = 0;
-		color = -1;
+		color = None;
 	}
 	
    /*
@@ -24,9 +24,10 @@ public class Dreieck {
 	public Stein add(Stein s){
 		// Unsicherers Feld und anderer Stein.
 		Stein old;
-		if(unsecure() && s.getColor() != color){
+		if(unsecure() && s.getColor() != color && !content.isEmpty()){
 			old = content.pop();
 			content.push(s);
+			color = s.getColor();
 			return old;
 		}
 		
@@ -34,8 +35,9 @@ public class Dreieck {
 		if(!unsecure() && s.getColor() != color)
 			return s;
 		
-		//Sicher und Eigenes Feld
+		//Sicher und Eigenes Feld | freies Feld
 		content.push(s);
+		color = s.getColor();
 		size++;
 		if(size >= 2)
 			unsecure = false;
@@ -63,6 +65,10 @@ public class Dreieck {
 			return null;
 		}else{
 			size--;
+			if(size < 2)
+				unsecure = true;
+			if(content.isEmpty())
+				color = None;
 			return r;
 		}
 	}
@@ -76,14 +82,14 @@ public class Dreieck {
 	 * @returns the color of Stones on the Field 
 	 */
 	public int getColor(){
-		return Stein.Black;
+		return color;
 	}
 	
 	/*
 	 * @returns true if Dreieck is Empty
 	 */
 	public boolean isEmpty(){
-		return false;
+		return content.isEmpty();
 	}
 	
 	/*
@@ -91,8 +97,9 @@ public class Dreieck {
 	 * returns a Set of Stones
 	 */
 	
-	public Set<Stein> clear (){
-		return new TreeSet<Stein>();
+	public void clear (){
+		size = 0;
+		content.clear();
 	}
 	
 	

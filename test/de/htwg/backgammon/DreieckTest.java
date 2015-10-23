@@ -7,6 +7,8 @@ import org.junit.Test;
 
 public class DreieckTest {
 
+	
+	
 	Dreieck d;
 	@Before
 	public void setUp() throws Exception {
@@ -18,6 +20,9 @@ public class DreieckTest {
 		Stein s = new Stein(Stein.Black);
 		d.add(s);
 		assertSame(s, d.remove());
+		assertNull(d.add(new Stein(Stein.Black)));
+		assertNull(d.add(new Stein(Stein.Black)));
+		assertNotNull(d.add(new Stein(Stein.White)));
 	}
 	
 	@Test
@@ -26,6 +31,7 @@ public class DreieckTest {
 		Stein s = new Stein(Stein.White);
 		d.add(s);
 		assertSame (s,d.remove());
+		assertNull(d.remove());
 	}
 	
 	@Test
@@ -48,21 +54,22 @@ public class DreieckTest {
 	@Test
 	public void clear(){
 		d.add(new Stein(Stein.White));
-		assertNotSame(0,d.clear().size());
+		d.clear();
+		assertSame(0, d.count());
 	}
 	
 	@Test
 	public void isEmpty(){
 		d.clear();
 		assertTrue(d.isEmpty());
+		assertSame(0, d.count());
 	}
 	
 	@Test
 	public void unsecure(){
 		d.clear();
 		d.add(new Stein(Stein.White));
-		d.add(new Stein(Stein.White));
-		assertTrue(d.isEmpty());
+		assertTrue(d.count() < 2 == d.unsecure());
 	}
 	
 }
