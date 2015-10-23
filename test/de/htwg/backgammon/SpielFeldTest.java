@@ -35,10 +35,22 @@ public class SpielFeldTest {
 			assertNotNull(sfs.getDreiecke(i));
 		}
 	}
-	
+
 	@Test
-	public void testZug(){
-		
+	public void testZug() {
+
+	}
+
+	@Test
+	public void testIsEmpty() {
+		for (int i = 0; i < 24; i++)
+			assertTrue(sfstd.isEmpty(i));
+	}
+
+	@Test
+	public void testIsBarEmpty() {
+		assertTrue(sfstd.isBarEmpty(Stein.White));
+		assertTrue(sfstd.isBarEmpty(Stein.Black));
 	}
 
 }

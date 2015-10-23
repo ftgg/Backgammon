@@ -55,7 +55,30 @@ public class SpielFeld {
 		return dreiecke.get(i);
 	}
 
-	private boolean isLegal(int i) {
+	/**
+	 * Returns true if there is at least one token on the field
+	 * 
+	 * @param i
+	 *            index of the Field
+	 * @return true if there is at least one token on this field, else false
+	 */
+	public boolean isEmpty(int i) {
+//		return dreiecke.get(i).isEmpty();
+		return false;
+	}
+
+	/**
+	 * returns true if the Player has a empty Bar and can do a move on the field
+	 * 
+	 * @param spieler
+	 *            playerid (Stone.White or Stone.Black)
+	 * @return true if Bar is empty
+	 */
+	public boolean isBarEmpty(int spieler) {
+//		if (spieler == Stein.White) {
+//			return barone.isEmpty();
+//		}
+//		return bartwo.isEmpty();
 		return false;
 	}
 
@@ -67,30 +90,30 @@ public class SpielFeld {
 	 *            start position of move
 	 * @param b
 	 *            target position of move
+	 * @param spieler
+	 *            spieler can be Stein.Black or Stein.White
 	 * @return returns -1 if move is not possible, 0 if its a correct move and 1
 	 *         if it is an attack
 	 */
-	public int zug(int a, int b) {
-		if (isLegal(a))
-			return -1;
-		return 0;
-	}
+	 public int zug(int a, int b, int spieler) {
+//	 //there is a token of the current player
+//	 if (dreiecke.get(a).getColour() == spieler)
+//	 Stein attacker = dreiecke.get(b).remove;
+//	 Stein beaten = dreiecke.get(b).add(attacker);
+//	 //target field was empty, nothing to do
+//	 if(beaten == null)
+//	 return 0;
+//	 //else the current move was an attack and we got a stone of the enemy
+//	 else{
+//	 //white = player one, so the kicked token has to be addet to bartwo
+//	 if(spieler == Stein.White)
+//	 bartwo.add(beaten);
+//	 else
+//	 barone.add(beaten);
+//	 }
+//	 //else, there is no token of the current player, so return move not
+//	 possible
+	 return -1;
+	 }
 
-	/**
-	 * puts a Stone out of a Field and puts it into the bar. the attacking token
-	 * get put into the attacked Field.
-	 * 
-	 * @param target
-	 *            the number of the field which should get attacked
-	 * @param a
-	 *            the token which attacks
-	 */
-	// private void angriff(int target,Stein a) {
-	// Stein beaten;// = dreiecke.get(target).add(a)
-	// if(beaten.getColor() == Stein.White){
-	// //Player 1 got attacked
-	// barone.add(beaten);
-	//
-	// }
-	// }
 }
