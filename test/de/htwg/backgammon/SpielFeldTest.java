@@ -35,5 +35,10 @@ public class SpielFeldTest {
 			assertNotNull(sfs.getDreiecke(i));
 		}
 	}
+	
+	@Test
+	public void testZug(){
+		
+	}
 
 }

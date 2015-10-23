@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import javax.management.modelmbean.InvalidTargetObjectTypeException;
 
 /**
- * SpielFeld contains a List of all aviable Fields in wich the tokens are.
+ * SpielFeld contains a List of all aviable Fields in which the tokens are.
  */
 public class SpielFeld {
 
