@@ -1,13 +1,15 @@
 package de.htwg.backgammon;
 
+
 import java.util.LinkedList;
 
-import javax.management.modelmbean.InvalidTargetObjectTypeException;
 
 /**
  * SpielFeld contains a List of all aviable Fields in which the tokens are.
  */
+
 public class SpielFeld {
+
 
 	private LinkedList<Dreieck> dreiecke;
 	private Dreieck barone; // Bar of Player one (White)
