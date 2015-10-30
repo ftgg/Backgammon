@@ -33,5 +33,6 @@ public class SpielerTest extends TestCase {
 		assertEquals(Stein.WHITE, s2.getColor());
 		assertEquals(Stein.BLACK, s3.getColor());
 	}
+	
 
 }
