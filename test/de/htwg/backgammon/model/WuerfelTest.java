@@ -23,6 +23,19 @@ public class WuerfelTest extends TestCase {
 	}
 
 	@Test
+	public void testGetCurrent() {
+		assertSame(w.wuerfeln(), w.getCurrent());
+	}
+
+	@Test
+	public void testisPasch() {
+		for (int i = 0; i < 37; i++) {
+			w.wuerfeln();
+			assertSame(w.isPasch(), w.getCurrent()[0] == w.getCurrent()[1]);
+		}
+	}
+
+	@Test
 	public void testWuerfeln() {
 
 		// zahl zwischen [1;6]
