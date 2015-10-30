@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.SpielFeld;
+import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
 import junit.framework.TestCase;
 
@@ -11,11 +12,13 @@ public class GameStateTest extends TestCase {
 
 	GameState gs;
 	SpielFeld sf;
+	Spieler spieler;
 
 	@Before
 	public void setUp() throws Exception {
 		sf = new SpielFeld();
-		gs = new GameState(sf, new int[] { 0, 1, 2, 3 });
+		spieler = new Spieler("Hund", Stein.WHITE);
+		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spieler);
 
 	}
 
@@ -29,17 +32,33 @@ public class GameStateTest extends TestCase {
 		}
 	}
 
-	
 	@Test
 	public void testZuege() {
-		for(int i = 0; i < 4;i++){
-			assertEquals(i,gs.getZuege()[i]);
+		for (int i = 0; i < 4; i++) {
+			assertEquals(i, gs.getZuege()[i]);
 		}
 	}
-	
+
 	@Test
-	public void testMessage() {
-		assertEquals("Update",gs.getMessage());
+	public void testMessageAndSpieler() {
+		assertEquals("Update", gs.getMessage());
+		assertEquals(spieler,gs.getCurrent());
+	}
+
+	@Test
+	public void testBars() {
+		// TODO testen bei inhalt auf der bar
+
+		assertEquals(0, gs.getWhiteBar());
+		assertEquals(0, gs.getBlackBar());
+
+		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", 2, 3, spieler);
+		sf.zug(0, 6, Stein.WHITE);
+		sf.zug(5, 6, Stein.BLACK);
+		assertFalse(sf.isBarEmpty(Stein.WHITE));
+		assertTrue(sf.isBarEmpty(Stein.BLACK));
+		assertEquals(3, gs.getBlackBar());
+		assertEquals(2, gs.getWhiteBar());
 	}
 
 }

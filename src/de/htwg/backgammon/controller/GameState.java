@@ -1,6 +1,7 @@
 package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.SpielFeld;
+import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
 import de.htwg.backgammon.util.Event;
 
@@ -16,18 +17,24 @@ public class GameState implements Event {
 	private int whiteBar;
 	private int[] zuege;
 	private String message;
-
-	GameState(SpielFeld sf, int[] z) {
-		this(sf, z, "Update",0,0);
+	private Spieler current;
+	
+	public Spieler getCurrent() {
+		return current;
 	}
 
-	GameState(SpielFeld sf, int[] z, String m, int whiteBar, int blackBar) {
+	GameState(SpielFeld sf, int[] z,Spieler s) {
+		this(sf, z, "Update",0,0,s);
+	}
+
+	GameState(SpielFeld sf, int[] z, String m, int whiteBar, int blackBar,Spieler s) {
 		zuege = z;
 		message = m;
 		blackStones = new int[sf.getSize()];
 		whiteStones = new int[sf.getSize()];
 		this.whiteBar = whiteBar;
 		this.blackBar = blackBar;
+		current = s;
 		fillArrays(sf);
 	}
 
@@ -51,7 +58,7 @@ public class GameState implements Event {
 		return blackBar;
 	}
 
-	public int getBlackWhiteBar() {
+	public int getWhiteBar() {
 		return whiteBar;
 	}
 
