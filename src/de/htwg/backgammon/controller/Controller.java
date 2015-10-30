@@ -15,11 +15,16 @@ public class Controller extends Subject {
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
-		s1 = new Spieler("NAME", Stein.WHITE);
-		s2 = new Spieler("NAME2", Stein.BLACK);
+		//TODO UI erstellen und setSpieler aufrufen. danach nie wieder setSpieler! 
+		setSpieler("Hans","Hatkeinelust");
 		current = s1;
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
+	}
+	
+	public void setSpieler(String n1, String n2){
+		s1 = new Spieler(n1,Stein.WHITE);
+		s2 = new Spieler(n2,Stein.BLACK);
 	}
 
 	public int[] wuerfeln() {
