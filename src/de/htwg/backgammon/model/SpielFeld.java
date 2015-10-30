@@ -3,14 +3,14 @@ package de.htwg.backgammon.model;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
-
+import java.util.List;
 /**
  * SpielFeld contains a List of all aviable Fields in which the tokens are.
  */
 
 public class SpielFeld {
 
-	private LinkedList<Dreieck> dreiecke;
+	private List<Dreieck> dreiecke;
 	private Dreieck barone; // Bar of Player one (White)
 	private Dreieck bartwo; // Bar of Player two (Black)
 
@@ -32,8 +32,9 @@ public class SpielFeld {
 		barone = new Dreieck();
 		bartwo = new Dreieck();
 		dreiecke = new LinkedList<Dreieck>();
-		size = size * 4;
-		for (int i = 0; i < size; i++) {
+		int quadsize;
+		quadsize = size * 4;
+		for (int i = 0; i < quadsize; i++) {
 			dreiecke.add(new Dreieck());
 		}
 		Map<Integer, Integer> initpos = new TreeMap<>();
@@ -42,7 +43,7 @@ public class SpielFeld {
 		initpos.put(11, 5);
 		initpos.put(16, 3);
 		initpos.put(18, 5);
-		if (size == 24)
+		if (quadsize == 24)
 			fill(initpos);
 	}
 
@@ -50,14 +51,14 @@ public class SpielFeld {
 	 * fills the empty pitch
 	 */
 	private void fill(Map<Integer, Integer> initpos) {
-		int color = Stein.White;
+		int color = Stein.WHITE;
 		for (int invers = 0; invers < 2; invers++) {
 			for (Map.Entry<Integer, Integer> current : initpos.entrySet()) {
 				for (int i = 0; current.getValue() > i; i++) {
 					dreiecke.get(Math.abs(current.getKey() - 23 * invers)).add(new Stein(color));
 				}
 			}
-			color = Stein.Black;
+			color = Stein.BLACK;
 		}
 	}
 
@@ -100,7 +101,7 @@ public class SpielFeld {
 	 * @return true if Bar is empty
 	 */
 	public boolean isBarEmpty(int spieler) {
-		if (spieler == Stein.White) {
+		if (spieler == Stein.WHITE) {
 			return barone.isEmpty();
 		}
 		return bartwo.isEmpty();
@@ -125,7 +126,7 @@ public class SpielFeld {
 		if (dreiecke.get(a).getColor() != spieler)
 			return -1;
 		// field b is attackable or own
-		if ((dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == spieler)) {
+		if (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == spieler) {
 			Stein attack = dreiecke.get(a).remove();
 			Stein beaten = dreiecke.get(b).add(attack);
 			// target field was empty, nothing to do
@@ -136,7 +137,7 @@ public class SpielFeld {
 			} else {
 				// white = player one, so the kicked token has to be addet to
 				// bartwo
-				if (spieler == Stein.White)
+				if (spieler == Stein.WHITE)
 					bartwo.add(beaten);
 				else
 					barone.add(beaten);
@@ -148,7 +149,7 @@ public class SpielFeld {
 		return -1;
 	}
 
-	public int count_of_D(int i) {
+	public int countOfTriangles(int i) {
 		return dreiecke.get(i).count();
 	}
 }

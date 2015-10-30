@@ -15,22 +15,22 @@ public class SteinTest {
 	
 	@Before
 	public void setUp() throws Exception{
-		steinB = new Stein(Stein.Black);
-		steinW = new Stein(Stein.White);
+		steinB = new Stein(Stein.BLACK);
+		steinW = new Stein(Stein.WHITE);
 		
 		try{
 			steinX = new Stein(-1);
 		}catch (IllegalArgumentException e){
 		}
 		
-		steinX = new Stein(Stein.Black);
+		steinX = new Stein(Stein.BLACK);
 		
 	}
 	
 	@Test
 	public void getColorTest(){
-		assertSame(Stein.Black,steinB.getColor());
-		assertSame(Stein.White,steinW.getColor());
+		assertSame(Stein.BLACK,steinB.getColor());
+		assertSame(Stein.WHITE,steinW.getColor());
 	}
 	
 

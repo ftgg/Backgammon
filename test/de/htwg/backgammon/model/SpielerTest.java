@@ -17,8 +17,8 @@ public class SpielerTest extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		s = new Spieler(name, 5);
-		s2 = new Spieler(name2, Stein.White);
-		s3 = new Spieler(name3, Stein.Black);
+		s2 = new Spieler(name2, Stein.WHITE);
+		s3 = new Spieler(name3, Stein.BLACK);
 	}
 
 	@Test
@@ -30,8 +30,8 @@ public class SpielerTest extends TestCase {
 
 	@Test
 	public void testGetColor() {
-		assertEquals(Stein.White, s2.getColor());
-		assertEquals(Stein.Black, s3.getColor());
+		assertEquals(Stein.WHITE, s2.getColor());
+		assertEquals(Stein.BLACK, s3.getColor());
 	}
 
 }

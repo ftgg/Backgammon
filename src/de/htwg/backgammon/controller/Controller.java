@@ -3,7 +3,9 @@ package de.htwg.backgammon.controller;
 import de.htwg.backgammon.model.*;
 
 public class Controller {
-	private Spieler s1, s2, current;
+	private Spieler s1;
+	private Spieler s2;
+	private Spieler current;
 	private SpielFeld sf;
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
@@ -14,8 +16,8 @@ public class Controller {
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
-		s1 = new Spieler("NAME", Stein.White);
-		s2 = new Spieler("NAME2", Stein.Black);
+		s1 = new Spieler("NAME", Stein.WHITE);
+		s2 = new Spieler("NAME2", Stein.BLACK);
 		current = s1;
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();

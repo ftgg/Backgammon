@@ -7,14 +7,6 @@ public class Wuerfel {
 	private int[] current; // zuletzt gewürfeltes ergebnis
 	private boolean isPasch;
 
-	public boolean isPasch() {
-		return isPasch;
-	}
-
-	public int[] getCurrent() {
-		return current;
-	}
-
 	public Wuerfel() {
 		this(1, 6);
 	}
@@ -29,6 +21,15 @@ public class Wuerfel {
 		this.max = max;
 		this.min = min;
 		current = new int[2];
+	}
+	
+	
+	public boolean isPasch() {
+		return isPasch;
+	}
+
+	public int[] getCurrent() {
+		return current;
 	}
 
 	public int[] wuerfeln() {

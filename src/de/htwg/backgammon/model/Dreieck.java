@@ -1,109 +1,105 @@
 package de.htwg.backgammon.model;
 
-import java.util.EmptyStackException;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.NoSuchElementException;
+
 public class Dreieck {
-	
-	public static final int None = -1;
-	private Stack<Stein> content;
+
+	public static final int NONE = -1;
+	private Deque<Stein> content;
 	private int size;
 	private int color;
 	private boolean unsecure = true;
-	
-	Dreieck(){
-		content = new Stack<Stein>();
+
+	Dreieck() {
+		content = new ArrayDeque<Stein>();
 		size = 0;
-		color = None;
+		color = NONE;
 	}
-	
-   /**
-	* @return a the stone for bar or null
-	*/
-	public Stein add(Stein s){
+
+	/**
+	 * @return a the stone for bar or null
+	 */
+	public Stein add(Stein s) {
 		// Unsicherers Feld und anderer Stein.
 		Stein old;
-		if(unsecure() && s.getColor() != color && !content.isEmpty()){
+		if (unsecure() && s.getColor() != color && !content.isEmpty()) {
 			old = content.pop();
 			content.push(s);
 			color = s.getColor();
 			return old;
 		}
-		
-		//Sicher und Fremdes Feld
-		if(!unsecure() && s.getColor() != color)
+
+		// Sicher und Fremdes Feld
+		if (!unsecure() && s.getColor() != color)
 			return s;
-		
-		//Sicher und Eigenes Feld | freies Feld
+
+		// Sicher und Eigenes Feld | freies Feld
 		content.push(s);
 		color = s.getColor();
 		size++;
-		if(size >= 2)
+		if (size >= 2)
 			unsecure = false;
 		return null;
 	}
-	
+
 	/*
-	 *@return false if two or more stones are on the field 
+	 * @return false if two or more stones are on the field
 	 */
-	public boolean unsecure(){
+	public boolean unsecure() {
 		return unsecure;
 	}
-	
+
 	/*
-	 *@returns a removed stone or null
-	 */ 
-	public Stein remove(){
-		Stein r; 
+	 * @returns a removed stone or null
+	 */
+	public Stein remove() {
+		Stein r;
 		try {
 			r = content.pop();
-		}catch (EmptyStackException e){
-			r = null;
-		}
-		if(r == null){
+		} catch (NoSuchElementException e) {
 			return null;
-		}else{
-			size--;
-			if(size < 2)
-				unsecure = true;
-			if(content.isEmpty())
-				color = None;
-			return r;
 		}
+
+		size--;
+		if (size < 2)
+			unsecure = true;
+		if (content.isEmpty())
+			color = NONE;
+		return r;
+
 	}
+
 	/*
 	 * @returns the Amount of stones in Field
 	 */
-	public int count(){
+	public int count() {
 		return size;
 	}
+
 	/*
-	 * @returns the color of Stones on the Field 
+	 * @returns the color of Stones on the Field
 	 */
-	public int getColor(){
+	public int getColor() {
 		return color;
 	}
-	
+
 	/*
 	 * @returns true if Dreieck is Empty
 	 */
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return content.isEmpty();
 	}
-	
+
 	/*
-	 * clears the Dreieck
-	 * returns a Set of Stones
+	 * clears the Dreieck returns a Set of Stones
 	 */
-	
-	public void clear (){
+
+	public void clear() {
 		size = 0;
 		unsecure = true;
 		content.clear();
 	}
-	
-	
-	
-	
+
 }

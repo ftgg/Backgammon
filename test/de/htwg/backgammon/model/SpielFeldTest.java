@@ -44,26 +44,26 @@ public class SpielFeldTest {
 		Integer[] posw = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
 		Integer[] posb = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
 		for (int i = 0; i < 24; i++) {
-			if (sfstd.getDreiecke(i).getColor() == Stein.White)
-				assertSame(posw[i], sfstd.count_of_D(i));
+			if (sfstd.getDreiecke(i).getColor() == Stein.WHITE)
+				assertSame(posw[i], sfstd.countOfTriangles(i));
 			else
-				assertSame(posb[i], sfstd.count_of_D(i));
+				assertSame(posb[i], sfstd.countOfTriangles(i));
 		}
 	}
 
 	@Test
 	public void testZug() {
-		assertSame(0,sfstd.zug(0, 1, Stein.White)); //legal
-		assertSame(-1,sfstd.zug(3, 4, Stein.White));//kein stein zu bewegen
-		assertSame(-1,sfstd.zug(0, 5, Stein.White));//5 ist rot sicher
-		assertSame(0,sfstd.zug(0, 1, Stein.White));//weiss auf weiss
-		assertSame(0,sfstd.zug(1, 6, Stein.White));//6 weiss angreifbar
-		assertTrue(sfstd.isBarEmpty(Stein.White));
-		assertSame(1,sfstd.zug(5, 6, Stein.Black));//schwarz schlägt weiss
-		assertFalse(sfstd.isBarEmpty(Stein.White));
-		assertSame(0,sfstd.zug(5, 6, Stein.Black));
-		assertSame(0,sfstd.zug(6, 7, Stein.Black));
-		assertSame(1,sfstd.zug(1, 6, Stein.White));
+		assertSame(0,sfstd.zug(0, 1, Stein.WHITE)); //legal
+		assertSame(-1,sfstd.zug(3, 4, Stein.WHITE));//kein stein zu bewegen
+		assertSame(-1,sfstd.zug(0, 5, Stein.WHITE));//5 ist rot sicher
+		assertSame(0,sfstd.zug(0, 1, Stein.WHITE));//weiss auf weiss
+		assertSame(0,sfstd.zug(1, 6, Stein.WHITE));//6 weiss angreifbar
+		assertTrue(sfstd.isBarEmpty(Stein.WHITE));
+		assertSame(1,sfstd.zug(5, 6, Stein.BLACK));//schwarz schlägt weiss
+		assertFalse(sfstd.isBarEmpty(Stein.WHITE));
+		assertSame(0,sfstd.zug(5, 6, Stein.BLACK));
+		assertSame(0,sfstd.zug(6, 7, Stein.BLACK));
+		assertSame(1,sfstd.zug(1, 6, Stein.WHITE));
 	}
 
 	@Test
@@ -91,8 +91,8 @@ public class SpielFeldTest {
 
 	@Test
 	public void testIsBarEmpty() {
-		assertTrue(sfstd.isBarEmpty(Stein.White));
-		assertTrue(sfstd.isBarEmpty(Stein.Black));
+		assertTrue(sfstd.isBarEmpty(Stein.WHITE));
+		assertTrue(sfstd.isBarEmpty(Stein.BLACK));
 	}
 
 }
