@@ -122,32 +122,23 @@ public class SpielFeld {
 	 *         if it is an attack
 	 */
 	public int zug(int a, int b, int spieler) {
-
-		// there is a token of the current player in field a
-		if (dreiecke.get(a).getColor() != spieler)
+		if (!possibleMove(a, b, spieler))
 			return -1;
-		// field b is attackable or own
-		if (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == spieler) {
-			Stein attack = dreiecke.get(a).remove();
-			Stein beaten = dreiecke.get(b).add(attack);
-			// target field was empty, nothing to do
-			if (beaten == null) {
-				return 0;
-				// else the current move was an attack and we got a stone of the
-				// enemy
-			} else {
-				// white = player one, so the kicked token has to be addet to
-				// bartwo
-				if (spieler == Stein.WHITE)
-					bartwo.add(beaten);
-				else
-					barone.add(beaten);
-				return 1;
-			}
+
+		Stein attack = dreiecke.get(a).remove();
+		Stein beaten = dreiecke.get(b).add(attack);
+
+		if (beaten == null) { // target field was empty, nothing to do
+			return 0;
+		} else { // else the current move was an attack and we got a stone of
+					// the enemy
+			if (spieler == Stein.WHITE)
+				bartwo.add(beaten); // white = player one, so the kicked token
+									// has to be addet to bartwo
+			else
+				barone.add(beaten);
+			return 1;
 		}
-		// else, there is no token of the current player, or b is not attackable
-		// so return move not possible
-		return -1;
 	}
 
 	public boolean possibleMove(int a, int b, int pc) {
