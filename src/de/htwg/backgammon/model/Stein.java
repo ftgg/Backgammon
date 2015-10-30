@@ -5,7 +5,7 @@ public class Stein {
 	public static final int BLACK = 0;
 	public static final int WHITE = 1;
 	
-	private int Color;
+	private int color;
 
 	
 	
@@ -13,11 +13,11 @@ public class Stein {
 		if(color != BLACK && color != WHITE){
 			throw new IllegalArgumentException("Ungueltige Farbe");
 		}
-		this.Color = color;
+		this.color = color;
 	}
 	
 	public int getColor(){
-		return Color;
+		return color;
 	}
 	
 }

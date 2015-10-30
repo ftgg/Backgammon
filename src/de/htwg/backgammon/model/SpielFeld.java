@@ -128,17 +128,17 @@ public class SpielFeld {
 		Stein attack = dreiecke.get(a).remove();
 		Stein beaten = dreiecke.get(b).add(attack);
 
-		if (beaten == null) { // target field was empty, nothing to do
+		if (beaten == null) // target field was empty, nothing to do
 			return 0;
-		} else { // else the current move was an attack and we got a stone of
-					// the enemy
-			if (spieler == Stein.WHITE)
-				bartwo.add(beaten); // white = player one, so the kicked token
-									// has to be addet to bartwo
-			else
-				barone.add(beaten);
-			return 1;
-		}
+		// else the current move was an attack and we got a stone of
+		// the enemy
+		if (spieler == Stein.WHITE)
+			bartwo.add(beaten); // white = player one, so the kicked token
+								// has to be addet to bartwo
+		else
+			barone.add(beaten);
+		return 1;
+
 	}
 
 	public boolean possibleMove(int a, int b, int pc) {

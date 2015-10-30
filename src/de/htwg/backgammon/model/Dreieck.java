@@ -2,7 +2,6 @@ package de.htwg.backgammon.model;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.NoSuchElementException;
 
 public class Dreieck {
 
@@ -55,13 +54,10 @@ public class Dreieck {
 	 * @returns a removed stone or null
 	 */
 	public Stein remove() {
-		Stein r;
-		try {
-			r = content.pop();
-		} catch (NoSuchElementException e) {
+		if (content.isEmpty())
 			return null;
-		}
 
+		Stein r = content.pop();
 		size--;
 		if (size < 2)
 			unsecure = true;
