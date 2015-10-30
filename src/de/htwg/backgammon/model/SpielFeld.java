@@ -62,6 +62,8 @@ public class SpielFeld {
 			color = Stein.BLACK;
 		}
 	}
+	
+	
 
 	/**
 	 * returns the number of fields
