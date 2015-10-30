@@ -1,5 +1,6 @@
 package de.htwg.backgammon.controller;
 
+import de.htwg.backgammon.aView.Tui;
 import de.htwg.backgammon.model.*;
 import de.htwg.backgammon.util.Subject;
 
@@ -15,11 +16,10 @@ public class Controller extends Subject {
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
-		//TODO UI erstellen und setSpieler aufrufen. danach nie wieder setSpieler! 
-		setSpieler("Hans","Hatkeinelust");
-		current = s1;
+		Tui tui = new Tui(this);
 		sf = new SpielFeld();// Standartgröße = original größe
-		w = new Wuerfel();
+		w = new Wuerfel();	
+		current = s1;
 	}
 	
 	public void setSpieler(String n1, String n2){
