@@ -46,13 +46,14 @@ public class Controller {
 		// prüfen ob zug überhaupt möglich
 		// wenn ja zug tätigen //wenn keine zuege mehr da = current = anderer
 		// Spieler
-		int zugreturn = sf.zug(a, b, current.getColor());
+		
+		int result = sf.zug(a, b, current.getColor());
 		//TODO zug aus liste löschen und prüfen ob machbar
-		if (zugreturn == -1) {
+		if (result == -1) {
 			// ILLEGAL
 			// TODO return an UI ausgabe von falscher zug
 			return;
-		} else if (zugreturn == 0) {
+		} else if (result == 0) {
 			// move
 
 			spielerwechsel();
