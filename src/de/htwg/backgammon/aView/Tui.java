@@ -30,7 +30,7 @@ public class Tui implements Observer {
 	}
 
 	private void print(){
-		//TODO: Print
+		
 		System.out.print("TUI");
 	}
 	

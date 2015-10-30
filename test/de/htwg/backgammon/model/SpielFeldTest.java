@@ -73,9 +73,9 @@ public class SpielFeldTest {
 		assertSame(-1,sfstd.zug(0, 5, Stein.WHITE));//5 ist rot sicher
 		assertSame(0,sfstd.zug(0, 1, Stein.WHITE));//weiss auf weiss
 		assertSame(0,sfstd.zug(1, 6, Stein.WHITE));//6 weiss angreifbar
-		assertTrue(sfstd.isBarEmpty(Stein.WHITE));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T",Stein.WHITE)));
 		assertSame(1,sfstd.zug(5, 6, Stein.BLACK));//schwarz schlägt weiss
-		assertFalse(sfstd.isBarEmpty(Stein.WHITE));
+		assertFalse(sfstd.isBarEmpty(new Spieler("T",Stein.WHITE)));
 		assertSame(0,sfstd.zug(5, 6, Stein.BLACK));
 		assertSame(0,sfstd.zug(6, 7, Stein.BLACK));
 		assertSame(1,sfstd.zug(1, 6, Stein.WHITE));
@@ -106,8 +106,8 @@ public class SpielFeldTest {
 
 	@Test
 	public void testIsBarEmpty() {
-		assertTrue(sfstd.isBarEmpty(Stein.WHITE));
-		assertTrue(sfstd.isBarEmpty(Stein.BLACK));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T",Stein.WHITE)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T",Stein.BLACK)));
 	}
 
 }

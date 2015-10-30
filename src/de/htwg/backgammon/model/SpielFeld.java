@@ -103,8 +103,8 @@ public class SpielFeld {
 	 *            playerid (Stone.White or Stone.Black)
 	 * @return true if Bar is empty
 	 */
-	public boolean isBarEmpty(int spieler) {
-		if (spieler == Stein.WHITE) {
+	public boolean isBarEmpty(Spieler spieler) {
+		if (spieler.getColor() == Stein.WHITE) {
 			return barone.isEmpty();
 		}
 		return bartwo.isEmpty();

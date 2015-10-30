@@ -54,8 +54,8 @@ public class GameStateTest extends TestCase {
 		
 		sf.zug(0, 6, Stein.WHITE);
 		sf.zug(5, 6, Stein.BLACK);
-		assertFalse(sf.isBarEmpty(Stein.WHITE));
-		assertTrue(sf.isBarEmpty(Stein.BLACK));
+		assertFalse(sf.isBarEmpty(spieler));
+		assertTrue(sf.isBarEmpty(new Spieler("Testspieler",Stein.BLACK)));
 		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spieler);
 		assertEquals(0, gs.getBlackBar());
 		assertEquals(1, gs.getWhiteBar());

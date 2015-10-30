@@ -18,7 +18,7 @@ public class ControllerTest {
 	public void wuerfeln() {
 		
 		for(int j = 0; j < 36;j++){
-		int[] erg = c.wuerfeln();
+		int[] erg = c.getZuege();
 		int[] cur = c.getWuerfelC();
 		for (int i = 0; i < 2; i++) {
 			assertEquals(cur[i], erg[i]);
@@ -36,5 +36,13 @@ public class ControllerTest {
 		
 
 	}
+	
+	@Test
+	public void testParseAction(){
+		assertEquals(new int[]{3,5},c.parseAction("3 5"));
+		assertEquals(new int[]{20,-1},c.parseAction("20 h"));
+		assertEquals(new int[]{-2,5},c.parseAction("b 5"));
+	}
+	
 
 }

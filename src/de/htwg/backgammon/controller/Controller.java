@@ -20,6 +20,7 @@ public class Controller extends Subject {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();	
 		current = s1;
+		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current));
 	}
 	
 	public void setSpieler(String n1, String n2){
@@ -27,7 +28,45 @@ public class Controller extends Subject {
 		s2 = new Spieler(n2,Stein.BLACK);
 	}
 
-	public int[] wuerfeln() {
+	//Auf jedenfall 2 eingaben zb b 3 von bar nach feld nummer 3 oder 20 h für von 20 nach hause, oder 3 5
+	public void doAction(String action){
+		
+		if(isHandEmpty()){
+			wuerfeln();
+			//TODO evtl ans ende der methode
+			notifyObs(new GameState(sf, zuege, "Gewuerfelt", current));
+		}
+		else if(sf.isBarEmpty(current)){
+			//TODO Spielzug von Bar
+		}
+		else{
+			
+		}
+		//TODO gewonnen?
+	}
+	
+	//public for test
+	public int[] parseAction(String act){
+		String[] s = act.split(" ");
+		int res[] = {0,0};
+		//TODO fälle behandeln mit falscher Eingabe
+		if(s[0].equals("b")){
+			res[0] = -2;
+		}else{
+			res[0] = Integer.valueOf(s[0]);
+		}
+		
+		if(s[1].equals("h")){
+			res[1] = -1;
+		}else{
+			res[1] = Integer.valueOf(s[1]);
+		}		
+		
+		
+		return res;
+	}
+	
+	public void wuerfeln() {
 		w.wuerfeln();
 		if (w.isPasch()) {
 			zuege[0] = w.getCurrent()[0];
@@ -40,10 +79,12 @@ public class Controller extends Subject {
 			zuege[2] = 0;
 			zuege[3] = 0;
 		}
-		return zuege;
 	}
 
 	//TODO isBarEmpty() weil wegen Bar zuerst ausspielen
+	
+	
+	
 	
 	public void spielZug(int a, int b) {
 		// TODO zug 5+1 sind noch zwei züge, sollen aber als ein zug mit 6
@@ -77,18 +118,23 @@ public class Controller extends Subject {
 		notifyObs(new GameState(sf, zuege, message, current));
 	}
 
+	private boolean isHandEmpty(){
+		for (int c : zuege) {
+			if (c != 0)
+				return false;
+		}
+		return true;
+	}
+	
 	private void spielerwechsel() {
 		// TODO schaut ob spieler nochmal ziehen darf oder ob anderer Spieler
 		// dran ist
-		for (int c : zuege) {
-			if (c != 0)
-				return;
+		if(isHandEmpty()){
+			if (current == s1)
+				current = s2;
+			else
+				current = s1;
 		}
-		// spielerwechsel
-		if (current == s1)
-			current = s2;
-		else
-			current = s1;
 	}
 
 	/**
@@ -98,6 +144,10 @@ public class Controller extends Subject {
 	 */
 	public int[] getWuerfelC() {
 		return w.getCurrent();
+	}
+	
+	public int[] getZuege(){
+		return zuege;
 	}
 
 }
