@@ -7,12 +7,12 @@ import de.htwg.backgammon.controller.GameState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 
-public class tui implements Observer {
+public class Tui implements Observer {
 
 	private GameState gs;
 	private Controller contr;
 	
-	public tui(Controller c){
+	public Tui(Controller c){
 		contr = c;
 		initNames();
 	}
