@@ -8,6 +8,14 @@ public class Controller {
 	private Spieler current;
 	private SpielFeld sf;
 	private Wuerfel w;
+	/**
+	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
+	 * @return ja
+	 */
+	public int[] getWuerfelC() {
+		return w.getCurrent();
+	}
+
 	private int[] zuege = { 0, 0, 0, 0 };
 
 	// TODO Baut Modelschicht auf
@@ -32,7 +40,7 @@ public class Controller {
 			zuege[3] = w.getCurrent()[1];
 		} else {
 			zuege[0] = w.getCurrent()[0];
-			zuege[1] = w.getCurrent()[0];
+			zuege[1] = w.getCurrent()[1];
 			zuege[2] = 0;
 			zuege[3] = 0;
 		}
