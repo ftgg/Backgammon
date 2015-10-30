@@ -40,12 +40,14 @@ public class Controller {
 	}
 
 	public void spielZug(int a, int b) {
+		//TODO zug 5+1 sind noch zwei züge, sollen aber als ein zug mit 6 realisiert werden
 		// TODO von a nach b wie weit zum aus zuege löschen
 		// prüfen ob playerbar frei oder nicht !ZUERST
 		// prüfen ob zug überhaupt möglich
 		// wenn ja zug tätigen //wenn keine zuege mehr da = current = anderer
 		// Spieler
 		int zugreturn = sf.zug(a, b, current.getColor());
+		//TODO zug aus liste löschen und prüfen ob machbar
 		if (zugreturn == -1) {
 			// ILLEGAL
 			// TODO return an UI ausgabe von falscher zug
