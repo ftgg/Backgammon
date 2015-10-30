@@ -31,6 +31,14 @@ public class GameState implements Event {
 		return whiteStones;
 	}
 
+	public int[] getZuege() {
+		return zuege;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
 	public int[] getBlackStones() {
 		return blackStones;
 	}

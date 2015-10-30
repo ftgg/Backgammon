@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.SpielFeld;
+import de.htwg.backgammon.model.Stein;
 import junit.framework.TestCase;
 
 public class GameStateTest extends TestCase {
@@ -28,5 +29,17 @@ public class GameStateTest extends TestCase {
 		}
 	}
 
+	
+	@Test
+	public void testZuege() {
+		for(int i = 0; i < 4;i++){
+			assertEquals(i,gs.getZuege()[i]);
+		}
+	}
+	
+	@Test
+	public void testMessage() {
+		assertEquals("Update",gs.getMessage());
+	}
 
 }
