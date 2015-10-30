@@ -33,6 +33,21 @@ public class SpielFeldTest {
 	}
 
 	@Test
+	public void testPossibleMove() {
+		sfstd = new SpielFeld();
+		assertTrue(sfstd.possibleMove(0, 1, Stein.WHITE)); //legal
+		assertFalse(sfstd.possibleMove(3, 4, Stein.WHITE));//kein stein zu bewegen
+		assertFalse(sfstd.possibleMove(0, 5, Stein.WHITE));//5 ist rot sicher
+		assertTrue(sfstd.possibleMove(0, 1, Stein.WHITE));//weiss auf weiss
+		assertTrue(sfstd.possibleMove(0, 6, Stein.WHITE));//6 weiss angreifbar
+		assertTrue(sfstd.possibleMove(5, 6, Stein.BLACK));//schwarz schlägt weiss
+		assertTrue(sfstd.possibleMove(5, 6, Stein.BLACK));
+		assertTrue(sfstd.possibleMove(5, 7, Stein.BLACK));
+		assertTrue(sfstd.possibleMove(0, 6, Stein.WHITE));
+	}
+	
+	
+	@Test
 	public void testGetDreieck() {
 		for (int i = sfs.getSize() - 1; i >= 0; i--) {
 			assertNotNull(sfs.getDreiecke(i));

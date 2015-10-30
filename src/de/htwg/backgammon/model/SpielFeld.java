@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.List;
+
 /**
  * SpielFeld contains a List of all aviable Fields in which the tokens are.
  */
@@ -147,6 +148,17 @@ public class SpielFeld {
 		// else, there is no token of the current player, or b is not attackable
 		// so return move not possible
 		return -1;
+	}
+
+	public boolean possibleMove(int a, int b, int pc) {
+		// there is a token of the current player in field a
+		if (dreiecke.get(a).getColor() != pc)
+			return false;
+		// field b is attackable or own
+		if (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == pc)
+			return true;
+		return false;
+
 	}
 
 	public int countOfTriangles(int i) {
