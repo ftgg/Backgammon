@@ -12,18 +12,22 @@ public class GameState implements Event {
 
 	private int[] whiteStones;
 	private int[] blackStones;
+	private int blackBar;
+	private int whiteBar;
 	private int[] zuege;
 	private String message;
 
 	GameState(SpielFeld sf, int[] z) {
-		this(sf, z, "Update");
+		this(sf, z, "Update",0,0);
 	}
 
-	GameState(SpielFeld sf, int[] z, String m) {
+	GameState(SpielFeld sf, int[] z, String m, int whiteBar, int blackBar) {
 		zuege = z;
 		message = m;
 		blackStones = new int[sf.getSize()];
 		whiteStones = new int[sf.getSize()];
+		this.whiteBar = whiteBar;
+		this.blackBar = blackBar;
 		fillArrays(sf);
 	}
 
@@ -41,6 +45,14 @@ public class GameState implements Event {
 
 	public int[] getBlackStones() {
 		return blackStones;
+	}
+	
+	public int getBlackBar() {
+		return blackBar;
+	}
+
+	public int getBlackWhiteBar() {
+		return whiteBar;
 	}
 
 	private void fillArrays(SpielFeld sf) {
