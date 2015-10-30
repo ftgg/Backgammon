@@ -109,6 +109,13 @@ public class SpielFeld {
 		}
 		return bartwo.isEmpty();
 	}
+	
+	public int getBarCount(int spieler){
+		if (spieler == Stein.WHITE) {
+			return barone.count();
+		}
+		return bartwo.count();
+	}
 
 	/**
 	 * moves one token from a to b. only works if the move is legal, starts an

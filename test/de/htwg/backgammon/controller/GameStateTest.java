@@ -51,14 +51,15 @@ public class GameStateTest extends TestCase {
 
 		assertEquals(0, gs.getWhiteBar());
 		assertEquals(0, gs.getBlackBar());
-
-		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", 2, 3, spieler);
+		
 		sf.zug(0, 6, Stein.WHITE);
 		sf.zug(5, 6, Stein.BLACK);
 		assertFalse(sf.isBarEmpty(Stein.WHITE));
 		assertTrue(sf.isBarEmpty(Stein.BLACK));
-		assertEquals(3, gs.getBlackBar());
-		assertEquals(2, gs.getWhiteBar());
+		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spieler);
+		assertEquals(0, gs.getBlackBar());
+		assertEquals(1, gs.getWhiteBar());
 	}
+	
 
 }

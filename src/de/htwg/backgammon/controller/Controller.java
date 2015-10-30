@@ -1,25 +1,16 @@
 package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.*;
+import de.htwg.backgammon.util.Subject;
 
-public class Controller {
+public class Controller extends Subject {
 	private Spieler s1;
 	private Spieler s2;
 	private Spieler current;
 	private SpielFeld sf;
 	private Wuerfel w;
-	/**
-	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
-	 * @return ja
-	 */
-	public int[] getWuerfelC() {
-		return w.getCurrent();
-	}
-
 	private int[] zuege = { 0, 0, 0, 0 };
 
-	// TODO Baut Modelschicht auf
-	// 2 Spieler, spielfeld, ein würfel
 	// TODO Regeln beachten
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
@@ -47,35 +38,61 @@ public class Controller {
 		return zuege;
 	}
 
+	//TODO isBarEmpty() weil wegen Bar zuerst ausspielen
+	
 	public void spielZug(int a, int b) {
-		//TODO zug 5+1 sind noch zwei züge, sollen aber als ein zug mit 6 realisiert werden
+		// TODO zug 5+1 sind noch zwei züge, sollen aber als ein zug mit 6
+		// realisiert werden
+		
 		// TODO von a nach b wie weit zum aus zuege löschen
-		// prüfen ob playerbar frei oder nicht !ZUERST
-		// prüfen ob zug überhaupt möglich
+		// prüfen ob zug überhaupt möglich(zahl gewürfelt)
 		// wenn ja zug tätigen //wenn keine zuege mehr da = current = anderer
 		// Spieler
-		
+
 		int result = sf.zug(a, b, current.getColor());
-		//TODO zug aus liste löschen und prüfen ob machbar
+		String message;
+		// TODO zug aus liste löschen und prüfen ob machbar
 		if (result == -1) {
 			// ILLEGAL
 			// TODO return an UI ausgabe von falscher zug
+			message = "Zug nicht möglich!";
 			return;
 		} else if (result == 0) {
-			// move
+			// move und zug entfernen
 
 			spielerwechsel();
+			message = "";
 		} else {
-			// attack
+			// attack und Zug entfernen
 
 			spielerwechsel();
+			message = "";
 		}
-
+		// Subject Notify für update an UI
+		notifyObs(new GameState(sf, zuege, message, current));
 	}
 
 	private void spielerwechsel() {
 		// TODO schaut ob spieler nochmal ziehen darf oder ob anderer Spieler
 		// dran ist
+		for (int c : zuege) {
+			if (c != 0)
+				return;
+		}
+		// spielerwechsel
+		if (current == s1)
+			current = s2;
+		else
+			current = s1;
+	}
+
+	/**
+	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
+	 * 
+	 * @return ja
+	 */
+	public int[] getWuerfelC() {
+		return w.getCurrent();
 	}
 
 }

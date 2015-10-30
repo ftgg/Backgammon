@@ -6,7 +6,7 @@ public abstract class Subject {
 	
 	Set<Observer> observers;
 	
-	Subject(){
+	public Subject(){
 		observers = new TreeSet<Observer>();
 	}
 	

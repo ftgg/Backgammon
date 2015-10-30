@@ -5,8 +5,6 @@ import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
 import de.htwg.backgammon.util.Event;
 
-import java.util.Arrays;
-
 import de.htwg.backgammon.model.Dreieck;
 
 public class GameState implements Event {
@@ -18,24 +16,24 @@ public class GameState implements Event {
 	private int[] zuege;
 	private String message;
 	private Spieler current;
-	
-	public Spieler getCurrent() {
-		return current;
+
+	GameState(SpielFeld sf, int[] z, Spieler s) {
+		this(sf, z, "Update", s);
 	}
 
-	GameState(SpielFeld sf, int[] z,Spieler s) {
-		this(sf, z, "Update",0,0,s);
-	}
-
-	GameState(SpielFeld sf, int[] z, String m, int whiteBar, int blackBar,Spieler s) {
+	GameState(SpielFeld sf, int[] z, String m, Spieler s) {
 		zuege = z;
 		message = m;
 		blackStones = new int[sf.getSize()];
 		whiteStones = new int[sf.getSize()];
-		this.whiteBar = whiteBar;
-		this.blackBar = blackBar;
+		this.whiteBar = sf.getBarCount(Stein.WHITE);
+		this.blackBar = sf.getBarCount(Stein.BLACK);
 		current = s;
 		fillArrays(sf);
+	}
+
+	public Spieler getCurrent() {
+		return current;
 	}
 
 	public int[] getWhiteStones() {
@@ -53,7 +51,7 @@ public class GameState implements Event {
 	public int[] getBlackStones() {
 		return blackStones;
 	}
-	
+
 	public int getBlackBar() {
 		return blackBar;
 	}
@@ -71,7 +69,7 @@ public class GameState implements Event {
 			} else if (d.getColor() == Stein.BLACK) {
 				blackStones[i] = d.count();
 				whiteStones[i] = 0;
-			}else{
+			} else {
 				whiteStones[i] = 0;
 				blackStones[i] = 0;
 			}
