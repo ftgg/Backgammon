@@ -19,11 +19,11 @@ public class Controller extends Subject {
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
-		Tui tui;
+		//Tui tui;
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
 		wuerfeln();
-		// tui = new Tui(this);
+		//tui = new Tui(this);
 		setSpieler("Test1", "Test2");
 	}
 
