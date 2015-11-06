@@ -12,12 +12,15 @@ public class SpielFeldTest {
 
 	private SpielFeld sfstd, sfs;
 	private int size; // size of (pitch/4)
+	private Spieler spielerw, spielerb;
 
 	@Before
 	public void setUp() throws Exception {
 		size = 2;
 		sfstd = new SpielFeld();
 		sfs = new SpielFeld(size);
+		spielerw = new Spieler("Jan", Stein.WHITE);
+		spielerb = new Spieler("Herbert", Stein.BLACK);
 	}
 
 	@Test
@@ -35,18 +38,17 @@ public class SpielFeldTest {
 	@Test
 	public void testPossibleMove() {
 		sfstd = new SpielFeld();
-		assertTrue(sfstd.possibleMove(0, 1, Stein.WHITE)); //legal
-		assertFalse(sfstd.possibleMove(3, 4, Stein.WHITE));//kein stein zu bewegen
-		assertFalse(sfstd.possibleMove(0, 5, Stein.WHITE));//5 ist rot sicher
-		assertTrue(sfstd.possibleMove(0, 1, Stein.WHITE));//weiss auf weiss
-		assertTrue(sfstd.possibleMove(0, 6, Stein.WHITE));//6 weiss angreifbar
-		assertTrue(sfstd.possibleMove(5, 6, Stein.BLACK));//schwarz schlägt weiss
-		assertTrue(sfstd.possibleMove(5, 6, Stein.BLACK));
-		assertTrue(sfstd.possibleMove(5, 7, Stein.BLACK));
-		assertTrue(sfstd.possibleMove(0, 6, Stein.WHITE));
+		assertTrue(sfstd.isMovePossible(0, 1, spielerw)); // legal
+		assertFalse(sfstd.isMovePossible(3, 4, spielerw));// kein stein zu bewegen
+		assertFalse(sfstd.isMovePossible(0, 5, spielerw));// 5 ist rot sicher
+		assertTrue(sfstd.isMovePossible(0, 1, spielerw));// weiss auf weiss
+		assertTrue(sfstd.isMovePossible(0, 6, spielerw));// 6 weiss angreifbar
+		assertTrue(sfstd.isMovePossible(5, 6, spielerb));// schwarz schlägt weiss
+		assertTrue(sfstd.isMovePossible(5, 6, spielerb));
+		assertTrue(sfstd.isMovePossible(5, 7, spielerb));
+		assertTrue(sfstd.isMovePossible(0, 6, spielerw));
 	}
-	
-	
+
 	@Test
 	public void testGetDreieck() {
 		for (int i = sfs.getSize() - 1; i >= 0; i--) {
@@ -68,25 +70,25 @@ public class SpielFeldTest {
 
 	@Test
 	public void testZug() {
-		assertSame(0,sfstd.zug(0, 1, Stein.WHITE)); //legal
-		assertSame(-1,sfstd.zug(3, 4, Stein.WHITE));//kein stein zu bewegen
-		assertSame(-1,sfstd.zug(0, 5, Stein.WHITE));//5 ist rot sicher
-		assertSame(0,sfstd.zug(0, 1, Stein.WHITE));//weiss auf weiss
-		assertSame(0,sfstd.zug(1, 6, Stein.WHITE));//6 weiss angreifbar
-		assertTrue(sfstd.isBarEmpty(new Spieler("T",Stein.WHITE)));
-		assertSame(1,sfstd.zug(5, 6, Stein.BLACK));//schwarz schlägt weiss
-		assertFalse(sfstd.isBarEmpty(new Spieler("T",Stein.WHITE)));
-		assertSame(0,sfstd.zug(5, 6, Stein.BLACK));
-		assertSame(0,sfstd.zug(6, 7, Stein.BLACK));
-		assertSame(1,sfstd.zug(1, 6, Stein.WHITE));
+		assertSame(0, sfstd.zug(0, 1, spielerw)); // legal
+		assertSame(-1, sfstd.zug(3, 4, spielerw));// kein stein zu bewegen
+		assertSame(-1, sfstd.zug(0, 5, spielerw));// 5 ist rot sicher
+		assertSame(0, sfstd.zug(0, 1, spielerw));// weiss auf weiss
+		assertSame(0, sfstd.zug(1, 6, spielerw));// 6 weiss angreifbar
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		assertSame(1, sfstd.zug(5, 6, spielerb));// schwarz schlägt weiss
+		assertFalse(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		assertSame(0, sfstd.zug(5, 6, spielerb));
+		assertSame(0, sfstd.zug(6, 7, spielerb));
+		assertSame(1, sfstd.zug(1, 6, spielerw));
 	}
 
 	@Test
 	public void testIsEmpty() {
-		
+
 		for (int i = 0; i < size * 4; i++)
 			assertTrue(sfs.isEmpty(i));
-		
+
 		for (int i = 0; i < 24; i++)
 			switch (i) {
 			case 0:
@@ -106,8 +108,8 @@ public class SpielFeldTest {
 
 	@Test
 	public void testIsBarEmpty() {
-		assertTrue(sfstd.isBarEmpty(new Spieler("T",Stein.WHITE)));
-		assertTrue(sfstd.isBarEmpty(new Spieler("T",Stein.BLACK)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.BLACK)));
 	}
 
 }

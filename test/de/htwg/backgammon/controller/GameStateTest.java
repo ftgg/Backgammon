@@ -12,13 +12,14 @@ public class GameStateTest extends TestCase {
 
 	GameState gs;
 	SpielFeld sf;
-	Spieler spieler;
+	Spieler spielerw , spielerb;
 
 	@Before
 	public void setUp() throws Exception {
 		sf = new SpielFeld();
-		spieler = new Spieler("Hund", Stein.WHITE);
-		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spieler);
+		spielerw = new Spieler("Hund", Stein.WHITE);
+		spielerb = new Spieler("Hund", Stein.BLACK);
+		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw);
 
 	}
 
@@ -47,7 +48,7 @@ public class GameStateTest extends TestCase {
 	@Test
 	public void testMessageAndSpieler() {
 		assertEquals("Update", gs.getMessage());
-		assertEquals(spieler,gs.getCurrent());
+		assertEquals(spielerw,gs.getCurrent());
 	}
 
 	@Test
@@ -57,11 +58,11 @@ public class GameStateTest extends TestCase {
 		assertEquals(0, gs.getWhiteBar());
 		assertEquals(0, gs.getBlackBar());
 		
-		sf.zug(0, 6, Stein.WHITE);
-		sf.zug(5, 6, Stein.BLACK);
-		assertFalse(sf.isBarEmpty(spieler));
-		assertTrue(sf.isBarEmpty(new Spieler("Testspieler",Stein.BLACK)));
-		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spieler);
+		sf.zug(0, 6, spielerw);
+		sf.zug(5, 6, spielerb);
+		assertFalse(sf.isBarEmpty(spielerw));
+		assertTrue(sf.isBarEmpty(spielerb));
+		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spielerw);
 		assertEquals(0, gs.getBlackBar());
 		assertEquals(1, gs.getWhiteBar());
 	}

@@ -12,8 +12,8 @@ import java.util.List;
 public class SpielFeld {
 
 	private List<Dreieck> dreiecke;
-	private Dreieck barone; // Bar of Player one (White)
-	private Dreieck bartwo; // Bar of Player two (Black)
+	private Dreieck barblack; // Bar of Player one (White)
+	private Dreieck barwhite; // Bar of Player two (Black)
 
 	/**
 	 * Creates a pitch with 24 Fields like the real Backgammon-Field
@@ -30,8 +30,8 @@ public class SpielFeld {
 	 *            the number of Fields in each Base
 	 */
 	public SpielFeld(int size) {
-		barone = new Dreieck();
-		bartwo = new Dreieck();
+		barblack = new Dreieck();
+		barwhite = new Dreieck();
 		dreiecke = new LinkedList<Dreieck>();
 		int quadsize;
 		quadsize = size * 4;
@@ -105,16 +105,16 @@ public class SpielFeld {
 	 */
 	public boolean isBarEmpty(Spieler spieler) {
 		if (spieler.getColor() == Stein.WHITE) {
-			return barone.isEmpty();
+			return barblack.isEmpty();
 		}
-		return bartwo.isEmpty();
+		return barwhite.isEmpty();
 	}
 	
 	public int getBarCount(int spieler){
 		if (spieler == Stein.WHITE) {
-			return barone.count();
+			return barblack.count();
 		}
-		return bartwo.count();
+		return barwhite.count();
 	}
 
 	/**
@@ -130,8 +130,8 @@ public class SpielFeld {
 	 * @return returns -1 if move is not possible, 0 if its a correct move and 1
 	 *         if it is an attack
 	 */
-	public int zug(int a, int b, int spieler) {
-		if (!possibleMove(a, b, spieler))
+	public int zug(int a, int b, Spieler s) {
+		if (!isMovePossible(a, b, s))
 			return -1;
 
 		Stein attack = dreiecke.get(a).remove();
@@ -141,27 +141,38 @@ public class SpielFeld {
 			return 0;
 		// else the current move was an attack and we got a stone of
 		// the enemy
-		if (spieler == Stein.WHITE)
-			bartwo.add(beaten); // white = player one, so the kicked token
-								// has to be addet to bartwo
+		if (s.getColor() == Stein.WHITE)
+			barwhite.add(beaten);
 		else
-			barone.add(beaten);
+			barblack.add(beaten);
 		return 1;
-
 	}
 
-	public boolean possibleMove(int a, int b, int pc) {
+	public boolean isMovePossible(int a, int b, Spieler s) {
 		// there is a token of the current player in field a
-		if (dreiecke.get(a).getColor() != pc)
+		if (dreiecke.get(a).getColor() != s.getColor())
 			return false;
-		// field b is attackable or own
-		if (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == pc)
+		// field b is attackable or own	
+		return isTargetPossible(b,s);
+	}
+	
+	public boolean isTargetPossible(int b, Spieler s){
+		if (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor())
 			return true;
 		return false;
-
 	}
+	
 
 	public int countOfTriangles(int i) {
 		return dreiecke.get(i).count();
+	}
+
+	/**
+	 * are all tokens of the player in the last quarter of the pitch
+	 * @param current player
+	 */
+	public void allHome(Spieler current) {
+		// TODO Auto-generated method stub
+		
 	}
 }

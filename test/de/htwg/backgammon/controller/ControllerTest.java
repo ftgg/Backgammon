@@ -42,13 +42,35 @@ public class ControllerTest {
 		assertTrue(3 == c.parseAction("3 5")[0] && 5 == c.parseAction("3 5")[1]);
 		assertTrue(20 == c.parseAction("20 h")[0] && -1 == c.parseAction("20 h")[1]);
 		assertTrue(-2 == c.parseAction("b 5")[0] && 5 == c.parseAction("b 5")[1]);
-	
+
 	}
 
 	@Test
-	public void testParseInt(){
-		assertEquals(-3,c.parseInt("a"));
-		assertEquals(10,c.parseInt("10"));
+	public void testParseInt() {
+		assertEquals(-3, c.parseInt("a"));
+		assertEquals(10, c.parseInt("10"));
+	}
+
+	@Test
+	public void testLoescheWurf() {
+		// vorraussetzung auf feld 5 liegt ein stein und auf feld 10 ist es leer
+		for (int i = 0; i < 30; i++) {
+			c.wuerfeln();
+			int erg[] = c.getZuege();
+			if (erg[0] == 5 || erg[1] == 5) {
+				assertTrue(c.zugMoeglich(5, 10));
+				c.loescheWurf(5, 10);
+				erg = c.getZuege();
+				assertTrue(erg[0] == 0 || erg[1] == 0);
+			} else {
+				assertFalse(c.zugMoeglich(5, 10));
+			}
+		}
+	}
+
+	@Test
+	public void testZugMoeglich() {
+
 	}
 
 }

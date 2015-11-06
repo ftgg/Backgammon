@@ -23,7 +23,7 @@ public class Controller extends Subject {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
 		wuerfeln();
-		//tui = new Tui(this);
+		// tui = new Tui(this);
 	}
 
 	public void setSpieler(String n1, String n2) {
@@ -35,27 +35,32 @@ public class Controller extends Subject {
 
 	// Auf jedenfall 2 eingaben zb b 3 von bar nach feld nummer 3 oder 20 h für
 	// von 20 nach hause, oder 3 5
-	public void doAction(String s) {	
+	public void doAction(String s) {
 		int[] act = parseAction(s);
-		if(act[0] == -3 || act[1] == -3){
+		if (act[0] == -3 || act[1] == -3) {
 			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current));
 			return;
 		}
-		
-		
-			
+		if (!zugMoeglich(act[0], act[1])) {
+			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
+			return;
+		}
+		// korrekte Eingabe, also Spielen
+		spielZug(act[0], act[1]);
+
 	}
 
 	// public for test
 	/**
 	 * 
-	 * @param act String with two numbers or "h" | "b"
-	 * @return two ints and -3 if illegalArgument
+	 * @param act
+	 *            String with two numbers or "h" | "b"
+	 * @return two int's and -3 if illegalArgument
 	 */
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
-		if(s.length != 2)
-			return new int[] {-3,-3};
+		if (s.length != 2)
+			return new int[] { -3, -3 };
 		int res[] = { 0, 0 };
 		// TODO fälle behandeln mit falscher Eingabe
 		if (s[0].equals("b")) {
@@ -71,14 +76,14 @@ public class Controller extends Subject {
 		}
 		return res;
 	}
-	
-	int parseInt(String s){
+
+	int parseInt(String s) {
 		int a;
-		try{
+		try {
 			a = Integer.parseInt(s);
-		}catch(Exception e){
+		} catch (Exception e) {
 			return -3;
-		} 
+		}
 		return a;
 	}
 
@@ -98,18 +103,20 @@ public class Controller extends Subject {
 	}
 
 	// TODO isBarEmpty() weil wegen Bar zuerst ausspielen
+	// TODO zug 5+1 sind noch zwei züge, sollen aber als ein zug mit 6
+	// realisiert werden
+	// TODO von a nach b wie weit zum aus zuege löschen
+	// prüfen ob zug überhaupt möglich(zahl gewürfelt)
+	// wenn ja zug tätigen //wenn keine zuege mehr da = current = anderer
+	// Spieler
 
 	public void spielZug(int a, int b) {
-		// TODO zug 5+1 sind noch zwei züge, sollen aber als ein zug mit 6
-		// realisiert werden
 
-		// TODO von a nach b wie weit zum aus zuege löschen
-		// prüfen ob zug überhaupt möglich(zahl gewürfelt)
-		// wenn ja zug tätigen //wenn keine zuege mehr da = current = anderer
-		// Spieler
-
-		int result = sf.zug(a, b, current.getColor());
+		// zug theoretisch ausführen
+		int result = sf.zug(a, b, current);
 		String message;
+		// TODO schauen ob a nach b mit zuege möglich
+		zugMoeglich(a, b);
 		// TODO zug aus liste löschen und prüfen ob machbar
 		if (result == -1) {
 			// ILLEGAL
@@ -117,16 +124,84 @@ public class Controller extends Subject {
 			message = "Zug nicht möglich!";
 			return;
 		} else if (result == 0) {
+			bewege(a, b);
 			// move und zug entfernen
 			spielerwechsel();
 			message = "";
 		} else {
+			schlage(a, b);
 			// attack und Zug entfernen
 			spielerwechsel();
 			message = "";
 		}
 		// Subject Notify für update an UI
 		notifyObs(new GameState(sf, zuege, message, current));
+	}
+
+	/**
+	 * completes an attack
+	 * 
+	 * @param a
+	 * @param b
+	 */
+	private void schlage(int a, int b) {
+		loescheWurf(a, b);
+
+	}
+
+	/**
+	 * completes an move
+	 * 
+	 * @param a
+	 * @param b
+	 */
+	private void bewege(int a, int b) {
+		// TODO evtl mit schlage() zusammenfassen
+
+	}
+
+	/**
+	 * deleates the current move from zuege
+	 */
+	protected void loescheWurf(int a, int b) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * checks if move from a to b is possible with diced numbers
+	 * 
+	 * @param a
+	 *            startposition
+	 * @param b
+	 *            targetposition
+	 * @return true if move is possible with diced numbers
+	 */
+	protected boolean zugMoeglich(int a, int b) {
+		// bar
+		if (!isBarMoveValid(a, b))
+			return false;
+
+		// home
+		sf.allHome(current);
+
+		sf.isMovePossible(a, b, current);
+		return false;
+	}
+
+	private boolean isBarMoveValid(int a, int b){
+		if(sf.isBarEmpty(current))
+			return true;
+
+		if(a != BAR){
+			return false;
+		}else{
+			if(!sf.isTargetPossible(b, current))
+				return false;
+			//if(//TODO überprüfung bereich home)
+				
+		}	
+		return false;
 	}
 
 	private boolean zuegeEmpty() {
