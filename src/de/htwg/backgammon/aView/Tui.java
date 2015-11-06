@@ -28,6 +28,7 @@ public class Tui implements Observer {
 		s1 = s.next();
 		System.out.println("Name Spieler Schwarz:");
 		s2 = s.next();
+		s.close();
 		System.out.printf("Viel Spass %s und %s\n", s1, s2);
 		contr.setSpieler(s1, s2);
 	}
@@ -44,6 +45,7 @@ public class Tui implements Observer {
 		System.out.println(gs.getCurrent().getName() + " ist am Zug:");
 		Scanner s = new Scanner(System.in);
 		String t = s.nextLine();
+		s.close();
 		contr.doAction(t);
 	}
 	
