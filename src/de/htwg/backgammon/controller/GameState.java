@@ -16,6 +16,7 @@ public class GameState implements Event {
 	private int[] zuege;
 	private String message;
 	private Spieler current;
+	private boolean gamefinished = false;
 
 	GameState(SpielFeld sf, int[] z, Spieler s) {
 		this(sf, z, "Update", s);
@@ -32,6 +33,10 @@ public class GameState implements Event {
 		fillArrays(sf);
 	}
 
+	public boolean getGameFinished(){
+		return gamefinished;
+	}
+	
 	public Spieler getCurrent() {
 		return current;
 	}

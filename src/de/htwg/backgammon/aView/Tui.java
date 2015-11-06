@@ -33,11 +33,20 @@ public class Tui implements Observer {
 
 	private void running() {
 		while (!gs.getGameFinished()) {
-
+			System.out.println(gs.getMessage());
+			print();
+			eingabe();
 		}
 	}
 
-	public void print(GameState gs) {
+	private void eingabe(){
+		System.out.println(gs.getCurrent().getName() + "ist am Zug:");
+		Scanner s = new Scanner(System.in);
+		String t = s.next();
+		contr.doAction(t);
+	}
+	
+	public void print() {
 
 	}
 
@@ -45,7 +54,6 @@ public class Tui implements Observer {
 	public void update(Event e) {
 		if (e instanceof GameState) {
 			gs = (GameState) e;
-			print(gs);
 		}
 
 	}

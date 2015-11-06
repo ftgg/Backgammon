@@ -1,13 +1,14 @@
 package de.htwg.backgammon.util;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
+
 
 public abstract class Subject {
 	
 	Set<Observer> observers;
 	
 	public Subject(){
-		observers = new TreeSet<Observer>();
+		observers = new HashSet<Observer>();
 	}
 	
 	public void notifyObs(Event e){

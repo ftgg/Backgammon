@@ -33,6 +33,11 @@ public class GameStateTest extends TestCase {
 	}
 
 	@Test
+	public void testGameNotFinished(){
+		assertFalse(gs.getGameFinished());
+	}
+	
+	@Test
 	public void testZuege() {
 		for (int i = 0; i < 4; i++) {
 			assertEquals(i, gs.getZuege()[i]);
