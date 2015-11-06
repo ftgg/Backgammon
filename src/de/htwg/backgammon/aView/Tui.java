@@ -14,6 +14,7 @@ public class Tui implements Observer {
 	
 	public Tui(Controller c){
 		contr = c;
+		contr.add(this);
 		initNames();
 	}
 	private void initNames(){
@@ -29,7 +30,8 @@ public class Tui implements Observer {
 		contr.setSpieler(s1, s2);
 	}
 
-	private void print(){
+	public void print(GameState gs){
+		
 		
 		System.out.print("TUI");
 	}
@@ -37,9 +39,10 @@ public class Tui implements Observer {
 	
 	@Override
 	public void update(Event e) {
+		System.out.println("HALLO");
 		if(e instanceof GameState){
 			gs = (GameState) e;
-			print();
+			print(gs);
 		}
 			
 	}
