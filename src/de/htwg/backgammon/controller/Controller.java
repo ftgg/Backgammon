@@ -193,8 +193,8 @@ public class Controller extends Subject {
 		// vorletztem auf letztes feld bewegt wird
 		if (sf.allHome(current) && b != HOME)
 			return false;
-		//ist zug von logik her möglich
-		if(sf.isMovePossible(a, b, current))
+		// ist zug von logik her möglich
+		if (sf.isMovePossible(a, b, current))
 			return true;
 		return false;
 	}
@@ -216,19 +216,19 @@ public class Controller extends Subject {
 	private boolean indecInBase(int b) {
 		int fieldindex = sf.getSize() / 4;
 		if (current.getColor() == Stein.WHITE) {
-			// Spieler weiss 1 - x
-			if (b > fieldindex - 1 || b < 1) {
-				return false;
-			}
-			return true;
+			return indexInBase(b, fieldindex - 1, 1);
 		} else {
 			// spieler schwarz
-			int homebaseb = fieldindex * 3 - 1;
-			if (b > fieldindex * 4 || b < homebaseb) {
-				return false;
-			}
-			return true;
+			return indexInBase(b, fieldindex * 4, fieldindex * 3 - 1);
 		}
+	}
+
+	private boolean indexInBase(int b, int min, int max) {
+		// min und max angabe für noch in der base
+		if (b > max || b < min) {
+			return false;
+		}
+		return true;
 	}
 
 	private boolean zuegeEmpty() {
