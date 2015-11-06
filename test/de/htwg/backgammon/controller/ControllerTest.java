@@ -54,6 +54,7 @@ public class ControllerTest {
 	@Test
 	public void testLoescheWurf() {
 		// vorraussetzung auf feld 5 liegt ein stein und auf feld 10 ist es leer
+		//TODO diese vorraussetzung schaffen
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();

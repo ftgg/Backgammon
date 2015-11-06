@@ -24,6 +24,7 @@ public class Controller extends Subject {
 		w = new Wuerfel();
 		wuerfeln();
 		// tui = new Tui(this);
+		setSpieler("Test1", "Test2");
 	}
 
 	public void setSpieler(String n1, String n2) {
@@ -178,30 +179,56 @@ public class Controller extends Subject {
 	 * @return true if move is possible with diced numbers
 	 */
 	protected boolean zugMoeglich(int a, int b) {
-		// bar
+		int value = b - a;
+		// zug passt zu keiner gewürfelten zahl
+		if (value != zuege[0] && value != zuege[1] && value != zuege[2] && value != zuege[3])
+			return false;
+		// zug beginnt mit bar
 		if (!isBarMoveValid(a, b))
 			return false;
-
 		// home
-		sf.allHome(current);
-
-		sf.isMovePossible(a, b, current);
+		if (sf.allHome(current) && b == HOME)
+			return true;
+		// TODO b != HOME kann auch true zurückliefern falls 1 gewürfelt und von
+		// vorletztem auf letztes feld bewegt wird
+		if (sf.allHome(current) && b != HOME)
+			return false;
+		//ist zug von logik her möglich
+		if(sf.isMovePossible(a, b, current))
+			return true;
 		return false;
 	}
 
-	private boolean isBarMoveValid(int a, int b){
-		if(sf.isBarEmpty(current))
+	private boolean isBarMoveValid(int a, int b) {
+		if (sf.isBarEmpty(current))
 			return true;
 
-		if(a != BAR){
+		if (a != BAR) {
 			return false;
-		}else{
-			if(!sf.isTargetPossible(b, current))
+		} else {
+			if (!sf.isTargetPossible(b, current))
 				return false;
-			//if(//TODO überprüfung bereich home)
-				
-		}	
-		return false;
+			// zielfeld frei und etwas auf bar => b prüfen
+			return indecInBase(b);
+		}
+	}
+
+	private boolean indecInBase(int b) {
+		int fieldindex = sf.getSize() / 4;
+		if (current.getColor() == Stein.WHITE) {
+			// Spieler weiss 1 - x
+			if (b > fieldindex - 1 || b < 1) {
+				return false;
+			}
+			return true;
+		} else {
+			// spieler schwarz
+			int homebaseb = fieldindex * 3 - 1;
+			if (b > fieldindex * 4 || b < homebaseb) {
+				return false;
+			}
+			return true;
+		}
 	}
 
 	private boolean zuegeEmpty() {
