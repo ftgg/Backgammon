@@ -16,6 +16,7 @@ public class Tui implements Observer {
 		contr = c;
 		contr.add(this);
 		initNames();
+		running();
 	}
 
 	private void initNames() {
@@ -40,9 +41,9 @@ public class Tui implements Observer {
 	}
 
 	private void eingabe(){
-		System.out.println(gs.getCurrent().getName() + "ist am Zug:");
+		System.out.println(gs.getCurrent().getName() + " ist am Zug:");
 		Scanner s = new Scanner(System.in);
-		String t = s.next();
+		String t = s.nextLine();
 		contr.doAction(t);
 	}
 	

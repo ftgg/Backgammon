@@ -19,32 +19,31 @@ public class Controller extends Subject {
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
-		Tui tui = new Tui(this);
+		Tui tui;
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
-		current = s1;
-		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current));
+		wuerfeln();
+		tui = new Tui(this);
 	}
 
 	public void setSpieler(String n1, String n2) {
 		s1 = new Spieler(n1, Stein.WHITE);
 		s2 = new Spieler(n2, Stein.BLACK);
+		current = s1;
+		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current));
 	}
 
 	// Auf jedenfall 2 eingaben zb b 3 von bar nach feld nummer 3 oder 20 h für
 	// von 20 nach hause, oder 3 5
-	public void doAction(String action) {
-
-		if (isHandEmpty()) {
-			wuerfeln();
-			// TODO evtl ans ende der methode
-			notifyObs(new GameState(sf, zuege, "Gewuerfelt", current));
-		} else if (sf.isBarEmpty(current)) {
-			// TODO Spielzug von Bar
-		} else {
-
+	public void doAction(String s) {	
+		int[] act = parseAction(s);
+		if(act[0] == -3 || act[1] == -3){
+			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current));
+			return;
 		}
-		// TODO gewonnen?
+		
+		
+			
 	}
 
 	// public for test
@@ -55,6 +54,8 @@ public class Controller extends Subject {
 	 */
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
+		if(s.length != 2)
+			return new int[] {-3,-3};
 		int res[] = { 0, 0 };
 		// TODO fälle behandeln mit falscher Eingabe
 		if (s[0].equals("b")) {
@@ -71,7 +72,7 @@ public class Controller extends Subject {
 		return res;
 	}
 	
-	private int parseInt(String s){
+	int parseInt(String s){
 		int a;
 		try{
 			a = Integer.parseInt(s);
@@ -117,12 +118,10 @@ public class Controller extends Subject {
 			return;
 		} else if (result == 0) {
 			// move und zug entfernen
-
 			spielerwechsel();
 			message = "";
 		} else {
 			// attack und Zug entfernen
-
 			spielerwechsel();
 			message = "";
 		}
@@ -130,7 +129,7 @@ public class Controller extends Subject {
 		notifyObs(new GameState(sf, zuege, message, current));
 	}
 
-	private boolean isHandEmpty() {
+	private boolean zuegeEmpty() {
 		for (int c : zuege) {
 			if (c != 0)
 				return false;
@@ -139,20 +138,19 @@ public class Controller extends Subject {
 	}
 
 	private void spielerwechsel() {
-		// TODO schaut ob spieler nochmal ziehen darf oder ob anderer Spieler
-		// dran ist
-		if (isHandEmpty()) {
+		if (zuegeEmpty()) {
 			if (current == s1)
 				current = s2;
 			else
 				current = s1;
+			wuerfeln();
 		}
 	}
 
 	/**
 	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
 	 * 
-	 * @return ja
+	 * @return Wuerfelergebnis
 	 */
 	public int[] getWuerfelC() {
 		return w.getCurrent();

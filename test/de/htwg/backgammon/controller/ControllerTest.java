@@ -42,6 +42,13 @@ public class ControllerTest {
 		assertTrue(3 == c.parseAction("3 5")[0] && 5 == c.parseAction("3 5")[1]);
 		assertTrue(20 == c.parseAction("20 h")[0] && -1 == c.parseAction("20 h")[1]);
 		assertTrue(-2 == c.parseAction("b 5")[0] && 5 == c.parseAction("b 5")[1]);
+	
+	}
+
+	@Test
+	public void testParseInt(){
+		assertEquals(-3,c.parseInt("a"));
+		assertEquals(10,c.parseInt("10"));
 	}
 
 }
