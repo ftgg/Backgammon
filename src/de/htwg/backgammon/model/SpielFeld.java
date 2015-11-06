@@ -62,8 +62,6 @@ public class SpielFeld {
 			color = Stein.BLACK;
 		}
 	}
-	
-	
 
 	/**
 	 * returns the number of fields
@@ -109,8 +107,8 @@ public class SpielFeld {
 		}
 		return barwhite.isEmpty();
 	}
-	
-	public int getBarCount(int spieler){
+
+	public int getBarCount(int spieler) {
 		if (spieler == Stein.WHITE) {
 			return barblack.count();
 		}
@@ -152,16 +150,15 @@ public class SpielFeld {
 		// there is a token of the current player in field a
 		if (dreiecke.get(a).getColor() != s.getColor())
 			return false;
-		// field b is attackable or own	
-		return isTargetPossible(b,s);
+		// field b is attackable or own
+		return isTargetPossible(b, s);
 	}
-	
-	public boolean isTargetPossible(int b, Spieler s){
+
+	public boolean isTargetPossible(int b, Spieler s) {
 		if (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor())
 			return true;
 		return false;
 	}
-	
 
 	public int countOfTriangles(int i) {
 		return dreiecke.get(i).count();
@@ -169,10 +166,13 @@ public class SpielFeld {
 
 	/**
 	 * are all tokens of the player in the last quarter of the pitch
-	 * @param current player
+	 * 
+	 * @param current
+	 *            player
+	 * @return
 	 */
-	public void allHome(Spieler current) {
+	public boolean allHome(Spieler current) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 }
