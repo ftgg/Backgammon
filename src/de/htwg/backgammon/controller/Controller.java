@@ -23,7 +23,7 @@ public class Controller extends Subject {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
 		wuerfeln();
-		tui = new Tui(this);
+		//tui = new Tui(this);
 	}
 
 	public void setSpieler(String n1, String n2) {
