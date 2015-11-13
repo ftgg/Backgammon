@@ -12,18 +12,24 @@ public class Controller extends Subject {
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
 
-	private static final int HOME = -1;
+	private static final int EXIT = -1;
 	private static final int BAR = -2;
 
 	// TODO Regeln beachten
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
-		//Tui tui;
+		Tui tui;
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
 		wuerfeln();
-		//tui = new Tui(this);
+		tui = new Tui(this);
+	}
+
+	public Controller(boolean a) {
+		sf = new SpielFeld();// Standartgröße = original größe
+		w = new Wuerfel();
+		wuerfeln();
 		setSpieler("Test1", "Test2");
 	}
 
@@ -42,7 +48,7 @@ public class Controller extends Subject {
 			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current));
 			return;
 		}
-		if (!zugMoeglich(act[0], act[1])) {
+		if (!verifyMove(act[0], act[1])) {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
 			return;
 		}
@@ -63,7 +69,7 @@ public class Controller extends Subject {
 		if (s.length != 2)
 			return new int[] { -3, -3 };
 		int res[] = { 0, 0 };
-		// TODO fälle behandeln mit falscher Eingabe
+
 		if (s[0].equals("b")) {
 			res[0] = BAR;
 		} else {
@@ -71,7 +77,7 @@ public class Controller extends Subject {
 		}
 
 		if (s[1].equals("h")) {
-			res[1] = HOME;
+			res[1] = EXIT;
 		} else {
 			res[1] = parseInt(s[1]);
 		}
@@ -117,7 +123,7 @@ public class Controller extends Subject {
 		int result = sf.zug(a, b, current);
 		String message;
 		// TODO schauen ob a nach b mit zuege möglich
-		zugMoeglich(a, b);
+		verifyMove(a, b);
 		// TODO zug aus liste löschen und prüfen ob machbar
 		if (result == -1) {
 			// ILLEGAL
@@ -147,7 +153,6 @@ public class Controller extends Subject {
 	 */
 	private void schlage(int a, int b) {
 		loescheWurf(a, b);
-
 	}
 
 	/**
@@ -178,58 +183,54 @@ public class Controller extends Subject {
 	 *            targetposition
 	 * @return true if move is possible with diced numbers
 	 */
-	protected boolean zugMoeglich(int a, int b) {
-		int value = b - a;
+	protected boolean verifyMove(int a, int b) {
+
+		int value = Math.abs(b - a);
 		// zug passt zu keiner gewürfelten zahl
 		if (value != zuege[0] && value != zuege[1] && value != zuege[2] && value != zuege[3])
 			return false;
 		// zug beginnt mit bar
+
 		if (!isBarMoveValid(a, b))
 			return false;
+
 		// home
-		if (sf.allHome(current) && b == HOME)
+		if (sf.allHome(current) && b == EXIT)
 			return true;
-		// TODO b != HOME kann auch true zurückliefern falls 1 gewürfelt und von
-		// vorletztem auf letztes feld bewegt wird
-		if (sf.allHome(current) && b != HOME)
-			return false;
+
 		// ist zug von logik her möglich
 		if (sf.isMovePossible(a, b, current))
 			return true;
 		return false;
 	}
 
+	protected int getMoveDistance(int a, int b) {
+		if (a == BAR)
+			if (current.getColor() == Stein.BLACK)
+				a = sf.getSize();
+			else
+				a = 0;
+		if (b == EXIT)
+			if (current.getColor() == Stein.BLACK)
+				b = sf.getSize();
+			else
+				b = 0;
+		return Math.abs(b - a);
+	}
+
 	private boolean isBarMoveValid(int a, int b) {
 		if (sf.isBarEmpty(current))
 			return true;
-
 		if (a != BAR) {
 			return false;
 		} else {
 			if (!sf.isTargetPossible(b, current))
 				return false;
 			// zielfeld frei und etwas auf bar => b prüfen
-			return indecInBase(b);
+			return sf.indexInHome(b, current);
 		}
 	}
 
-	private boolean indecInBase(int b) {
-		int fieldindex = sf.getSize() / 4;
-		if (current.getColor() == Stein.WHITE) {
-			return indexInBase(b, fieldindex - 1, 1);
-		} else {
-			// spieler schwarz
-			return indexInBase(b, fieldindex * 4, fieldindex * 3 - 1);
-		}
-	}
-
-	private boolean indexInBase(int b, int min, int max) {
-		// min und max angabe für noch in der base
-		if (b > max || b < min) {
-			return false;
-		}
-		return true;
-	}
 
 	private boolean zuegeEmpty() {
 		for (int c : zuege) {

@@ -11,7 +11,7 @@ public class ControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		c = new Controller();
+		c = new Controller(true);
 	}
 
 	@Test
@@ -59,12 +59,12 @@ public class ControllerTest {
 			c.wuerfeln();
 			int erg[] = c.getZuege();
 			if (erg[0] == 5 || erg[1] == 5) {
-				assertTrue(c.zugMoeglich(5, 10));
+				assertTrue(c.verifyMove(5, 10));
 				c.loescheWurf(5, 10);
 				erg = c.getZuege();
 				assertTrue(erg[0] == 0 || erg[1] == 0);
 			} else {
-				assertFalse(c.zugMoeglich(5, 10));
+				assertFalse(c.verifyMove(5, 10));
 			}
 		}
 	}
