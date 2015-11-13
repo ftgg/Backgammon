@@ -71,8 +71,6 @@ public class SpielFeldTest {
 	@Test
 	public void testZug() {
 		assertSame(0, sfstd.zug(0, 1, spielerw)); // legal
-		assertSame(-1, sfstd.zug(3, 4, spielerw));// kein stein zu bewegen
-		assertSame(-1, sfstd.zug(0, 5, spielerw));// 5 ist rot sicher
 		assertSame(0, sfstd.zug(0, 1, spielerw));// weiss auf weiss
 		assertSame(0, sfstd.zug(1, 6, spielerw));// 6 weiss angreifbar
 		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
@@ -110,6 +108,21 @@ public class SpielFeldTest {
 	public void testIsBarEmpty() {
 		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
 		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.BLACK)));
+	}
+	
+	@Test
+	public void testindexInBase(){
+		assertTrue(sfstd.indexInHome(23, spielerw));
+		assertFalse(sfstd.indexInHome(23, spielerb));
+		assertFalse(sfstd.indexInHome(4, spielerw));
+		assertTrue(sfstd.indexInHome(0, spielerb));
+		assertTrue(sfstd.indexInHome(5, spielerb));
+		assertFalse(sfstd.indexInHome(6, spielerb));
+		assertFalse(sfstd.indexInHome(7, spielerw));
+		assertFalse(sfstd.indexInHome(10, spielerb));
+		assertTrue(sfstd.indexInHome(23, spielerw));
+		assertTrue(sfstd.indexInHome(18, spielerw));
+		assertFalse(sfstd.indexInHome(17, spielerw));
 	}
 
 }

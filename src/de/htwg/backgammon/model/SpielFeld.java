@@ -129,8 +129,7 @@ public class SpielFeld {
 	 *         if it is an attack
 	 */
 	public int zug(int a, int b, Spieler s) {
-		if (!isMovePossible(a, b, s))
-			return -1;
+		assert(isMovePossible(a, b, s));
 
 		Stein attack = dreiecke.get(a).remove();
 		Stein beaten = dreiecke.get(b).add(attack);
@@ -162,6 +161,24 @@ public class SpielFeld {
 
 	public int countOfTriangles(int i) {
 		return dreiecke.get(i).count();
+	}
+
+	public boolean indexInHome(int b, Spieler current) {
+		int quarterRange = getSize() / 4;
+		if (current.getColor() == Stein.BLACK) {
+			return valueInRange(b, 0, quarterRange - 1);
+		} else {
+			// spieler schwarz
+			return valueInRange(b, quarterRange * 3, quarterRange * 4 - 1);
+		}
+	}
+
+	private boolean valueInRange(int value, int min, int max) {
+		// min und max angabe für noch in der base
+		if (value > max || value < min) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
