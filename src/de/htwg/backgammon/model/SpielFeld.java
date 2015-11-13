@@ -11,6 +11,8 @@ import java.util.List;
 
 public class SpielFeld {
 
+	public static final int EXIT = -1;
+	public static final int BAR = -2;
 	private List<Dreieck> dreiecke;
 	private Dreieck barblack; // Bar of Player one (White)
 	private Dreieck barwhite; // Bar of Player two (Black)
@@ -180,7 +182,23 @@ public class SpielFeld {
 		}
 		return true;
 	}
-
+	
+	protected int getMoveDistance(int a, int b, Spieler current) {
+		if (a == BAR)
+			if (current.getColor() == Stein.BLACK)
+				a = getSize();
+			else
+				a = 0;
+		if (b == EXIT)
+			if (current.getColor() == Stein.BLACK)
+				b = getSize();
+			else
+				b = 0;
+		return Math.abs(b - a);
+	}
+	
+	
+	
 	/**
 	 * are all tokens of the player in the last quarter of the pitch
 	 * 

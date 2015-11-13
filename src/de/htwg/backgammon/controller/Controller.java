@@ -12,18 +12,14 @@ public class Controller extends Subject {
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
 
-	private static final int EXIT = -1;
-	private static final int BAR = -2;
 
 	// TODO Regeln beachten
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
-		Tui tui;
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
-		wuerfeln();
-		tui = new Tui(this);
+		wuerfeln();	
 	}
 
 	public Controller(boolean a) {
@@ -71,13 +67,13 @@ public class Controller extends Subject {
 		int res[] = { 0, 0 };
 
 		if (s[0].equals("b")) {
-			res[0] = BAR;
+			res[0] = sf.BAR;
 		} else {
 			res[0] = parseInt(s[0]);
 		}
 
 		if (s[1].equals("h")) {
-			res[1] = EXIT;
+			res[1] = sf.EXIT;
 		} else {
 			res[1] = parseInt(s[1]);
 		}
@@ -91,7 +87,7 @@ public class Controller extends Subject {
 		} catch (Exception e) {
 			return -3;
 		}
-		return a;
+		return a - 1;
 	}
 
 	public void wuerfeln() {
@@ -170,7 +166,6 @@ public class Controller extends Subject {
 	 * deleates the current move from zuege
 	 */
 	protected void loescheWurf(int a, int b) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -195,7 +190,7 @@ public class Controller extends Subject {
 			return false;
 
 		// home
-		if (sf.allHome(current) && b == EXIT)
+		if (sf.allHome(current) && b == sf.EXIT)
 			return true;
 
 		// ist zug von logik her möglich
@@ -204,33 +199,22 @@ public class Controller extends Subject {
 		return false;
 	}
 
-	protected int getMoveDistance(int a, int b) {
-		if (a == BAR)
-			if (current.getColor() == Stein.BLACK)
-				a = sf.getSize();
-			else
-				a = 0;
-		if (b == EXIT)
-			if (current.getColor() == Stein.BLACK)
-				b = sf.getSize();
-			else
-				b = 0;
-		return Math.abs(b - a);
-	}
-
 	private boolean isBarMoveValid(int a, int b) {
 		if (sf.isBarEmpty(current))
 			return true;
-		if (a != BAR) {
+		if (a != sf.BAR) {
 			return false;
 		} else {
 			if (!sf.isTargetPossible(b, current))
 				return false;
 			// zielfeld frei und etwas auf bar => b prüfen
-			return sf.indexInHome(b, current);
+			return sf.indexInHome(b, otherPlayer(current));
 		}
 	}
 
+	private Spieler otherPlayer(Spieler c) {
+		return c == s1 ? s2 : s1;
+	}
 
 	private boolean zuegeEmpty() {
 		for (int c : zuege) {
