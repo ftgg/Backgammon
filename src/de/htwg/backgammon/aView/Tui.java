@@ -12,11 +12,16 @@ public class Tui implements Observer {
 	private GameState gs;
 	private Controller contr;
 	private Scanner sc = new Scanner(System.in);
+	
 	public Tui(Controller c) {
 		contr = c;
 		contr.add(this);
 		initNames();
 		running();
+	}
+	//nur für Test
+	public Tui(){
+		//gs = new GameState(null, null, null)// hollymollymo
 	}
 	
 	private void initNames() {
@@ -48,8 +53,18 @@ public class Tui implements Observer {
 		contr.doAction(input);
 	}
 	
-	private void printField(){
-		
+	public void printField(){
+		printNumbers(gs.getWhiteStones().length,true);
+	}
+	
+	private void printNumbers(int a, boolean left){
+		StringBuilder sb = new StringBuilder();
+		if(left){
+			for(int i = 0; i < a ; i++){
+				sb.append(i);
+			}
+		}
+		System.out.println(sb.toString());
 	}
 	
 	@Override
