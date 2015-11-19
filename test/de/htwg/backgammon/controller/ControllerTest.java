@@ -70,6 +70,12 @@ public class ControllerTest {
 	}
 
 	@Test
+	public void testController(){
+		Controller c2 = new Controller();
+		assertNotNull(c2.getWuerfelC());
+	}
+	
+	@Test
 	public void testdoAction() {
 		c.doAction("hallo welt");
 		//TODO joah, gut getestet )= dazu brauch ich ein Observer?
