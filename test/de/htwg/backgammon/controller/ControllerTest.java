@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.Stein;
+
 public class ControllerTest {
 
 	Controller c;
@@ -42,6 +44,7 @@ public class ControllerTest {
 		assertTrue(2 == c.parseAction("3 5")[0] && 4 == c.parseAction("3 5")[1]);
 		assertTrue(19 == c.parseAction("20 h")[0] && -1 == c.parseAction("20 h")[1]);
 		assertTrue(-2 == c.parseAction("b 5")[0] && 4 == c.parseAction("b 5")[1]);
+		assertTrue(-3 == c.parseAction("b")[0] && -3 == c.parseAction("b")[1]);
 
 	}
 
@@ -52,7 +55,8 @@ public class ControllerTest {
 	}
 
 	@Test
-	public void testremoveThrow() {
+	public void testremoveThrowANDSpielerwechsel() {
+		assertTrue(c.current.getColor() == Stein.WHITE);
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();
@@ -66,8 +70,11 @@ public class ControllerTest {
 	}
 
 	@Test
-	public void verifyMove() {
-		
+	public void testdoAction() {
+		c.doAction("hallo welt");
+		//TODO joah, gut getestet )= dazu brauch ich ein Observer?
 	}
+	
+
 
 }

@@ -6,7 +6,7 @@ import de.htwg.backgammon.util.Subject;
 public class Controller extends Subject {
 	private Spieler s1;
 	private Spieler s2;
-	private Spieler current;
+	public Spieler current;
 	private SpielFeld sf;
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
@@ -178,7 +178,7 @@ public class Controller extends Subject {
 		return true;
 	}
 
-	private void spielerwechsel() {
+	public void spielerwechsel() {
 		if (zuegeEmpty()) {
 			if (current == s1)
 				current = s2;
