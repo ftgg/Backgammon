@@ -60,7 +60,7 @@ public class ControllerTest {
 			int erg[] = c.getZuege();
 			if (erg[0] == 5 || erg[1] == 5) {
 				assertTrue(c.verifyMove(5, 10));
-				c.loescheWurf(5, 10);
+				c.removeThrow(5, 10);
 				erg = c.getZuege();
 				assertTrue(erg[0] == 0 || erg[1] == 0);
 			} else {
