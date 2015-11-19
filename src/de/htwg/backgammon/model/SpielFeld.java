@@ -127,8 +127,7 @@ public class SpielFeld {
 	 *            target position of move
 	 * @param spieler
 	 *            spieler can be Stein.Black or Stein.White
-	 * @return returns -1 if move is not possible, 0 if its a correct move and 1
-	 *         if it is an attack
+	 * @return returns 0 if its a correct move and 1 if it is an attack
 	 */
 	public int zug(int a, int b, Spieler s) {
 		assert(isMovePossible(a, b, s));
@@ -149,16 +148,11 @@ public class SpielFeld {
 
 	public boolean isMovePossible(int a, int b, Spieler s) {
 		// there is a token of the current player in field a
-		if (dreiecke.get(a).getColor() != s.getColor())
-			return false;
+		if(a != BAR)
+			if (dreiecke.get(a).getColor() != s.getColor())
+				return false;
 		// field b is attackable or own
-		return isTargetPossible(b, s);
-	}
-
-	public boolean isTargetPossible(int b, Spieler s) {
-		if (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor())
-			return true;
-		return false;
+		return (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor());
 	}
 
 	public int countOfTriangles(int i) {
@@ -182,23 +176,7 @@ public class SpielFeld {
 		}
 		return true;
 	}
-	
-	protected int getMoveDistance(int a, int b, Spieler current) {
-		if (a == BAR)
-			if (current.getColor() == Stein.BLACK)
-				a = getSize();
-			else
-				a = 0;
-		if (b == EXIT)
-			if (current.getColor() == Stein.BLACK)
-				b = getSize();
-			else
-				b = 0;
-		return Math.abs(b - a);
-	}
-	
-	
-	
+
 	/**
 	 * are all tokens of the player in the last quarter of the pitch
 	 * 

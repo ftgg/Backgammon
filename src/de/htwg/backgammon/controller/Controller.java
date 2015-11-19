@@ -12,16 +12,20 @@ public class Controller extends Subject {
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
 
-
 	// TODO Regeln beachten
 	// immer abwechselnd fahren
 	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
-		wuerfeln();	
+		wuerfeln();
 	}
 
+	/**
+	 * Controller für Test umgebung
+	 * 
+	 * @param a
+	 */
 	public Controller(boolean a) {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
@@ -44,13 +48,7 @@ public class Controller extends Subject {
 			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current));
 			return;
 		}
-		if (!verifyMove(act[0], act[1])) {
-			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
-			return;
-		}
-		// korrekte Eingabe, also Spielen
 		spielZug(act[0], act[1]);
-
 	}
 
 	// public for test
@@ -114,59 +112,35 @@ public class Controller extends Subject {
 	// Spieler
 
 	public void spielZug(int a, int b) {
+		if (!verifyMove(a, b)) {
+			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
+			return;
+		}
 
-		// zug theoretisch ausführen
 		int result = sf.zug(a, b, current);
 		String message;
-		// TODO schauen ob a nach b mit zuege möglich
-		verifyMove(a, b);
 		// TODO zug aus liste löschen und prüfen ob machbar
-		if (result == -1) {
-			// ILLEGAL
-			// TODO return an UI ausgabe von falscher zug
-			message = "Zug nicht möglich!";
-			return;
-		} else if (result == 0) {
-			bewege(a, b);
+		if (result == 0) {
+			removeThrow(a, b);
 			// move und zug entfernen
 			spielerwechsel();
 			message = "";
 		} else {
-			schlage(a, b);
+			removeThrow(a, b);
 			// attack und Zug entfernen
 			spielerwechsel();
 			message = "";
 		}
-		// Subject Notify für update an UI
+		// Subject Notify für Update an UI
 		notifyObs(new GameState(sf, zuege, message, current));
-	}
-
-	/**
-	 * completes an attack
-	 * 
-	 * @param a
-	 * @param b
-	 */
-	private void schlage(int a, int b) {
-		loescheWurf(a, b);
-	}
-
-	/**
-	 * completes an move
-	 * 
-	 * @param a
-	 * @param b
-	 */
-	private void bewege(int a, int b) {
-		// TODO evtl mit schlage() zusammenfassen
-
 	}
 
 	/**
 	 * deleates the current move from zuege
 	 */
-	protected void loescheWurf(int a, int b) {
-
+	protected void removeThrow(int a, int b) {
+		int digit = Math.abs(a-b);
+		// TODO löschen
 	}
 
 	/**
@@ -184,32 +158,20 @@ public class Controller extends Subject {
 		// zug passt zu keiner gewürfelten zahl
 		if (value != zuege[0] && value != zuege[1] && value != zuege[2] && value != zuege[3])
 			return false;
-		// zug beginnt mit bar
-
-		if (!isBarMoveValid(a, b))
-			return false;
-
-		// home
-		if (sf.allHome(current) && b == sf.EXIT)
-			return true;
-
-		// ist zug von logik her möglich
-		if (sf.isMovePossible(a, b, current))
-			return true;
-		return false;
+		return (isBarMoveValid(a, b)) && (sf.allHome(current) && b == sf.EXIT) 
+				&& (sf.isMovePossible(a, b, current));
 	}
 
 	private boolean isBarMoveValid(int a, int b) {
 		if (sf.isBarEmpty(current))
 			return true;
-		if (a != sf.BAR) {
+		if (a != sf.BAR)
 			return false;
-		} else {
-			if (!sf.isTargetPossible(b, current))
-				return false;
-			// zielfeld frei und etwas auf bar => b prüfen
-			return sf.indexInHome(b, otherPlayer(current));
-		}
+
+		if (!sf.isMovePossible(sf.BAR, b, current))
+			return false;
+		// zielfeld frei und etwas auf bar => b prüfen
+		return sf.indexInHome(b, otherPlayer(current));
 	}
 
 	private Spieler otherPlayer(Spieler c) {
