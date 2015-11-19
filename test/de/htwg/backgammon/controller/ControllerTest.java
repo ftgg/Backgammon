@@ -51,20 +51,16 @@ public class ControllerTest {
 		assertEquals(9, c.parseInt("10"));
 	}
 
-	// TODO @Test
-	public void testLoescheWurf() {
-		// vorraussetzung auf feld 5 liegt ein stein und auf feld 10 ist es leer
-		//TODO diese vorraussetzung schaffen
+	@Test
+	public void testremoveThrow() {
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();
-			if (erg[0] == 5 || erg[1] == 5) {
-				assertTrue(c.verifyMove(5, 10));
-				c.removeThrow(5, 10);
+			if (erg[0] ==  erg[1] ) {
+				assertFalse(erg[0] == 0);	//es wurde eine Zahl gewürfelt
+				c.removeThrow(0, erg[0]);	//die zahl wird aus würfen gelöscht
 				erg = c.getZuege();
-				assertTrue(erg[0] == 0 || erg[1] == 0);
-			} else {
-				assertFalse(c.verifyMove(5, 10));
+				assertTrue(erg[0] == 0);	//die Zahl ist tatsächlich aus würfen gelöscht
 			}
 		}
 	}

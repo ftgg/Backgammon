@@ -128,7 +128,11 @@ public class Controller extends Subject {
 	 */
 	protected void removeThrow(int a, int b) {
 		int digit = Math.abs(a-b);
-		// TODO löschen
+		for(int i = 0; i < 4; i++)
+			if(zuege[i] == digit){
+				zuege[i] = 0;
+				break;
+			}			
 	}
 
 	/**
