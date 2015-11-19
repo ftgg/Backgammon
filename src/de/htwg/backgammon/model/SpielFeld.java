@@ -148,9 +148,8 @@ public class SpielFeld {
 
 	public boolean isMovePossible(int a, int b, Spieler s) {
 		// there is a token of the current player in field a
-		if(a != BAR)
-			if (dreiecke.get(a).getColor() != s.getColor())
-				return false;
+		if(a != BAR && dreiecke.get(a).getColor() != s.getColor())
+			return false;
 		// field b is attackable or own
 		return (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor());
 	}
