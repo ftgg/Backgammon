@@ -130,7 +130,7 @@ public class SpielFeld {
 	 * @return returns 0 if its a correct move and 1 if it is an attack
 	 */
 	public int zug(int a, int b, Spieler s) {
-		assert(isMovePossible(a, b, s));
+		assert isMovePossible(a, b, s);
 
 		Stein attack = dreiecke.get(a).remove();
 		Stein beaten = dreiecke.get(b).add(attack);

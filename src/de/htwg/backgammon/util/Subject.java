@@ -5,7 +5,11 @@ import java.util.Set;
 
 public abstract class Subject {
 	
-	Set<Observer> observers;
+	private Set<Observer> observers;
+	
+	public Set<Observer> getObs(){
+		return observers;
+	}
 	
 	public Subject(){
 		observers = new HashSet<Observer>();
