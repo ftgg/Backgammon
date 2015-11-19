@@ -1,6 +1,5 @@
 package de.htwg.backgammon.controller;
 
-import de.htwg.backgammon.aView.Tui;
 import de.htwg.backgammon.model.*;
 import de.htwg.backgammon.util.Subject;
 
@@ -12,9 +11,6 @@ public class Controller extends Subject {
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
 
-	// TODO Regeln beachten
-	// immer abwechselnd fahren
-	// wie gefahren werden darf, zugüberprüfung
 	public Controller() {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
@@ -26,11 +22,11 @@ public class Controller extends Subject {
 	 * 
 	 * @param a
 	 */
-	public Controller(boolean a) {
+	public Controller(String name) {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
 		wuerfeln();
-		setSpieler("Test1", "Test2");
+		setSpieler("Test1", name);
 	}
 
 	public void setSpieler(String n1, String n2) {
@@ -62,15 +58,15 @@ public class Controller extends Subject {
 		String[] s = act.split(" ");
 		if (s.length != 2)
 			return new int[] { -3, -3 };
-		int res[] = { 0, 0 };
+		int[] res = { 0, 0 };
 
-		if (s[0].equals("b")) {
+		if ("b".equals(s[0])) {
 			res[0] = sf.BAR;
 		} else {
 			res[0] = parseInt(s[0]);
 		}
 
-		if (s[1].equals("h")) {
+		if ("h".equals(s[1])) {
 			res[1] = sf.EXIT;
 		} else {
 			res[1] = parseInt(s[1]);
@@ -102,14 +98,6 @@ public class Controller extends Subject {
 			zuege[3] = 0;
 		}
 	}
-
-	// TODO isBarEmpty() weil wegen Bar zuerst ausspielen
-	// TODO zug 5+1 sind noch zwei züge, sollen aber als ein zug mit 6
-	// realisiert werden
-	// TODO von a nach b wie weit zum aus zuege löschen
-	// prüfen ob zug überhaupt möglich(zahl gewürfelt)
-	// wenn ja zug tätigen //wenn keine zuege mehr da = current = anderer
-	// Spieler
 
 	public void spielZug(int a, int b) {
 		if (!verifyMove(a, b)) {

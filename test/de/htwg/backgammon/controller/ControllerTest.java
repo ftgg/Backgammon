@@ -11,7 +11,7 @@ public class ControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		c = new Controller(true);
+		c = new Controller("Test2");
 	}
 
 	@Test
