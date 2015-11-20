@@ -107,7 +107,6 @@ public class Controller extends Subject {
 
 		int result = sf.zug(a, b, current);
 		String message;
-		// TODO zug aus liste löschen und prüfen ob machbar
 		if (result == 0) {
 			removeThrow(a, b);
 			// move und zug entfernen
