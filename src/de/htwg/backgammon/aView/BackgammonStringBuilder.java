@@ -13,13 +13,15 @@ public class BackgammonStringBuilder {
 		int[] b = gs.getBlackStones();
 		int[] w = gs.getWhiteStones();
 		
-		int spalte = (b.length / 2) * 3 + 1; // anzahl Spalten * Zeichen pro Spalte + \n
+		int fieldwidth = b.length / 2;
+		
+		int spalte = (fieldwidth) * 3 + 1; // anzahl Spalten * Zeichen pro Spalte + \n
 		int fieldSize = 15 * spalte; // 15 Zeilen!
 		
 		for (int i = 0; i < fieldSize; i++)
 			sb.append('X');
 		
-		for (int i = 1; i < 16; i++) {
+		for (int i = 1; i < 16; i++) { //alle Zeilen mit \n beenden
 			sb.setCharAt(spalte * i - 1, '\n');
 		}
 
@@ -27,9 +29,9 @@ public class BackgammonStringBuilder {
 			printLine(i, spalte - 1, w, b, sb);
 		}
 		printSame(1, spalte - 1, '_', sb);
-		printNumbers(2, spalte - 1, 12, sb);
+		printNumbers(2, spalte - 1, fieldwidth, sb);
 		printSame(8, spalte - 1, ' ', sb);
-		printNumbers(14, spalte - 1, 13, sb);
+		printNumbers(14, spalte - 1, fieldwidth+1, sb);
 		printSame(15, spalte - 1, '¯', sb);
 
 		return sb;
@@ -48,7 +50,7 @@ public class BackgammonStringBuilder {
 		for (int i = 0; i < size; i++) {
 			pos = i % 3;
 			if (pos == 2) {
-				sb.setCharAt(start + i, getWoB(11 - i / 3, zeile, weiss, schwarz));
+				sb.setCharAt(start + i, getWoB((weiss.length/2 -1) - i / 3, zeile, weiss, schwarz));
 			} else {
 				sb.setCharAt(start + i, ' ');
 			}
@@ -96,7 +98,6 @@ public class BackgammonStringBuilder {
 					number++;
 			}
 		}
-
 	}
 
 	private static char getchar(int number) {
