@@ -109,24 +109,13 @@ public class Controller extends Subject {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
 			return;
 		}
+		
+		sf.zug(a, b, current);
+		removeThrow(a, b);
+		spielerwechsel();
 
-		int result = sf.zug(a, b, current);
-		String message;
-		if (result == 0) {
-			removeThrow(a, b);
-			// move und zug entfernen
-			spielerwechsel();
-			message = "";
-		} else {
-			removeThrow(a, b);
-			// attack und Zug entfernen
-			spielerwechsel();
-			message = "";
-		}
-		// Subject Notify für Update an UI
-		notifyObs(new GameState(sf, zuege, message, current));
+		notifyObs(new GameState(sf, zuege, "", current));
 	}
-	
 
 	/**
 	 * deleates the current move from zuege
