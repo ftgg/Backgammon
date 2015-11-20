@@ -52,6 +52,12 @@ public class SpielFeldTest {
 	}
 
 	@Test
+	public void testGetStonesOnField(){
+		assertEquals(1,sfs.getStonesOnField()[0]);
+		assertEquals(1,sfs.getStonesOnField()[1]);
+	}
+	
+	@Test
 	public void testGetDreieck() {
 		for (int i = sfs.getSize() - 1; i >= 0; i--) {
 			assertNotNull(sfs.getDreiecke(i));

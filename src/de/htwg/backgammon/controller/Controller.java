@@ -109,7 +109,7 @@ public class Controller extends Subject {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
 			return;
 		}
-		
+
 		sf.zug(a, b, current);
 		removeThrow(a, b);
 		spielerwechsel();
@@ -145,27 +145,28 @@ public class Controller extends Subject {
 			IndiceResult = (value != i && IndiceResult);
 		}
 		IndiceResult = !IndiceResult;
-
+		boolean validDirection = (b - a > 0) && current.getColor() == Stein.BLACK
+				|| (b - a < 0) && (current.getColor() == Stein.WHITE);
 		boolean isBarMoveValidRes = isBarMoveValid(a, b);
-		boolean isExitMoveValid = sf.allHome(current) && b == sf.EXIT;
-		boolean isGeneralMovePossible = (sf.isMovePossible(a, b, current));
+		boolean isExitMoveValid = !(b == sf.EXIT) || sf.allHome(current);
+		boolean isGeneralMovePossible = sf.isMovePossible(a, b, current);
 
-		return IndiceResult && isBarMoveValidRes && isExitMoveValid && isGeneralMovePossible;
+		return IndiceResult && isBarMoveValidRes && isExitMoveValid
+				&& isGeneralMovePossible && validDirection;
 	}
 
 	private boolean isBarMoveValid(int a, int b) {
 		boolean isBarEmpty = sf.isBarEmpty(current);
 		boolean aisbar = (a == sf.BAR);
-		boolean moveFromBarPossible = sf.isMovePossible(sf.BAR, b, current);
 		boolean indexInHome = sf.indexInHome(b, otherPlayer(current));
-		return isBarEmpty || aisbar && moveFromBarPossible && indexInHome;
+		return isBarEmpty || aisbar && indexInHome;
 	}
 
-	private Spieler otherPlayer(Spieler c) {
+	Spieler otherPlayer(Spieler c) {
 		return c == s1 ? s2 : s1;
 	}
 
-	private boolean zuegeEmpty() {
+	public boolean zuegeEmpty() {
 		for (int c : zuege) {
 			if (c != 0)
 				return false;
@@ -194,6 +195,10 @@ public class Controller extends Subject {
 
 	public int[] getZuege() {
 		return zuege;
+	}
+
+	public Spieler[] getSpieler() {
+		return new Spieler[] { s1, s2 };
 	}
 
 }

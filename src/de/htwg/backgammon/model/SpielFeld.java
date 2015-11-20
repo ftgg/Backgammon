@@ -16,7 +16,7 @@ public class SpielFeld {
 	private List<Dreieck> dreiecke;
 	private Dreieck barblack; // Bar of Player one (White)
 	private Dreieck barwhite; // Bar of Player two (Black)
-
+	private int[] StonesOnField = {0,0}; // Black 0 , White 1
 	/**
 	 * Creates a pitch with 24 Fields like the real Backgammon-Field
 	 */
@@ -66,12 +66,17 @@ public class SpielFeld {
 			for (Map.Entry<Integer, Integer> current : initpos.entrySet()) {
 				for (int i = 0; current.getValue() > i; i++) {
 					dreiecke.get(Math.abs(current.getKey() - (dreiecke.size()-1) * invers)).add(new Stein(color));
+					StonesOnField[invers] = StonesOnField[invers] +1; 
 				}
 			}
 			color = Stein.BLACK;
 		}
 	}
 	
+	public int[] getStonesOnField() {
+		return StonesOnField;
+	}
+
 	/**
 	 * returns the number of fields
 	 * 
@@ -142,16 +147,29 @@ public class SpielFeld {
 		Stein attack = dreiecke.get(a).remove();
 		Stein beaten = dreiecke.get(b).add(attack);
 
+		if(b == EXIT)
+			return isgameFinished(s);
+
 		if (beaten == null) // target field was empty, nothing to do
 			return 0;
-		// else the current move was an attack and we got a stone of
-		// the enemy
+		// Attack
 		if (s.getColor() == Stein.WHITE)
 			barwhite.add(beaten);
 		else
 			barblack.add(beaten);
 		return 1;
 	}
+	
+	
+	//Write TEST isgameFinished
+	private int isgameFinished(Spieler s){
+		int i = 0;
+		if(s.getColor() == Stein.WHITE)
+			i = 1;
+		StonesOnField[i] = StonesOnField[i] - 1;
+		return StonesOnField[i] == 0 ? 111 : 0;
+	}
+	
 
 	public boolean isMovePossible(int a, int b, Spieler s) {
 		// there is a token of the current player in field a
@@ -170,7 +188,6 @@ public class SpielFeld {
 		if (current.getColor() == Stein.BLACK) {
 			return valueInRange(b, 0, quarterRange - 1);
 		} else {
-			// spieler schwarz
 			return valueInRange(b, quarterRange * 3, quarterRange * 4 - 1);
 		}
 	}
@@ -201,4 +218,5 @@ public class SpielFeld {
 		}
 		return athome;
 	}
+	
 }
