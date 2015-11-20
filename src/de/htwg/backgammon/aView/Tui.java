@@ -11,6 +11,7 @@ public class Tui implements Observer {
 	// Alle Feldzahlen eingabe 1-24 intern 0 -23
 	private GameState gs;
 	private Controller contr;
+	private BackgammonStringBuilder bStringBuilder= new BackgammonStringBuilder();
 	private Scanner sc = new Scanner(System.in);
 
 	public Tui(Controller c) {
@@ -55,30 +56,9 @@ public class Tui implements Observer {
 	}
 
 	public void printField() {
-		printNumbers(gs.getWhiteStones().length / 2, false);
-		// TODO Spielfeld ausgeben
-		printNumbers(gs.getWhiteStones().length, true);
+		bStringBuilder.getStringBuilder(gs);
 	}
 
-	private void printNumbers(int a, boolean left) {
-		StringBuilder sb = new StringBuilder();
-		if (left) {
-			for (int i = a / 2 + 1; i <= a; i++) {
-				sb.append(whitespace(i));
-			}
-		} else {
-			for (int i = a; i > 0; i--) {
-				sb.append(whitespace(i));
-			}
-		}
-		System.out.println(sb.toString());
-	}
-
-	private String whitespace(int i) {
-		if (i < 10)
-			return "  " + i;
-		return " " + i;
-	}
 
 	@Override
 	public void update(Event e) {
