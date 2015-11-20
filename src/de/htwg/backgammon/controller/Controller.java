@@ -81,6 +81,8 @@ public class Controller extends Subject {
 		} catch (Exception e) {
 			return -3;
 		}
+		if(a < 1)
+			return -3;
 		return a - 1;
 	}
 
@@ -126,12 +128,12 @@ public class Controller extends Subject {
 	 * deleates the current move from zuege
 	 */
 	protected void removeThrow(int a, int b) {
-		int digit = Math.abs(a-b);
-		for(int i = 0; i < 4; i++)
-			if(zuege[i] == digit){
+		int digit = Math.abs(a - b);
+		for (int i = 0; i < 4; i++)
+			if (zuege[i] == digit) {
 				zuege[i] = 0;
 				break;
-			}			
+			}
 	}
 
 	/**
@@ -144,25 +146,26 @@ public class Controller extends Subject {
 	 * @return true if move is possible with diced numbers
 	 */
 	protected boolean verifyMove(int a, int b) {
-
 		int value = Math.abs(b - a);
-		// zug passt zu keiner gewürfelten zahl
-		if (value != zuege[0] && value != zuege[1] && value != zuege[2] && value != zuege[3])
-			return false;
-		return (isBarMoveValid(a, b)) && (sf.allHome(current) && b == sf.EXIT) 
-				&& (sf.isMovePossible(a, b, current));
+		boolean IndiceResult = true;
+		for(int i : zuege){	
+			IndiceResult = (value != i && IndiceResult); 
+		}
+		IndiceResult = !IndiceResult;
+		
+		boolean isBarMoveValidRes = isBarMoveValid(a, b);
+		boolean isExitMoveValid = sf.allHome(current) && b == sf.EXIT;
+		boolean isGeneralMovePossible = (sf.isMovePossible(a, b, current));
+		
+		return IndiceResult && isBarMoveValidRes && isExitMoveValid && isGeneralMovePossible;
 	}
 
 	private boolean isBarMoveValid(int a, int b) {
-		if (sf.isBarEmpty(current))
-			return true;
-		if (a != sf.BAR)
-			return false;
-
-		if (!sf.isMovePossible(sf.BAR, b, current))
-			return false;
-		// zielfeld frei und etwas auf bar => b prüfen
-		return sf.indexInHome(b, otherPlayer(current));
+		boolean isBarEmpty = sf.isBarEmpty(current);
+		boolean aisbar = (a == sf.BAR);
+		boolean moveFromBarPossible = sf.isMovePossible(sf.BAR, b, current);
+		boolean indexInHome = sf.indexInHome(b, otherPlayer(current));
+		return isBarEmpty || aisbar && moveFromBarPossible && indexInHome;
 	}
 
 	private Spieler otherPlayer(Spieler c) {

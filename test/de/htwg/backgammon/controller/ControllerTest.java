@@ -79,9 +79,10 @@ public class ControllerTest {
 	public void testdoAction() {
 		c.doAction("hallo welt");
 		c.doAction("0 5");
+		c.doAction("1 5");
 		c.wuerfeln();
 		int erg[] = c.getZuege();
-		c.doAction("0 "+erg[0]);
+		c.doAction("1 "+(erg[0]+1));
 		//TODO joah, gut getestet )= dazu brauch ich ein Observer?
 	}
 	
