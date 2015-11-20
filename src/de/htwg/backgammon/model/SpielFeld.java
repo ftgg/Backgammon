@@ -142,16 +142,15 @@ public class SpielFeld {
 	 * @return returns 0 if its a correct move and 1 if it is an attack
 	 */
 	public int zug(int a, int b, Spieler s) {
-		assert isMovePossible(a, b, s);
-
+		if(b == EXIT)
+			return removeStone(s);
+		
 		Stein attack = dreiecke.get(a).remove();
 		Stein beaten = dreiecke.get(b).add(attack);
 
-		if(b == EXIT)
-			return isgameFinished(s);
-
-		if (beaten == null) // target field was empty, nothing to do
+		if (beaten == null) // target field was empty
 			return 0;
+		
 		// Attack
 		if (s.getColor() == Stein.WHITE)
 			barwhite.add(beaten);
@@ -161,8 +160,8 @@ public class SpielFeld {
 	}
 	
 	
-	//Write TEST isgameFinished
-	private int isgameFinished(Spieler s){
+	
+	private int removeStone(Spieler s){
 		int i = 0;
 		if(s.getColor() == Stein.WHITE)
 			i = 1;

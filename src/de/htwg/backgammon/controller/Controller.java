@@ -110,7 +110,11 @@ public class Controller extends Subject {
 			return;
 		}
 
-		sf.zug(a, b, current);
+		if (sf.zug(a, b, current) == 111) {
+			notifyObs(new GameState(sf, zuege, current.getName() + " hat gewonnen!", current));
+			return;
+		}
+
 		removeThrow(a, b);
 		spielerwechsel();
 
@@ -139,20 +143,39 @@ public class Controller extends Subject {
 	 * @return true if move is possible with diced numbers
 	 */
 	protected boolean verifyMove(int a, int b) {
-		int value = Math.abs(b - a);
+		return inDiceResult(a, b) && isBarMoveValid(a, b) && isExitMoveValid(b) && sf.isMovePossible(a, b, current)
+				&& isDirectionValid(a, b);
+	}
+
+	public boolean isDirectionValid(int a, int b) {
+		return (b - a > 0) && current.getColor() == Stein.BLACK || (b - a < 0) && (current.getColor() == Stein.WHITE);
+	}
+
+	public boolean isExitMoveValid(int b) {
+		return !(b == sf.EXIT) || sf.allHome(current); // Implikation
+	}
+
+	public boolean inDiceResult(int a, int b) {
+		int value = getDistance(a, b);
 		boolean IndiceResult = true;
 		for (int i : zuege) {
 			IndiceResult = (value != i && IndiceResult);
 		}
-		IndiceResult = !IndiceResult;
-		boolean validDirection = (b - a > 0) && current.getColor() == Stein.BLACK
-				|| (b - a < 0) && (current.getColor() == Stein.WHITE);
-		boolean isBarMoveValidRes = isBarMoveValid(a, b);
-		boolean isExitMoveValid = !(b == sf.EXIT) || sf.allHome(current);
-		boolean isGeneralMovePossible = sf.isMovePossible(a, b, current);
+		return !IndiceResult;
+	}
 
-		return IndiceResult && isBarMoveValidRes && isExitMoveValid
-				&& isGeneralMovePossible && validDirection;
+	public int getDistance(int a, int b) {
+		int start = sf.getSize();
+		int end = -1;
+		if (current.getColor() == Stein.WHITE) {
+			start = 0;
+			end = sf.getSize();
+		}
+		if (a == sf.BAR)
+			a = start;
+		else if (b == sf.EXIT)
+			b = end;
+		return Math.abs(b - a);
 	}
 
 	private boolean isBarMoveValid(int a, int b) {

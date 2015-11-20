@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.SpielFeld;
 import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
 
@@ -12,6 +13,7 @@ public class ControllerTest {
 
 	Controller c;
 	Controller minC;
+
 	@Before
 	public void setUp() throws Exception {
 		c = new Controller(false);
@@ -62,21 +64,22 @@ public class ControllerTest {
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();
-			if (erg[0] ==  erg[1] ) {
-				assertFalse(erg[0] == 0);	//es wurde eine Zahl gewürfelt
-				c.removeThrow(0, erg[0]);	//die zahl wird aus würfen gelöscht
+			if (erg[0] == erg[1]) {
+				assertFalse(erg[0] == 0); // es wurde eine Zahl gewürfelt
+				c.removeThrow(0, erg[0]); // die zahl wird aus würfen gelöscht
 				erg = c.getZuege();
-				assertTrue(erg[0] == 0);	//die Zahl ist tatsächlich aus würfen gelöscht
+				assertTrue(erg[0] == 0); // die Zahl ist tatsächlich aus würfen
+											// gelöscht
 			}
 		}
 	}
 
 	@Test
-	public void testController(){
+	public void testController() {
 		Controller c2 = new Controller();
 		assertNotNull(c2.getWuerfelC());
 	}
-	
+
 	@Test
 	public void testdoAction() {
 		c.doAction("hallo welt");
@@ -84,44 +87,75 @@ public class ControllerTest {
 		c.doAction("1 5");
 		c.wuerfeln();
 		int erg[] = c.getZuege();
-		c.doAction("1 "+(erg[0]+1));
-		//TODO joah, gut getestet )= dazu brauch ich ein Observer?
-	}
-	
-	@Test
-	public void TestzuegeEmpty(){
-		c.wuerfeln();
-		assertFalse(c.zuegeEmpty());
-		for(int i: c.getZuege())
-			c.removeThrow(1, 1 + i);
-		assertTrue(c.zuegeEmpty());
-	}
-	
-	@Test
-	public void TestSpielerWechsel(){
-		Spieler[] s = c.getSpieler();
-		c.spielerwechsel();
-		assertSame(c.current,s[0]);
-		
-		for(int i: c.getZuege())
-			c.removeThrow(1, 1 + i);
-		
-		c.spielerwechsel();
-		assertNotSame(c.current,s[0]);
-		assertSame(c.current,s[1]);
-		
-		for(int i: c.getZuege())
-			c.removeThrow(1, 1 + i);
-		
-		c.spielerwechsel();
-		assertNotSame(c.current,s[1]);
-		assertSame(c.current,s[0]);
-		
+		c.doAction("1 " + (erg[0] + 1));
+		// TODO joah, gut getestet )= dazu brauch ich ein Observer?
 	}
 
 	@Test
-	public void TestotherPlayer(){
-		Spieler[] s = c.getSpieler();
-		assertSame(s[0],c.otherPlayer(s[1]));
+	public void TestzuegeEmpty() {
+		c.wuerfeln();
+		assertFalse(c.zuegeEmpty());
+		for (int i : c.getZuege())
+			c.removeThrow(1, 1 + i);
+		assertTrue(c.zuegeEmpty());
 	}
+
+	@Test
+	public void TestSpielerWechsel() {
+		Spieler[] s = c.getSpieler();
+		c.spielerwechsel();
+		assertSame(c.current, s[0]);
+
+		for (int i : c.getZuege())
+			c.removeThrow(1, 1 + i);
+
+		c.spielerwechsel();
+		assertNotSame(c.current, s[0]);
+		assertSame(c.current, s[1]);
+
+		for (int i : c.getZuege())
+			c.removeThrow(1, 1 + i);
+
+		c.spielerwechsel();
+		assertNotSame(c.current, s[1]);
+		assertSame(c.current, s[0]);
+
+	}
+
+	@Test
+	public void TestotherPlayer() {
+		Spieler[] s = c.getSpieler();
+		assertSame(s[0], c.otherPlayer(s[1]));
+	}
+
+	@Test
+	public void testIsDirectionValid() {
+		assertFalse(c.isDirectionValid(1, 2));
+		assertTrue(c.isDirectionValid(2, 1));
+		for (int i : c.getZuege())
+			c.removeThrow(1, 1 + i);
+		c.spielerwechsel();
+		assertFalse(c.isDirectionValid(2, 1));
+		assertTrue(c.isDirectionValid(1, 2));
+
+	}
+
+	@Test
+	public void testinDiceResult() {
+		// c.wuerfeln();
+		// assertTrue(c.inDiceResult(SpielFeld.BAR,4));
+	}
+
+	@Test
+	public void testgetDistance() {
+		c = new Controller(false);
+		assertEquals(5, c.getDistance(SpielFeld.BAR, 5));
+		assertEquals(5, c.getDistance(19, SpielFeld.EXIT));
+		for (int i : c.getZuege())
+			c.removeThrow(1, 1 + i);
+		c.spielerwechsel();
+		assertEquals(3, c.getDistance(SpielFeld.BAR, 21));
+		assertEquals(3, c.getDistance(2, SpielFeld.EXIT));
+	}
+
 }

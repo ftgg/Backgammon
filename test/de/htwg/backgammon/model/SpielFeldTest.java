@@ -90,6 +90,14 @@ public class SpielFeldTest {
 	}
 
 	@Test
+	public void testremoveStone(){
+		assertEquals(0,sfs.zug(0, 1,spielerb));
+		assertEquals(111,sfs.zug(0, sfs.EXIT,spielerb));
+		assertEquals(111,sfs.zug(0, sfs.EXIT,spielerw));
+	}
+	
+	
+	@Test
 	public void testIsEmpty() {
 
 		for (int i = 0; i < size * 4; i++) {
