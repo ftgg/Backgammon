@@ -169,7 +169,7 @@ public class Controller extends Subject {
 			IndiceResult = (value != i && IndiceResult);
 			max = Math.max(max, i);
 		}
-		if(b == SpielFeld.EXIT)
+		if (b == SpielFeld.EXIT)
 			return max >= value;
 		return !IndiceResult;
 	}
