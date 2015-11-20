@@ -104,21 +104,22 @@ public class Controller extends Subject {
 		}
 	}
 
-	public void spielZug(int a, int b) {
+	public int spielZug(int a, int b) {
 		if (!verifyMove(a, b)) {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
-			return;
+			return -3;
 		}
-
-		if (sf.zug(a, b, current) == 111) {
+		int result = sf.zug(a, b, current);
+		if (result == 111) {
 			notifyObs(new GameState(sf, zuege, current.getName() + " hat gewonnen!", current));
-			return;
+			return result;
 		}
 
 		removeThrow(a, b);
 		spielerwechsel();
 
 		notifyObs(new GameState(sf, zuege, "", current));
+		return result;
 	}
 
 	/**
@@ -143,12 +144,17 @@ public class Controller extends Subject {
 	 * @return true if move is possible with diced numbers
 	 */
 	protected boolean verifyMove(int a, int b) {
+		System.out.println(inDiceResult(a, b));
+		System.out.println(isBarMoveValid(a, b));
+		System.out.println(isExitMoveValid(b));
+		System.out.println(sf.isMovePossible(a, b, current));
+		System.out.println(isDirectionValid(a, b));
 		return inDiceResult(a, b) && isBarMoveValid(a, b) && isExitMoveValid(b) && sf.isMovePossible(a, b, current)
 				&& isDirectionValid(a, b);
 	}
 
 	public boolean isDirectionValid(int a, int b) {
-		return (b - a > 0) && current.getColor() == Stein.BLACK || (b - a < 0) && (current.getColor() == Stein.WHITE);
+		return (a - b > 0) && current.getColor() == Stein.BLACK || (a - b < 0) && (current.getColor() == Stein.WHITE);
 	}
 
 	public boolean isExitMoveValid(int b) {
@@ -157,10 +163,14 @@ public class Controller extends Subject {
 
 	public boolean inDiceResult(int a, int b) {
 		int value = getDistance(a, b);
+		int max = 0;
 		boolean IndiceResult = true;
 		for (int i : zuege) {
 			IndiceResult = (value != i && IndiceResult);
+			max = Math.max(max, i);
 		}
+		if(b == SpielFeld.EXIT)
+			return max >= value;
 		return !IndiceResult;
 	}
 

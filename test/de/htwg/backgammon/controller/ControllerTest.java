@@ -130,20 +130,23 @@ public class ControllerTest {
 
 	@Test
 	public void testIsDirectionValid() {
-		assertFalse(c.isDirectionValid(1, 2));
-		assertTrue(c.isDirectionValid(2, 1));
+		assertFalse(c.isDirectionValid(2, 1));
+		assertTrue(c.isDirectionValid(1, 2));
 		for (int i : c.getZuege())
 			c.removeThrow(1, 1 + i);
 		c.spielerwechsel();
-		assertFalse(c.isDirectionValid(2, 1));
-		assertTrue(c.isDirectionValid(1, 2));
+		assertFalse(c.isDirectionValid(1, 2));
+		assertTrue(c.isDirectionValid(2, 1));
 
 	}
 
 	@Test
 	public void testinDiceResult() {
-		// c.wuerfeln();
-		// assertTrue(c.inDiceResult(SpielFeld.BAR,4));
+		c = new Controller(false);
+		c.getZuege();
+		assertTrue(c.inDiceResult(10, 10 +c.getZuege()[0]));
+		assertTrue(c.inDiceResult(23, SpielFeld.EXIT));
+		assertFalse(c.inDiceResult(10, SpielFeld.EXIT));
 	}
 
 	@Test
@@ -156,6 +159,29 @@ public class ControllerTest {
 		c.spielerwechsel();
 		assertEquals(3, c.getDistance(SpielFeld.BAR, 21));
 		assertEquals(3, c.getDistance(2, SpielFeld.EXIT));
+	}
+	
+	@Test
+	public void testisExitMoveValid(){
+		minC = new Controller(true);
+		assertFalse(minC.isExitMoveValid(SpielFeld.EXIT));
+		assertTrue(minC.isExitMoveValid(1));
+		System.out.println(minC.spielZug(0, 1));
+		
+		for (int i : minC.getZuege())
+			minC.removeThrow(1, 1 + i);
+		minC.spielerwechsel();
+		System.out.println(minC.spielZug(3, 2));
+		
+		for (int i : minC.getZuege())
+			minC.removeThrow(1, 1 + i);
+//		minC.spielerwechsel();
+//		
+//		assertFalse(minC.isExitMoveValid(SpielFeld.EXIT));
+//		System.out.println(minC.spielZug(1, 3));
+//		assertTrue(minC.isExitMoveValid(SpielFeld.EXIT));
+		
+	  
 	}
 
 }
