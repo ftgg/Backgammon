@@ -39,11 +39,13 @@ public class SpielFeldTest {
 	public void testPossibleMove() {
 		sfstd = new SpielFeld();
 		assertTrue(sfstd.isMovePossible(0, 1, spielerw)); // legal
-		assertFalse(sfstd.isMovePossible(3, 4, spielerw));// kein stein zu bewegen
+		assertFalse(sfstd.isMovePossible(3, 4, spielerw));// kein stein zu
+															// bewegen
 		assertFalse(sfstd.isMovePossible(0, 5, spielerw));// 5 ist rot sicher
 		assertTrue(sfstd.isMovePossible(0, 1, spielerw));// weiss auf weiss
 		assertTrue(sfstd.isMovePossible(0, 6, spielerw));// 6 weiss angreifbar
-		assertTrue(sfstd.isMovePossible(5, 6, spielerb));// schwarz schlägt weiss
+		assertTrue(sfstd.isMovePossible(5, 6, spielerb));// schwarz schlägt
+															// weiss
 		assertTrue(sfstd.isMovePossible(5, 6, spielerb));
 		assertTrue(sfstd.isMovePossible(5, 7, spielerb));
 		assertTrue(sfstd.isMovePossible(0, 6, spielerw));
@@ -84,8 +86,12 @@ public class SpielFeldTest {
 	@Test
 	public void testIsEmpty() {
 
-		for (int i = 0; i < size * 4; i++)
-			assertTrue(sfs.isEmpty(i));
+		for (int i = 0; i < size * 4; i++) {
+			if (i == 0 || i == size * 4 - 1)
+				assertFalse(sfs.isEmpty(i));
+			else
+				assertTrue(sfs.isEmpty(i));
+		}
 
 		for (int i = 0; i < 24; i++)
 			switch (i) {
@@ -109,9 +115,9 @@ public class SpielFeldTest {
 		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
 		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.BLACK)));
 	}
-	
+
 	@Test
-	public void testindexInBase(){
+	public void testindexInBase() {
 		assertTrue(sfstd.indexInHome(23, spielerw));
 		assertFalse(sfstd.indexInHome(23, spielerb));
 		assertFalse(sfstd.indexInHome(4, spielerw));
@@ -125,4 +131,11 @@ public class SpielFeldTest {
 		assertFalse(sfstd.indexInHome(17, spielerw));
 	}
 
+	@Test
+	public void testallHome() {
+		Spieler jan = new Spieler("Jan", Stein.WHITE);
+		assertFalse(sfs.allHome(jan));
+		sfs.zug(0,size*4-1, jan);
+		assertTrue(sfs.allHome(jan));
+	}
 }

@@ -10,10 +10,11 @@ import de.htwg.backgammon.model.Stein;
 public class ControllerTest {
 
 	Controller c;
-
+	Controller minC;
 	@Before
 	public void setUp() throws Exception {
-		c = new Controller("Test2");
+		c = new Controller(false);
+		minC = new Controller(true);
 	}
 
 	@Test

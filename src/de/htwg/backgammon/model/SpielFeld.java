@@ -40,14 +40,21 @@ public class SpielFeld {
 		for (int i = 0; i < quadsize; i++) {
 			dreiecke.add(new Dreieck());
 		}
+		
 		Map<Integer, Integer> initpos = new TreeMap<>();
 
-		initpos.put(0, 2);
-		initpos.put(11, 5);
-		initpos.put(16, 3);
-		initpos.put(18, 5);
-		if (quadsize == 24)
+		
+		if (quadsize == 24){
+			initpos.put(0, 2);
+			initpos.put(11, 5);
+			initpos.put(16, 3);
+			initpos.put(18, 5);
 			fill(initpos);
+		}else{
+			initpos.put(0, 1);
+			fill(initpos);
+		}
+			
 	}
 
 	/**
@@ -58,13 +65,13 @@ public class SpielFeld {
 		for (int invers = 0; invers < 2; invers++) {
 			for (Map.Entry<Integer, Integer> current : initpos.entrySet()) {
 				for (int i = 0; current.getValue() > i; i++) {
-					dreiecke.get(Math.abs(current.getKey() - 23 * invers)).add(new Stein(color));
+					dreiecke.get(Math.abs(current.getKey() - (dreiecke.size()-1) * invers)).add(new Stein(color));
 				}
 			}
 			color = Stein.BLACK;
 		}
 	}
-
+	
 	/**
 	 * returns the number of fields
 	 * 
@@ -148,7 +155,7 @@ public class SpielFeld {
 
 	public boolean isMovePossible(int a, int b, Spieler s) {
 		// there is a token of the current player in field a
-		if(a != BAR && dreiecke.get(a).getColor() != s.getColor())
+		if (a != BAR && dreiecke.get(a).getColor() != s.getColor())
 			return false;
 		// field b is attackable or own
 		return (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor());
@@ -184,7 +191,14 @@ public class SpielFeld {
 	 * @return
 	 */
 	public boolean allHome(Spieler current) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean athome = true;
+		for(int i = 0; i < dreiecke.size();i++){
+			if(dreiecke.get(i).getColor() != current.getColor()){
+				continue;
+			}else{
+				athome = athome && indexInHome(i,current);
+			}
+		}
+		return athome;
 	}
 }

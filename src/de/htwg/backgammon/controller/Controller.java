@@ -22,11 +22,14 @@ public class Controller extends Subject {
 	 * 
 	 * @param a
 	 */
-	public Controller(String name) {
-		sf = new SpielFeld();// Standartgröße = original größe
+	public Controller(boolean scaled) {
+		if (scaled)
+			sf = new SpielFeld(1);
+		else
+			sf = new SpielFeld();
 		w = new Wuerfel();
 		wuerfeln();
-		setSpieler("Test1", name);
+		setSpieler("Test1", "Test2");
 	}
 
 	public void setSpieler(String n1, String n2) {
@@ -81,7 +84,7 @@ public class Controller extends Subject {
 		} catch (Exception e) {
 			return -3;
 		}
-		if(a < 1)
+		if (a < 1)
 			return -3;
 		return a - 1;
 	}
@@ -148,15 +151,15 @@ public class Controller extends Subject {
 	protected boolean verifyMove(int a, int b) {
 		int value = Math.abs(b - a);
 		boolean IndiceResult = true;
-		for(int i : zuege){	
-			IndiceResult = (value != i && IndiceResult); 
+		for (int i : zuege) {
+			IndiceResult = (value != i && IndiceResult);
 		}
 		IndiceResult = !IndiceResult;
-		
+
 		boolean isBarMoveValidRes = isBarMoveValid(a, b);
 		boolean isExitMoveValid = sf.allHome(current) && b == sf.EXIT;
 		boolean isGeneralMovePossible = (sf.isMovePossible(a, b, current));
-		
+
 		return IndiceResult && isBarMoveValidRes && isExitMoveValid && isGeneralMovePossible;
 	}
 
