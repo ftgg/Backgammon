@@ -54,17 +54,28 @@ public class Tui implements Observer {
 	}
 	
 	public void printField(){
-		printNumbers(gs.getWhiteStones().length,true);
+		printNumbers(gs.getWhiteStones().length / 2 ,true);
+		printNumbers(gs.getWhiteStones().length,false);
 	}
 	
-	private void printNumbers(int a, boolean left){
+	private  void printNumbers(int a, boolean left) {
 		StringBuilder sb = new StringBuilder();
-		if(left){
-			for(int i = 0; i < a ; i++){
-				sb.append(i);
+		if (left) {
+			for (int i = a/2 + 1; i <= a; i++) {
+				sb.append(whitespace(i));
+			}
+		} else {
+			for (int i = a; i > 0; i--) {
+				sb.append(whitespace(i));
 			}
 		}
 		System.out.println(sb.toString());
+	}
+
+	private String whitespace(int i) {
+		if (i < 10)
+			return "  " + i;
+		return " " + i;
 	}
 	
 	@Override

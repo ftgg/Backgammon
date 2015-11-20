@@ -126,6 +126,7 @@ public class Controller extends Subject {
 		// Subject Notify für Update an UI
 		notifyObs(new GameState(sf, zuege, message, current));
 	}
+	
 
 	/**
 	 * deleates the current move from zuege
