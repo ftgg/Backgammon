@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
 
 public class ControllerTest {
@@ -87,6 +88,40 @@ public class ControllerTest {
 		//TODO joah, gut getestet )= dazu brauch ich ein Observer?
 	}
 	
+	@Test
+	public void TestzuegeEmpty(){
+		c.wuerfeln();
+		assertFalse(c.zuegeEmpty());
+		for(int i: c.getZuege())
+			c.removeThrow(1, 1 + i);
+		assertTrue(c.zuegeEmpty());
+	}
+	
+	@Test
+	public void TestSpielerWechsel(){
+		Spieler[] s = c.getSpieler();
+		c.spielerwechsel();
+		assertSame(c.current,s[0]);
+		
+		for(int i: c.getZuege())
+			c.removeThrow(1, 1 + i);
+		
+		c.spielerwechsel();
+		assertNotSame(c.current,s[0]);
+		assertSame(c.current,s[1]);
+		
+		for(int i: c.getZuege())
+			c.removeThrow(1, 1 + i);
+		
+		c.spielerwechsel();
+		assertNotSame(c.current,s[1]);
+		assertSame(c.current,s[0]);
+		
+	}
 
-
+	@Test
+	public void TestotherPlayer(){
+		Spieler[] s = c.getSpieler();
+		assertSame(s[0],c.otherPlayer(s[1]));
+	}
 }
