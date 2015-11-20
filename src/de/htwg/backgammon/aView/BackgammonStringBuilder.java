@@ -85,7 +85,7 @@ public class BackgammonStringBuilder {
 		}
 		if (w[i] >= depth) {
 			if (w[i] > 5 && depth == 5)
-				return '*';
+				return 'X';
 			return 'W';
 		}
 		if (b[i] >= depth) {
