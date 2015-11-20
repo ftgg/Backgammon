@@ -78,6 +78,7 @@ public class ControllerTest {
 	@Test
 	public void testdoAction() {
 		c.doAction("hallo welt");
+		c.doAction("0 5");
 		//TODO joah, gut getestet )= dazu brauch ich ein Observer?
 	}
 	
