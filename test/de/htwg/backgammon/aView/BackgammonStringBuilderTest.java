@@ -40,8 +40,8 @@ public class BackgammonStringBuilderTest {
 		BackgammonStringBuilder bs = new BackgammonStringBuilder();
 		StringBuilder sb = bs.getStringBuilder(gs);
 		assertEquals(sb.toString(), result);
-		System.out.println(sb.toString());
 		sb = bs.getStringBuilder(gsS);
+		System.out.println(sb.toString());
 		assertEquals(sb.toString(), scaledres);
 		sf.zug(0, 11, player);
 		sf.zug(23, 12, black);
