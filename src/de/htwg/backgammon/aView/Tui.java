@@ -11,7 +11,7 @@ public class Tui implements Observer {
 	// Alle Feldzahlen eingabe 1-24 intern 0 -23
 	private GameState gs;
 	private Controller contr;
-	private BackgammonStringBuilder bStringBuilder= new BackgammonStringBuilder();
+	private BackgammonStringBuilder bStringBuilder = new BackgammonStringBuilder();
 	private Scanner sc = new Scanner(System.in);
 
 	public Tui(Controller c) {
@@ -19,11 +19,6 @@ public class Tui implements Observer {
 		contr.add(this);
 		initNames();
 		running();
-	}
-
-	// nur für Test
-	public Tui() {
-		// gs = new GameState(null, null, null)// hollymollymo
 	}
 
 	private void initNames() {
@@ -56,9 +51,9 @@ public class Tui implements Observer {
 	}
 
 	public void printField() {
-		bStringBuilder.getStringBuilder(gs);
+		System.out.print(bStringBuilder.getStringBuilder(gs).toString());
+		System.out.print(bStringBuilder.getInformations(gs).toString());
 	}
-
 
 	@Override
 	public void update(Event e) {

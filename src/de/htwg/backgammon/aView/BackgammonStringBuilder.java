@@ -1,27 +1,47 @@
 package de.htwg.backgammon.aView;
 
 import de.htwg.backgammon.controller.GameState;
+import de.htwg.backgammon.model.Stein;
 
 public class BackgammonStringBuilder {
 
-	public BackgammonStringBuilder(){
-		
+	public BackgammonStringBuilder() {
+
 	}
-	
+
+	public StringBuilder getInformations(GameState gs) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Steine auf der Bar: ");
+		if (gs.getCurrent().getColor() == Stein.WHITE)
+			sb.append(gs.getWhiteBar());
+		else
+			sb.append(gs.getBlackBar());
+		sb.append("\nWürfel: ");
+		int[] a = gs.getZuege();
+		for (int i = 0; i < 4; i++) {
+			if (a[i] != 0) {
+				sb.append(a[i]).append(" ");
+			}
+		}
+		sb.append("\n");
+		return sb;
+	}
+
 	public StringBuilder getStringBuilder(GameState gs) {
 		StringBuilder sb = new StringBuilder();
 		int[] b = gs.getBlackStones();
 		int[] w = gs.getWhiteStones();
-		
+
 		int fieldwidth = b.length / 2;
-		
-		int spalte = (fieldwidth) * 3 + 1; // anzahl Spalten * Zeichen pro Spalte + \n
+
+		int spalte = (fieldwidth) * 3 + 1; // anzahl Spalten * Zeichen pro
+											// Spalte + \n
 		int fieldSize = 15 * spalte; // 15 Zeilen!
-		
+
 		for (int i = 0; i < fieldSize; i++)
 			sb.append('X');
-		
-		for (int i = 1; i < 16; i++) { //alle Zeilen mit \n beenden
+
+		for (int i = 1; i < 16; i++) { // alle Zeilen mit \n beenden
 			sb.setCharAt(spalte * i - 1, '\n');
 		}
 
@@ -31,7 +51,7 @@ public class BackgammonStringBuilder {
 		printSame(1, spalte - 1, '_', sb);
 		printNumbers(2, spalte - 1, fieldwidth, sb);
 		printSame(8, spalte - 1, ' ', sb);
-		printNumbers(14, spalte - 1, fieldwidth+1, sb);
+		printNumbers(14, spalte - 1, fieldwidth + 1, sb);
 		printSame(15, spalte - 1, '¯', sb);
 
 		return sb;
@@ -50,7 +70,7 @@ public class BackgammonStringBuilder {
 		for (int i = 0; i < size; i++) {
 			pos = i % 3;
 			if (pos == 2) {
-				sb.setCharAt(start + i, getWoB((weiss.length/2 -1) - i / 3, zeile, weiss, schwarz));
+				sb.setCharAt(start + i, getWoB((weiss.length / 2 - 1) - i / 3, zeile, weiss, schwarz));
 			} else {
 				sb.setCharAt(start + i, ' ');
 			}

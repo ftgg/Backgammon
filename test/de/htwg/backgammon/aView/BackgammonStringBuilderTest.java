@@ -36,9 +36,9 @@ public class BackgammonStringBuilderTest {
 		BackgammonStringBuilder bs = new BackgammonStringBuilder();
 		StringBuilder sb = bs.getStringBuilder(gs);
 		assertEquals(sb.toString(), result);
+		System.out.println(sb.toString());
 		sb = bs.getStringBuilder(gsS);
 		assertEquals(sb.toString(), scaledres);
-
 	}
 
 }
