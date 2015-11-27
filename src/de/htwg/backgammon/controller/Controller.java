@@ -7,7 +7,7 @@ public class Controller extends Subject {
 	public static int NEXT = -4;
 	private Spieler s1;
 	private Spieler s2;
-	public Spieler current;
+	private Spieler current;
 	private SpielFeld sf;
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
@@ -241,4 +241,7 @@ public class Controller extends Subject {
 		return new Spieler[] { s1, s2 };
 	}
 
+	public Spieler getCurrent() {
+		return current;
+	}
 }

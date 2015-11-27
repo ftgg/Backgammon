@@ -61,7 +61,7 @@ public class ControllerTest {
 
 	@Test
 	public void testremoveThrowANDSpielerwechsel() {
-		assertTrue(c.current.getColor() == Stein.WHITE);
+		assertTrue(c.getCurrent().getColor() == Stein.WHITE);
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();
@@ -106,13 +106,13 @@ public class ControllerTest {
 	public void TestSpielerWechsel() {
 		Spieler[] s = c.getSpieler();
 		c.spielerwechsel();
-		assertSame(c.current, s[1]);
+		assertSame(c.getCurrent(), s[1]);
 		c.spielerwechsel();
-		assertNotSame(c.current, s[1]);
-		assertSame(c.current, s[0]);
+		assertNotSame(c.getCurrent(), s[1]);
+		assertSame(c.getCurrent(), s[0]);
 		c.spielerwechsel();
-		assertNotSame(c.current, s[0]);
-		assertSame(c.current, s[1]);
+		assertNotSame(c.getCurrent(), s[0]);
+		assertSame(c.getCurrent(), s[1]);
 
 	}
 
