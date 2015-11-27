@@ -77,25 +77,28 @@ public class BackgammonStringBuilder {
 		}
 	}
 
-	private static char getWoB(int i, int depth, int[] w, int[] b) {
-		depth = depth - 2;
+	private static char getWoB(int position, int unrealdepth, int[] w, int[] b) {
+		int depth = unrealdepth - 2;
+		int i = position;
 		if (depth > 5) {// drucken von unten
-			i = w.length - (i + 1);
+			i = w.length - (position + 1);
 			depth = 12 - depth;
 		}
 		if (w[i] >= depth) {
-			if (w[i] > 5 && depth == 5)
-				return 'X';
-			return 'W';
+			return chosechar('W', w[i], depth);
 		}
 		if (b[i] >= depth) {
-			if (b[i] > 5 && depth == 5)
-				return 'X';
-			return 'B';
+			return chosechar('B', b[i], depth);
 		}
 		return ' ';
 	}
 
+	private static char chosechar(char color, int coloronField,int depth){
+		if (coloronField > 5 && depth == 5)
+			return 'X';
+		return color;
+	}
+	
 	private static void printNumbers(int zeile, int size, int number, StringBuilder sb) {
 		// ich bin in Zeile zeile und habe eine Zeilenlänge von size, an der
 		// stelle size steht das nullzeichen!
