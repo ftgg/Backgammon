@@ -19,10 +19,10 @@ public class GameState implements Event {
 	private boolean gamefinished = false;
 
 	GameState(SpielFeld sf, int[] z, Spieler s) {
-		this(sf, z, "Update", s);
+		this(sf, z, "Update", s, false);
 	}
 
-	public GameState(SpielFeld sf, int[] z, String m, Spieler s) {
+	public GameState(SpielFeld sf, int[] z, String m, Spieler s, boolean w) {
 		zuege = z;
 		message = m;
 		blackStones = new int[sf.getSize()];
@@ -30,6 +30,7 @@ public class GameState implements Event {
 		this.whiteBar = sf.getBarCount(Stein.WHITE);
 		this.blackBar = sf.getBarCount(Stein.BLACK);
 		current = s;
+		gamefinished = w;
 		fillArrays(sf);
 	}
 

@@ -144,10 +144,17 @@ public class SpielFeld {
 	public int zug(int a, int b, Spieler s) {
 		if(b == EXIT)
 			return removeStone(s);
-		
-		Stein attack = dreiecke.get(a).remove();
+		Stein attack;
+		if(a == BAR)
+			if(s.getColor() == Stein.WHITE)
+				attack = barwhite.remove();
+			else
+				attack = barblack.remove();
+		else
+			attack = dreiecke.get(a).remove();
+		 
 		Stein beaten = dreiecke.get(b).add(attack);
-
+		
 		if (beaten == null) // target field was empty
 			return 0;
 		
@@ -175,7 +182,7 @@ public class SpielFeld {
 		if (a != BAR && dreiecke.get(a).getColor() != s.getColor())
 			return false;
 		// field b is attackable or own
-		return (dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor());
+		return (b == EXIT || dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor());
 	}
 
 	public int countOfTriangles(int i) {

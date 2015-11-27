@@ -22,21 +22,18 @@ public class Controller extends Subject {
 	 * 
 	 * @param a
 	 */
-	public Controller(boolean scaled) {
-		if (scaled)
-			sf = new SpielFeld(1);
-		else
-			sf = new SpielFeld();
+	public Controller(int i) {
+		sf = new SpielFeld(i);
 		w = new Wuerfel();
 		wuerfeln();
-		setSpieler("Test1", "Test2");
+		setSpieler("Weiss","Schwarz");
 	}
 
 	public void setSpieler(String n1, String n2) {
 		s1 = new Spieler(n1, Stein.WHITE);
 		s2 = new Spieler(n2, Stein.BLACK);
 		current = s1;
-		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current));
+		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false));
 	}
 
 	// Auf jedenfall 2 eingaben zb b 3 von bar nach feld nummer 3 oder 20 h für
@@ -44,7 +41,7 @@ public class Controller extends Subject {
 	public void doAction(String s) {
 		int[] act = parseAction(s);
 		if (act[0] == -3 || act[1] == -3) {
-			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current));
+			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false));
 			return;
 		}
 		spielZug(act[0], act[1]);
@@ -57,6 +54,7 @@ public class Controller extends Subject {
 	 *            String with two numbers or "h" | "b"
 	 * @return two int's and -3 if illegalArgument
 	 */
+
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
 		if (s.length != 2)
@@ -106,19 +104,19 @@ public class Controller extends Subject {
 
 	public int spielZug(int a, int b) {
 		if (!verifyMove(a, b)) {
-			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current));
+			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current, false));
 			return -3;
 		}
 		int result = sf.zug(a, b, current);
 		if (result == 111) {
-			notifyObs(new GameState(sf, zuege, current.getName() + " hat gewonnen!", current));
+			notifyObs(new GameState(sf, zuege, current.getName() + " hat gewonnen!", current, true));
 			return result;
 		}
 
 		removeThrow(a, b);
 		spielerwechsel();
 
-		notifyObs(new GameState(sf, zuege, "", current));
+		notifyObs(new GameState(sf, zuege, "", current, false));
 		return result;
 	}
 
@@ -154,7 +152,8 @@ public class Controller extends Subject {
 	}
 
 	public boolean isDirectionValid(int a, int b) {
-		return (a - b > 0) && current.getColor() == Stein.BLACK || (a - b < 0) && (current.getColor() == Stein.WHITE);
+		return (a - b > 0) && current.getColor() == Stein.BLACK || (a - b < 0) && (current.getColor() == Stein.WHITE)
+				|| current.getColor() == Stein.WHITE && b == sf.BAR;
 	}
 
 	public boolean isExitMoveValid(int b) {

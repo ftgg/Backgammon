@@ -28,8 +28,8 @@ public class BackgammonStringBuilderTest {
 		black = new Spieler("Helga", Stein.BLACK);
 		sf = new SpielFeld();
 		sfS = new SpielFeld(1);
-		gsS = new GameState(sfS, zuege, "no message", black);
-		gs = new GameState(sf, zuege, "no message", player);
+		gsS = new GameState(sfS, zuege, "no message", black, false);
+		gs = new GameState(sf, zuege, "no message", player, false);
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class BackgammonStringBuilderTest {
 		assertEquals(sb.toString(), scaledres);
 		sf.zug(0, 11, player);
 		sf.zug(23, 12, black);
-		gs = new GameState(sf, zuege, "no message", player);
+		gs = new GameState(sf, zuege, "no message", player, false);
 		assertEquals(bs.getStringBuilder(gs).toString(),withX);
 	}
 

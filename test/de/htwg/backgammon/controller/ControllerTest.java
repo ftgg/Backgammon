@@ -16,8 +16,8 @@ public class ControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		c = new Controller(false);
-		minC = new Controller(true);
+		c = new Controller(6);
+		minC = new Controller(1);
 	}
 
 	@Test
@@ -142,7 +142,7 @@ public class ControllerTest {
 
 	@Test
 	public void testinDiceResult() {
-		c = new Controller(false);
+		c = new Controller(6);
 		c.getZuege();
 		assertTrue(c.inDiceResult(10, 10 +c.getZuege()[0]));
 		assertTrue(c.inDiceResult(23, SpielFeld.EXIT));
@@ -151,7 +151,7 @@ public class ControllerTest {
 
 	@Test
 	public void testgetDistance() {
-		c = new Controller(false);
+		c = new Controller(6);
 		assertEquals(5, c.getDistance(SpielFeld.BAR, 5));
 		assertEquals(5, c.getDistance(19, SpielFeld.EXIT));
 		for (int i : c.getZuege())
@@ -163,7 +163,7 @@ public class ControllerTest {
 	
 	@Test
 	public void testisExitMoveValid(){
-		minC = new Controller(true);
+		minC = new Controller(1);
 		assertFalse(minC.isExitMoveValid(SpielFeld.EXIT));
 		assertTrue(minC.isExitMoveValid(1));
 		System.out.println(minC.spielZug(0, 1));
