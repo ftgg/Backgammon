@@ -4,7 +4,7 @@ import de.htwg.backgammon.model.*;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
-	public static int NEXT = -4;
+	public static final int NEXT = -4;
 	private Spieler s1;
 	private Spieler s2;
 	private Spieler current;
@@ -62,10 +62,10 @@ public class Controller extends Subject {
 
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
-		
+
 		if ("n".equals(s[0]))
 			return new int[] { NEXT, NEXT };
-		
+
 		if (s.length != 2)
 			return new int[] { -3, -3 };
 		int[] res = { 0, 0 };
@@ -89,6 +89,7 @@ public class Controller extends Subject {
 		try {
 			a = Integer.parseInt(s);
 		} catch (Exception e) {
+			System.err.println(e);
 			return -3;
 		}
 		if (a < 1)
@@ -152,18 +153,13 @@ public class Controller extends Subject {
 	 * @return true if move is possible with diced numbers
 	 */
 	protected boolean verifyMove(int a, int b) {
-		System.out.println(inDiceResult(a, b));
-		System.out.println(isBarMoveValid(a, b));
-		System.out.println(isExitMoveValid(b));
-		System.out.println(sf.isMovePossible(a, b, current));
-		System.out.println(isDirectionValid(a, b));
 		return inDiceResult(a, b) && isBarMoveValid(a, b) && isExitMoveValid(b) && sf.isMovePossible(a, b, current)
 				&& isDirectionValid(a, b);
 	}
 
 	public boolean isDirectionValid(int a, int b) {
-		return (a - b > 0) && current.getColor() == Stein.BLACK || (a - b < 0) && (current.getColor() == Stein.WHITE)
-				|| b == sf.EXIT;
+		boolean color = (a - b < 0) && (current.getColor() == Stein.WHITE);
+		return (a - b > 0) && current.getColor() == Stein.BLACK || color || b == sf.EXIT;
 	}
 
 	public boolean isExitMoveValid(int b) {
@@ -173,14 +169,14 @@ public class Controller extends Subject {
 	public boolean inDiceResult(int a, int b) {
 		int value = getDistance(a, b);
 		int max = 0;
-		boolean IndiceResult = true;
+		boolean indiceResult = true;
 		for (int i : zuege) {
-			IndiceResult = (value != i && IndiceResult);
+			indiceResult = (value != i && indiceResult);
 			max = Math.max(max, i);
 		}
 		if (b == SpielFeld.EXIT)
 			return max >= value;
-		return !IndiceResult;
+		return !indiceResult;
 	}
 
 	public int getDistance(int a, int b) {
@@ -199,7 +195,7 @@ public class Controller extends Subject {
 
 	private boolean isBarMoveValid(int a, int b) {
 		boolean isBarEmpty = sf.isBarEmpty(current);
-		boolean aisbar = (a == sf.BAR);
+		boolean aisbar = a == sf.BAR;
 		boolean indexInHome = sf.indexInHome(b, otherPlayer(current));
 		return isBarEmpty || aisbar && indexInHome;
 	}
