@@ -84,9 +84,17 @@ public class SpielFeldTest {
 		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
 		assertSame(1, sfstd.zug(5, 6, spielerb));// schwarz schlägt weiss
 		assertFalse(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		
 		assertSame(0, sfstd.zug(5, 6, spielerb));
 		assertSame(0, sfstd.zug(6, 7, spielerb));
 		assertSame(1, sfstd.zug(1, 6, spielerw));
+		
+		assertSame(1, sfs.zug(0,7,spielerw));
+		assertFalse(sfs.isBarEmpty(spielerb));
+		assertSame(1 , sfs.getBarblack().count());
+		assertSame(0 , sfs.getBarwhite().count());
+		assertSame(Dreieck.NONE, sfs.getBarwhite().getColor());
+		assertSame(1, sfs.zug(sfs.BAR,7,spielerb));
 	}
 
 	@Test

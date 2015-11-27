@@ -4,6 +4,7 @@ import de.htwg.backgammon.model.*;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
+	public static int NEXT = -4;
 	private Spieler s1;
 	private Spieler s2;
 	public Spieler current;
@@ -26,7 +27,7 @@ public class Controller extends Subject {
 		sf = new SpielFeld(i);
 		w = new Wuerfel();
 		wuerfeln();
-		setSpieler("Weiss","Schwarz");
+		setSpieler("Weiss", "Schwarz");
 	}
 
 	public void setSpieler(String n1, String n2) {
@@ -43,6 +44,10 @@ public class Controller extends Subject {
 		if (act[0] == -3 || act[1] == -3) {
 			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false));
 			return;
+		} else if (act[0] == NEXT) {
+			spielerwechsel();
+			notifyObs(new GameState(sf, zuege, "SpielerWechsel", current, false));
+			return;
 		}
 		spielZug(act[0], act[1]);
 	}
@@ -57,6 +62,10 @@ public class Controller extends Subject {
 
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
+		
+		if ("n".equals(s[0]))
+			return new int[] { NEXT, NEXT };
+		
 		if (s.length != 2)
 			return new int[] { -3, -3 };
 		int[] res = { 0, 0 };
@@ -114,7 +123,8 @@ public class Controller extends Subject {
 		}
 
 		removeThrow(a, b);
-		spielerwechsel();
+		if (zuegeEmpty())
+			spielerwechsel();
 
 		notifyObs(new GameState(sf, zuege, "", current, false));
 		return result;
@@ -153,7 +163,7 @@ public class Controller extends Subject {
 
 	public boolean isDirectionValid(int a, int b) {
 		return (a - b > 0) && current.getColor() == Stein.BLACK || (a - b < 0) && (current.getColor() == Stein.WHITE)
-				|| current.getColor() == Stein.WHITE && b == sf.BAR;
+				|| b == sf.EXIT;
 	}
 
 	public boolean isExitMoveValid(int b) {
@@ -207,13 +217,11 @@ public class Controller extends Subject {
 	}
 
 	public void spielerwechsel() {
-		if (zuegeEmpty()) {
-			if (current == s1)
-				current = s2;
-			else
-				current = s1;
-			wuerfeln();
-		}
+		if (current == s1)
+			current = s2;
+		else
+			current = s1;
+		wuerfeln();
 	}
 
 	/**

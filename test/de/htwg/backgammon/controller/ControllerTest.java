@@ -104,21 +104,13 @@ public class ControllerTest {
 	public void TestSpielerWechsel() {
 		Spieler[] s = c.getSpieler();
 		c.spielerwechsel();
-		assertSame(c.current, s[0]);
-
-		for (int i : c.getZuege())
-			c.removeThrow(1, 1 + i);
-
-		c.spielerwechsel();
-		assertNotSame(c.current, s[0]);
 		assertSame(c.current, s[1]);
-
-		for (int i : c.getZuege())
-			c.removeThrow(1, 1 + i);
-
 		c.spielerwechsel();
 		assertNotSame(c.current, s[1]);
 		assertSame(c.current, s[0]);
+		c.spielerwechsel();
+		assertNotSame(c.current, s[0]);
+		assertSame(c.current, s[1]);
 
 	}
 

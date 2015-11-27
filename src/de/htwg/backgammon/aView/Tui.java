@@ -41,6 +41,7 @@ public class Tui implements Observer {
 			printField();
 			eingabe();
 		}
+		System.out.println(gs.getMessage());
 	}
 
 	private void eingabe() {
