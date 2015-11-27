@@ -95,6 +95,9 @@ public class SpielFeldTest {
 		assertSame(0 , sfs.getBarwhite().count());
 		assertSame(Dreieck.NONE, sfs.getBarwhite().getColor());
 		assertSame(1, sfs.zug(sfs.BAR,7,spielerb));
+		assertSame(0 , sfs.getBarblack().count());
+		assertSame(1 , sfs.getBarwhite().count());
+		assertSame(0, sfs.zug(sfs.BAR,3,spielerw));
 	}
 
 	@Test

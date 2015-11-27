@@ -49,6 +49,7 @@ public class ControllerTest {
 		assertTrue(19 == c.parseAction("20 h")[0] && -1 == c.parseAction("20 h")[1]);
 		assertTrue(-2 == c.parseAction("b 5")[0] && 4 == c.parseAction("b 5")[1]);
 		assertTrue(-3 == c.parseAction("b")[0] && -3 == c.parseAction("b")[1]);
+		assertSame(-4 , c.parseAction("n")[0]);
 
 	}
 
@@ -88,6 +89,7 @@ public class ControllerTest {
 		c.wuerfeln();
 		int erg[] = c.getZuege();
 		c.doAction("1 " + (erg[0] + 1));
+		c.doAction("n");
 		// TODO joah, gut getestet )= dazu brauch ich ein Observer?
 	}
 
