@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.Player;
 import de.htwg.backgammon.model.SpielFeld;
 import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
@@ -106,7 +107,7 @@ public class ControllerTest {
 
 	@Test
 	public void TestSpielerWechsel() {
-		Spieler[] s = c.getSpieler();
+		Player[] s = c.getSpieler();
 		c.spielerwechsel();
 		assertSame(c.getCurrent(), s[1]);
 		c.spielerwechsel();
