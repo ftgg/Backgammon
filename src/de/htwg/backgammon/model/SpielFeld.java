@@ -3,6 +3,9 @@ package de.htwg.backgammon.model;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
+
+import de.htwg.backgammon.model.implementation.Dreieck;
+
 import java.util.List;
 
 /**
@@ -11,9 +14,9 @@ import java.util.List;
 
 public class SpielFeld implements Pitch, testPitch {
 
-	private List<Dreieck> dreiecke;
-	private Dreieck barblack; // Bar of Player one (White)
-	private Dreieck barwhite; // Bar of Player two (Black)
+	private List<Triangle> dreiecke;
+	private Triangle barblack; // Bar of Player one (White)
+	private Triangle barwhite; // Bar of Player two (Black)
 	private int[] stonesOnField = { 0, 0 }; // Black 0 , White 1
 
 	/**
@@ -33,7 +36,7 @@ public class SpielFeld implements Pitch, testPitch {
 	public SpielFeld(int size) {
 		barblack = new Dreieck();
 		barwhite = new Dreieck();
-		dreiecke = new LinkedList<Dreieck>();
+		dreiecke = new LinkedList<Triangle>();
 		int quadsize;
 		quadsize = size * 4;
 		for (int i = 0; i < quadsize; i++) {
@@ -77,7 +80,7 @@ public class SpielFeld implements Pitch, testPitch {
 		return dreiecke.size();
 	}
 
-	private Dreieck getDreiecke(int i) {
+	private Triangle getDreiecke(int i) {
 		return dreiecke.get(i);
 	}
 
@@ -87,8 +90,8 @@ public class SpielFeld implements Pitch, testPitch {
 	}
 
 	@Override
-	public boolean isBarEmpty(Spieler spieler) {
-		if (spieler.getColor() == Stein.WHITE) 
+	public boolean isBarEmpty(Player spieler) {
+		if (spieler.getColor() == Stein.WHITE)
 			return barwhite.isEmpty();
 		return barblack.isEmpty();
 	}
@@ -102,16 +105,10 @@ public class SpielFeld implements Pitch, testPitch {
 	}
 
 	@Override
-	public int move(int start, int destination, Spieler player) {
-		return zug(start, destination, player);
-	}
-
-	private int zug(int a, int b, Spieler s) {
-		AbstractMove m = AbstractMove.createMoveObject(a, b, s, this, stonesOnField);
+	public int move(int a, int b, Player s) {
+		AbstractMove m = AbstractMove.createMoveObject(a, b, (Spieler)s, this, stonesOnField);
 		return m.move();
 	}
-
-
 
 	@Override
 	public int countOfTriangle(int i) {
@@ -119,7 +116,7 @@ public class SpielFeld implements Pitch, testPitch {
 	}
 
 	@Override
-	public boolean indexInHome(int b, Spieler current) {
+	public boolean indexInHome(int b, Player current) {
 		int quarterRange = getSize() / 4;
 		if (current.getColor() == Stein.BLACK) {
 			return valueInRange(b, 0, quarterRange - 1);
@@ -133,7 +130,7 @@ public class SpielFeld implements Pitch, testPitch {
 	}
 
 	@Override
-	public boolean allHome(Spieler current) {
+	public boolean allHome(Player current) {
 		boolean athome = true;
 		for (int i = 0; i < dreiecke.size(); i++) {
 			if (dreiecke.get(i).getColor() != current.getColor()) {
@@ -146,17 +143,17 @@ public class SpielFeld implements Pitch, testPitch {
 	}
 
 	@Override
-	public Dreieck getBarblack() {
+	public Triangle getBarblack() {
 		return barblack;
 	}
 
 	@Override
-	public Dreieck getBarwhite() {
+	public Triangle getBarwhite() {
 		return barwhite;
 	}
 
 	@Override
-	public Dreieck getTriangle(int i) {
+	public Triangle getTriangle(int i) {
 		return getDreiecke(i);
 	}
 

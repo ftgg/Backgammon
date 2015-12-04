@@ -6,13 +6,13 @@ public abstract class AbstractMove {
 	protected int a;
 	protected int b;
 	protected Spieler s;
-	protected Dreieck currentbar;
-	private Dreieck otherbar;
+	protected Triangle currentbar;
+	private Triangle otherbar;
 	
 	public static AbstractMove createMoveObject(int a, int b, Spieler s, SpielFeld sf, int[] stonesOnField){
-		if(a == sf.BAR)
+		if(a == Pitch.BAR)
 			return new BarMove(a,b,s,sf);
-		if(b == sf.EXIT)
+		if(b == Pitch.EXIT)
 			return new ExitMove(a,b,s,sf,stonesOnField);
 		return new StandardMove(a,b,s,sf);
 	}

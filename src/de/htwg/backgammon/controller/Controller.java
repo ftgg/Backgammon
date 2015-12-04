@@ -107,14 +107,14 @@ public class Controller extends Subject {
 
 	public void wuerfeln() {
 		w.wuerfeln();
-		if (w.isPasch()) {
-			zuege[0] = w.getCurrent()[0];
-			zuege[1] = w.getCurrent()[1];
-			zuege[2] = w.getCurrent()[0];
-			zuege[3] = w.getCurrent()[1];
+		if (w.isDoublets()) {
+			zuege[0] = w.getCurrentCubeNumbers()[0];
+			zuege[1] = w.getCurrentCubeNumbers()[1];
+			zuege[2] = w.getCurrentCubeNumbers()[0];
+			zuege[3] = w.getCurrentCubeNumbers()[1];
 		} else {
-			zuege[0] = w.getCurrent()[0];
-			zuege[1] = w.getCurrent()[1];
+			zuege[0] = w.getCurrentCubeNumbers()[0];
+			zuege[1] = w.getCurrentCubeNumbers()[1];
 			zuege[2] = 0;
 			zuege[3] = 0;
 		}
@@ -190,7 +190,7 @@ public class Controller extends Subject {
 	 * @return Wuerfelergebnis
 	 */
 	public int[] getWuerfelC() {
-		return w.getCurrent();
+		return w.getCurrentCubeNumbers();
 	}
 
 	public int[] getZuege() {

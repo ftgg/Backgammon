@@ -19,9 +19,5 @@ public interface testPitch extends Pitch {
 	 */
 	public int[] getTokensOnTriangle();
 	
-	/**
-	 * @return bar
-	 */
-	public Dreieck getBarblack();
-	public Dreieck getBarwhite();
+
 }

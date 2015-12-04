@@ -30,9 +30,9 @@ public class DiceResultVerifierTest {
 	public void testinDiceResult() {
 		w.wuerfeln();
 		
-		assertTrue(drv.inDiceResult(10, 10 + w.getCurrent()[0],w.getCurrent(),sf,spielerb));
-		assertTrue(drv.inDiceResult(23, SpielFeld.EXIT,w.getCurrent(),sf,spielerw));
-		assertFalse(drv.inDiceResult(10, SpielFeld.EXIT,w.getCurrent(), sf, spielerb));
+		assertTrue(drv.inDiceResult(10, 10 + w.getCurrentCubeNumbers()[0],w.getCurrentCubeNumbers(),sf,spielerb));
+		assertTrue(drv.inDiceResult(23, SpielFeld.EXIT,w.getCurrentCubeNumbers(),sf,spielerw));
+		assertFalse(drv.inDiceResult(10, SpielFeld.EXIT,w.getCurrentCubeNumbers(), sf, spielerb));
 	}
 
 	@Test
