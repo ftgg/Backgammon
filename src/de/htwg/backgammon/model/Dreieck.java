@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class Dreieck {
 
-	public static final int NONE = -1;
+	private static final int NONE = -1;
 	private Deque<Stein> content;
 	private int size;
 	private int color;
@@ -98,4 +98,7 @@ public class Dreieck {
 		content.clear();
 	}
 
+	public static int getNone() {
+		return NONE;
+	}
 }

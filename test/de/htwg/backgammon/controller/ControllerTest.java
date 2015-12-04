@@ -57,11 +57,12 @@ public class ControllerTest {
 	public void testParseInt() {
 		assertEquals(-3, c.parseInt("a"));
 		assertEquals(9, c.parseInt("10"));
+		assertEquals(c.getNext(), -4);
 	}
 
 	@Test
 	public void testremoveThrowANDSpielerwechsel() {
-		assertTrue(c.getCurrent().getColor() == Stein.WHITE);
+		assertTrue(c.getCurrent().getColor() == Stein.getWhite());
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();
@@ -139,26 +140,26 @@ public class ControllerTest {
 		c = new Controller(6);
 		c.getZuege();
 		assertTrue(c.inDiceResult(10, 10 +c.getZuege()[0]));
-		assertTrue(c.inDiceResult(23, SpielFeld.EXIT));
-		assertFalse(c.inDiceResult(10, SpielFeld.EXIT));
+		assertTrue(c.inDiceResult(23, SpielFeld.getExit()));
+		assertFalse(c.inDiceResult(10, SpielFeld.getExit()));
 	}
 
 	@Test
 	public void testgetDistance() {
 		c = new Controller(6);
-		assertEquals(5, c.getDistance(SpielFeld.BAR, 5));
-		assertEquals(5, c.getDistance(19, SpielFeld.EXIT));
+		assertEquals(5, c.getDistance(SpielFeld.getBar(), 5));
+		assertEquals(5, c.getDistance(19, SpielFeld.getExit()));
 		for (int i : c.getZuege())
 			c.removeThrow(1, 1 + i);
 		c.spielerwechsel();
-		assertEquals(3, c.getDistance(SpielFeld.BAR, 21));
-		assertEquals(3, c.getDistance(2, SpielFeld.EXIT));
+		assertEquals(3, c.getDistance(SpielFeld.getBar(), 21));
+		assertEquals(3, c.getDistance(2, SpielFeld.getExit()));
 	}
 	
 	@Test
 	public void testisExitMoveValid(){
 		minC = new Controller(1);
-		assertFalse(minC.isExitMoveValid(SpielFeld.EXIT));
+		assertFalse(minC.isExitMoveValid(SpielFeld.getExit()));
 		assertTrue(minC.isExitMoveValid(1));
 		System.out.println(minC.spielZug(0, 1));
 		

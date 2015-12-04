@@ -15,10 +15,10 @@ public class Spieler {
 	 */
 	public Spieler(String name, int color) {
 		// color has to be Stein,White or Stein.Black!
-		if (color == Stein.WHITE)
-			this.color = Stein.WHITE;
+		if (color == Stein.getWhite())
+			this.color = Stein.getWhite();
 		else
-			this.color = Stein.BLACK;
+			this.color = Stein.getBlack();
 		this.name = name;
 
 	}

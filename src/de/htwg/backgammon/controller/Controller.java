@@ -4,7 +4,7 @@ import de.htwg.backgammon.model.*;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
-	public static final int NEXT = -4;
+	private static final int NEXT = -4;
 	private Spieler s1;
 	private Spieler s2;
 	private Spieler current;
@@ -31,8 +31,8 @@ public class Controller extends Subject {
 	}
 
 	public void setSpieler(String n1, String n2) {
-		s1 = new Spieler(n1, Stein.WHITE);
-		s2 = new Spieler(n2, Stein.BLACK);
+		s1 = new Spieler(n1, Stein.getWhite());
+		s2 = new Spieler(n2, Stein.getBlack());
 		current = s1;
 		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false));
 	}
@@ -71,13 +71,13 @@ public class Controller extends Subject {
 		int[] res = { 0, 0 };
 
 		if ("b".equals(s[0])) {
-			res[0] = sf.BAR;
+			res[0] = sf.getBar();
 		} else {
 			res[0] = parseInt(s[0]);
 		}
 
 		if ("h".equals(s[1])) {
-			res[1] = sf.EXIT;
+			res[1] = sf.getExit();
 		} else {
 			res[1] = parseInt(s[1]);
 		}
@@ -158,12 +158,12 @@ public class Controller extends Subject {
 	}
 
 	public boolean isDirectionValid(int a, int b) {
-		boolean color = (a - b < 0) && (current.getColor() == Stein.WHITE);
-		return (a - b > 0) && current.getColor() == Stein.BLACK || color || b == sf.EXIT;
+		boolean color = (a - b < 0) && (current.getColor() == Stein.getWhite());
+		return (a - b > 0) && current.getColor() == Stein.getBlack() || color || b == sf.getExit();
 	}
 
 	public boolean isExitMoveValid(int b) {
-		return !(b == sf.EXIT) || sf.allHome(current); // Implikation
+		return !(b == sf.getExit()) || sf.allHome(current); // Implikation
 	}
 
 	public boolean inDiceResult(int a, int b) {
@@ -174,7 +174,7 @@ public class Controller extends Subject {
 			indiceResult = (value != i && indiceResult);
 			max = Math.max(max, i);
 		}
-		if (b == SpielFeld.EXIT)
+		if (b == SpielFeld.getExit())
 			return max >= value;
 		return !indiceResult;
 	}
@@ -182,20 +182,20 @@ public class Controller extends Subject {
 	public int getDistance(int a, int b) {
 		int start = sf.getSize();
 		int end = -1;
-		if (current.getColor() == Stein.WHITE) {
+		if (current.getColor() == Stein.getWhite()) {
 			start = 0;
 			end = sf.getSize();
 		}
-		if (a == sf.BAR)
+		if (a == sf.getBar())
 			a = start;
-		else if (b == sf.EXIT)
+		else if (b == sf.getExit())
 			b = end;
 		return Math.abs(b - a);
 	}
 
 	private boolean isBarMoveValid(int a, int b) {
 		boolean isBarEmpty = sf.isBarEmpty(current);
-		boolean aisbar = a == sf.BAR;
+		boolean aisbar = a == sf.getBar();
 		boolean indexInHome = sf.indexInHome(b, otherPlayer(current));
 		return isBarEmpty || aisbar && indexInHome;
 	}
@@ -239,5 +239,9 @@ public class Controller extends Subject {
 
 	public Spieler getCurrent() {
 		return current;
+	}
+	
+	public static int getNext() {
+		return NEXT;
 	}
 }

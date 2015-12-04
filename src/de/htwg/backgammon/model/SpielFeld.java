@@ -11,8 +11,8 @@ import java.util.List;
 
 public class SpielFeld {
 
-	public static final int EXIT = -1;
-	public static final int BAR = -2;
+	private static final int EXIT = -1;
+	private static final int BAR = -2;
 	private List<Dreieck> dreiecke;
 	private Dreieck barblack; // Bar of Player one (White)
 	private Dreieck barwhite; // Bar of Player two (Black)
@@ -61,7 +61,7 @@ public class SpielFeld {
 	 * fills the empty pitch
 	 */
 	private void fill(Map<Integer, Integer> initpos) {
-		int color = Stein.WHITE;
+		int color = Stein.getWhite();
 		for (int invers = 0; invers < 2; invers++) {
 			for (Map.Entry<Integer, Integer> current : initpos.entrySet()) {
 				for (int i = 0; current.getValue() > i; i++) {
@@ -69,7 +69,7 @@ public class SpielFeld {
 					StonesOnField[invers] = StonesOnField[invers] + 1;
 				}
 			}
-			color = Stein.BLACK;
+			color = Stein.getBlack();
 		}
 	}
 
@@ -116,14 +116,14 @@ public class SpielFeld {
 	 * @return true if Bar is empty
 	 */
 	public boolean isBarEmpty(Spieler spieler) {
-		if (spieler.getColor() == Stein.WHITE) {
+		if (spieler.getColor() == Stein.getWhite()) {
 			return barwhite.isEmpty();
 		}
 		return barblack.isEmpty();
 	}
 
 	public int getBarCount(int spieler) {
-		if (spieler == Stein.WHITE) {
+		if (spieler == Stein.getWhite()) {
 			return barwhite.count();
 		}
 		return barblack.count();
@@ -146,7 +146,7 @@ public class SpielFeld {
 			return removeStone(s);
 		Stein attack;
 		if (a == BAR) {
-			if (s.getColor() == Stein.WHITE)
+			if (s.getColor() == Stein.getWhite())
 				attack = barwhite.remove();
 			else
 				attack = barblack.remove();
@@ -159,7 +159,7 @@ public class SpielFeld {
 			return 0;
 
 		// Attack
-		if (s.getColor() == Stein.WHITE)
+		if (s.getColor() == Stein.getWhite())
 			barblack.add(beaten);
 		else
 			barwhite.add(beaten);
@@ -168,7 +168,7 @@ public class SpielFeld {
 
 	private int removeStone(Spieler s) {
 		int i = 0;
-		if (s.getColor() == Stein.WHITE)
+		if (s.getColor() == Stein.getWhite())
 			i = 1;
 		StonesOnField[i] = StonesOnField[i] - 1;
 		return StonesOnField[i] == 0 ? 111 : 0;
@@ -188,7 +188,7 @@ public class SpielFeld {
 
 	public boolean indexInHome(int b, Spieler current) {
 		int quarterRange = getSize() / 4;
-		if (current.getColor() == Stein.BLACK) {
+		if (current.getColor() == Stein.getBlack()) {
 			return valueInRange(b, 0, quarterRange - 1);
 		} else {
 			return valueInRange(b, quarterRange * 3, quarterRange * 4 - 1);
@@ -228,5 +228,13 @@ public class SpielFeld {
 
 	public Dreieck getBarwhite() {
 		return barwhite;
+	}
+
+	public static int getExit() {
+		return EXIT;
+	}
+
+	public static int getBar() {
+		return BAR;
 	}
 }

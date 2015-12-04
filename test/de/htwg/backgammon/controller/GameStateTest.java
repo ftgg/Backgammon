@@ -17,8 +17,8 @@ public class GameStateTest extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		sf = new SpielFeld();
-		spielerw = new Spieler("Hund", Stein.WHITE);
-		spielerb = new Spieler("Hund", Stein.BLACK);
+		spielerw = new Spieler("Hund", Stein.getWhite());
+		spielerb = new Spieler("Hund", Stein.getBlack());
 		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw);
 
 	}

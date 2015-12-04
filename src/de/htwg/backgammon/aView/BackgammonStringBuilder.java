@@ -12,7 +12,7 @@ public class BackgammonStringBuilder {
 	public StringBuilder getInformations(GameState gs) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Steine auf der Bar: ");
-		if (gs.getCurrent().getColor() == Stein.WHITE)
+		if (gs.getCurrent().getColor() == Stein.getWhite())
 			sb.append(gs.getWhiteBar());
 		else
 			sb.append(gs.getBlackBar());

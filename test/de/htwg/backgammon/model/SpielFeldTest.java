@@ -19,8 +19,8 @@ public class SpielFeldTest {
 		size = 2;
 		sfstd = new SpielFeld();
 		sfs = new SpielFeld(size);
-		spielerw = new Spieler("Jan", Stein.WHITE);
-		spielerb = new Spieler("Herbert", Stein.BLACK);
+		spielerw = new Spieler("Jan", Stein.getWhite());
+		spielerb = new Spieler("Herbert", Stein.getBlack());
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class SpielFeldTest {
 		Integer[] posw = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
 		Integer[] posb = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
 		for (int i = 0; i < 24; i++) {
-			if (sfstd.getDreiecke(i).getColor() == Stein.WHITE)
+			if (sfstd.getDreiecke(i).getColor() == Stein.getWhite())
 				assertSame(posw[i], sfstd.countOfTriangles(i));
 			else
 				assertSame(posb[i], sfstd.countOfTriangles(i));
@@ -81,9 +81,9 @@ public class SpielFeldTest {
 		assertSame(0, sfstd.zug(0, 1, spielerw)); // legal
 		assertSame(0, sfstd.zug(0, 1, spielerw));// weiss auf weiss
 		assertSame(0, sfstd.zug(1, 6, spielerw));// 6 weiss angreifbar
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.getWhite())));
 		assertSame(1, sfstd.zug(5, 6, spielerb));// schwarz schlägt weiss
-		assertFalse(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		assertFalse(sfstd.isBarEmpty(new Spieler("T", Stein.getWhite())));
 		
 		assertSame(0, sfstd.zug(5, 6, spielerb));
 		assertSame(0, sfstd.zug(6, 7, spielerb));
@@ -93,18 +93,18 @@ public class SpielFeldTest {
 		assertFalse(sfs.isBarEmpty(spielerb));
 		assertSame(1 , sfs.getBarblack().count());
 		assertSame(0 , sfs.getBarwhite().count());
-		assertSame(Dreieck.NONE, sfs.getBarwhite().getColor());
-		assertSame(1, sfs.zug(sfs.BAR,7,spielerb));
+		assertSame(Dreieck.getNone(), sfs.getBarwhite().getColor());
+		assertSame(1, sfs.zug(sfs.getBar(),7,spielerb));
 		assertSame(0 , sfs.getBarblack().count());
 		assertSame(1 , sfs.getBarwhite().count());
-		assertSame(0, sfs.zug(sfs.BAR,3,spielerw));
+		assertSame(0, sfs.zug(sfs.getBar(),3,spielerw));
 	}
 
 	@Test
 	public void testremoveStone(){
 		assertEquals(0,sfs.zug(0, 1,spielerb));
-		assertEquals(111,sfs.zug(0, sfs.EXIT,spielerb));
-		assertEquals(111,sfs.zug(0, sfs.EXIT,spielerw));
+		assertEquals(111,sfs.zug(0, sfs.getExit(),spielerb));
+		assertEquals(111,sfs.zug(0, sfs.getExit(),spielerw));
 	}
 	
 	
@@ -137,8 +137,8 @@ public class SpielFeldTest {
 
 	@Test
 	public void testIsBarEmpty() {
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.BLACK)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.getWhite())));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.getBlack())));
 	}
 
 	@Test
@@ -158,7 +158,7 @@ public class SpielFeldTest {
 
 	@Test
 	public void testallHome() {
-		Spieler jan = new Spieler("Jan", Stein.WHITE);
+		Spieler jan = new Spieler("Jan", Stein.getWhite());
 		assertFalse(sfs.allHome(jan));
 		sfs.zug(0,size*4-1, jan);
 		assertTrue(sfs.allHome(jan));

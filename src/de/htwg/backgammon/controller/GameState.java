@@ -27,8 +27,8 @@ public class GameState implements Event {
 		message = m;
 		blackStones = new int[sf.getSize()];
 		whiteStones = new int[sf.getSize()];
-		this.whiteBar = sf.getBarCount(Stein.WHITE);
-		this.blackBar = sf.getBarCount(Stein.BLACK);
+		this.whiteBar = sf.getBarCount(Stein.getWhite());
+		this.blackBar = sf.getBarCount(Stein.getBlack());
 		current = s;
 		gamefinished = w;
 		fillArrays(sf);
@@ -69,10 +69,10 @@ public class GameState implements Event {
 	private void fillArrays(SpielFeld sf) {
 		for (int i = 0; i < sf.getSize(); i++) {
 			Dreieck d = sf.getDreiecke(i);
-			if (d.getColor() == Stein.WHITE) {
+			if (d.getColor() == Stein.getWhite()) {
 				whiteStones[i] = d.count();
 				blackStones[i] = 0;
-			} else if (d.getColor() == Stein.BLACK) {
+			} else if (d.getColor() == Stein.getBlack()) {
 				blackStones[i] = d.count();
 				whiteStones[i] = 0;
 			} else {

@@ -20,23 +20,23 @@ public class DreieckTest {
 
 	@Test
 	public void add() {
-		Stein s = new Stein(Stein.BLACK);
+		Stein s = new Stein(Stein.getBlack());
 		d.add(s);
 		assertSame(s, d.remove());
-		assertNull(d.add(new Stein(Stein.BLACK)));
-		assertNull(d.add(new Stein(Stein.BLACK)));
-		assertNotNull(d.add(new Stein(Stein.WHITE)));
+		assertNull(d.add(new Stein(Stein.getBlack())));
+		assertNull(d.add(new Stein(Stein.getBlack())));
+		assertNotNull(d.add(new Stein(Stein.getWhite())));
 		
 		d.clear();
-		d.add(new Stein(Stein.BLACK));
-		assertNotNull(d.add(new Stein(Stein.WHITE)));
+		d.add(new Stein(Stein.getBlack()));
+		assertNotNull(d.add(new Stein(Stein.getWhite())));
 		
 	}
 	
 	@Test
 	public void remove(){
 		d.clear();
-		Stein s = new Stein(Stein.WHITE);
+		Stein s = new Stein(Stein.getWhite());
 		d.add(s);
 		assertSame (s,d.remove());
 		assertNull(d.remove());
@@ -44,7 +44,7 @@ public class DreieckTest {
 	
 	@Test
 	public void count(){
-		Stein s = new Stein(Stein.WHITE);
+		Stein s = new Stein(Stein.getWhite());
 		int count = d.count();
 		d.add(s);
 		assertSame(count + 1 ,d.count());
@@ -52,16 +52,16 @@ public class DreieckTest {
 	
 	@Test
 	public void getColor(){
-		Stein s = new Stein(Stein.WHITE);
+		Stein s = new Stein(Stein.getWhite());
 		d.clear();
 		d.add(s);
-		assertSame(Stein.WHITE,d.getColor());
+		assertSame(Stein.getWhite(),d.getColor());
 		
 	}
 	
 	@Test
 	public void clear(){
-		d.add(new Stein(Stein.WHITE));
+		d.add(new Stein(Stein.getWhite()));
 		d.clear();
 		assertSame(0, d.count());
 	}
@@ -76,7 +76,7 @@ public class DreieckTest {
 	@Test
 	public void unsecure(){
 		d.clear();
-		d.add(new Stein(Stein.WHITE));
+		d.add(new Stein(Stein.getWhite()));
 		assertTrue(d.count() < 2 == d.unsecure());
 	}
 	
