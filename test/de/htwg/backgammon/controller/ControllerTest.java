@@ -184,17 +184,17 @@ public class ControllerTest {
 		Spieler spielerw = new Spieler("a",Stein.WHITE);
 		Spieler spielerb = new Spieler("b",Stein.BLACK);
 		
-		assertTrue(c.isMovePossible(0, 1, spielerw)); // legal
-		assertFalse(c.isMovePossible(3, 4, spielerw));// kein stein zu
+		assertTrue(c.isTargetColorValid(0, 1, spielerw)); // legal
+		assertFalse(c.isTargetColorValid(3, 4, spielerw));// kein stein zu
 															// bewegen
-		assertFalse(c.isMovePossible(0, 5, spielerw));// 5 ist rot sicher
-		assertTrue(c.isMovePossible(0, 1, spielerw));// weiss auf weiss
-		assertTrue(c.isMovePossible(0, 6, spielerw));// 6 weiss angreifbar
-		assertTrue(c.isMovePossible(5, 6, spielerb));// schwarz schlägt
+		assertFalse(c.isTargetColorValid(0, 5, spielerw));// 5 ist rot sicher
+		assertTrue(c.isTargetColorValid(0, 1, spielerw));// weiss auf weiss
+		assertTrue(c.isTargetColorValid(0, 6, spielerw));// 6 weiss angreifbar
+		assertTrue(c.isTargetColorValid(5, 6, spielerb));// schwarz schlägt
 															// weiss
-		assertTrue(c.isMovePossible(5, 6, spielerb));
-		assertTrue(c.isMovePossible(5, 7, spielerb));
-		assertTrue(c.isMovePossible(0, 6, spielerw));
+		assertTrue(c.isTargetColorValid(5, 6, spielerb));
+		assertTrue(c.isTargetColorValid(5, 7, spielerb));
+		assertTrue(c.isTargetColorValid(0, 6, spielerw));
 	}
 
 }

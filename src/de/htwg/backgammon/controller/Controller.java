@@ -11,10 +11,11 @@ public class Controller extends Subject {
 	private SpielFeld sf;
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
-
+	private MoveVerifier moveVerifier;
 	public Controller() {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
+		createMoveVerifier();
 		wuerfeln();
 	}
 
@@ -26,6 +27,7 @@ public class Controller extends Subject {
 	public Controller(int i) {
 		sf = new SpielFeld(i);
 		w = new Wuerfel();
+		createMoveVerifier();
 		wuerfeln();
 		setSpieler("Weiss", "Schwarz");
 	}
@@ -115,7 +117,7 @@ public class Controller extends Subject {
 	public int spielZug(int a, int b) {
 		boolean win = false;
 		String msg = "";
-		if (!verifyMove(a, b)) {
+		if (!moveVerifier.checkMove(a, b, zuege, sf, current, this)) {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current, false));
 			return -3;
 		}
@@ -145,72 +147,6 @@ public class Controller extends Subject {
 			}
 	}
 
-	/**
-	 * checks if move from a to b is possible with diced numbers
-	 * 
-	 * @param a
-	 *            startposition
-	 * @param b
-	 *            targetposition
-	 * @return true if move is possible with diced numbers
-	 */
-	protected boolean verifyMove(int a, int b) {
-		return inDiceResult(a, b) && isBarMoveValid(a, b) && isExitMoveValid(b) && isMovePossible(a, b, current)
-				&& isDirectionValid(a, b);
-	}
-
-	public boolean isDirectionValid(int a, int b) {
-		boolean color = (a - b < 0) && (current.getColor() == Stein.WHITE);
-		return (a - b > 0) && current.getColor() == Stein.BLACK || color || b == sf.EXIT;
-	}
-
-	public boolean isExitMoveValid(int b) {
-		return !(b == sf.EXIT) || sf.allHome(current); // Implikation
-	}
-
-	public boolean isMovePossible(int a, int b, Spieler s) {
-		// there is a token of the current player in field a
-		if (a != sf.BAR && sf.getDreieck(a).getColor() != s.getColor())
-			return false;
-		// field b is attackable or own
-		return (b == sf.EXIT || sf.getDreieck(b).unsecure() || sf.getDreieck(b).getColor() == s.getColor());
-	}
-	
-	
-	public boolean inDiceResult(int a, int b) {
-		int value = getDistance(a, b);
-		int max = 0;
-		boolean indiceResult = true;
-		for (int i : zuege) {
-			indiceResult = (value != i && indiceResult);
-			max = Math.max(max, i);
-		}
-		if (b == SpielFeld.EXIT)
-			return max >= value;
-		return !indiceResult;
-	}
-
-	public int getDistance(int a, int b) {
-		int start = sf.getSize();
-		int end = -1;
-		if (current.getColor() == Stein.WHITE) {
-			start = 0;
-			end = sf.getSize();
-		}
-		if (a == sf.BAR)
-			a = start;
-		else if (b == sf.EXIT)
-			b = end;
-		return Math.abs(b - a);
-	}
-
-	boolean isBarMoveValid(int a, int b) {
-		boolean isBarEmpty = sf.isBarEmpty(current);
-		boolean aisbar = a == sf.BAR;
-		boolean indexInHome = sf.indexInHome(b, otherPlayer(current));
-		return isBarEmpty || aisbar && indexInHome;
-	}
-
 	Spieler otherPlayer(Spieler c) {
 		return c == s1 ? s2 : s1;
 	}
@@ -231,6 +167,21 @@ public class Controller extends Subject {
 		wuerfeln();
 	}
 
+	private void createMoveVerifier(){
+		BarVerifier bv = new BarVerifier();;
+		DiceResultVerifier drv = new DiceResultVerifier();
+		ExitMoveVerifier emv = new ExitMoveVerifier();
+		TargetColorVerifier tcv = new TargetColorVerifier();
+		DirectionVerifier dv = new DirectionVerifier();
+		bv.successor = drv;
+		drv.successor = emv;
+		emv.successor = tcv;
+		tcv.successor = dv;
+		moveVerifier.successor = bv;
+	}
+	
+	
+	
 	/**
 	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
 	 * 
