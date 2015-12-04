@@ -2,7 +2,7 @@ package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
-import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.Token;
 
 public class DiceResultVerifier extends MoveVerifier {
 	
@@ -19,15 +19,13 @@ public class DiceResultVerifier extends MoveVerifier {
 			indiceResult = (value != i && indiceResult);
 			max = Math.max(max, i);
 		}
-		if (b == Pitch.EXIT)
-			return max >= value;
-		return !indiceResult;
+		return !indiceResult || (max >= value && b == Pitch.EXIT);
 	}
 
 	public int getDistance(int a, int b, Pitch sf, Player current) {
 		int start = sf.getSize();
 		int end = -1;
-		if (current.getColor() == Stein.WHITE) {
+		if (current.getColor() == Token.WHITE) {
 			start = 0;
 			end = sf.getSize();
 		}

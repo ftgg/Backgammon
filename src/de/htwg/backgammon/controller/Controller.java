@@ -18,10 +18,13 @@ public class Controller extends Subject {
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
+	private ActionParser actionparser;
+	
 	public Controller() {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
 		createMoveVerifier();
+		actionparser = new ActionParser();
 		wuerfeln();
 	}
 
@@ -34,6 +37,7 @@ public class Controller extends Subject {
 		sf = new SpielFeld(i);
 		w = new Wuerfel();
 		createMoveVerifier();
+		actionparser = new ActionParser();
 		wuerfeln();
 		setSpieler("Weiss", "Schwarz");
 	}
@@ -48,7 +52,7 @@ public class Controller extends Subject {
 	// Auf jedenfall 2 eingaben zb b 3 von bar nach feld nummer 3 oder 20 h für
 	// von 20 nach hause, oder 3 5
 	public void doAction(String s) {
-		int[] act = parseAction(s);
+		int[] act = actionparser.parse(s);
 		if (act[0] == -3 || act[1] == -3) {
 			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false));
 			return;
@@ -60,51 +64,7 @@ public class Controller extends Subject {
 		spielZug(act[0], act[1]);
 	}
 
-	// public for test
-	/**
-	 * 
-	 * @param act
-	 *            String with two numbers or "h" | "b"
-	 * @return two int's and -3 if illegalArgument
-	 */
-
-	public int[] parseAction(String act) {
-		String[] s = act.split(" ");
-
-		if ("n".equals(s[0]))
-			return new int[] { NEXT, NEXT };
-
-		if (s.length != 2)
-			return new int[] { -3, -3 };
-		int[] res = { 0, 0 };
-
-		if ("b".equals(s[0])) {
-			res[0] = Pitch.BAR;
-		} else {
-			res[0] = parseInt(s[0]);
-		}
-
-		if ("h".equals(s[1])) {
-			res[1] = Pitch.EXIT;
-		} else {
-			res[1] = parseInt(s[1]);
-		}
-		return res;
-	}
-
-	int parseInt(String s) {
-		int a;
-		try {
-			a = Integer.parseInt(s);
-		} catch (Exception e) {
-			System.err.println(e);
-			return -3;
-		}
-		if (a < 1)
-			return -3;
-		return a - 1;
-	}
-
+	
 	public void wuerfeln() {
 		w.wuerfeln();
 		if (w.isDoublets()) {
