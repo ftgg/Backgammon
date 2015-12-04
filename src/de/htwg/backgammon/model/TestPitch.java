@@ -1,13 +1,11 @@
 package de.htwg.backgammon.model;
 
-import de.htwg.backgammon.model.implementation.Dreieck;
-
 /**
  * approved exclusively for use of tests
  * 
  * @author thgnaedi
  */
-public interface testPitch extends Pitch {
+public interface TestPitch extends Pitch {
 
 	/**
 	 * returns number of tokens on triangle

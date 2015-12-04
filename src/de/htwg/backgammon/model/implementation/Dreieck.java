@@ -5,7 +5,7 @@ import java.util.Deque;
 
 import de.htwg.backgammon.model.Triangle;
 
-public class Dreieck implements Triangle{
+public class Dreieck implements Triangle {
 
 	private Deque<Stein> content;
 	private int size;
@@ -18,6 +18,7 @@ public class Dreieck implements Triangle{
 		color = NONE;
 	}
 
+	@Override
 	public Stein add(Stein s) {
 		// Unsicherers Feld und anderer Stein.
 		Stein old;
@@ -41,10 +42,12 @@ public class Dreieck implements Triangle{
 		return null;
 	}
 
+	@Override
 	public boolean unsecure() {
 		return unsecure;
 	}
 
+	@Override
 	public Stein remove() {
 		if (content.isEmpty())
 			return null;
@@ -59,18 +62,22 @@ public class Dreieck implements Triangle{
 
 	}
 
+	@Override
 	public int count() {
 		return size;
 	}
 
+	@Override
 	public int getColor() {
 		return color;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return content.isEmpty();
 	}
 
+	@Override
 	public void clear() {
 		size = 0;
 		unsecure = true;

@@ -1,10 +1,11 @@
-package de.htwg.backgammon.aView;
+package de.htwg.backgammon.aview;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.aview.Tui;
 import de.htwg.backgammon.controller.Controller;
 import de.htwg.backgammon.util.Subject;
 

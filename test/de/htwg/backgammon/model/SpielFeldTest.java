@@ -11,7 +11,7 @@ import de.htwg.backgammon.model.implementation.Stein;
 
 public class SpielFeldTest {
 
-	private testPitch sfstd, sfs;
+	private TestPitch sfstd, sfs;
 	private int size; // size of (pitch/4)
 	private Spieler spielerw, spielerb;
 
