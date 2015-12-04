@@ -6,12 +6,18 @@ import de.htwg.backgammon.model.Spieler;
 public class BarVerifier extends MoveVerifier {
 
 	@Override
-	public boolean checkMove(int a, int b, int[] zuege, SpielFeld sf, Spieler s, Controller c) {
-		boolean isBarEmpty = sf.isBarEmpty(s);
-		boolean aisbar = a == sf.BAR;
-		boolean indexInHome = sf.indexInHome(b, c.otherPlayer(s));
-		return (isBarEmpty || aisbar && indexInHome) && successor.checkMove(a, b, zuege, sf, s, c);
+	public boolean checkMove(int a, int b, int[] zuege, SpielFeld sf, Spieler c, Spieler s1, Spieler s2) {
+		return checkBarmove(a,b,sf,c,s1,s2) && successor.checkMove(a, b, zuege, sf, c, s1,s2);
 	}
 	
-
+	boolean checkBarmove(int a, int b, SpielFeld sf, Spieler c, Spieler s1, Spieler s2){
+		boolean isBarEmpty = sf.isBarEmpty(c);
+		boolean aisbar = a == sf.BAR;
+		boolean indexInHome = sf.indexInHome(b, otherPlayer(c,s1,s2));
+		return (isBarEmpty && !aisbar || aisbar && indexInHome);
+	}
+	
+	Spieler otherPlayer(Spieler c, Spieler s1, Spieler s2) {
+		return c == s1 ? s2 : s1;
+	}
 }

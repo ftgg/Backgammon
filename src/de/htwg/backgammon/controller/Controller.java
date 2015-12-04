@@ -117,7 +117,7 @@ public class Controller extends Subject {
 	public int spielZug(int a, int b) {
 		boolean win = false;
 		String msg = "";
-		if (!moveVerifier.checkMove(a, b, zuege, sf, current, this)) {
+		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1,s2)) {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current, false));
 			return -3;
 		}
@@ -147,10 +147,6 @@ public class Controller extends Subject {
 			}
 	}
 
-	Spieler otherPlayer(Spieler c) {
-		return c == s1 ? s2 : s1;
-	}
-
 	public boolean zuegeEmpty() {
 		for (int c : zuege) {
 			if (c != 0)
@@ -177,7 +173,7 @@ public class Controller extends Subject {
 		drv.successor = emv;
 		emv.successor = tcv;
 		tcv.successor = dv;
-		moveVerifier.successor = bv;
+		moveVerifier = bv;
 	}
 	
 	

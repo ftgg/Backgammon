@@ -7,12 +7,12 @@ import de.htwg.backgammon.model.Stein;
 public class DiceResultVerifier extends MoveVerifier {
 	
 	@Override
-	public boolean checkMove(int a, int b, int[] zuege, SpielFeld sf, Spieler s, Controller c) {
-		return inDiceresult(a,b,zuege,sf,s) && successor.checkMove(a, b, zuege, sf, s,c);
+	public boolean checkMove(int a, int b, int[] zuege, SpielFeld sf, Spieler s, Spieler s1, Spieler s2) {
+		return inDiceResult(a,b,zuege,sf,s) && successor.checkMove(a, b, zuege, sf, s, s1, s2);
 	}
 	
-	public boolean inDiceresult(int a, int b, int[] zuege,SpielFeld sf, Spieler s){
-		int value = getDistance(a,b,zuege, sf, s);
+	public boolean inDiceResult(int a, int b, int[] zuege,SpielFeld sf, Spieler s){
+		int value = getDistance(a,b, sf, s);
 		int max = 0;
 		boolean indiceResult = true;
 		for (int i : zuege) {
@@ -24,7 +24,7 @@ public class DiceResultVerifier extends MoveVerifier {
 		return !indiceResult;
 	}
 
-	public int getDistance(int a, int b, int[] zuege, SpielFeld sf, Spieler current) {
+	public int getDistance(int a, int b, SpielFeld sf, Spieler current) {
 		int start = sf.getSize();
 		int end = -1;
 		if (current.getColor() == Stein.WHITE) {
@@ -37,6 +37,7 @@ public class DiceResultVerifier extends MoveVerifier {
 			b = end;
 		return Math.abs(b - a);
 	}
+
 	
 	
 	

@@ -6,9 +6,9 @@ import de.htwg.backgammon.model.Spieler;
 public class TargetColorVerifier extends MoveVerifier {
 
 	@Override
-	public boolean checkMove(int a, int b, int[] zuege, SpielFeld sf, Spieler s, Controller c) {
+	public boolean checkMove(int a, int b, int[] zuege, SpielFeld sf, Spieler s, Spieler s1, Spieler s2) {
 		
-		return isTargetColorValid(a,b,s,sf) && successor.checkMove(a, b, zuege, sf, s, c);
+		return isTargetColorValid(a,b,s,sf) && successor.checkMove(a, b, zuege, sf, s, s1,s2);
 	}
 	
 	public boolean isTargetColorValid(int a, int b, Spieler s,SpielFeld sf) {
