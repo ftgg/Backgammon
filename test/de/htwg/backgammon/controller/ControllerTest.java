@@ -90,6 +90,7 @@ public class ControllerTest {
 		c.wuerfeln();
 		int erg[] = c.getZuege();
 		c.doAction("1 " + (erg[0] + 1));
+		c.doAction("0 b");
 		c.doAction("n");
 		// TODO joah, gut getestet )= dazu brauch ich ein Observer?
 	}
@@ -132,7 +133,7 @@ public class ControllerTest {
 		c.spielerwechsel();
 		assertFalse(c.isDirectionValid(1, 2));
 		assertTrue(c.isDirectionValid(2, 1));
-
+		assertTrue(c.isBarMoveValid(-2,5));
 	}
 
 	@Test

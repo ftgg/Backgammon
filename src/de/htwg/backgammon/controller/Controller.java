@@ -113,21 +113,23 @@ public class Controller extends Subject {
 	}
 
 	public int spielZug(int a, int b) {
+		boolean win = false;
+		String msg = "";
 		if (!verifyMove(a, b)) {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current, false));
 			return -3;
 		}
 		int result = sf.zug(a, b, current);
 		if (result == 111) {
-			notifyObs(new GameState(sf, zuege, current.getName() + " hat gewonnen!", current, true));
-			return result;
+			msg = current.getName() + " hat gewonnen!";
+			win = true;
 		}
 
 		removeThrow(a, b);
 		if (zuegeEmpty())
 			spielerwechsel();
 
-		notifyObs(new GameState(sf, zuege, "", current, false));
+		notifyObs(new GameState(sf, zuege, msg, current, win));
 		return result;
 	}
 
@@ -193,7 +195,7 @@ public class Controller extends Subject {
 		return Math.abs(b - a);
 	}
 
-	private boolean isBarMoveValid(int a, int b) {
+	boolean isBarMoveValid(int a, int b) {
 		boolean isBarEmpty = sf.isBarEmpty(current);
 		boolean aisbar = a == sf.getBar();
 		boolean indexInHome = sf.indexInHome(b, otherPlayer(current));
@@ -240,7 +242,7 @@ public class Controller extends Subject {
 	public Spieler getCurrent() {
 		return current;
 	}
-	
+
 	public static int getNext() {
 		return NEXT;
 	}
