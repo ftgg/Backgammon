@@ -99,10 +99,11 @@ public class BackgammonStringBuilder {
 		return color;
 	}
 	
-	private static void printNumbers(int zeile, int size, int number, StringBuilder sb) {
+	private static void printNumbers(int zeile, int size, final int absnumber, StringBuilder sb) {
 		// ich bin in Zeile zeile und habe eine Zeilenlänge von size, an der
 		// stelle size steht das nullzeichen!
 		// (zeile-1)*size = startposition
+		int number = absnumber;
 		int start = (zeile - 1) * (size + 1);
 		int pos;
 

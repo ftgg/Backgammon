@@ -14,12 +14,17 @@ public class TuiTest {
 	
 	@Before
 	public void setUp() throws Exception{
-		//tui = new Tui();
+		tui = new Tui();
 	}
 	
 	@Test
 	public void testprintField(){
 		//tui.printField();
+	}
+	
+	@Test
+	public void testprint(){
+		tui.print("");
 	}
 	
 

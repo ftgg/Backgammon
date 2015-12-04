@@ -20,40 +20,44 @@ public class Tui implements Observer {
 		initNames();
 		running();
 	}
+	
+	protected Tui(){
+		//constructor for tests
+	}
 
 	private void initNames() {
 		String s1;
 		String s2;
-		System.out.println("Hallo, bitte zwei Spielernamen angeben:");
-		System.out.println("Name Spieler Weiss:");
+		print("Hallo, bitte zwei Spielernamen angeben:");
+		print("Name Spieler Weiss:");
 
 		s1 = sc.next();
-		System.out.println("Name Spieler Schwarz:");
+		print("Name Spieler Schwarz:");
 		s2 = sc.next();
 
-		System.out.printf("Viel Spass %s und %s\n", s1, s2);
+		print("Viel Spass "+s1+" und "+s2);
 		contr.setSpieler(s1, s2);
 	}
 
 	private void running() {
 		while (!gs.getGameFinished()) {
-			System.out.println(gs.getMessage());
+			print(gs.getMessage());
 			printField();
 			eingabe();
 		}
-		System.out.println(gs.getMessage());
+		print(gs.getMessage());
 	}
 
 	private void eingabe() {
-		System.out.println(gs.getCurrent().getName() + " ist am Zug:");
+		print(gs.getCurrent().getName() + " ist am Zug:");
 		String input;
 		input = sc.nextLine();
 		contr.doAction(input);
 	}
 
 	public void printField() {
-		System.out.print(bStringBuilder.getStringBuilder(gs).toString());
-		System.out.print(bStringBuilder.getInformations(gs).toString());
+		print(bStringBuilder.getStringBuilder(gs).toString());
+		print(bStringBuilder.getInformations(gs).toString());
 	}
 
 	@Override
@@ -62,5 +66,9 @@ public class Tui implements Observer {
 			gs = (GameState) e;
 		}
 
+	}
+	
+	public void print(String msg){
+		System.out.println(msg);
 	}
 }

@@ -9,8 +9,7 @@ public class Backgammon {
 	
 	public static void main(String[] args) {
 		Controller c = new Controller(2);
-		Tui tui = new Tui(c);
-
+		new Tui(c);
 	}
 
 }
