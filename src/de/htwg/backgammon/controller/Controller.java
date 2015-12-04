@@ -3,6 +3,7 @@ package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.Token;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
 import de.htwg.backgammon.model.implementation.Stein;
@@ -45,8 +46,6 @@ public class Controller extends Subject {
 		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false));
 	}
 
-	// Auf jedenfall 2 eingaben zb b 3 von bar nach feld nummer 3 oder 20 h für
-	// von 20 nach hause, oder 3 5
 	public void doAction(String s) {
 		int[] act = parseAction(s);
 		if (act[0] == -3 || act[1] == -3) {
@@ -59,14 +58,6 @@ public class Controller extends Subject {
 		}
 		spielZug(act[0], act[1]);
 	}
-
-	// public for test
-	/**
-	 * 
-	 * @param act
-	 *            String with two numbers or "h" | "b"
-	 * @return two int's and -3 if illegalArgument
-	 */
 
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
@@ -145,7 +136,14 @@ public class Controller extends Subject {
 	 * deleates the current move from zuege
 	 */
 	protected void removeThrow(int a, int b) {
+//		if(a < 0 && current.getColor() == Token.WHITE)
+//			a = -1;
+//		if(a < 0 && current.getColor() == Token.BLACK)
+//			a = sf.getSize();
 		int digit = Math.abs(a - b);
+		//8 nach 6 heisst 7 - 5
+		//b ist -2, muss aber -1 bzw. size+1 sein
+		System.out.printf("ZUG: %d = %d - %d", digit, a, b);
 		for (int i = 0; i < 4; i++)
 			if (zuege[i] == digit) {
 				zuege[i] = 0;

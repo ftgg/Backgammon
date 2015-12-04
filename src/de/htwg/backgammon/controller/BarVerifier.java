@@ -14,7 +14,7 @@ public class BarVerifier extends MoveVerifier {
 		boolean isBarEmpty = sf.isBarEmpty(c);
 		boolean aisbar = a == Pitch.BAR;
 		boolean indexInHome = sf.indexInHome(b, otherPlayer(c,s1,s2));
-		return (isBarEmpty && !aisbar || aisbar && indexInHome);
+		return (isBarEmpty && !aisbar || aisbar && indexInHome && !isBarEmpty);
 	}
 	
 	Player otherPlayer(Player c, Player s1, Player s2) {

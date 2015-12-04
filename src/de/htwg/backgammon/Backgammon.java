@@ -8,7 +8,7 @@ public class Backgammon {
 	private Backgammon(){}
 	
 	public static void main(String[] args) {
-		Controller c = new Controller(2);
+		Controller c = new Controller();
 		new Tui(c);
 	}
 
