@@ -1,6 +1,11 @@
 package de.htwg.backgammon.controller;
 
-import de.htwg.backgammon.model.*;
+
+import de.htwg.backgammon.model.Pitch;
+import de.htwg.backgammon.model.SpielFeld;
+import de.htwg.backgammon.model.Spieler;
+import de.htwg.backgammon.model.Stein;
+import de.htwg.backgammon.model.Wuerfel;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
@@ -8,7 +13,7 @@ public class Controller extends Subject {
 	private Spieler s1;
 	private Spieler s2;
 	private Spieler current;
-	private SpielFeld sf;
+	private Pitch sf;
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
@@ -73,13 +78,13 @@ public class Controller extends Subject {
 		int[] res = { 0, 0 };
 
 		if ("b".equals(s[0])) {
-			res[0] = sf.BAR;
+			res[0] = Pitch.BAR;
 		} else {
 			res[0] = parseInt(s[0]);
 		}
 
 		if ("h".equals(s[1])) {
-			res[1] = sf.EXIT;
+			res[1] = Pitch.EXIT;
 		} else {
 			res[1] = parseInt(s[1]);
 		}
@@ -121,7 +126,7 @@ public class Controller extends Subject {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current, false));
 			return -3;
 		}
-		int result = sf.zug(a, b, current);
+		int result = sf.move(a, b, current);
 		if (result == 111) {
 			msg = current.getName() + " hat gewonnen!";
 			win = true;

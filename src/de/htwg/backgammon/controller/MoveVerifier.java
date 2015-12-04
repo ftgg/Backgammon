@@ -2,5 +2,5 @@ package de.htwg.backgammon.controller;
 import de.htwg.backgammon.model.*;
 public abstract class MoveVerifier {
 	MoveVerifier successor;
-	public abstract boolean checkMove(int a, int b, int zuege[], SpielFeld sf, Spieler s, Spieler s1, Spieler s2);
+	public abstract boolean checkMove(int a, int b, int zuege[], Pitch sf, Spieler s, Spieler s1, Spieler s2);
 }

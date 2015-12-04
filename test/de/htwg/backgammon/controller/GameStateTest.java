@@ -58,8 +58,8 @@ public class GameStateTest extends TestCase {
 		assertEquals(0, gs.getWhiteBar());
 		assertEquals(0, gs.getBlackBar());
 		
-		sf.zug(0, 6, spielerw);
-		sf.zug(5, 6, spielerb); //Schwarz schlägt Weiss
+		sf.move(0, 6, spielerw);
+		sf.move(5, 6, spielerb); //Schwarz schlägt Weiss
 		assertFalse(sf.isBarEmpty(spielerw));
 		assertTrue(sf.isBarEmpty(spielerb));
 		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spielerw, false);

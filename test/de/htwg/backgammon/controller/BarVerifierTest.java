@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.SpielFeld;
 import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
@@ -27,11 +28,11 @@ public class BarVerifierTest {
 	
 	@Test
 	public void TestBarmove() {
-		assertFalse(bv.checkBarmove(sf.BAR, 0, sf, c, s1, s2));
-		sf.zug(3, 0, s1);
+		assertFalse(bv.checkBarmove(Pitch.BAR, 0, sf, c, s1, s2));
+		sf.move(3, 0, s1);
 		c = s2;
-		assertFalse(bv.checkBarmove(sf.BAR, 2, sf, c, s1, s2));
-		assertTrue(bv.checkBarmove(sf.BAR, 0, sf, c, s1, s2));
+		assertFalse(bv.checkBarmove(Pitch.BAR, 2, sf, c, s1, s2));
+		assertTrue(bv.checkBarmove(Pitch.BAR, 0, sf, c, s1, s2));
 		
 	}
 

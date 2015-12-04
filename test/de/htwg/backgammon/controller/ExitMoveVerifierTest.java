@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.SpielFeld;
 import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
@@ -23,9 +24,9 @@ public class ExitMoveVerifierTest {
 
 	@Test
 	public void testisExitMoveValid(){	
-		assertFalse(ev.isExitMoveValid(SpielFeld.EXIT,sf,s1));
+		assertFalse(ev.isExitMoveValid(Pitch.EXIT,sf,s1));
 		assertTrue(ev.isExitMoveValid(1,sf,s1));
-		sf.zug(3, 0, s1);
-		assertTrue(ev.isExitMoveValid(SpielFeld.EXIT,sf,s1));
+		sf.move(3, 0, s1);
+		assertTrue(ev.isExitMoveValid(Pitch.EXIT,sf,s1));
 	}
 }

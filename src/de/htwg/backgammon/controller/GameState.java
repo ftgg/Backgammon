@@ -23,7 +23,7 @@ public class GameState implements Event {
 		this(sf, z, "Update", s, false);
 	}
 
-	public GameState(SpielFeld sf, int[] z, String m, Spieler s, boolean w) {
+	public GameState(Pitch sf, int[] z, String m, Spieler s, boolean w) {
 		zuege = z;
 		message = m;
 		blackStones = new int[sf.getSize()];
