@@ -3,7 +3,7 @@ package de.htwg.backgammon.model;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Dreieck {
+public class Dreieck implements Triangle{
 
 	public static final int NONE = -1;
 	private Deque<Stein> content;
