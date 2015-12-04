@@ -88,9 +88,8 @@ public class SpielFeld implements Pitch, testPitch {
 
 	@Override
 	public boolean isBarEmpty(Spieler spieler) {
-		if (spieler.getColor() == Stein.WHITE) {
+		if (spieler.getColor() == Stein.WHITE) 
 			return barwhite.isEmpty();
-		}
 		return barblack.isEmpty();
 	}
 
@@ -108,37 +107,11 @@ public class SpielFeld implements Pitch, testPitch {
 	}
 
 	private int zug(int a, int b, Spieler s) {
-		if (b == EXIT)
-			return removeStone(s);
-		Stein attack;
-		if (a == BAR) {
-			if (s.getColor() == Stein.WHITE)
-				attack = barwhite.remove();
-			else
-				attack = barblack.remove();
-		} else {
-			attack = dreiecke.get(a).remove();
-		}
-		Stein beaten = dreiecke.get(b).add(attack);
-
-		if (beaten == null) // target field was empty
-			return 0;
-
-		// Attack
-		if (s.getColor() == Stein.WHITE)
-			barblack.add(beaten);
-		else
-			barwhite.add(beaten);
-		return 1;
+		AbstractMove m = AbstractMove.createMoveObject(a, b, s, this, stonesOnField);
+		return m.move();
 	}
 
-	private int removeStone(Spieler s) {
-		int i = 0;
-		if (s.getColor() == Stein.WHITE)
-			i = 1;
-		stonesOnField[i] = stonesOnField[i] - 1;
-		return stonesOnField[i] == 0 ? 111 : 0;
-	}
+
 
 	@Override
 	public int countOfTriangle(int i) {
@@ -156,7 +129,6 @@ public class SpielFeld implements Pitch, testPitch {
 	}
 
 	private boolean valueInRange(int value, int min, int max) {
-		// min und max angabe für noch in der base
 		return !(value > max || value < min);
 	}
 
