@@ -10,7 +10,7 @@ import de.htwg.backgammon.model.Stein;
 
 public class SpielFeldTest {
 
-	private SpielFeld sfstd, sfs;
+	private testPitch sfstd, sfs;
 	private int size; // size of (pitch/4)
 	private Spieler spielerw, spielerb;
 
@@ -79,18 +79,18 @@ public class SpielFeldTest {
 		assertFalse(sfs.isBarEmpty(spielerb));
 		assertSame(1 , sfs.getBarblack().count());
 		assertSame(0 , sfs.getBarwhite().count());
-		assertSame(Dreieck.getNone(), sfs.getBarwhite().getColor());
-		assertSame(1, sfs.move(sfs.BAR,7,spielerb));
+		assertSame(Dreieck.NONE, sfs.getBarwhite().getColor());
+		assertSame(1, sfs.move(Pitch.BAR,7,spielerb));
 		assertSame(0 , sfs.getBarblack().count());
 		assertSame(1 , sfs.getBarwhite().count());
-		assertSame(0, sfs.move(sfs.BAR,3,spielerw));
+		assertSame(0, sfs.move(Pitch.BAR,3,spielerw));
 	}
 
 	@Test
 	public void testremoveStone(){
 		assertEquals(0,sfs.move(0, 1,spielerb));
-		assertEquals(111,sfs.move(0, sfs.EXIT,spielerb));
-		assertEquals(111,sfs.move(0, sfs.EXIT,spielerw));
+		assertEquals(111,sfs.move(0, Pitch.EXIT,spielerb));
+		assertEquals(111,sfs.move(0, Pitch.EXIT,spielerw));
 	}
 	
 	

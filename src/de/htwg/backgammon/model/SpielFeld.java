@@ -9,7 +9,7 @@ import java.util.List;
  * SpielFeld contains a List of all aviable Fields in which the tokens are.
  */
 
-public class SpielFeld implements Pitch {
+public class SpielFeld implements Pitch, testPitch {
 
 	private List<Dreieck> dreiecke;
 	private Dreieck barblack; // Bar of Player one (White)
@@ -68,7 +68,7 @@ public class SpielFeld implements Pitch {
 		}
 	}
 
-	protected int[] getTokensOnTriangle() {
+	public int[] getTokensOnTriangle() {
 		return stonesOnField;
 	}
 
@@ -140,7 +140,8 @@ public class SpielFeld implements Pitch {
 		return stonesOnField[i] == 0 ? 111 : 0;
 	}
 
-	protected int countOfTriangle(int i) {
+	@Override
+	public int countOfTriangle(int i) {
 		return dreiecke.get(i).count();
 	}
 
@@ -172,10 +173,12 @@ public class SpielFeld implements Pitch {
 		return athome;
 	}
 
+	@Override
 	public Dreieck getBarblack() {
 		return barblack;
 	}
 
+	@Override
 	public Dreieck getBarwhite() {
 		return barwhite;
 	}

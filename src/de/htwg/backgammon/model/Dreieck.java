@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class Dreieck {
 
-	private static final int NONE = -1;
+	public static final int NONE = -1;
 	private Deque<Stein> content;
 	private int size;
 	private int color;
@@ -17,9 +17,6 @@ public class Dreieck {
 		color = NONE;
 	}
 
-	/**
-	 * @return a the stone for bar or null
-	 */
 	public Stein add(Stein s) {
 		// Unsicherers Feld und anderer Stein.
 		Stein old;
@@ -43,16 +40,10 @@ public class Dreieck {
 		return null;
 	}
 
-	/*
-	 * @return false if two or more stones are on the field
-	 */
 	public boolean unsecure() {
 		return unsecure;
 	}
 
-	/*
-	 * @returns a removed stone or null
-	 */
 	public Stein remove() {
 		if (content.isEmpty())
 			return null;
@@ -67,30 +58,17 @@ public class Dreieck {
 
 	}
 
-	/*
-	 * @returns the Amount of stones in Field
-	 */
 	public int count() {
 		return size;
 	}
 
-	/*
-	 * @returns the color of Stones on the Field
-	 */
 	public int getColor() {
 		return color;
 	}
 
-	/*
-	 * @returns true if Dreieck is Empty
-	 */
 	public boolean isEmpty() {
 		return content.isEmpty();
 	}
-
-	/*
-	 * clears the Dreieck returns a Set of Stones
-	 */
 
 	public void clear() {
 		size = 0;
@@ -98,7 +76,4 @@ public class Dreieck {
 		content.clear();
 	}
 
-	public static int getNone() {
-		return NONE;
-	}
 }
