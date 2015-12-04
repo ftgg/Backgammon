@@ -20,9 +20,9 @@ public class Tui implements Observer {
 		initNames();
 		running();
 	}
-	
-	protected Tui(){
-		//constructor for tests
+
+	protected Tui() {
+		// constructor for tests
 	}
 
 	private void initNames() {
@@ -35,7 +35,7 @@ public class Tui implements Observer {
 		print("Name Spieler Schwarz:");
 		s2 = sc.next();
 
-		print("Viel Spass "+s1+" und "+s2);
+		print("Viel Spass " + s1 + " und " + s2);
 		contr.setSpieler(s1, s2);
 	}
 
@@ -65,10 +65,9 @@ public class Tui implements Observer {
 		if (e instanceof GameState) {
 			gs = (GameState) e;
 		}
-
 	}
-	
-	public void print(String msg){
+
+	public void print(String msg) {
 		System.out.println(msg);
 	}
 }

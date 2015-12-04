@@ -24,8 +24,8 @@ public class BackgammonStringBuilderTest {
 
 	@Before
 	public void setUp() throws Exception {
-		player = new Spieler("Jan", Stein.getWhite());
-		black = new Spieler("Helga", Stein.getBlack());
+		player = new Spieler("Jan", Stein.WHITE);
+		black = new Spieler("Helga", Stein.BLACK);
 		sf = new SpielFeld();
 		sfS = new SpielFeld(1);
 		gsS = new GameState(sfS, zuege, "no message", black, false);

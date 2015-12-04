@@ -12,10 +12,7 @@ public class BackgammonStringBuilder {
 	public StringBuilder getInformations(GameState gs) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Steine auf der Bar: ");
-		if (gs.getCurrent().getColor() == Stein.getWhite())
-			sb.append(gs.getWhiteBar());
-		else
-			sb.append(gs.getBlackBar());
+		sb.append(Bar(gs));
 		sb.append("\nWürfel: ");
 		int[] a = gs.getZuege();
 		for (int i = 0; i < 4; i++) {
@@ -27,27 +24,30 @@ public class BackgammonStringBuilder {
 		return sb;
 	}
 
+	private int Bar(GameState gs) {
+		if (gs.getCurrent().getColor() == Stein.WHITE)
+			return gs.getWhiteBar();
+		return gs.getBlackBar();
+	}
+
 	public StringBuilder getStringBuilder(GameState gs) {
 		StringBuilder sb = new StringBuilder();
 		int[] b = gs.getBlackStones();
 		int[] w = gs.getWhiteStones();
-
 		int fieldwidth = b.length / 2;
-
 		int spalte = (fieldwidth) * 3 + 1; // anzahl Spalten * Zeichen pro
 											// Spalte + \n
 		int fieldSize = 15 * spalte; // 15 Zeilen!
-
+		
 		for (int i = 0; i < fieldSize; i++)
 			sb.append('X');
-
 		for (int i = 1; i < 16; i++) { // alle Zeilen mit \n beenden
 			sb.setCharAt(spalte * i - 1, '\n');
 		}
-
 		for (int i = 3; i < 14; i++) {
 			printLine(i, spalte - 1, w, b, sb);
 		}
+		
 		printSame(1, spalte - 1, '_', sb);
 		printNumbers(2, spalte - 1, fieldwidth, sb);
 		printSame(8, spalte - 1, ' ', sb);
@@ -84,6 +84,10 @@ public class BackgammonStringBuilder {
 			i = w.length - (position + 1);
 			depth = 12 - depth;
 		}
+		return color(depth, i, w, b);
+	}
+	
+	private static char color(int depth, int i, int[]w, int[]b){
 		if (w[i] >= depth) {
 			return chosechar('W', w[i], depth);
 		}
@@ -93,16 +97,15 @@ public class BackgammonStringBuilder {
 		return ' ';
 	}
 
-	private static char chosechar(char color, int coloronField,int depth){
+	private static char chosechar(char color, int coloronField, int depth) {
 		if (coloronField > 5 && depth == 5)
 			return 'X';
 		return color;
 	}
-	
+
 	private static void printNumbers(int zeile, int size, final int absnumber, StringBuilder sb) {
 		// ich bin in Zeile zeile und habe eine Zeilenlänge von size, an der
 		// stelle size steht das nullzeichen!
-		// (zeile-1)*size = startposition
 		int number = absnumber;
 		int start = (zeile - 1) * (size + 1);
 		int pos;
@@ -116,12 +119,15 @@ public class BackgammonStringBuilder {
 				sb.setCharAt(start + i, getchar(number));
 			} else if (pos == 2) {
 				sb.setCharAt(start + i, String.valueOf(number % 10).toCharArray()[0]);
-				if (zeile == 2)
-					number--;
-				else
-					number++;
+				number = newnumber(number, zeile);
 			}
 		}
+	}
+	
+	private static int newnumber(int number, int zeile){
+		if (zeile == 2)
+			return --number;
+		return ++number;
 	}
 
 	private static char getchar(int number) {
