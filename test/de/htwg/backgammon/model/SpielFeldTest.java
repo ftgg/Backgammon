@@ -79,7 +79,7 @@ public class SpielFeldTest {
 		assertFalse(sfs.isBarEmpty(spielerb));
 		assertSame(1 , sfs.getBarblack().count());
 		assertSame(0 , sfs.getBarwhite().count());
-		assertSame(Dreieck.NONE, sfs.getBarwhite().getColor());
+		assertSame(Triangle.NONE, sfs.getBarwhite().getColor());
 		assertSame(1, sfs.move(Pitch.BAR,7,spielerb));
 		assertSame(0 , sfs.getBarblack().count());
 		assertSame(1 , sfs.getBarwhite().count());

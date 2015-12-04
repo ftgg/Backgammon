@@ -8,7 +8,6 @@ import de.htwg.backgammon.model.Triangle;
 
 public class Dreieck implements Triangle{
 
-	public static final int NONE = -1;
 	private Deque<Stein> content;
 	private int size;
 	private int color;

@@ -2,6 +2,8 @@ package de.htwg.backgammon.model;
 
 public interface Triangle {
 
+	public static final int NONE = -1;
+	
 	/**
 	 * add a Token to this triangle
 	 * 
