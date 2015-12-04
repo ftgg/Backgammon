@@ -1,5 +1,7 @@
 package de.htwg.backgammon.model;
 
+import de.htwg.backgammon.model.implementation.Stein;
+
 public interface Triangle {
 
 	public static final int NONE = -1;

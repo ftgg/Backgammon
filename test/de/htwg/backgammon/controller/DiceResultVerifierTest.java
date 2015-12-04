@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.SpielFeld;
-import de.htwg.backgammon.model.Spieler;
-import de.htwg.backgammon.model.Stein;
-import de.htwg.backgammon.model.Wuerfel;
+import de.htwg.backgammon.model.implementation.SpielFeld;
+import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.implementation.Wuerfel;
 
 public class DiceResultVerifierTest {
 

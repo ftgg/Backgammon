@@ -3,7 +3,8 @@ package de.htwg.backgammon.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.Spieler;
+import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Stein;
 import junit.framework.TestCase;
 
 public class SpielerTest extends TestCase {

@@ -1,7 +1,7 @@
 package de.htwg.backgammon.aView;
 
 import de.htwg.backgammon.controller.GameState;
-import de.htwg.backgammon.model.Stein;
+import de.htwg.backgammon.model.implementation.Stein;
 
 public class BackgammonStringBuilder implements TuiSB {
 

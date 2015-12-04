@@ -1,5 +1,9 @@
 package de.htwg.backgammon.model;
 
+import de.htwg.backgammon.model.implementation.SpielFeld;
+import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Stein;
+
 public class BarMove extends AbstractMove {
 
 	protected BarMove(int a, int b, Spieler s, SpielFeld sf) {

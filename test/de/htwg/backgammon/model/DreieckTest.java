@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.Stein;
 import de.htwg.backgammon.model.implementation.Dreieck;
+import de.htwg.backgammon.model.implementation.Stein;
 
 public class DreieckTest {
 

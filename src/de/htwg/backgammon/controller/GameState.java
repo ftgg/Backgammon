@@ -1,8 +1,8 @@
 package de.htwg.backgammon.controller;
 
-import de.htwg.backgammon.model.SpielFeld;
-import de.htwg.backgammon.model.Stein;
 import de.htwg.backgammon.model.Triangle;
+import de.htwg.backgammon.model.implementation.SpielFeld;
+import de.htwg.backgammon.model.implementation.Stein;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.Wuerfel;
+import de.htwg.backgammon.model.implementation.Wuerfel;
 import junit.framework.TestCase;
 
 public class WuerfelTest extends TestCase {

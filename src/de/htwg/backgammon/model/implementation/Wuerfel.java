@@ -1,4 +1,6 @@
-package de.htwg.backgammon.model;
+package de.htwg.backgammon.model.implementation;
+
+import de.htwg.backgammon.model.Dice;
 
 public class Wuerfel implements Dice {
 

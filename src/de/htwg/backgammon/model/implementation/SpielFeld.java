@@ -1,10 +1,14 @@
-package de.htwg.backgammon.model;
+package de.htwg.backgammon.model.implementation;
 
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import de.htwg.backgammon.model.implementation.Dreieck;
+import de.htwg.backgammon.model.AbstractMove;
+import de.htwg.backgammon.model.Pitch;
+import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.Triangle;
+import de.htwg.backgammon.model.testPitch;
 
 import java.util.List;
 

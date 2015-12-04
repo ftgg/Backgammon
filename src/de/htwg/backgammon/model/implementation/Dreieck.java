@@ -3,7 +3,6 @@ package de.htwg.backgammon.model.implementation;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import de.htwg.backgammon.model.Stein;
 import de.htwg.backgammon.model.Triangle;
 
 public class Dreieck implements Triangle{

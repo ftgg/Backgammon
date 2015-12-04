@@ -3,9 +3,9 @@ package de.htwg.backgammon.controller;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.SpielFeld;
-import de.htwg.backgammon.model.Spieler;
-import de.htwg.backgammon.model.Stein;
+import de.htwg.backgammon.model.implementation.SpielFeld;
+import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Stein;
 import junit.framework.TestCase;
 
 public class GameStateTest extends TestCase {

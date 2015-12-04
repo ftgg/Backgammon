@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.controller.GameState;
-import de.htwg.backgammon.model.SpielFeld;
-import de.htwg.backgammon.model.Spieler;
-import de.htwg.backgammon.model.Stein;
+import de.htwg.backgammon.model.implementation.SpielFeld;
+import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Stein;
 
 public class BackgammonStringBuilderTest {
 

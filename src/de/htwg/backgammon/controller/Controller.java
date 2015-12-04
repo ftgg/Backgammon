@@ -2,11 +2,11 @@ package de.htwg.backgammon.controller;
 
 
 import de.htwg.backgammon.model.Pitch;
-import de.htwg.backgammon.model.SpielFeld;
-import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Player;
-import de.htwg.backgammon.model.Stein;
-import de.htwg.backgammon.model.Wuerfel;
+import de.htwg.backgammon.model.implementation.SpielFeld;
+import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.implementation.Wuerfel;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {

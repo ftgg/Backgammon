@@ -2,7 +2,7 @@ package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
-import de.htwg.backgammon.model.Stein;
+import de.htwg.backgammon.model.implementation.Stein;
 
 public class DirectionVerifier extends MoveVerifier {
 
