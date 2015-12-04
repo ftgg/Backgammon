@@ -2,12 +2,12 @@ package de.htwg.backgammon.model;
 
 public abstract class AbstractMove {
 
-	protected SpielFeld sf;
-	protected int a;
-	protected int b;
-	protected Spieler s;
-	protected Triangle currentbar;
-	private Triangle otherbar;
+	SpielFeld sf;
+	int a;
+	int b;
+	Spieler s;
+	Triangle currentbar;
+	Triangle otherbar;
 	
 	public static AbstractMove createMoveObject(int a, int b, Spieler s, SpielFeld sf, int[] stonesOnField){
 		if(a == Pitch.BAR)
