@@ -11,7 +11,7 @@ public class Tui implements Observer {
 	// Alle Feldzahlen eingabe 1-24 intern 0 -23
 	private GameState gs;
 	private Controller contr;
-	private BackgammonStringBuilder bStringBuilder = new BackgammonStringBuilder();
+	private TuiSB bStringBuilder = new BackgammonStringBuilder();
 	private Scanner sc = new Scanner(System.in);
 
 	public Tui(Controller c) {
