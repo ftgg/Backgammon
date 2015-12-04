@@ -1,5 +1,7 @@
 package de.htwg.backgammon.model;
 
+import de.htwg.backgammon.model.Triangle;
+
 public interface Pitch {
 	public static final int EXIT = -1;
 	public static final int BAR = -2;
@@ -15,7 +17,7 @@ public interface Pitch {
 	 * @param i index
 	 * @return triangle on index i
 	 */
-	public Dreieck getTriangle(int i) ;
+	public Triangle getTriangle(int i) ;
 
 	/**
 	 * returns true if there is no token on the selected triangle

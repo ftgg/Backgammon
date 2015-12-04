@@ -1,6 +1,6 @@
 package de.htwg.backgammon.model;
 
-public class Spieler {
+public class Spieler implements Player {
 
 	private String name;
 	private int color;
@@ -23,10 +23,12 @@ public class Spieler {
 
 	}
 
+	@Override
 	public int getColor() {
 		return color;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

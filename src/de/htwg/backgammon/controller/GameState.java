@@ -1,12 +1,11 @@
 package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.SpielFeld;
-import de.htwg.backgammon.model.Spieler;
 import de.htwg.backgammon.model.Stein;
+import de.htwg.backgammon.model.Triangle;
 import de.htwg.backgammon.util.Event;
-
-import de.htwg.backgammon.model.Dreieck;
 import de.htwg.backgammon.model.Pitch;
+import de.htwg.backgammon.model.Player;
 
 public class GameState implements Event {
 
@@ -16,14 +15,14 @@ public class GameState implements Event {
 	private int whiteBar;
 	private int[] zuege;
 	private String message;
-	private Spieler current;
+	private Player current;
 	private boolean gamefinished = false;
 
-	GameState(SpielFeld sf, int[] z, Spieler s) {
+	GameState(SpielFeld sf, int[] z, Player s) {
 		this(sf, z, "Update", s, false);
 	}
 
-	public GameState(Pitch sf, int[] z, String m, Spieler s, boolean w) {
+	public GameState(Pitch sf, int[] z, String m, Player s, boolean w) {
 		zuege = z;
 		message = m;
 		blackStones = new int[sf.getSize()];
@@ -39,7 +38,7 @@ public class GameState implements Event {
 		return gamefinished;
 	}
 	
-	public Spieler getCurrent() {
+	public Player getCurrent() {
 		return current;
 	}
 
@@ -69,7 +68,7 @@ public class GameState implements Event {
 
 	private void fillArrays(Pitch sf) {
 		for (int i = 0; i < sf.getSize(); i++) {
-			Dreieck d = sf.getTriangle(i);
+			Triangle d = sf.getTriangle(i);
 			if (d.getColor() == Stein.WHITE) {
 				whiteStones[i] = d.count();
 				blackStones[i] = 0;

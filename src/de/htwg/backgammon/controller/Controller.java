@@ -4,15 +4,16 @@ package de.htwg.backgammon.controller;
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.SpielFeld;
 import de.htwg.backgammon.model.Spieler;
+import de.htwg.backgammon.model.Player;
 import de.htwg.backgammon.model.Stein;
 import de.htwg.backgammon.model.Wuerfel;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
 	public static final int NEXT = -4;
-	private Spieler s1;
-	private Spieler s2;
-	private Spieler current;
+	private Player s1;
+	private Player s2;
+	private Player current;
 	private Pitch sf;
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
@@ -196,11 +197,11 @@ public class Controller extends Subject {
 		return zuege;
 	}
 
-	public Spieler[] getSpieler() {
-		return new Spieler[] { s1, s2 };
+	public Player[] getSpieler() {
+		return new Player[] { s1, s2 };
 	}
 
-	public Spieler getCurrent() {
+	public Player getCurrent() {
 		return current;
 	}
 

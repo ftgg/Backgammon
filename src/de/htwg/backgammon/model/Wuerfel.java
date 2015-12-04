@@ -1,6 +1,6 @@
 package de.htwg.backgammon.model;
 
-public class Wuerfel {
+public class Wuerfel implements Dice {
 
 	private int max;
 	private int min;
@@ -22,15 +22,6 @@ public class Wuerfel {
 		this.min = min;
 		current = new int[2];
 	}
-	
-	
-	public boolean isPasch() {
-		return isPasch;
-	}
-
-	public int[] getCurrent() {
-		return current;
-	}
 
 	public int[] wuerfeln() {
 		int z1, z2;
@@ -45,12 +36,32 @@ public class Wuerfel {
 		return current;
 	}
 
+	// TODO auch nur im Test?
+	@Override
 	public int getMax() {
 		return max;
 	}
 
+	// TODO auch nur im Test?
+	@Override
 	public int getMin() {
 		return min;
+	}
+
+	@Override
+	public boolean isDoublets() {
+		return isPasch;
+	}
+
+	@Override
+	public int[] getCurrentCubeNumbers() {
+		// TODO brauch ich das nur im Test?
+		return current;
+	}
+
+	@Override
+	public int[] rollTheDice() {
+		return wuerfeln();
 	}
 
 }
