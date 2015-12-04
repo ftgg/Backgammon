@@ -1,4 +1,4 @@
-package de.htwg.backgammon.aView;
+package de.htwg.backgammon.aview;
 
 import static org.junit.Assert.*;
 
