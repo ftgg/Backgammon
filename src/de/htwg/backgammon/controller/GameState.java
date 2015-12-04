@@ -6,6 +6,7 @@ import de.htwg.backgammon.model.Stein;
 import de.htwg.backgammon.util.Event;
 
 import de.htwg.backgammon.model.Dreieck;
+import de.htwg.backgammon.model.Pitch;
 
 public class GameState implements Event {
 
@@ -66,9 +67,9 @@ public class GameState implements Event {
 		return whiteBar;
 	}
 
-	private void fillArrays(SpielFeld sf) {
+	private void fillArrays(Pitch sf) {
 		for (int i = 0; i < sf.getSize(); i++) {
-			Dreieck d = sf.getDreiecke(i);
+			Dreieck d = sf.getTriangle(i);
 			if (d.getColor() == Stein.WHITE) {
 				whiteStones[i] = d.count();
 				blackStones[i] = 0;

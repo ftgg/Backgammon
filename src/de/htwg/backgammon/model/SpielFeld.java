@@ -9,10 +9,8 @@ import java.util.List;
  * SpielFeld contains a List of all aviable Fields in which the tokens are.
  */
 
-public class SpielFeld {
+public class SpielFeld implements Pitch {
 
-	public static final int EXIT = -1;
-	public static final int BAR = -2;
 	private List<Dreieck> dreiecke;
 	private Dreieck barblack; // Bar of Player one (White)
 	private Dreieck barwhite; // Bar of Player two (Black)
@@ -57,9 +55,6 @@ public class SpielFeld {
 
 	}
 
-	/**
-	 * fills the empty pitch
-	 */
 	private void fill(Map<Integer, Integer> initpos) {
 		int color = Stein.WHITE;
 		for (int invers = 0; invers < 2; invers++) {
@@ -73,48 +68,25 @@ public class SpielFeld {
 		}
 	}
 
-	public int[] getStonesOnField() {
+	protected int[] getTokensOnTriangle() {
 		return stonesOnField;
 	}
 
-	/**
-	 * returns the number of fields
-	 * 
-	 * @return the number of fields
-	 */
+	@Override
 	public int getSize() {
 		return dreiecke.size();
 	}
 
-	/**
-	 * Returns the Field on the position i
-	 * 
-	 * @param i
-	 *            the index of the field
-	 * @return the selected Field
-	 */
-	public Dreieck getDreiecke(int i) {
+	private Dreieck getDreiecke(int i) {
 		return dreiecke.get(i);
 	}
 
-	/**
-	 * Returns true if there is at least one token on the field
-	 * 
-	 * @param i
-	 *            index of the Field
-	 * @return true if there is at least one token on this field, else false
-	 */
+	@Override
 	public boolean isEmpty(int i) {
 		return dreiecke.get(i).isEmpty();
 	}
 
-	/**
-	 * returns true if the Player has a empty Bar and can do a move on the field
-	 * 
-	 * @param spieler
-	 *            playerid (Stone.White or Stone.Black)
-	 * @return true if Bar is empty
-	 */
+	@Override
 	public boolean isBarEmpty(Spieler spieler) {
 		if (spieler.getColor() == Stein.WHITE) {
 			return barwhite.isEmpty();
@@ -122,6 +94,7 @@ public class SpielFeld {
 		return barblack.isEmpty();
 	}
 
+	@Override
 	public int getBarCount(int spieler) {
 		if (spieler == Stein.WHITE) {
 			return barwhite.count();
@@ -129,19 +102,12 @@ public class SpielFeld {
 		return barblack.count();
 	}
 
-	/**
-	 * moves one token from a to b. only works if the move is legal, starts an
-	 * attack if b is attackable or a move if b is empty or own
-	 * 
-	 * @param a
-	 *            start position of move
-	 * @param b
-	 *            target position of move
-	 * @param spieler
-	 *            spieler can be Stein.Black or Stein.White
-	 * @return returns 0 if its a correct move and 1 if it is an attack
-	 */
-	public int zug(int a, int b, Spieler s) {
+	@Override
+	public int move(int start, int destination, Spieler player) {
+		return zug(start, destination, player);
+	}
+
+	private int zug(int a, int b, Spieler s) {
 		if (b == EXIT)
 			return removeStone(s);
 		Stein attack;
@@ -174,16 +140,11 @@ public class SpielFeld {
 		return stonesOnField[i] == 0 ? 111 : 0;
 	}
 
-	
-	public Dreieck getDreieck(int a){
-		return dreiecke.get(a);
-	}
-	
-	
-	public int countOfTriangles(int i) {
+	protected int countOfTriangle(int i) {
 		return dreiecke.get(i).count();
 	}
 
+	@Override
 	public boolean indexInHome(int b, Spieler current) {
 		int quarterRange = getSize() / 4;
 		if (current.getColor() == Stein.BLACK) {
@@ -198,13 +159,7 @@ public class SpielFeld {
 		return !(value > max || value < min);
 	}
 
-	/**
-	 * are all tokens of the player in the last quarter of the pitch
-	 * 
-	 * @param current
-	 *            player
-	 * @return
-	 */
+	@Override
 	public boolean allHome(Spieler current) {
 		boolean athome = true;
 		for (int i = 0; i < dreiecke.size(); i++) {
@@ -223,6 +178,11 @@ public class SpielFeld {
 
 	public Dreieck getBarwhite() {
 		return barwhite;
+	}
+
+	@Override
+	public Dreieck getTriangle(int i) {
+		return getDreiecke(i);
 	}
 
 }
