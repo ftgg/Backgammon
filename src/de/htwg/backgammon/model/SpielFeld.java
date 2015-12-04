@@ -11,8 +11,8 @@ import java.util.List;
 
 public class SpielFeld {
 
-	private static final int EXIT = -1;
-	private static final int BAR = -2;
+	public static final int EXIT = -1;
+	public static final int BAR = -2;
 	private List<Dreieck> dreiecke;
 	private Dreieck barblack; // Bar of Player one (White)
 	private Dreieck barwhite; // Bar of Player two (Black)
@@ -61,7 +61,7 @@ public class SpielFeld {
 	 * fills the empty pitch
 	 */
 	private void fill(Map<Integer, Integer> initpos) {
-		int color = Stein.getWhite();
+		int color = Stein.WHITE;
 		for (int invers = 0; invers < 2; invers++) {
 			for (Map.Entry<Integer, Integer> current : initpos.entrySet()) {
 				for (int i = 0; current.getValue() > i; i++) {
@@ -69,7 +69,7 @@ public class SpielFeld {
 					stonesOnField[invers] = stonesOnField[invers] + 1;
 				}
 			}
-			color = Stein.getBlack();
+			color = Stein.BLACK;
 		}
 	}
 
@@ -116,14 +116,14 @@ public class SpielFeld {
 	 * @return true if Bar is empty
 	 */
 	public boolean isBarEmpty(Spieler spieler) {
-		if (spieler.getColor() == Stein.getWhite()) {
+		if (spieler.getColor() == Stein.WHITE) {
 			return barwhite.isEmpty();
 		}
 		return barblack.isEmpty();
 	}
 
 	public int getBarCount(int spieler) {
-		if (spieler == Stein.getWhite()) {
+		if (spieler == Stein.WHITE) {
 			return barwhite.count();
 		}
 		return barblack.count();
@@ -146,7 +146,7 @@ public class SpielFeld {
 			return removeStone(s);
 		Stein attack;
 		if (a == BAR) {
-			if (s.getColor() == Stein.getWhite())
+			if (s.getColor() == Stein.WHITE)
 				attack = barwhite.remove();
 			else
 				attack = barblack.remove();
@@ -159,7 +159,7 @@ public class SpielFeld {
 			return 0;
 
 		// Attack
-		if (s.getColor() == Stein.getWhite())
+		if (s.getColor() == Stein.WHITE)
 			barblack.add(beaten);
 		else
 			barwhite.add(beaten);
@@ -168,27 +168,25 @@ public class SpielFeld {
 
 	private int removeStone(Spieler s) {
 		int i = 0;
-		if (s.getColor() == Stein.getWhite())
+		if (s.getColor() == Stein.WHITE)
 			i = 1;
 		stonesOnField[i] = stonesOnField[i] - 1;
 		return stonesOnField[i] == 0 ? 111 : 0;
 	}
 
-	public boolean isMovePossible(int a, int b, Spieler s) {
-		// there is a token of the current player in field a
-		if (a != BAR && dreiecke.get(a).getColor() != s.getColor())
-			return false;
-		// field b is attackable or own
-		return (b == EXIT || dreiecke.get(b).unsecure() || dreiecke.get(b).getColor() == s.getColor());
+	
+	public Dreieck getDreieck(int a){
+		return dreiecke.get(a);
 	}
-
+	
+	
 	public int countOfTriangles(int i) {
 		return dreiecke.get(i).count();
 	}
 
 	public boolean indexInHome(int b, Spieler current) {
 		int quarterRange = getSize() / 4;
-		if (current.getColor() == Stein.getBlack()) {
+		if (current.getColor() == Stein.BLACK) {
 			return valueInRange(b, 0, quarterRange - 1);
 		} else {
 			return valueInRange(b, quarterRange * 3, quarterRange * 4 - 1);
@@ -197,10 +195,7 @@ public class SpielFeld {
 
 	private boolean valueInRange(int value, int min, int max) {
 		// min und max angabe für noch in der base
-		if (value > max || value < min) {
-			return false;
-		}
-		return true;
+		return !(value > max || value < min);
 	}
 
 	/**
@@ -230,11 +225,4 @@ public class SpielFeld {
 		return barwhite;
 	}
 
-	public static int getExit() {
-		return EXIT;
-	}
-
-	public static int getBar() {
-		return BAR;
-	}
 }

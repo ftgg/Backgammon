@@ -4,7 +4,7 @@ import de.htwg.backgammon.model.*;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
-	private static final int NEXT = -4;
+	public static final int NEXT = -4;
 	private Spieler s1;
 	private Spieler s2;
 	private Spieler current;
@@ -31,8 +31,8 @@ public class Controller extends Subject {
 	}
 
 	public void setSpieler(String n1, String n2) {
-		s1 = new Spieler(n1, Stein.getWhite());
-		s2 = new Spieler(n2, Stein.getBlack());
+		s1 = new Spieler(n1, Stein.WHITE);
+		s2 = new Spieler(n2, Stein.BLACK);
 		current = s1;
 		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false));
 	}
@@ -71,13 +71,13 @@ public class Controller extends Subject {
 		int[] res = { 0, 0 };
 
 		if ("b".equals(s[0])) {
-			res[0] = sf.getBar();
+			res[0] = sf.BAR;
 		} else {
 			res[0] = parseInt(s[0]);
 		}
 
 		if ("h".equals(s[1])) {
-			res[1] = sf.getExit();
+			res[1] = sf.EXIT;
 		} else {
 			res[1] = parseInt(s[1]);
 		}
@@ -155,19 +155,28 @@ public class Controller extends Subject {
 	 * @return true if move is possible with diced numbers
 	 */
 	protected boolean verifyMove(int a, int b) {
-		return inDiceResult(a, b) && isBarMoveValid(a, b) && isExitMoveValid(b) && sf.isMovePossible(a, b, current)
+		return inDiceResult(a, b) && isBarMoveValid(a, b) && isExitMoveValid(b) && isMovePossible(a, b, current)
 				&& isDirectionValid(a, b);
 	}
 
 	public boolean isDirectionValid(int a, int b) {
-		boolean color = (a - b < 0) && (current.getColor() == Stein.getWhite());
-		return (a - b > 0) && current.getColor() == Stein.getBlack() || color || b == sf.getExit();
+		boolean color = (a - b < 0) && (current.getColor() == Stein.WHITE);
+		return (a - b > 0) && current.getColor() == Stein.BLACK || color || b == sf.EXIT;
 	}
 
 	public boolean isExitMoveValid(int b) {
-		return !(b == sf.getExit()) || sf.allHome(current); // Implikation
+		return !(b == sf.EXIT) || sf.allHome(current); // Implikation
 	}
 
+	public boolean isMovePossible(int a, int b, Spieler s) {
+		// there is a token of the current player in field a
+		if (a != sf.BAR && sf.getDreieck(a).getColor() != s.getColor())
+			return false;
+		// field b is attackable or own
+		return (b == sf.EXIT || sf.getDreieck(b).unsecure() || sf.getDreieck(b).getColor() == s.getColor());
+	}
+	
+	
 	public boolean inDiceResult(int a, int b) {
 		int value = getDistance(a, b);
 		int max = 0;
@@ -176,7 +185,7 @@ public class Controller extends Subject {
 			indiceResult = (value != i && indiceResult);
 			max = Math.max(max, i);
 		}
-		if (b == SpielFeld.getExit())
+		if (b == SpielFeld.EXIT)
 			return max >= value;
 		return !indiceResult;
 	}
@@ -184,20 +193,20 @@ public class Controller extends Subject {
 	public int getDistance(int a, int b) {
 		int start = sf.getSize();
 		int end = -1;
-		if (current.getColor() == Stein.getWhite()) {
+		if (current.getColor() == Stein.WHITE) {
 			start = 0;
 			end = sf.getSize();
 		}
-		if (a == sf.getBar())
+		if (a == sf.BAR)
 			a = start;
-		else if (b == sf.getExit())
+		else if (b == sf.EXIT)
 			b = end;
 		return Math.abs(b - a);
 	}
 
 	boolean isBarMoveValid(int a, int b) {
 		boolean isBarEmpty = sf.isBarEmpty(current);
-		boolean aisbar = a == sf.getBar();
+		boolean aisbar = a == sf.BAR;
 		boolean indexInHome = sf.indexInHome(b, otherPlayer(current));
 		return isBarEmpty || aisbar && indexInHome;
 	}
@@ -243,7 +252,4 @@ public class Controller extends Subject {
 		return current;
 	}
 
-	public static int getNext() {
-		return NEXT;
-	}
 }

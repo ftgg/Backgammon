@@ -57,12 +57,12 @@ public class ControllerTest {
 	public void testParseInt() {
 		assertEquals(-3, c.parseInt("a"));
 		assertEquals(9, c.parseInt("10"));
-		assertEquals(c.getNext(), -4);
+		assertEquals(c.NEXT, -4);
 	}
 
 	@Test
 	public void testremoveThrowANDSpielerwechsel() {
-		assertTrue(c.getCurrent().getColor() == Stein.getWhite());
+		assertTrue(c.getCurrent().getColor() == Stein.WHITE);
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();
@@ -141,26 +141,26 @@ public class ControllerTest {
 		c = new Controller(6);
 		c.getZuege();
 		assertTrue(c.inDiceResult(10, 10 +c.getZuege()[0]));
-		assertTrue(c.inDiceResult(23, SpielFeld.getExit()));
-		assertFalse(c.inDiceResult(10, SpielFeld.getExit()));
+		assertTrue(c.inDiceResult(23, SpielFeld.EXIT));
+		assertFalse(c.inDiceResult(10, SpielFeld.EXIT));
 	}
 
 	@Test
 	public void testgetDistance() {
 		c = new Controller(6);
-		assertEquals(5, c.getDistance(SpielFeld.getBar(), 5));
-		assertEquals(5, c.getDistance(19, SpielFeld.getExit()));
+		assertEquals(5, c.getDistance(SpielFeld.BAR, 5));
+		assertEquals(5, c.getDistance(19, SpielFeld.EXIT));
 		for (int i : c.getZuege())
 			c.removeThrow(1, 1 + i);
 		c.spielerwechsel();
-		assertEquals(3, c.getDistance(SpielFeld.getBar(), 21));
-		assertEquals(3, c.getDistance(2, SpielFeld.getExit()));
+		assertEquals(3, c.getDistance(SpielFeld.BAR, 21));
+		assertEquals(3, c.getDistance(2, SpielFeld.EXIT));
 	}
 	
 	@Test
 	public void testisExitMoveValid(){
 		minC = new Controller(1);
-		assertFalse(minC.isExitMoveValid(SpielFeld.getExit()));
+		assertFalse(minC.isExitMoveValid(SpielFeld.EXIT));
 		assertTrue(minC.isExitMoveValid(1));
 		System.out.println(minC.spielZug(0, 1));
 		
@@ -176,8 +176,25 @@ public class ControllerTest {
 //		assertFalse(minC.isExitMoveValid(SpielFeld.EXIT));
 //		System.out.println(minC.spielZug(1, 3));
 //		assertTrue(minC.isExitMoveValid(SpielFeld.EXIT));
+	}
+	
+	@Test
+	public void testPossibleMove() {
+		c = new Controller(6);
+		Spieler spielerw = new Spieler("a",Stein.WHITE);
+		Spieler spielerb = new Spieler("b",Stein.BLACK);
 		
-	  
+		assertTrue(c.isMovePossible(0, 1, spielerw)); // legal
+		assertFalse(c.isMovePossible(3, 4, spielerw));// kein stein zu
+															// bewegen
+		assertFalse(c.isMovePossible(0, 5, spielerw));// 5 ist rot sicher
+		assertTrue(c.isMovePossible(0, 1, spielerw));// weiss auf weiss
+		assertTrue(c.isMovePossible(0, 6, spielerw));// 6 weiss angreifbar
+		assertTrue(c.isMovePossible(5, 6, spielerb));// schwarz schlägt
+															// weiss
+		assertTrue(c.isMovePossible(5, 6, spielerb));
+		assertTrue(c.isMovePossible(5, 7, spielerb));
+		assertTrue(c.isMovePossible(0, 6, spielerw));
 	}
 
 }

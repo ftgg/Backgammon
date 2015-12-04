@@ -2,8 +2,8 @@ package de.htwg.backgammon.model;
 
 public class Stein {
 	
-	private static final int BLACK = 0;
-	private static final int WHITE = 1;
+	public static final int BLACK = 0;
+	public static final int WHITE = 1;
 	
 	private int color;	
 	
@@ -18,13 +18,6 @@ public class Stein {
 		return color;
 	}
 
-	public static int getBlack() {
-		return BLACK;
-	}
-
-	public static int getWhite() {
-		return WHITE;
-	}
 	
 	
 }
