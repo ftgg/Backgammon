@@ -1,7 +1,10 @@
-package de.htwg.backgammon.model;
+package de.htwg.backgammon.model.implementation;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import de.htwg.backgammon.model.Stein;
+import de.htwg.backgammon.model.Triangle;
 
 public class Dreieck implements Triangle{
 
@@ -11,7 +14,7 @@ public class Dreieck implements Triangle{
 	private int color;
 	private boolean unsecure = true;
 
-	Dreieck() {
+	public Dreieck() {
 		content = new ArrayDeque<Stein>();
 		size = 0;
 		color = NONE;

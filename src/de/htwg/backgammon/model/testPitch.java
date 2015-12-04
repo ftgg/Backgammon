@@ -1,5 +1,7 @@
 package de.htwg.backgammon.model;
 
+import de.htwg.backgammon.model.implementation.Dreieck;
+
 /**
  * approved exclusively for use of tests
  * 
