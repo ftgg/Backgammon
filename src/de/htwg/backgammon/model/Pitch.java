@@ -1,7 +1,6 @@
 package de.htwg.backgammon.model;
 
 import de.htwg.backgammon.model.Triangle;
-import de.htwg.backgammon.model.implementation.Dreieck;
 
 public interface Pitch {
 	public static final int EXIT = -1;

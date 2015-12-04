@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.aview.BackgammonStringBuilder;
 import de.htwg.backgammon.controller.GameState;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;

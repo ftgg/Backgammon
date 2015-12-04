@@ -8,7 +8,7 @@ import de.htwg.backgammon.model.AbstractMove;
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
 import de.htwg.backgammon.model.Triangle;
-import de.htwg.backgammon.model.testPitch;
+import de.htwg.backgammon.model.TestPitch;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * SpielFeld contains a List of all aviable Fields in which the tokens are.
  */
 
-public class SpielFeld implements Pitch, testPitch {
+public class SpielFeld implements Pitch, TestPitch {
 
 	private List<Triangle> dreiecke;
 	private Triangle barblack; // Bar of Player one (White)
@@ -75,6 +75,7 @@ public class SpielFeld implements Pitch, testPitch {
 		}
 	}
 
+	@Override
 	public int[] getTokensOnTriangle() {
 		return stonesOnField;
 	}
@@ -110,7 +111,7 @@ public class SpielFeld implements Pitch, testPitch {
 
 	@Override
 	public int move(int a, int b, Player s) {
-		AbstractMove m = AbstractMove.createMoveObject(a, b, (Spieler)s, this, stonesOnField);
+		AbstractMove m = AbstractMove.createMoveObject(a, b, (Spieler) s, this, stonesOnField);
 		return m.move();
 	}
 

@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.Player;
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
 import de.htwg.backgammon.model.implementation.Stein;
 
 public class ControllerTest {
@@ -58,7 +56,7 @@ public class ControllerTest {
 	public void testParseInt() {
 		assertEquals(-3, c.parseInt("a"));
 		assertEquals(9, c.parseInt("10"));
-		assertEquals(c.NEXT, -4);
+		assertEquals(Controller.NEXT, -4);
 	}
 
 	@Test
