@@ -3,19 +3,13 @@ package de.htwg.backgammon.aView;
 import de.htwg.backgammon.controller.GameState;
 import de.htwg.backgammon.model.Stein;
 
-public class BackgammonStringBuilder {
+public class BackgammonStringBuilder implements TuiSB {
 
 	public BackgammonStringBuilder() {
 
 	}
 
-	/**
-	 * returns a StringBuilder with informations about the current gameState
-	 * 
-	 * @param gs
-	 *            current GameState
-	 * @return number of tokens on bar and dice result
-	 */
+	@Override
 	public StringBuilder getInformations(GameState gs) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Steine auf der Bar: ");
@@ -29,31 +23,18 @@ public class BackgammonStringBuilder {
 		return sb;
 	}
 
-	/**
-	 * appends diced number to stringbuilder
-	 * 
-	 * @param diceResult
-	 *            number betwen 0 and 6
-	 * @param sb
-	 */
 	private void appendDiced(int diceResult, StringBuilder sb) {
 		if (diceResult != 0)
 			sb.append(diceResult).append(" ");
 	}
 
-	/**
-	 * returns the number of tokens on current players bar
-	 * 
-	 * @param gs
-	 *            current GameState
-	 * @return number of tokens
-	 */
 	private int Bar(GameState gs) {
 		if (gs.getCurrent().getColor() == Stein.WHITE)
 			return gs.getWhiteBar();
 		return gs.getBlackBar();
 	}
 
+	@Override
 	public StringBuilder getStringBuilder(GameState gs) {
 		StringBuilder sb = new StringBuilder();
 		int[] b = gs.getBlackStones();
@@ -79,12 +60,6 @@ public class BackgammonStringBuilder {
 			printLine(i, spalte - 1, w, b, sb);
 	}
 
-	/**
-	 * initialize the StringBuilder with a X-field with correct size
-	 * 
-	 * @param sb
-	 * @param fieldSize
-	 */
 	private void initSB(StringBuilder sb, int fieldSize, int spalte) {
 		for (int i = 0; i < fieldSize; i++)
 			sb.append('X');
@@ -126,8 +101,7 @@ public class BackgammonStringBuilder {
 	private char color(int depth, int i, int[] w, int[] b) {
 		if (w[i] >= depth) {
 			return chosechar('W', w[i], depth);
-		}
-		else if (b[i] >= depth) {
+		} else if (b[i] >= depth) {
 			return chosechar('B', b[i], depth);
 		}
 		return ' ';
@@ -153,7 +127,7 @@ public class BackgammonStringBuilder {
 				sb.setCharAt(start + i, ' ');
 			else if (pos == 1) {
 				sb.setCharAt(start + i, getchar(number));
-			} else if (pos == 2) {
+			} else {
 				sb.setCharAt(start + i, String.valueOf(number % 10).toCharArray()[0]);
 				number = newnumber(number, zeile);
 			}
