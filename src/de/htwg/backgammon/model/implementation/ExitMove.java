@@ -1,5 +1,7 @@
 package de.htwg.backgammon.model.implementation;
 
+import de.htwg.backgammon.model.TokenColor;
+
 public class ExitMove extends AbstractMove {
 
 	private int[] stonesOnField;
@@ -15,7 +17,7 @@ public class ExitMove extends AbstractMove {
 	
 	private int removeStone(Spieler s) {
 		int i = 0;
-		if (s.getColor() == Stein.WHITE)
+		if (s.getColor() == TokenColor.WHITE)
 			i = 1;
 		stonesOnField[i] = stonesOnField[i] - 1;
 		return stonesOnField[i] == 0 ? 111 : 0;

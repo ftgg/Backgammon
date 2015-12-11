@@ -47,7 +47,7 @@ public interface Pitch {
 	 *            current player
 	 * @return number of tokens on players bar
 	 */
-	public int getBarCount(int spieler);
+	public int getBarCount(TokenColor spieler);
 
 	/**
 	 * tries to move one token from start to destination

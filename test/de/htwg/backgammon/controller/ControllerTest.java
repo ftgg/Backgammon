@@ -6,7 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.Player;
-import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.TokenColor;
+
 
 public class ControllerTest {
 
@@ -46,7 +47,7 @@ public class ControllerTest {
 
 	@Test
 	public void testremoveThrowANDSpielerwechsel() {
-		assertTrue(c.getCurrent().getColor() == Stein.WHITE);
+		assertTrue(c.getCurrent().getColor() == TokenColor.WHITE);
 		for (int i = 0; i < 30; i++) {
 			c.wuerfeln();
 			int erg[] = c.getZuege();

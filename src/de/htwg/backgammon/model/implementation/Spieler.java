@@ -1,11 +1,12 @@
 package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.TokenColor;
 
 public class Spieler implements Player {
 
 	private String name;
-	private int color;
+	private TokenColor color;
 
 	/**
 	 * Player construktor set playername and player color
@@ -15,18 +16,18 @@ public class Spieler implements Player {
 	 * @param color
 	 *            color of the player, has to be Stein.White or Stein.Black!
 	 */
-	public Spieler(String name, int color) {
+	public Spieler(String name, TokenColor color) {
 		// color has to be Stein,White or Stein.Black!
-		if (color == Stein.WHITE)
-			this.color = Stein.WHITE;
+		if (color == TokenColor.WHITE)
+			this.color = TokenColor.WHITE;
 		else
-			this.color = Stein.BLACK;
+			this.color = TokenColor.BLACK;
 		this.name = name;
 
 	}
 
 	@Override
-	public int getColor() {
+	public TokenColor getColor() {
 		return color;
 	}
 

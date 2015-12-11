@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
 import junit.framework.TestCase;
 
 public class SpielerTest extends TestCase {
@@ -17,9 +16,9 @@ public class SpielerTest extends TestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		s = new Spieler(name, 5);
-		s2 = new Spieler(name2, Stein.WHITE);
-		s3 = new Spieler(name3, Stein.BLACK);
+		s = new Spieler(name, TokenColor.NONE);
+		s2 = new Spieler(name2, TokenColor.WHITE);
+		s3 = new Spieler(name3, TokenColor.BLACK);
 	}
 
 	@Test
@@ -31,8 +30,8 @@ public class SpielerTest extends TestCase {
 
 	@Test
 	public void testGetColor() {
-		assertEquals(Stein.WHITE, s2.getColor());
-		assertEquals(Stein.BLACK, s3.getColor());
+		assertEquals(TokenColor.WHITE, s2.getColor());
+		assertEquals(TokenColor.BLACK, s3.getColor());
 	}
 	
 

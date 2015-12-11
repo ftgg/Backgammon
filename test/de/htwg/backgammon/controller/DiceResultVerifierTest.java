@@ -5,9 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
+
 import de.htwg.backgammon.model.implementation.Wuerfel;
 
 public class DiceResultVerifierTest {
@@ -20,8 +21,8 @@ public class DiceResultVerifierTest {
 	@Before
 	public void setUp() throws Exception {
 		drv = new DiceResultVerifier();
-		spielerb = new Spieler("b",Stein.BLACK);
-		spielerw = new Spieler("a",Stein.WHITE);
+		spielerb = new Spieler("b",TokenColor.BLACK);
+		spielerw = new Spieler("a",TokenColor.WHITE);
 		sf = new SpielFeld(6);
 		w = new Wuerfel();
 	}
@@ -37,7 +38,7 @@ public class DiceResultVerifierTest {
 
 	@Test
 	public void testgetDistance() {
-		assertEquals(5, drv.getDistance(SpielFeld.BAR, 5,sf,spielerw));
+		assertEquals(4, drv.getDistance(SpielFeld.BAR, 5,sf,spielerw));
 		assertEquals(5, drv.getDistance(19, SpielFeld.EXIT,sf,spielerw));
 
 		assertEquals(3, drv.getDistance(SpielFeld.BAR, 21,sf,spielerb));

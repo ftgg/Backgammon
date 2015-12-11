@@ -5,9 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
+
 
 public class TargetColorVerifierTest {
 
@@ -18,8 +19,8 @@ public class TargetColorVerifierTest {
 	@Before
 	public void setUp() throws Exception {
 		tcv = new TargetColorVerifier();
-		spielerb = new Spieler("b",Stein.BLACK);
-		spielerw = new Spieler("a",Stein.WHITE);
+		spielerb = new Spieler("b",TokenColor.BLACK);
+		spielerw = new Spieler("a",TokenColor.WHITE);
 		sf = new SpielFeld(6);
 	}
 

@@ -2,6 +2,7 @@ package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Token;
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.Triangle;
 
 public abstract class AbstractMove {
@@ -28,7 +29,7 @@ public abstract class AbstractMove {
 		this.s = s;
 		this.sf = sf;
 		
-		if (s.getColor() == Stein.WHITE){
+		if (s.getColor() == TokenColor.WHITE){
 			currentbar = sf.getBarwhite();
 			otherbar = sf.getBarblack();
 		}else{

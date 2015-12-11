@@ -4,19 +4,20 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import de.htwg.backgammon.model.Token;
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.Triangle;
 
 public class Dreieck implements Triangle {
 
 	private Deque<Token> content;
 	private int size;
-	private int color;
+	private TokenColor color;
 	private boolean unsecure = true;
 
 	public Dreieck() {
 		content = new ArrayDeque<Token>();
 		size = 0;
-		color = NONE;
+		color = TokenColor.NONE;
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class Dreieck implements Triangle {
 		if (size < 2)
 			unsecure = true;
 		if (content.isEmpty())
-			color = NONE;
+			color = TokenColor.NONE;
 		return r;
 
 	}
@@ -69,7 +70,7 @@ public class Dreieck implements Triangle {
 	}
 
 	@Override
-	public int getColor() {
+	public TokenColor getColor() {
 		return color;
 	}
 

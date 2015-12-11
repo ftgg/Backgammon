@@ -2,7 +2,8 @@ package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
-import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.TokenColor;
+
 
 public class DirectionVerifier extends MoveVerifier {
 
@@ -13,8 +14,8 @@ public class DirectionVerifier extends MoveVerifier {
 	}
 	
 	public boolean isDirectionValid(int a, int b, Player c) {
-		boolean color = (a - b < 0) && (c.getColor() == Stein.WHITE);
-		return (a - b > 0) && c.getColor() == Stein.BLACK || color || b == Pitch.EXIT;
+		boolean color = (a - b < 0) && (c.getColor() == TokenColor.WHITE);
+		return (a - b > 0) && c.getColor() == TokenColor.BLACK || color || b == Pitch.EXIT;
 	}
 
 }

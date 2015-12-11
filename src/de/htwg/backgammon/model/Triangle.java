@@ -4,8 +4,6 @@ import de.htwg.backgammon.model.Token;
 
 public interface Triangle {
 
-	public static final int NONE = -1;
-	
 	/**
 	 * add a Token to this triangle
 	 * 
@@ -37,7 +35,7 @@ public interface Triangle {
 	 * return the tokens color
 	 * @return color of token
 	 */
-	public int getColor();
+	public TokenColor getColor();
 
 	/**
 	 * true if count() is 0

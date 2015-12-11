@@ -3,9 +3,10 @@ package de.htwg.backgammon.controller;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
+
 import junit.framework.TestCase;
 
 public class GameStateTest extends TestCase {
@@ -17,8 +18,8 @@ public class GameStateTest extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		sf = new SpielFeld();
-		spielerw = new Spieler("Hund", Stein.WHITE);
-		spielerb = new Spieler("Hund", Stein.BLACK);
+		spielerw = new Spieler("Hund", TokenColor.WHITE);
+		spielerb = new Spieler("Hund", TokenColor.BLACK);
 		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw);
 
 	}

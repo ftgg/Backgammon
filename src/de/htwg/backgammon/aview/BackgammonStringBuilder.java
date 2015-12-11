@@ -1,7 +1,8 @@
 package de.htwg.backgammon.aview;
 
 import de.htwg.backgammon.controller.GameState;
-import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.TokenColor;
+
 
 public class BackgammonStringBuilder implements TuiSB {
 
@@ -29,7 +30,7 @@ public class BackgammonStringBuilder implements TuiSB {
 	}
 
 	private int Bar(GameState gs) {
-		if (gs.getCurrent().getColor() == Stein.WHITE)
+		if (gs.getCurrent().getColor() == TokenColor.WHITE)
 			return gs.getWhiteBar();
 		return gs.getBlackBar();
 	}

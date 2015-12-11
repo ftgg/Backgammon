@@ -5,7 +5,7 @@ public interface Player {
 	/**
 	 * @return color of this Player
 	 */
-	public int getColor();
+	public TokenColor getColor();
 
 	/**
 	 * @return name of this Player

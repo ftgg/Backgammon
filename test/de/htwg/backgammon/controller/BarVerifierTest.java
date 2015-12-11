@@ -6,9 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.Pitch;
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
+
 
 public class BarVerifierTest {
 	BarVerifier bv;
@@ -20,8 +21,8 @@ public class BarVerifierTest {
 	public void setUp() throws Exception {
 		bv = new BarVerifier();
 		sf = new SpielFeld(1);
-		s1 = new Spieler("b", Stein.BLACK);
-		s2 = new Spieler("w", Stein.WHITE);
+		s1 = new Spieler("b", TokenColor.BLACK);
+		s2 = new Spieler("w", TokenColor.WHITE);
 		c = s1;
 	}
 

@@ -8,6 +8,7 @@ import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
 import de.htwg.backgammon.model.Triangle;
 import de.htwg.backgammon.model.TestPitch;
+import de.htwg.backgammon.model.TokenColor;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class SpielFeld implements Pitch, TestPitch {
 	}
 
 	private void fill(Map<Integer, Integer> initpos) {
-		int color = Stein.WHITE;
+		TokenColor color = TokenColor.WHITE;
 		for (int invers = 0; invers < 2; invers++) {
 			for (Map.Entry<Integer, Integer> current : initpos.entrySet()) {
 				for (int i = 0; current.getValue() > i; i++) {
@@ -70,7 +71,7 @@ public class SpielFeld implements Pitch, TestPitch {
 					stonesOnField[invers] = stonesOnField[invers] + 1;
 				}
 			}
-			color = Stein.BLACK;
+			color = TokenColor.BLACK;
 		}
 	}
 
@@ -95,14 +96,14 @@ public class SpielFeld implements Pitch, TestPitch {
 
 	@Override
 	public boolean isBarEmpty(Player spieler) {
-		if (spieler.getColor() == Stein.WHITE)
+		if (spieler.getColor() == TokenColor.WHITE)
 			return barwhite.isEmpty();
 		return barblack.isEmpty();
 	}
 
 	@Override
-	public int getBarCount(int spieler) {
-		if (spieler == Stein.WHITE) {
+	public int getBarCount(TokenColor spieler) {
+		if (spieler == TokenColor.WHITE) {
 			return barwhite.count();
 		}
 		return barblack.count();
@@ -122,7 +123,7 @@ public class SpielFeld implements Pitch, TestPitch {
 	@Override
 	public boolean indexInHome(int b, Player current) {
 		int quarterRange = getSize() / 4;
-		if (current.getColor() == Stein.BLACK) {
+		if (current.getColor() == TokenColor.BLACK) {
 			return valueInRange(b, 0, quarterRange - 1);
 		} else {
 			return valueInRange(b, quarterRange * 3, quarterRange * 4 - 1);

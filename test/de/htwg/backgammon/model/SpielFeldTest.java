@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
+
 
 public class SpielFeldTest {
 
@@ -20,8 +20,8 @@ public class SpielFeldTest {
 		size = 2;
 		sfstd = new SpielFeld();
 		sfs = new SpielFeld(size);
-		spielerw = new Spieler("Jan", Stein.WHITE);
-		spielerb = new Spieler("Herbert", Stein.BLACK);
+		spielerw = new Spieler("Jan", TokenColor.WHITE);
+		spielerb = new Spieler("Herbert", TokenColor.BLACK);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class SpielFeldTest {
 		Integer[] posw = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
 		Integer[] posb = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
 		for (int i = 0; i < 24; i++) {
-			if (sfstd.getTriangle(i).getColor() == Stein.WHITE)
+			if (sfstd.getTriangle(i).getColor() == TokenColor.WHITE)
 				assertSame(posw[i], sfstd.countOfTriangle(i));
 			else
 				assertSame(posb[i], sfstd.countOfTriangle(i));
@@ -68,9 +68,9 @@ public class SpielFeldTest {
 		assertSame(0, sfstd.move(0, 1, spielerw)); // legal
 		assertSame(0, sfstd.move(0, 1, spielerw));// weiss auf weiss
 		assertSame(0, sfstd.move(1, 6, spielerw));// 6 weiss angreifbar
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", TokenColor.WHITE)));
 		assertSame(1, sfstd.move(5, 6, spielerb));// schwarz schlägt weiss
-		assertFalse(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
+		assertFalse(sfstd.isBarEmpty(new Spieler("T", TokenColor.WHITE)));
 		
 		assertSame(0, sfstd.move(5, 6, spielerb));
 		assertSame(0, sfstd.move(6, 7, spielerb));
@@ -80,7 +80,7 @@ public class SpielFeldTest {
 		assertFalse(sfs.isBarEmpty(spielerb));
 		assertSame(1 , sfs.getBarblack().count());
 		assertSame(0 , sfs.getBarwhite().count());
-		assertSame(Triangle.NONE, sfs.getBarwhite().getColor());
+		assertSame(TokenColor.NONE, sfs.getBarwhite().getColor());
 		assertSame(1, sfs.move(Pitch.BAR,7,spielerb));
 		assertSame(0 , sfs.getBarblack().count());
 		assertSame(1 , sfs.getBarwhite().count());
@@ -124,8 +124,8 @@ public class SpielFeldTest {
 
 	@Test
 	public void testIsBarEmpty() {
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.WHITE)));
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", Stein.BLACK)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", TokenColor.WHITE)));
+		assertTrue(sfstd.isBarEmpty(new Spieler("T", TokenColor.BLACK)));
 	}
 
 	@Test
@@ -145,7 +145,7 @@ public class SpielFeldTest {
 
 	@Test
 	public void testallHome() {
-		Spieler jan = new Spieler("Jan", Stein.WHITE);
+		Spieler jan = new Spieler("Jan", TokenColor.WHITE);
 		assertFalse(sfs.allHome(jan));
 		sfs.move(0,size*4-1, jan);
 		assertTrue(sfs.allHome(jan));

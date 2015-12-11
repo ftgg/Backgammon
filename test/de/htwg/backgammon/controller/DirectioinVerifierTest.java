@@ -5,9 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
+
 
 public class DirectioinVerifierTest {
 	DirectionVerifier dv;
@@ -18,8 +19,8 @@ public class DirectioinVerifierTest {
 	public void setUp() throws Exception {
 		dv = new DirectionVerifier();
 		sf = new SpielFeld(6);
-		s1 = new Spieler("w",Stein.WHITE);
-		s2 = new Spieler("b",Stein.BLACK);
+		s1 = new Spieler("w",TokenColor.WHITE);
+		s2 = new Spieler("b",TokenColor.BLACK);
 	}
 
 	@Test

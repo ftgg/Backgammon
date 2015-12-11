@@ -3,10 +3,9 @@ package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
-import de.htwg.backgammon.model.Token;
+import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.SpielFeld;
 import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
 import de.htwg.backgammon.model.implementation.Wuerfel;
 import de.htwg.backgammon.util.Subject;
 
@@ -44,8 +43,8 @@ public class Controller extends Subject {
 	}
 
 	public void setSpieler(String n1, String n2) {
-		s1 = new Spieler(n1, Stein.WHITE);
-		s2 = new Spieler(n2, Stein.BLACK);
+		s1 = new Spieler(n1, TokenColor.WHITE);
+		s2 = new Spieler(n2, TokenColor.BLACK);
 		current = s1;
 		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false));
 	}

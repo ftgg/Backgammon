@@ -2,10 +2,11 @@ package de.htwg.backgammon.controller;
 
 import de.htwg.backgammon.model.Triangle;
 import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Stein;
+
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.TokenColor;
 
 public class GameState implements Event {
 
@@ -27,8 +28,8 @@ public class GameState implements Event {
 		message = m;
 		blackStones = new int[sf.getSize()];
 		whiteStones = new int[sf.getSize()];
-		this.whiteBar = sf.getBarCount(Stein.WHITE);
-		this.blackBar = sf.getBarCount(Stein.BLACK);
+		this.whiteBar = sf.getBarCount(TokenColor.WHITE);
+		this.blackBar = sf.getBarCount(TokenColor.BLACK);
 		current = s;
 		gamefinished = w;
 		fillArrays(sf);
@@ -69,10 +70,10 @@ public class GameState implements Event {
 	private void fillArrays(Pitch sf) {
 		for (int i = 0; i < sf.getSize(); i++) {
 			Triangle d = sf.getTriangle(i);
-			if (d.getColor() == Stein.WHITE) {
+			if (d.getColor() == TokenColor.WHITE) {
 				whiteStones[i] = d.count();
 				blackStones[i] = 0;
-			} else if (d.getColor() == Stein.BLACK) {
+			} else if (d.getColor() == TokenColor.BLACK) {
 				blackStones[i] = d.count();
 				whiteStones[i] = 0;
 			} else {

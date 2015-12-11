@@ -1,20 +1,21 @@
 package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.Token;
+import de.htwg.backgammon.model.TokenColor;
 
 public class Stein implements Token {
 
-	private int color;
+	private TokenColor color;
 
-	public Stein(int color) {
-		if (color != BLACK && color != WHITE) {
+	public Stein(TokenColor color) {
+		if (color != TokenColor.BLACK && color != TokenColor.WHITE) {
 			throw new IllegalArgumentException("Ungueltige Farbe");
 		}
 		this.color = color;
 	}
 
 	@Override
-	public int getColor() {
+	public TokenColor getColor() {
 		return color;
 	}
 
