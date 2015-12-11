@@ -3,7 +3,7 @@ package de.htwg.backgammon.aview;
 import java.util.Scanner;
 
 import de.htwg.backgammon.controller.Controller;
-import de.htwg.backgammon.controller.GameState;
+import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 

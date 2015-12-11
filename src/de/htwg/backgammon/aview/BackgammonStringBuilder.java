@@ -1,7 +1,7 @@
 package de.htwg.backgammon.aview;
 
-import de.htwg.backgammon.controller.GameState;
 import de.htwg.backgammon.model.TokenColor;
+import de.htwg.backgammon.model.implementation.GameState;
 
 
 public class BackgammonStringBuilder implements TuiSB {

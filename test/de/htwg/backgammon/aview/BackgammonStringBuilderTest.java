@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.aview.BackgammonStringBuilder;
-import de.htwg.backgammon.controller.GameState;
 import de.htwg.backgammon.model.TokenColor;
+import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
 

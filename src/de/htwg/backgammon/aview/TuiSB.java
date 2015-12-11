@@ -1,6 +1,6 @@
 package de.htwg.backgammon.aview;
 
-import de.htwg.backgammon.controller.GameState;
+import de.htwg.backgammon.model.implementation.GameState;
 
 public interface TuiSB {
 

@@ -7,6 +7,7 @@ import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
 import de.htwg.backgammon.model.implementation.Dice;
+import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {

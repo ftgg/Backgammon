@@ -1,9 +1,10 @@
-package de.htwg.backgammon.controller;
+package de.htwg.backgammon.model;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.TokenColor;
+import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
 

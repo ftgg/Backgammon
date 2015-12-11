@@ -1,8 +1,6 @@
-package de.htwg.backgammon.controller;
+package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.ITriangle;
-import de.htwg.backgammon.model.implementation.Pitch;
-
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
@@ -19,7 +17,7 @@ public class GameState implements Event {
 	private IPlayer current;
 	private boolean gamefinished = false;
 
-	GameState(Pitch sf, int[] z, IPlayer s) {
+	public GameState(Pitch sf, int[] z, IPlayer s) {
 		this(sf, z, "Update", s, false);
 	}
 
