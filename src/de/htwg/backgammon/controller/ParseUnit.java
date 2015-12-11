@@ -15,7 +15,7 @@ public abstract class ParseUnit {
 		try {
 			a = Integer.parseInt(s);
 		} catch (Exception e) {
-			System.err.println(e);
+			//System.err.println(e);
 			return -3;
 		}
 		if (a < 1)

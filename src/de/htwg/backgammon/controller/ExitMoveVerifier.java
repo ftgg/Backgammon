@@ -7,7 +7,6 @@ public class ExitMoveVerifier extends MoveVerifier {
 
 	@Override
 	public boolean checkMove(int a, int b, int[] zuege, Pitch sf, Player s, Player s1, Player s2) {
-		System.out.println("ExitMoveValid: " + isExitMoveValid(b, sf, s));
 		return isExitMoveValid(b, sf, s) && successor.checkMove(a, b, zuege, sf, s, s1, s2);
 	}
 
