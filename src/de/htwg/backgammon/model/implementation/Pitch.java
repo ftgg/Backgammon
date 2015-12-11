@@ -41,15 +41,9 @@ public class Pitch implements IPitch, TestPitch {
 		barblack = new Triangle();
 		barwhite = new Triangle();
 		dreiecke = new LinkedList<ITriangle>();
-		int quadsize;
-		quadsize = size * 4;
-		for (int i = 0; i < quadsize; i++) {
-			dreiecke.add(new Triangle());
-		}
-
 		Map<Integer, Integer> initpos = new TreeMap<>();
-
-		if (quadsize == 24) {
+		createTriangles(size * 4);
+		if (size * 4 == 24) {
 			initpos.put(0, 2);
 			initpos.put(11, 5);
 			initpos.put(16, 3);
@@ -61,6 +55,41 @@ public class Pitch implements IPitch, TestPitch {
 		}
 
 	}
+	
+	public Pitch(GameState gs){
+		createTriangles(gs.getBlackStones().length);
+		initPitch(gs.getBlackStones(), TokenColor.BLACK);
+		initPitch(gs.getWhiteStones(), TokenColor.WHITE);
+		initBar(barblack,gs.getBlackBar(),TokenColor.BLACK);
+		initBar(barwhite,gs.getWhiteBar(),TokenColor.WHITE);
+		stonesOnField[0] = gs.getBlackStones().length + gs.getBlackBar();
+		stonesOnField[1] = gs.getWhiteStones().length + gs.getWhiteBar();
+	}
+	
+	private void initBar(ITriangle t, int a, TokenColor c){
+		initTriangle(t,a,c);
+	}
+	
+	private void initPitch(int[] stones, TokenColor c){
+		for(int i = 0; i < stones.length;i++){
+			initTriangle(dreiecke.get(i),stones[i],c);
+		}
+	}
+	
+	private void initTriangle(ITriangle t, int count, TokenColor c){
+		for(int i = 0; i < count; i++)
+			t.add(new Token(c));
+	}
+	
+	
+	
+	private void createTriangles(int size){
+		for (int i = 0; i < size; i++) {
+			dreiecke.add(new Triangle());
+		}
+	}
+	
+	
 
 	private void fill(Map<Integer, Integer> initpos) {
 		TokenColor color = TokenColor.WHITE;
