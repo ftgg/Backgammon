@@ -8,6 +8,7 @@ public class DirectionVerifier extends MoveVerifier {
 
 	@Override
 	public boolean checkMove(int a, int b, int[] zuege, Pitch sf, Player s, Player s1, Player s2) {
+		System.out.println("Direction valid: " + isDirectionValid(a,b,s));
 		return isDirectionValid(a,b,s);
 	}
 	

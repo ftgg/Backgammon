@@ -11,7 +11,7 @@ public class DiceResultVerifier extends MoveVerifier {
 		return inDiceResult(a,b,zuege,sf,s) && successor.checkMove(a, b, zuege, sf, s, s1, s2);
 	}
 	
-	//TODO Kette ab hier weitertesten, b 3 geht nicht!
+	
 	public boolean inDiceResult(int a, int b, int[] zuege,Pitch sf, Player s){
 		int value = getDistance(a,b, sf, s);
 		int max = 0;
@@ -20,6 +20,7 @@ public class DiceResultVerifier extends MoveVerifier {
 			indiceResult = (value != i && indiceResult);
 			max = Math.max(max, i);
 		}
+		System.out.println("Dice Result:" + !indiceResult);
 		return !indiceResult || (max >= value && b == Pitch.EXIT);
 	}
 
@@ -27,7 +28,7 @@ public class DiceResultVerifier extends MoveVerifier {
 		int start = sf.getSize();
 		int end = -1;
 		if (current.getColor() == Token.WHITE) {
-			start = 0;
+			start = 1;
 			end = sf.getSize();
 		}
 		if (a == Pitch.BAR)
