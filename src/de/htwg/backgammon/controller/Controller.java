@@ -63,7 +63,6 @@ public class Controller extends Subject {
 		spielZug(act[0], act[1]);
 	}
 
-<<<<<<< HEAD
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
 
@@ -101,9 +100,6 @@ public class Controller extends Subject {
 		return a - 1;
 	}
 
-=======
-	
->>>>>>> branch 'Controller' of https://github.com/ftgg/Backgammon.git
 	public void wuerfeln() {
 		w.wuerfeln();
 		if (w.isDoublets()) {

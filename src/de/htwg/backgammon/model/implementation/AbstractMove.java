@@ -1,8 +1,7 @@
-package de.htwg.backgammon.model;
+package de.htwg.backgammon.model.implementation;
 
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.Pitch;
+import de.htwg.backgammon.model.Triangle;
 
 public abstract class AbstractMove {
 

@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import de.htwg.backgammon.model.AbstractMove;
 import de.htwg.backgammon.model.Pitch;
 import de.htwg.backgammon.model.Player;
 import de.htwg.backgammon.model.Triangle;
