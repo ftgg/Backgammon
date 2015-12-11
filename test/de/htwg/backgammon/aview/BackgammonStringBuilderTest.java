@@ -59,6 +59,7 @@ public class BackgammonStringBuilderTest {
 		assertEquals(sb.toString(), returnval);
 		sb = bs.getInformations(gsS);
 		assertEquals(sb.toString(), returnval);
+		bs.trollfab();
 	}
 
 }
