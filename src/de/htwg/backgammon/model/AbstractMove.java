@@ -36,7 +36,7 @@ public abstract class AbstractMove {
 			otherbar = sf.getBarwhite();
 		}
 	}
-	
+
 
 	public abstract int move();
 	

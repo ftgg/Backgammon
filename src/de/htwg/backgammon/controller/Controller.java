@@ -19,10 +19,13 @@ public class Controller extends Subject {
 	private Wuerfel w;
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
+	private ActionParser actionparser;
+	
 	public Controller() {
 		sf = new SpielFeld();// Standartgröße = original größe
 		w = new Wuerfel();
 		createMoveVerifier();
+		actionparser = new ActionParser();
 		wuerfeln();
 	}
 
@@ -35,6 +38,7 @@ public class Controller extends Subject {
 		sf = new SpielFeld(i);
 		w = new Wuerfel();
 		createMoveVerifier();
+		actionparser = new ActionParser();
 		wuerfeln();
 		setSpieler("Weiss", "Schwarz");
 	}
@@ -47,7 +51,7 @@ public class Controller extends Subject {
 	}
 
 	public void doAction(String s) {
-		int[] act = parseAction(s);
+		int[] act = actionparser.parse(s);
 		if (act[0] == -3 || act[1] == -3) {
 			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false));
 			return;
@@ -59,6 +63,7 @@ public class Controller extends Subject {
 		spielZug(act[0], act[1]);
 	}
 
+<<<<<<< HEAD
 	public int[] parseAction(String act) {
 		String[] s = act.split(" ");
 
@@ -96,6 +101,9 @@ public class Controller extends Subject {
 		return a - 1;
 	}
 
+=======
+	
+>>>>>>> branch 'Controller' of https://github.com/ftgg/Backgammon.git
 	public void wuerfeln() {
 		w.wuerfeln();
 		if (w.isDoublets()) {

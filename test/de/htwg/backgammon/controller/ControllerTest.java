@@ -42,22 +42,7 @@ public class ControllerTest {
 
 	}
 
-	@Test
-	public void testParseAction() {
-		assertTrue(2 == c.parseAction("3 5")[0] && 4 == c.parseAction("3 5")[1]);
-		assertTrue(19 == c.parseAction("20 h")[0] && -1 == c.parseAction("20 h")[1]);
-		assertTrue(-2 == c.parseAction("b 5")[0] && 4 == c.parseAction("b 5")[1]);
-		assertTrue(-3 == c.parseAction("b")[0] && -3 == c.parseAction("b")[1]);
-		assertSame(-4 , c.parseAction("n")[0]);
 
-	}
-
-	@Test
-	public void testParseInt() {
-		assertEquals(-3, c.parseInt("a"));
-		assertEquals(9, c.parseInt("10"));
-		assertEquals(Controller.NEXT, -4);
-	}
 
 	@Test
 	public void testremoveThrowANDSpielerwechsel() {

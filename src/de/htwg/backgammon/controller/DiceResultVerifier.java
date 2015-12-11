@@ -20,9 +20,7 @@ public class DiceResultVerifier extends MoveVerifier {
 			indiceResult = (value != i && indiceResult);
 			max = Math.max(max, i);
 		}
-		if (b == Pitch.EXIT)
-			return max >= value;
-		return !indiceResult;
+		return !indiceResult || (max >= value && b == Pitch.EXIT);
 	}
 
 	public int getDistance(int a, int b, Pitch sf, Player current) {
