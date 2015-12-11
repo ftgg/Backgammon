@@ -1,6 +1,7 @@
 package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.Pitch;
+import de.htwg.backgammon.model.Token;
 import de.htwg.backgammon.model.Triangle;
 
 public abstract class AbstractMove {
@@ -40,7 +41,7 @@ public abstract class AbstractMove {
 	public abstract int move();
 	
 
-	protected int putOnBar(Stein beaten){
+	protected int putOnBar(Token beaten){
 		if (beaten == null) // target field was empty
 			return 0;
 		otherbar.add(beaten);

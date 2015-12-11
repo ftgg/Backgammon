@@ -11,8 +11,8 @@ public class BarMove extends AbstractMove {
 		Stein attack;
 		Stein beaten;
 
-		attack = currentbar.remove();
-		beaten = sf.getTriangle(b).add(attack);
+		attack = (Stein) currentbar.remove();
+		beaten = (Stein) sf.getTriangle(b).add(attack);
 		return putOnBar(beaten);
 	}
 

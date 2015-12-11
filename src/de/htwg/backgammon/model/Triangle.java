@@ -1,6 +1,6 @@
 package de.htwg.backgammon.model;
 
-import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.Token;
 
 public interface Triangle {
 
@@ -13,7 +13,7 @@ public interface Triangle {
 	 *            token
 	 * @return null if its just a move or a token if an enemy has been slain
 	 */
-	public Stein add(Stein token);
+	public Token add(Token token);
 
 	/**
 	 * return false if there are more than one enemy tokens on the field
@@ -25,7 +25,7 @@ public interface Triangle {
 	 * removes a token from the triangle
 	 * @return removed token
 	 */
-	public Stein remove();
+	public Token remove();
 
 	/**
 	 * count number of tokens on triangle

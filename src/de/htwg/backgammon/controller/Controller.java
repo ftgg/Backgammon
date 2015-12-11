@@ -63,42 +63,42 @@ public class Controller extends Subject {
 		spielZug(act[0], act[1]);
 	}
 
-	public int[] parseAction(String act) {
-		String[] s = act.split(" ");
-
-		if ("n".equals(s[0]))
-			return new int[] { NEXT, NEXT };
-
-		if (s.length != 2)
-			return new int[] { -3, -3 };
-		int[] res = { 0, 0 };
-
-		if ("b".equals(s[0])) {
-			res[0] = Pitch.BAR;
-		} else {
-			res[0] = parseInt(s[0]);
-		}
-
-		if ("h".equals(s[1])) {
-			res[1] = Pitch.EXIT;
-		} else {
-			res[1] = parseInt(s[1]);
-		}
-		return res;
-	}
-
-	int parseInt(String s) {
-		int a;
-		try {
-			a = Integer.parseInt(s);
-		} catch (Exception e) {
-			System.err.println(e);
-			return -3;
-		}
-		if (a < 1)
-			return -3;
-		return a - 1;
-	}
+//	public int[] parseAction(String act) {
+//		String[] s = act.split(" ");
+//
+//		if ("n".equals(s[0]))
+//			return new int[] { NEXT, NEXT };
+//
+//		if (s.length != 2)
+//			return new int[] { -3, -3 };
+//		int[] res = { 0, 0 };
+//
+//		if ("b".equals(s[0])) {
+//			res[0] = Pitch.BAR;
+//		} else {
+//			res[0] = parseInt(s[0]);
+//		}
+//
+//		if ("h".equals(s[1])) {
+//			res[1] = Pitch.EXIT;
+//		} else {
+//			res[1] = parseInt(s[1]);
+//		}
+//		return res;
+//	}
+//
+//	int parseInt(String s) {
+//		int a;
+//		try {
+//			a = Integer.parseInt(s);
+//		} catch (Exception e) {
+//			System.err.println(e);
+//			return -3;
+//		}
+//		if (a < 1)
+//			return -3;
+//		return a - 1;
+//	}
 
 	public void wuerfeln() {
 		w.wuerfeln();
