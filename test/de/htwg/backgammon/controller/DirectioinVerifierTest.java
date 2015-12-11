@@ -6,21 +6,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
 
 
 public class DirectioinVerifierTest {
 	DirectionVerifier dv;
-	SpielFeld sf;
-	Spieler s1;
-	Spieler s2;
+	Pitch sf;
+	Player s1;
+	Player s2;
 	@Before
 	public void setUp() throws Exception {
 		dv = new DirectionVerifier();
-		sf = new SpielFeld(6);
-		s1 = new Spieler("w",TokenColor.WHITE);
-		s2 = new Spieler("b",TokenColor.BLACK);
+		sf = new Pitch(6);
+		s1 = new Player("w",TokenColor.WHITE);
+		s2 = new Player("b",TokenColor.BLACK);
 	}
 
 	@Test

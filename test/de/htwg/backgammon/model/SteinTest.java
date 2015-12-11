@@ -5,25 +5,25 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.implementation.Stein;
+import de.htwg.backgammon.model.implementation.Token;
 
 public class SteinTest {
 
-	Stein steinB;
-	Stein steinW;
-	Stein steinX;
+	Token steinB;
+	Token steinW;
+	Token steinX;
 	
 	@Before
 	public void setUp() throws Exception{
-		steinB = new Stein(TokenColor.BLACK);
-		steinW = new Stein(TokenColor.WHITE);
+		steinB = new Token(TokenColor.BLACK);
+		steinW = new Token(TokenColor.WHITE);
 		
 		try{
-			steinX = new Stein(TokenColor.NONE);
+			steinX = new Token(TokenColor.NONE);
 		}catch (IllegalArgumentException e){
 		}
 		
-		steinX = new Stein(TokenColor.BLACK);
+		steinX = new Token(TokenColor.BLACK);
 		
 	}
 	

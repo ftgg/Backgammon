@@ -1,6 +1,6 @@
 package de.htwg.backgammon.model;
 
-public interface Token {
+public interface IToken {
 
 
 	/**

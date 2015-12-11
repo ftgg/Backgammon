@@ -1,28 +1,28 @@
 package de.htwg.backgammon.controller;
 
 
-import de.htwg.backgammon.model.Pitch;
-import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.IPitch;
+import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
-import de.htwg.backgammon.model.implementation.Wuerfel;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
+import de.htwg.backgammon.model.implementation.Dice;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
 	public static final int NEXT = -4;
-	private Player s1;
-	private Player s2;
-	private Player current;
-	private Pitch sf;
-	private Wuerfel w;
+	private IPlayer s1;
+	private IPlayer s2;
+	private IPlayer current;
+	private IPitch sf;
+	private Dice w;
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
 	
 	public Controller() {
-		sf = new SpielFeld();// Standartgröße = original größe
-		w = new Wuerfel();
+		sf = new Pitch();// Standartgröße = original größe
+		w = new Dice();
 		createMoveVerifier();
 		actionparser = new ActionParser();
 		wuerfeln();
@@ -34,8 +34,8 @@ public class Controller extends Subject {
 	 * @param a
 	 */
 	public Controller(int i) {
-		sf = new SpielFeld(i);
-		w = new Wuerfel();
+		sf = new Pitch(i);
+		w = new Dice();
 		createMoveVerifier();
 		actionparser = new ActionParser();
 		wuerfeln();
@@ -43,8 +43,8 @@ public class Controller extends Subject {
 	}
 
 	public void setSpieler(String n1, String n2) {
-		s1 = new Spieler(n1, TokenColor.WHITE);
-		s2 = new Spieler(n2, TokenColor.BLACK);
+		s1 = new Player(n1, TokenColor.WHITE);
+		s2 = new Player(n2, TokenColor.BLACK);
 		current = s1;
 		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false));
 	}
@@ -145,11 +145,11 @@ public class Controller extends Subject {
 		return zuege;
 	}
 
-	public Player[] getSpieler() {
-		return new Player[] { s1, s2 };
+	public IPlayer[] getSpieler() {
+		return new IPlayer[] { s1, s2 };
 	}
 
-	public Player getCurrent() {
+	public IPlayer getCurrent() {
 		return current;
 	}
 

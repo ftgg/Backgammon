@@ -1,22 +1,22 @@
 package de.htwg.backgammon.controller;
 
-import de.htwg.backgammon.model.Pitch;
-import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.IPitch;
+import de.htwg.backgammon.model.IPlayer;
 
 public class TargetColorVerifier extends MoveVerifier {
 
 	@Override
-	public boolean checkMove(int a, int b, int[] zuege, Pitch sf, Player s, Player s1, Player s2) {
+	public boolean checkMove(int a, int b, int[] zuege, IPitch sf, IPlayer s, IPlayer s1, IPlayer s2) {
 		System.out.println("TargetColor: " + (isTargetColorValid(a, b, s, sf)));
 		return isTargetColorValid(a, b, s, sf) && successor.checkMove(a, b, zuege, sf, s, s1, s2);
 	}
 
-	public boolean isTargetColorValid(int a, int b, Player s, Pitch sf) {
+	public boolean isTargetColorValid(int a, int b, IPlayer s, IPitch sf) {
 		// there is a token of the current player in field a
-		if (a != Pitch.BAR && sf.getTriangle(a).getColor() != s.getColor())
+		if (a != IPitch.BAR && sf.getTriangle(a).getColor() != s.getColor())
 			return false;
 		// field b is attackable or own
-		return (b == Pitch.EXIT || sf.getTriangle(b).unsecure() || sf.getTriangle(b).getColor() == s.getColor());
+		return (b == IPitch.EXIT || sf.getTriangle(b).unsecure() || sf.getTriangle(b).getColor() == s.getColor());
 	}
 
 }

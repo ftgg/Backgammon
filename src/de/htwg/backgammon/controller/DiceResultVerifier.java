@@ -1,21 +1,21 @@
 package de.htwg.backgammon.controller;
 
-import de.htwg.backgammon.model.Pitch;
-import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.IPitch;
+import de.htwg.backgammon.model.IPlayer;
 
 import de.htwg.backgammon.model.TokenColor;
 
 public class DiceResultVerifier extends MoveVerifier {
 	
 	@Override
-	public boolean checkMove(int a, int b, int[] zuege, Pitch sf, Player s, Player s1, Player s2) {
+	public boolean checkMove(int a, int b, int[] zuege, IPitch sf, IPlayer s, IPlayer s1, IPlayer s2) {
 		//System.out.println("Dice Verifier: "+ inDiceResult(a,b,zuege,sf,s));
 		System.out.println(successor.checkMove(a, b, zuege, sf, s, s1, s2));
 		return  successor.checkMove(a, b, zuege, sf, s, s1, s2) && inDiceResult(a,b,zuege,sf,s);
 	}
 	
 	
-	public boolean inDiceResult(int a, int b, int[] zuege,Pitch sf, Player s){
+	public boolean inDiceResult(int a, int b, int[] zuege,IPitch sf, IPlayer s){
 		int value = getDistance(a,b, sf, s);
 		int max = 0;
 		boolean indiceResult = true;
@@ -27,10 +27,10 @@ public class DiceResultVerifier extends MoveVerifier {
 		if(!indiceResult){
 			removeThrow(value,zuege);
 			return true;
-		}else if(max >= value && b == Pitch.EXIT){
+		}else if(max >= value && b == IPitch.EXIT){
 			removeThrow(max,zuege);
 			return true;
-		}else if(a == Pitch.BAR){
+		}else if(a == IPitch.BAR){
 			removeThrow(value + 1,zuege);
 			return true;
 		}	
@@ -38,16 +38,16 @@ public class DiceResultVerifier extends MoveVerifier {
 		return false;
 	}
 
-	public int getDistance(int a, int b, Pitch sf, Player current) {
+	public int getDistance(int a, int b, IPitch sf, IPlayer current) {
 		int start = sf.getSize();
 		int end = -1;
 		if (current.getColor() == TokenColor.WHITE) {
 			start = 0;
 			end = sf.getSize();
 		}
-		if (a == Pitch.BAR)
+		if (a == IPitch.BAR)
 			a = start;
-		else if (b == Pitch.EXIT)
+		else if (b == IPitch.EXIT)
 			b = end;
 		return Math.abs(b - a);
 	}

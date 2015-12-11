@@ -1,6 +1,6 @@
 package de.htwg.backgammon.model;
 
-public interface Dice {
+public interface IDice {
 
 	/**
 	 * checks if both dice numbers are the same

@@ -6,22 +6,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
 
 
 public class TargetColorVerifierTest {
 
 	TargetColorVerifier tcv;
-	Spieler spielerw;
-	Spieler spielerb;
-	SpielFeld sf;
+	Player spielerw;
+	Player spielerb;
+	Pitch sf;
 	@Before
 	public void setUp() throws Exception {
 		tcv = new TargetColorVerifier();
-		spielerb = new Spieler("b",TokenColor.BLACK);
-		spielerw = new Spieler("a",TokenColor.WHITE);
-		sf = new SpielFeld(6);
+		spielerb = new Player("b",TokenColor.BLACK);
+		spielerw = new Player("a",TokenColor.WHITE);
+		sf = new Pitch(6);
 	}
 
 	@Test

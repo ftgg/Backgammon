@@ -1,6 +1,6 @@
 package de.htwg.backgammon.model;
 
-public interface Player {
+public interface IPlayer {
 
 	/**
 	 * @return color of this Player

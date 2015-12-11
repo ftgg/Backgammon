@@ -1,19 +1,19 @@
 package de.htwg.backgammon.model.implementation;
 
-import de.htwg.backgammon.model.Dice;
+import de.htwg.backgammon.model.IDice;
 
-public class Wuerfel implements Dice {
+public class Dice implements IDice {
 
 	private int max;
 	private int min;
 	private int[] current; // zuletzt gewürfeltes ergebnis
 	private boolean isPasch;
 
-	public Wuerfel() {
+	public Dice() {
 		this(1, 6);
 	}
 
-	public Wuerfel(int min, int max) {
+	public Dice(int min, int max) {
 		isPasch = false;
 		// max has to be greater than 0
 		// min has to be less than max and greather than -1

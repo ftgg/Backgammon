@@ -4,22 +4,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
 
 import junit.framework.TestCase;
 
 public class GameStateTest extends TestCase {
 
 	GameState gs;
-	SpielFeld sf;
-	Spieler spielerw , spielerb;
+	Pitch sf;
+	Player spielerw , spielerb;
 
 	@Before
 	public void setUp() throws Exception {
-		sf = new SpielFeld();
-		spielerw = new Spieler("Hund", TokenColor.WHITE);
-		spielerb = new Spieler("Hund", TokenColor.BLACK);
+		sf = new Pitch();
+		spielerw = new Player("Hund", TokenColor.WHITE);
+		spielerb = new Player("Hund", TokenColor.BLACK);
 		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw);
 
 	}

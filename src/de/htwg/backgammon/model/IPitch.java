@@ -1,8 +1,8 @@
 package de.htwg.backgammon.model;
 
-import de.htwg.backgammon.model.Triangle;
+import de.htwg.backgammon.model.ITriangle;
 
-public interface Pitch {
+public interface IPitch {
 	public static final int EXIT = -1;
 	public static final int BAR = -2;
 
@@ -20,7 +20,7 @@ public interface Pitch {
 	 *            index
 	 * @return triangle on index i
 	 */
-	public Triangle getTriangle(int i);
+	public ITriangle getTriangle(int i);
 
 	/**
 	 * returns true if there is no token on the selected triangle
@@ -38,7 +38,7 @@ public interface Pitch {
 	 *            current player
 	 * @return true if player has no tokens on his bar
 	 */
-	public boolean isBarEmpty(Player player);
+	public boolean isBarEmpty(IPlayer player);
 
 	/**
 	 * returns the number of tokens on players bar, 0 if isBarEmpty()
@@ -61,7 +61,7 @@ public interface Pitch {
 	 *            current player
 	 * @return 0 if its a move, 1 if an enemy has been slain
 	 */
-	public int move(int start, int destination, Player player);
+	public int move(int start, int destination, IPlayer player);
 
 	/**
 	 * return true if the index is element of current players home indices
@@ -72,7 +72,7 @@ public interface Pitch {
 	 *            current player
 	 * @return true if index is legal
 	 */
-	public boolean indexInHome(int i, Player current);
+	public boolean indexInHome(int i, IPlayer current);
 
 	/**
 	 * returns true if current player has all tokens in home indices, so player
@@ -82,12 +82,12 @@ public interface Pitch {
 	 *            current player
 	 * @return true if all tokens are home
 	 */
-	public boolean allHome(Player current);
+	public boolean allHome(IPlayer current);
 
 	/**
 	 * @return bar
 	 */
-	public Triangle getBarblack();
+	public ITriangle getBarblack();
 
-	public Triangle getBarwhite();
+	public ITriangle getBarwhite();
 }

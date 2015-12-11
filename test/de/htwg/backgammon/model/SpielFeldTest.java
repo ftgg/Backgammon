@@ -5,23 +5,23 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
 
 
 public class SpielFeldTest {
 
 	private TestPitch sfstd, sfs;
 	private int size; // size of (pitch/4)
-	private Spieler spielerw, spielerb;
+	private Player spielerw, spielerb;
 
 	@Before
 	public void setUp() throws Exception {
 		size = 2;
-		sfstd = new SpielFeld();
-		sfs = new SpielFeld(size);
-		spielerw = new Spieler("Jan", TokenColor.WHITE);
-		spielerb = new Spieler("Herbert", TokenColor.BLACK);
+		sfstd = new Pitch();
+		sfs = new Pitch(size);
+		spielerw = new Player("Jan", TokenColor.WHITE);
+		spielerb = new Player("Herbert", TokenColor.BLACK);
 	}
 
 	@Test
@@ -68,9 +68,9 @@ public class SpielFeldTest {
 		assertSame(0, sfstd.move(0, 1, spielerw)); // legal
 		assertSame(0, sfstd.move(0, 1, spielerw));// weiss auf weiss
 		assertSame(0, sfstd.move(1, 6, spielerw));// 6 weiss angreifbar
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", TokenColor.WHITE)));
+		assertTrue(sfstd.isBarEmpty(new Player("T", TokenColor.WHITE)));
 		assertSame(1, sfstd.move(5, 6, spielerb));// schwarz schlägt weiss
-		assertFalse(sfstd.isBarEmpty(new Spieler("T", TokenColor.WHITE)));
+		assertFalse(sfstd.isBarEmpty(new Player("T", TokenColor.WHITE)));
 		
 		assertSame(0, sfstd.move(5, 6, spielerb));
 		assertSame(0, sfstd.move(6, 7, spielerb));
@@ -81,17 +81,17 @@ public class SpielFeldTest {
 		assertSame(1 , sfs.getBarblack().count());
 		assertSame(0 , sfs.getBarwhite().count());
 		assertSame(TokenColor.NONE, sfs.getBarwhite().getColor());
-		assertSame(1, sfs.move(Pitch.BAR,7,spielerb));
+		assertSame(1, sfs.move(IPitch.BAR,7,spielerb));
 		assertSame(0 , sfs.getBarblack().count());
 		assertSame(1 , sfs.getBarwhite().count());
-		assertSame(0, sfs.move(Pitch.BAR,3,spielerw));
+		assertSame(0, sfs.move(IPitch.BAR,3,spielerw));
 	}
 
 	@Test
 	public void testremoveStone(){
 		assertEquals(0,sfs.move(0, 1,spielerb));
-		assertEquals(111,sfs.move(0, Pitch.EXIT,spielerb));
-		assertEquals(111,sfs.move(0, Pitch.EXIT,spielerw));
+		assertEquals(111,sfs.move(0, IPitch.EXIT,spielerb));
+		assertEquals(111,sfs.move(0, IPitch.EXIT,spielerw));
 	}
 	
 	
@@ -124,8 +124,8 @@ public class SpielFeldTest {
 
 	@Test
 	public void testIsBarEmpty() {
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", TokenColor.WHITE)));
-		assertTrue(sfstd.isBarEmpty(new Spieler("T", TokenColor.BLACK)));
+		assertTrue(sfstd.isBarEmpty(new Player("T", TokenColor.WHITE)));
+		assertTrue(sfstd.isBarEmpty(new Player("T", TokenColor.BLACK)));
 	}
 
 	@Test
@@ -145,7 +145,7 @@ public class SpielFeldTest {
 
 	@Test
 	public void testallHome() {
-		Spieler jan = new Spieler("Jan", TokenColor.WHITE);
+		Player jan = new Player("Jan", TokenColor.WHITE);
 		assertFalse(sfs.allHome(jan));
 		sfs.move(0,size*4-1, jan);
 		assertTrue(sfs.allHome(jan));

@@ -8,8 +8,8 @@ import org.junit.Test;
 import de.htwg.backgammon.aview.BackgammonStringBuilder;
 import de.htwg.backgammon.controller.GameState;
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.implementation.SpielFeld;
-import de.htwg.backgammon.model.implementation.Spieler;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
 
 
 public class BackgammonStringBuilderTest {
@@ -20,16 +20,16 @@ public class BackgammonStringBuilderTest {
 
 	private final int number = 5;
 	GameState gs, gsS;
-	SpielFeld sf, sfS;
+	Pitch sf, sfS;
 	int[] zuege = { number, 0, 0, 0 };
-	Spieler player, black;
+	Player player, black;
 
 	@Before
 	public void setUp() throws Exception {
-		player = new Spieler("Jan", TokenColor.WHITE);
-		black = new Spieler("Helga", TokenColor.BLACK);
-		sf = new SpielFeld();
-		sfS = new SpielFeld(1);
+		player = new Player("Jan", TokenColor.WHITE);
+		black = new Player("Helga", TokenColor.BLACK);
+		sf = new Pitch();
+		sfS = new Pitch(1);
 		gsS = new GameState(sfS, zuege, "no message", black, false);
 		gs = new GameState(sf, zuege, "no message", player, false);
 	}

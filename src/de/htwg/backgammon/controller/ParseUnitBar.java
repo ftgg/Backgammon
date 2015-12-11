@@ -1,6 +1,6 @@
 package de.htwg.backgammon.controller;
 
-import de.htwg.backgammon.model.Pitch;
+import de.htwg.backgammon.model.IPitch;
 
 public class ParseUnitBar extends ParseUnit {
 
@@ -11,7 +11,7 @@ public class ParseUnitBar extends ParseUnit {
 	@Override
 	public void parse(String[] s) {
 		if ("b".equals(s[0])) {
-			actp.res[0] = Pitch.BAR;
+			actp.res[0] = IPitch.BAR;
 		} else {
 			actp.res[0] = parseInt(s[0]);
 		}

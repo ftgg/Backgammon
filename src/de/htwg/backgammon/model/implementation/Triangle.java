@@ -3,27 +3,27 @@ package de.htwg.backgammon.model.implementation;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import de.htwg.backgammon.model.Token;
+import de.htwg.backgammon.model.IToken;
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.Triangle;
+import de.htwg.backgammon.model.ITriangle;
 
-public class Dreieck implements Triangle {
+public class Triangle implements ITriangle {
 
-	private Deque<Token> content;
+	private Deque<IToken> content;
 	private int size;
 	private TokenColor color;
 	private boolean unsecure = true;
 
-	public Dreieck() {
-		content = new ArrayDeque<Token>();
+	public Triangle() {
+		content = new ArrayDeque<IToken>();
 		size = 0;
 		color = TokenColor.NONE;
 	}
 
 	@Override
-	public Token add(Token s) {
+	public IToken add(IToken s) {
 		// Unsicherers Feld und anderer Stein.
-		Token old;
+		IToken old;
 		if (unsecure() && s.getColor() != color && !content.isEmpty()) {
 			old = content.pop();
 			content.push(s);
@@ -50,11 +50,11 @@ public class Dreieck implements Triangle {
 	}
 
 	@Override
-	public Token remove() {
+	public IToken remove() {
 		if (content.isEmpty())
 			return null;
 
-		Token r = content.pop();
+		IToken r = content.pop();
 		size--;
 		if (size < 2)
 			unsecure = true;

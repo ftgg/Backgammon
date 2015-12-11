@@ -5,17 +5,17 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.backgammon.model.implementation.Wuerfel;
+import de.htwg.backgammon.model.implementation.Dice;
 import junit.framework.TestCase;
 
 public class WuerfelTest extends TestCase {
-	Wuerfel w;
+	Dice w;
 
 	@Before
 	public void setUp() throws Exception {
-		w = new Wuerfel();
+		w = new Dice();
 		try {
-			Wuerfel C = new Wuerfel(-2, 5);
+			Dice C = new Dice(-2, 5);
 			fail("Excetion");
 		} catch (Exception e) {
 

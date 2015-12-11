@@ -5,7 +5,7 @@ package de.htwg.backgammon.model;
  * 
  * @author thgnaedi
  */
-public interface TestPitch extends Pitch {
+public interface TestPitch extends IPitch {
 
 	/**
 	 * returns number of tokens on triangle

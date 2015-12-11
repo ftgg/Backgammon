@@ -1,29 +1,29 @@
 package de.htwg.backgammon.model.implementation;
 
-import de.htwg.backgammon.model.Pitch;
-import de.htwg.backgammon.model.Token;
+import de.htwg.backgammon.model.IPitch;
+import de.htwg.backgammon.model.IToken;
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.Triangle;
+import de.htwg.backgammon.model.ITriangle;
 
 public abstract class AbstractMove {
 
-	SpielFeld sf;
+	Pitch sf;
 	int a;
 	int b;
-	Spieler s;
-	Triangle currentbar;
-	Triangle otherbar;
+	Player s;
+	ITriangle currentbar;
+	ITriangle otherbar;
 	
-	public static AbstractMove createMoveObject(int a, int b, Spieler s, SpielFeld sf, int[] stonesOnField){
-		if(a == Pitch.BAR)
+	public static AbstractMove createMoveObject(int a, int b, Player s, Pitch sf, int[] stonesOnField){
+		if(a == IPitch.BAR)
 			return new BarMove(a,b,s,sf);
-		if(b == Pitch.EXIT)
+		if(b == IPitch.EXIT)
 			return new ExitMove(a,b,s,sf,stonesOnField);
 		return new StandardMove(a,b,s,sf);
 	}
 	
 	
-	protected AbstractMove(int a, int b, Spieler s, SpielFeld sf){
+	protected AbstractMove(int a, int b, Player s, Pitch sf){
 		this.a = a;
 		this.b = b;
 		this.s = s;
@@ -42,7 +42,7 @@ public abstract class AbstractMove {
 	public abstract int move();
 	
 
-	protected int putOnBar(Token beaten){
+	protected int putOnBar(IToken beaten){
 		if (beaten == null) // target field was empty
 			return 0;
 		otherbar.add(beaten);

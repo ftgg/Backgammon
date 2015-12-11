@@ -1,9 +1,9 @@
 package de.htwg.backgammon.model.implementation;
 
-import de.htwg.backgammon.model.Player;
+import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 
-public class Spieler implements Player {
+public class Player implements IPlayer {
 
 	private String name;
 	private TokenColor color;
@@ -16,7 +16,7 @@ public class Spieler implements Player {
 	 * @param color
 	 *            color of the player, has to be Stein.White or Stein.Black!
 	 */
-	public Spieler(String name, TokenColor color) {
+	public Player(String name, TokenColor color) {
 		// color has to be Stein,White or Stein.Black!
 		if (color == TokenColor.WHITE)
 			this.color = TokenColor.WHITE;
