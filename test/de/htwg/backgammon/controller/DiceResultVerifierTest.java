@@ -38,7 +38,7 @@ public class DiceResultVerifierTest {
 
 	@Test
 	public void testgetDistance() {
-		assertEquals(4, drv.getDistance(SpielFeld.BAR, 5,sf,spielerw));
+		assertEquals(5, drv.getDistance(SpielFeld.BAR, 5,sf,spielerw));
 		assertEquals(5, drv.getDistance(19, SpielFeld.EXIT,sf,spielerw));
 
 		assertEquals(3, drv.getDistance(SpielFeld.BAR, 21,sf,spielerb));

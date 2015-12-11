@@ -7,6 +7,7 @@ public class BarVerifier extends MoveVerifier {
 
 	@Override
 	public boolean checkMove(int a, int b, int[] zuege, Pitch sf, Player c, Player s1, Player s2) {
+		System.out.println("Bar Verifier: "+ checkBarmove(a,b,sf,c,s1,s2));
 		return checkBarmove(a,b,sf,c,s1,s2) && successor.checkMove(a, b, zuege, sf, c, s1,s2);
 	}
 	

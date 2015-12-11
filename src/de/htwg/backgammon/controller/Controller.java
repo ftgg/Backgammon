@@ -91,7 +91,7 @@ public class Controller extends Subject {
 			win = true;
 		}
 
-		removeThrow(a, b);
+		//removeThrow(a, b);
 		if (zuegeEmpty())
 			spielerwechsel();
 
@@ -99,18 +99,7 @@ public class Controller extends Subject {
 		return result;
 	}
 
-	/**
-	 * deleates the current move from zuege
-	 */
-	protected void removeThrow(int a, int b) {
-		int digit = Math.abs(a - b);
-		System.out.printf("ZUG: %d = %d - %d", digit, a, b);
-		for (int i = 0; i < 4; i++)
-			if (zuege[i] == digit) {
-				zuege[i] = 0;
-				break;
-			}
-	}
+
 
 	public boolean zuegeEmpty() {
 		for (int c : zuege) {
@@ -134,11 +123,11 @@ public class Controller extends Subject {
 		ExitMoveVerifier emv = new ExitMoveVerifier();
 		TargetColorVerifier tcv = new TargetColorVerifier();
 		DirectionVerifier dv = new DirectionVerifier();
-		bv.successor = drv;
-		drv.successor = emv;
+		moveVerifier = drv;
+		drv.successor = bv;
+		bv.successor = emv;
 		emv.successor = tcv;
 		tcv.successor = dv;
-		moveVerifier = bv;
 	}
 	
 	

@@ -45,21 +45,6 @@ public class ControllerTest {
 
 
 
-	@Test
-	public void testremoveThrowANDSpielerwechsel() {
-		assertTrue(c.getCurrent().getColor() == TokenColor.WHITE);
-		for (int i = 0; i < 30; i++) {
-			c.wuerfeln();
-			int erg[] = c.getZuege();
-			if (erg[0] == erg[1]) {
-				assertFalse(erg[0] == 0); // es wurde eine Zahl gewürfelt
-				c.removeThrow(0, erg[0]); // die zahl wird aus würfen gelöscht
-				erg = c.getZuege();
-				assertTrue(erg[0] == 0); // die Zahl ist tatsächlich aus würfen
-											// gelöscht
-			}
-		}
-	}
 
 	@Test
 	public void testController() {
@@ -84,9 +69,6 @@ public class ControllerTest {
 	public void TestzuegeEmpty() {
 		c.wuerfeln();
 		assertFalse(c.zuegeEmpty());
-		for (int i : c.getZuege())
-			c.removeThrow(1, 1 + i);
-		assertTrue(c.zuegeEmpty());
 	}
 
 	@Test

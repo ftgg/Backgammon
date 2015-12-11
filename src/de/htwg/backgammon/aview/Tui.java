@@ -12,7 +12,7 @@ public class Tui implements Observer {
 	private GameState gs;
 	private Controller contr;
 	private TuiSB bStringBuilder = new BackgammonStringBuilder();
-	private Scanner sc = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
 
 	public Tui(Controller c) {
 		contr = c;
@@ -51,7 +51,7 @@ public class Tui implements Observer {
 	private void eingabe() {
 		print(gs.getCurrent().getName() + " ist am Zug:");
 		String input;
-		input = sc.nextLine();
+		input = sc.next();
 		contr.doAction(input);
 	}
 

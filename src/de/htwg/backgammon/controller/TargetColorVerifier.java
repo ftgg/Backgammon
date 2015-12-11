@@ -7,6 +7,7 @@ public class TargetColorVerifier extends MoveVerifier {
 
 	@Override
 	public boolean checkMove(int a, int b, int[] zuege, Pitch sf, Player s, Player s1, Player s2) {
+		System.out.println("TargetColor: " + (isTargetColorValid(a, b, s, sf)));
 		return isTargetColorValid(a, b, s, sf) && successor.checkMove(a, b, zuege, sf, s, s1, s2);
 	}
 
