@@ -7,7 +7,7 @@ import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 
 public class GameState implements Event {
-
+	/*Restorefunctions in Controller, to restore GameState*/
 	private int[] whiteStones;
 	private int[] blackStones;
 	private int blackBar;
