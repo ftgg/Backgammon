@@ -5,22 +5,26 @@ import java.awt.CardLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+
+import de.htwg.backgammon.controller.Controller;
+
 
 public class Gui {
 
+	public MainPanel mainPanel; // Public just for tests
+
+	
 	@SuppressWarnings("deprecation")
-	public Gui() {
+	public Gui(Controller c) {
 		JFrame mainFrame = new JFrame("Backgammon");
-		JPanel background = new JPanel();
-		background.setLayout(new CardLayout());
-		//background.add(new JLabel(new ImageIcon("images/background.jpg")));
-		JLabel mainLabel = new MainLabel();
-		background.add(mainLabel);
+		mainPanel = new MainPanel(c);
+		JLabel hallo = new JLabel();
+		hallo.setText("hallo");
 		
-		mainFrame.setContentPane(background);
-		//mainFrame.setContentPane(mainPanel); // add mainPanel to mainFrame
+		mainFrame.setJMenuBar(new myMenuBar());
+		mainFrame.add(mainPanel);
 		mainFrame.pack();
+		mainFrame.setResizable(false);
 		mainFrame.show();
 	}
 
