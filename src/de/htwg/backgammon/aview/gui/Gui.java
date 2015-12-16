@@ -1,8 +1,5 @@
 package de.htwg.backgammon.aview.gui;
 
-import java.awt.CardLayout;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -14,7 +11,6 @@ public class Gui {
 	public MainPanel mainPanel; // Public just for tests
 
 	
-	@SuppressWarnings("deprecation")
 	public Gui(Controller c) {
 		JFrame mainFrame = new JFrame("Backgammon");
 		mainPanel = new MainPanel(c);
@@ -25,7 +21,7 @@ public class Gui {
 		mainFrame.add(mainPanel);
 		mainFrame.pack();
 		mainFrame.setResizable(false);
-		mainFrame.show();
+		mainFrame.setVisible(true);
 	}
 
 }

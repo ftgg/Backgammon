@@ -31,12 +31,12 @@ public class MainPanel extends JPanel{
 		ImageIcon topone = new ImageIcon("images/dark.png");
 		ImageIcon toptwo = new ImageIcon("images/light.png");
 		
-		top = new IconField(topone, toptwo);
+		top = new IconField(topone, toptwo,this);
 		//top = new JPanel();
 		//top.add(new JLabel(new ImageIcon("images/dark.png")));
 		mid = new JPanel();
 		mid.add(new JLabel(new ImageIcon("images/nomessage.png")));
-		bot = new IconField(botone, bottwo);
+		bot = new IconField(botone, bottwo,this);
 		//this.add(new JLabel(new ImageIcon("images/dark.png")));
 		this.add(top, BorderLayout.NORTH);
 		this.add(mid, BorderLayout.CENTER);
@@ -50,18 +50,27 @@ public class MainPanel extends JPanel{
 		else
 			top.setToken(index, t, noT);
 	}
-	public void removeFromTriangle(int id,TokenColor t){
-		
+	public void selectTriangle(int id,TokenColor t,int noT){
+		int index = id % (size/2);
+		System.out.println("ID ist jetzt :_ " + id);
+		if(id > size/2)
+			bot.select(index, t, noT);
+		else
+			top.select(index, t, noT);
 	}
 	
-	private void select(int id){
+	//TODO select unselect a Field
+	void select(int id,TokenColor t, int noT){
 		if(selectedID < 0){
 			selectedID = id;
+			selectTriangle(id,null,noT);
 		}
 		else{
-			contr.doAction(selectedID + " " + id);
+			//contr.doAction(selectedID + " " + id);
+			selectTriangle(id,TokenColor.WHITE,noT);
 			selectedID = -1;
 		}
+		System.out.println(selectedID);
 	}
 	
 }

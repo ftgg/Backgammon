@@ -10,11 +10,13 @@ public class Field extends JLabel{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
+	public MainPanel mp; //TODO gibt das tangles?
 	
 
-	public Field(ImageIcon icon, int id) {
+	public Field(ImageIcon icon, int id, MainPanel mp) {
 		super(icon);
 		this.id = id;
+		this.mp = mp;
 	}
 
 	public int getID(){

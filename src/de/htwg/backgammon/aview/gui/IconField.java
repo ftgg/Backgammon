@@ -13,15 +13,17 @@ public class IconField extends JPanel{
 
 	private Field[] labels = new Field[13];
 	private int[] index = {0,1,2,3,4,5,12,6,7,8,9,10,11}; //cuz last JLabel should be in Center, last is whitespace
+	private MainPanel mp; //TODO gibt das tangles?
 	
-	public IconField(ImageIcon one,ImageIcon two){
+	public IconField(ImageIcon one,ImageIcon two,MainPanel mp){
 		this.setLayout(new GridLayout(1,0));
+		this.mp = mp;
 		
 		for(int i = 0; i < 6;i++){
-				labels[2*i] = new Field(one, 2*i);
-				labels[2*i+1] = new Field(two, 2*i+1);
+				labels[2*i] = new Field(one, 2*i,mp);
+				labels[2*i+1] = new Field(two, 2*i+1,mp);
 		}
-		labels[12] = new Field(new ImageIcon("images/whitespace.png"),12);
+		labels[12] = new Field(new ImageIcon("images/whitespace.png"),12,mp);
 		for(int i = 0; i < 13; i++){
 			this.add(labels[index[i]]);
 		}
@@ -34,7 +36,7 @@ public class IconField extends JPanel{
 				public void mouseClicked(MouseEvent e){
 					if(e.getSource() instanceof Field){
 						Field f = (Field) e.getSource();
-						setToken(f.getID(), null, 0);
+						f.mp.select(f.getID(), null, 0);
 					}
 				}
 			});
@@ -43,5 +45,12 @@ public class IconField extends JPanel{
 	
 	public void setToken(int id, TokenColor t, int noT){
 		labels[id].setIcon(new ImageIcon("images/changed.png"));
+	}
+
+	public void select(int id, TokenColor t, int noT) {
+		if(t == TokenColor.WHITE)
+			labels[id].setIcon(new ImageIcon("images/changed.png"));
+		else
+			labels[id].setIcon(new ImageIcon("images/changed2.png"));
 	}
 }
