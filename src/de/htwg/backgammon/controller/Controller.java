@@ -19,9 +19,12 @@ public class Controller extends Subject {
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
 
+	private int lastclick; // only need with gui
+
 	public Controller() {
 		sf = new Pitch();// Standartgröße = original größe
 		w = new Dice();
+		lastclick = -1;
 		createMoveVerifier();
 		actionparser = new ActionParser();
 		wuerfeln();
@@ -147,9 +150,29 @@ public class Controller extends Subject {
 	public IPlayer getCurrent() {
 		return current;
 	}
-// ab hier änderungen, vorsicht weil git merge und so
+
+	// ab hier änderungen, vorsicht weil git merge und so
 	// TODO gui wurde geklickt.
 	public void setclick(int id) {
+
 		System.out.println("click: " + id);
+		if (lastclick == -1) {
+			lastclick = id;
+		} else {
+			System.out.println(toStr(lastclick, id));
+			doAction(toStr(lastclick, id));
+			lastclick = -1;
+		}
+	}
+
+	private String toStr(int a, int b) {
+		String first;
+		if (a == 24 || a == 24)
+			first = "b ";
+		else
+			first = a + " ";
+		if (b == 24 || b == 24)
+			return first + "h";
+		return first + b;
 	}
 }

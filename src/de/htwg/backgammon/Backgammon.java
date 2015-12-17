@@ -11,8 +11,8 @@ public class Backgammon {
 	
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		//new Tui(c);
-		Gui gui = new Gui(c);
+		new Tui(c);
+		//Gui gui = new Gui(c);
 	}
 
 }
