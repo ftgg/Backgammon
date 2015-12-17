@@ -32,6 +32,90 @@ public class IconField extends JPanel {
 			this.add(labels[index[i]]);
 		}
 		initActionListeners();
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
+		System.out.println("nothing to do");
 	}
 
 	private void initActionListeners() {
@@ -46,9 +130,8 @@ public class IconField extends JPanel {
 			});
 		}
 	}
-
-	
-	public void setIconfield(GameState g) {
-
+	//gain necessary informations to update some JLabels
+	public void doUpdate(){
+		
 	}
 }

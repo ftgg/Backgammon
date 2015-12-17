@@ -10,8 +10,10 @@ import javax.swing.JPanel;
 import de.htwg.backgammon.controller.Controller;
 import de.htwg.backgammon.controller.GameState;
 import de.htwg.backgammon.model.TokenColor;
+import de.htwg.backgammon.util.Event;
+import de.htwg.backgammon.util.Observer;
 
-public class MainPanel extends JPanel{
+public class MainPanel extends JPanel implements Observer{
 
 	private IconField top;
 	private JPanel mid;
@@ -41,5 +43,19 @@ public class MainPanel extends JPanel{
 		this.add(top, BorderLayout.NORTH);
 		this.add(mid, BorderLayout.CENTER);
 		this.add(bot, BorderLayout.SOUTH);
+	}
+
+	@Override
+	public void update(Event e) {
+		if (e instanceof GameState) {
+			gs = (GameState) e;
+			spreadUpdate();
+		}
+	}
+	
+	private void spreadUpdate(){
+		top.doUpdate();
+		//TODO mid
+		bot.doUpdate();
 	}
 }
