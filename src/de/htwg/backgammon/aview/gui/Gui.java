@@ -9,9 +9,10 @@ import de.htwg.backgammon.controller.Controller;
 public class Gui {
 
 	public MainPanel mainPanel; // Public just for tests
-
+	private Controller c;
 	
 	public Gui(Controller c) {
+		this.c = c;
 		JFrame mainFrame = new JFrame("Backgammon");
 		mainPanel = new MainPanel(c);
 		JLabel hallo = new JLabel();
@@ -22,6 +23,11 @@ public class Gui {
 		mainFrame.pack();
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
+		initplayers();
 	}
 
+	//TODO spielernamen eingeben
+	private void initplayers(){
+		c.setSpieler("White", "Black");
+	}
 }

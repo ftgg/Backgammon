@@ -20,8 +20,8 @@ public class IconField extends JPanel {
 		this.mp = mp;
 
 		for (int i = 0; i < 6; i++) {
-			labels[2 * i] = new Field(one, id[2*i], mp);
-			labels[2 * i + 1] = new Field(two,id[2*i+1], mp);
+			labels[2 * i] = new Field(one, id[2*i]+1, mp);
+			labels[2 * i + 1] = new Field(two,id[2*i+1]+1, mp);
 		}
 		labels[12] = new Field(new ImageIcon("images/whitespace.png"), 12, mp);
 		for (int i = 0; i < 13; i++) {
@@ -43,7 +43,10 @@ public class IconField extends JPanel {
 		}
 	}
 	//gain necessary informations to update some JLabels
-	public void doUpdate(){
-		
+	public void doUpdate(int[] blackstones, int offset){
+		for(int i=0+offset;i<12+offset;i++){
+			if(blackstones[i] > 0)
+				labels[i].setIcon(new ImageIcon("images/dark_one_light.png"));
+		}
 	}
 }

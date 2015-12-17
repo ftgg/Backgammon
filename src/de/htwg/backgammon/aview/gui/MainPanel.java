@@ -22,6 +22,7 @@ public class MainPanel extends JPanel implements Observer{
 	
 	public MainPanel(Controller c){
 		contr = c;
+		c.add(this);
 		size = 24;
 		this.setLayout(new BorderLayout());
 		ImageIcon botone = new ImageIcon("images/darkb.png");
@@ -39,19 +40,21 @@ public class MainPanel extends JPanel implements Observer{
 		this.add(top, BorderLayout.NORTH);
 		this.add(mid, BorderLayout.CENTER);
 		this.add(bot, BorderLayout.SOUTH);
+		//top.doUpdate(new int[]{0,0,0,0,0,0,0,1,1,1,1,0,0},0); klappt
 	}
 
 	@Override
 	public void update(Event e) {
 		if (e instanceof GameState) {
 			gs = (GameState) e;
+			System.out.println(gs.getZuege());
 			spreadUpdate();
 		}
 	}
 	
 	private void spreadUpdate(){
-		top.doUpdate();
+		top.doUpdate(gs.getBlackStones(),0);
 		//TODO mid
-		bot.doUpdate();
+		bot.doUpdate(gs.getBlackStones(),12);
 	}
 }

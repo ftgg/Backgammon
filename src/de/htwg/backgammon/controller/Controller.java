@@ -53,6 +53,8 @@ public class Controller extends Subject {
 
 	public void doAction(String s) {
 		int[] act = actionparser.parse(s);
+
+		System.out.println("do action mit: "+act[0]+" "+act[1]);
 		if (act[0] == -3 || act[1] == -3) {
 			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false));
 			return;
@@ -131,7 +133,7 @@ public class Controller extends Subject {
 	}
 
 	/**
-	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
+	 * NUR für tests, nicht zum gebrauch gedacht =)
 	 * 
 	 * @return Wuerfelergebnis
 	 */
