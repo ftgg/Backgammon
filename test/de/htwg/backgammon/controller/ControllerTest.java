@@ -8,7 +8,6 @@ import org.junit.Test;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 
-
 public class ControllerTest {
 
 	Controller c;
@@ -43,9 +42,6 @@ public class ControllerTest {
 
 	}
 
-
-
-
 	@Test
 	public void testController() {
 		Controller c2 = new Controller();
@@ -56,7 +52,9 @@ public class ControllerTest {
 	public void testdoAction() {
 		c.doAction("hallo welt");
 		c.doAction("0 5");
-		c.doAction("1 5");
+		c.setclick(1);
+		c.setclick(5);
+		//c.doAction("1 5");
 		c.wuerfeln();
 		int erg[] = c.getZuege();
 		c.doAction("1 " + (erg[0] + 1));
@@ -84,13 +82,5 @@ public class ControllerTest {
 		assertSame(c.getCurrent(), s[1]);
 
 	}
-
-
-
-
-	
-
-	
-
 
 }
