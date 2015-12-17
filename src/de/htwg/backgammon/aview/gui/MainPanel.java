@@ -20,7 +20,7 @@ public class MainPanel extends JPanel{
 	
 	private int selectedID;
 	private GameState gs;
-	private Controller contr;
+	Controller contr;
 	
 	public MainPanel(Controller c){
 		contr = c;
@@ -30,47 +30,16 @@ public class MainPanel extends JPanel{
 		ImageIcon bottwo = new ImageIcon("images/lightb.png");
 		ImageIcon topone = new ImageIcon("images/dark.png");
 		ImageIcon toptwo = new ImageIcon("images/light.png");
-		
-		top = new IconField(topone, toptwo,this);
+
+		top = new IconField(topone, toptwo,this,new int[]{0,1,2,3,4,5,6,7,8,9,10,11,24});
 		//top = new JPanel();
 		//top.add(new JLabel(new ImageIcon("images/dark.png")));
 		mid = new JPanel();
 		mid.add(new JLabel(new ImageIcon("images/nomessage.png")));
-		bot = new IconField(botone, bottwo,this);
+		bot = new IconField(botone, bottwo,this,new int[]{23,22,21,20,19,18,17,16,15,14,13,12,25});
 		//this.add(new JLabel(new ImageIcon("images/dark.png")));
 		this.add(top, BorderLayout.NORTH);
 		this.add(mid, BorderLayout.CENTER);
 		this.add(bot, BorderLayout.SOUTH);
 	}
-	
-	public void setToTriangle(int id,TokenColor t, int noT){
-		int index = id % (size/2);
-		if(id > size/2)
-			bot.setToken(index, t, noT);
-		else
-			top.setToken(index, t, noT);
-	}
-	public void selectTriangle(int id,TokenColor t,int noT){
-		int index = id % (size/2);
-		System.out.println("ID ist jetzt :_ " + id);
-		if(id > size/2)
-			bot.select(index, t, noT);
-		else
-			top.select(index, t, noT);
-	}
-	
-	//TODO select unselect a Field
-	void select(int id,TokenColor t, int noT){
-		if(selectedID < 0){
-			selectedID = id;
-			selectTriangle(id,null,noT);
-		}
-		else{
-			//contr.doAction(selectedID + " " + id);
-			selectTriangle(id,TokenColor.WHITE,noT);
-			selectedID = -1;
-		}
-		System.out.println(selectedID);
-	}
-	
 }

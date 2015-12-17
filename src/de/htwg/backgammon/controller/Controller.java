@@ -1,6 +1,5 @@
 package de.htwg.backgammon.controller;
 
-
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
@@ -19,7 +18,7 @@ public class Controller extends Subject {
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
-	
+
 	public Controller() {
 		sf = new Pitch();// Standartgröße = original größe
 		w = new Dice();
@@ -62,7 +61,6 @@ public class Controller extends Subject {
 		spielZug(act[0], act[1]);
 	}
 
-
 	public void wuerfeln() {
 		w.wuerfeln();
 		if (w.isDoublets()) {
@@ -81,7 +79,7 @@ public class Controller extends Subject {
 	public int spielZug(int a, int b) {
 		boolean win = false;
 		String msg = "";
-		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1,s2)) {
+		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1, s2)) {
 			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current, false));
 			return -3;
 		}
@@ -91,15 +89,13 @@ public class Controller extends Subject {
 			win = true;
 		}
 
-		//removeThrow(a, b);
+		// removeThrow(a, b);
 		if (zuegeEmpty())
 			spielerwechsel();
 
 		notifyObs(new GameState(sf, zuege, msg, current, win));
 		return result;
 	}
-
-
 
 	public boolean zuegeEmpty() {
 		for (int c : zuege) {
@@ -117,8 +113,9 @@ public class Controller extends Subject {
 		wuerfeln();
 	}
 
-	private void createMoveVerifier(){
-		BarVerifier bv = new BarVerifier();;
+	private void createMoveVerifier() {
+		BarVerifier bv = new BarVerifier();
+		;
 		DiceResultVerifier drv = new DiceResultVerifier();
 		ExitMoveVerifier emv = new ExitMoveVerifier();
 		TargetColorVerifier tcv = new TargetColorVerifier();
@@ -129,9 +126,7 @@ public class Controller extends Subject {
 		emv.successor = tcv;
 		tcv.successor = dv;
 	}
-	
-	
-	
+
 	/**
 	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
 	 * 
@@ -152,5 +147,9 @@ public class Controller extends Subject {
 	public IPlayer getCurrent() {
 		return current;
 	}
-
+// ab hier änderungen, vorsicht weil git merge und so
+	// TODO gui wurde geklickt.
+	public void setclick(int id) {
+		System.out.println("click: " + id);
+	}
 }
