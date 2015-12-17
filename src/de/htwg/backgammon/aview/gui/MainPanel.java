@@ -1,7 +1,6 @@
 package de.htwg.backgammon.aview.gui;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -9,7 +8,6 @@ import javax.swing.JPanel;
 
 import de.htwg.backgammon.controller.Controller;
 import de.htwg.backgammon.controller.GameState;
-import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 
@@ -19,8 +17,6 @@ public class MainPanel extends JPanel implements Observer{
 	private JPanel mid;
 	private IconField bot;
 	private int size;
-	
-	private int selectedID;
 	private GameState gs;
 	Controller contr;
 	

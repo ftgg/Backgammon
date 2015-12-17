@@ -5,18 +5,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import de.htwg.backgammon.controller.GameState;
-import de.htwg.backgammon.model.TokenColor;
 
 public class IconField extends JPanel {
 
 	private Field[] labels = new Field[13];
 	private int[] index; // cuz last JLabel should be in Center, last is
 							// whitespace
-	private MainPanel mp; // TODO gibt das tangles?
+	private MainPanel mp;
 
 	public IconField(ImageIcon one, ImageIcon two, MainPanel mp, int[] id) {
 		index = new int[] { 11, 10, 9, 8, 7, 6, 12, 5, 4, 3, 2, 1, 0 };

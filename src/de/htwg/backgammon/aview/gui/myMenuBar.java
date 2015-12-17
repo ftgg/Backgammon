@@ -7,8 +7,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 public class myMenuBar extends JMenuBar {
 	private JMenu data;
