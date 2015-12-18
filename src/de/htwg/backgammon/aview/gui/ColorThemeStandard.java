@@ -8,48 +8,48 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getDarkTriangle() {
-		return ImageString("images/darkb.png");
+		return ImageString("images/d_dunkel.png");
 	}
 
 
 
 	@Override
 	public ImageIcon getLightTriangle() {
-		return ImageString("images/lightb.png");
+		return ImageString("images/d_hell.png");
 	}
 
 	@Override
 	public ImageIcon getDarkTriangleTop() {
-		return ImageString("images/dark.png");
+		return ImageString("images/d_dunkel.png");
 	}
 
 	@Override
 	public ImageIcon getLightTriangleTop() {
-		return ImageString("images/light.png");
+		return ImageString("images/d_hell.png");
 	}
 
 	@Override
 	public ImageIcon getBar() {
-		return ImageString("images/bar.png");
+		return ImageString("images/empty.png");
 	}
 
 	@Override
 	public ImageIcon getDarkToken(int number) {
-		String path = "images/dark_more.png";
-		if (number == 1)
-			path = "images/dark_one.png";
-		if (number == 2)
-			path = "images/dark_two.png";
+		String path = "images/empty.png";
+//		if (number == 1)
+//			path = "images/dark_one.png";
+//		if (number == 2)
+//			path = "images/dark_two.png";
 		return ImageString(path);
 	}
 
 	@Override
 	public ImageIcon getLightToken(int number) {
-		if (number == 1)
-			return new ImageIcon("images/light_one.png");
-		if (number == 2)
-			return new ImageIcon("images/light_two.png");
-		return new ImageIcon("images/light_more.png");
+//		if (number == 1)
+//			return new ImageIcon("images/light_one.png");
+//		if (number == 2)
+//			return new ImageIcon("images/light_two.png");
+		return ImageString("images/empty.png");
 	}
 
 	@Override

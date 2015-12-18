@@ -211,13 +211,14 @@ public class Controller extends Subject {
 		}
 	}
 
+	//25 is bar or home
 	public String toStr(int a, int b) {
 		String first;
-		if (a == 24 || a == 24)
+		if (a == 25 || a == 25)
 			first = "b ";
 		else
 			first = a + " ";
-		if (b == 24 || b == 24)
+		if (b == 25 || b == 25)
 			return first + "h";
 		return first + b;
 	}

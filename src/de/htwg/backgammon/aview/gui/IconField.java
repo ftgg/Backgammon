@@ -36,6 +36,7 @@ public class IconField extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					if (e.getSource() instanceof Field) {
 						Field f = (Field) e.getSource();
+						System.out.println("click: "+f.getID());
 						mp.contr.setclick(f.getID());
 					}
 				}
@@ -72,13 +73,13 @@ public class IconField extends JPanel {
 		for (int i = 0; i < 12; i++) {
 			number = blackstones[i + offset];
 			if (number > 0)
-				labels[offset-i].foreground.setIcon(mp.ct.getDarkToken(number));
+				labels[i].foreground.setIcon(mp.ct.getDarkToken(number));
 			else {
 				number = whitestones[i + offset];
 				if (number > 0)
-					labels[offset-i].foreground.setIcon(mp.ct.getLightToken(number));
+					labels[i].foreground.setIcon(mp.ct.getLightToken(number));
 				else
-					labels[offset-i].foreground.setIcon(mp.ct.getnoToken());
+					labels[i].foreground.setIcon(mp.ct.getnoToken());
 			}
 		}
 	}
