@@ -1,6 +1,7 @@
 package de.htwg.backgammon.controller;
 
 
+
 import java.util.Iterator;
 
 import de.htwg.backgammon.model.IPitch;
@@ -22,10 +23,13 @@ public class Controller extends Subject {
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
-	
+
+	private int lastclick; // only need with gui
+
 	public Controller() {
 		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße = original größe
 		w = new Dice();
+		lastclick = -1;
 		createMoveVerifier();
 		CreateMemento();
 		actionparser = new ActionParser();
@@ -74,7 +78,6 @@ public class Controller extends Subject {
 		spielZug(act[0], act[1]);
 	}
 
-
 	public void wuerfeln() {
 		w.wuerfeln();
 		if (w.isDoublets()) {
@@ -113,8 +116,6 @@ public class Controller extends Subject {
 		return result;
 	}
 
-
-
 	public boolean zuegeEmpty() {
 		for (int c : zuege) {
 			if (c != 0)
@@ -131,8 +132,9 @@ public class Controller extends Subject {
 		wuerfeln();
 	}
 
-	private void createMoveVerifier(){
-		BarVerifier bv = new BarVerifier();;
+	private void createMoveVerifier() {
+		BarVerifier bv = new BarVerifier();
+		;
 		DiceResultVerifier drv = new DiceResultVerifier();
 		ExitMoveVerifier emv = new ExitMoveVerifier();
 		TargetColorVerifier tcv = new TargetColorVerifier();
@@ -143,11 +145,9 @@ public class Controller extends Subject {
 		emv.successor = tcv;
 		tcv.successor = dv;
 	}
-	
-	
-	
+
 	/**
-	 * NUR EINE TESTMETHODE nicht zum gebrauch gedacht =)
+	 * NUR für tests, nicht zum gebrauch gedacht =)
 	 * 
 	 * @return Wuerfelergebnis
 	 */
@@ -166,6 +166,7 @@ public class Controller extends Subject {
 	public IPlayer getCurrent() {
 		return current;
 	}
+
 
 	Caretaker states;
 	
@@ -199,4 +200,28 @@ public class Controller extends Subject {
 	}
 
 	
+	// ab hier änderungen, vorsicht weil git merge und so
+	// TODO gui wurde geklickt.
+	public void setclick(int id) {
+
+		System.out.println("click: " + id);
+		if (lastclick == -1) {
+			lastclick = id;
+		} else {
+			System.out.println(toStr(lastclick, id));
+			doAction(toStr(lastclick, id));
+			lastclick = -1;
+		}
+	}
+
+	private String toStr(int a, int b) {
+		String first;
+		if (a == 24 || a == 24)
+			first = "b ";
+		else
+			first = a + " ";
+		if (b == 24 || b == 24)
+			return first + "h";
+		return first + b;
+	}
 }
