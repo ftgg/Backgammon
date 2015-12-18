@@ -1,41 +1,46 @@
 package de.htwg.backgammon.aview.gui;
 
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
 public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getDarkTriangle() {
-		return new ImageIcon("images/darkb.png");
+		return ImageString("images/darkb.png");
 	}
+
+
 
 	@Override
 	public ImageIcon getLightTriangle() {
-		return new ImageIcon("images/lightb.png");
+		return ImageString("images/lightb.png");
 	}
 
 	@Override
 	public ImageIcon getDarkTriangleTop() {
-		return new ImageIcon("images/dark.png");
+		return ImageString("images/dark.png");
 	}
 
 	@Override
 	public ImageIcon getLightTriangleTop() {
-		return new ImageIcon("images/light.png");
+		return ImageString("images/light.png");
 	}
 
 	@Override
 	public ImageIcon getBar() {
-		return new ImageIcon("images/bar.png");
+		return ImageString("images/bar.png");
 	}
 
 	@Override
 	public ImageIcon getDarkToken(int number) {
+		String path = "images/dark_more.png";
 		if (number == 1)
-			return new ImageIcon("images/dark_one.png");
+			path = "images/dark_one.png";
 		if (number == 2)
-			return new ImageIcon("images/dark_two.png");
-		return new ImageIcon("images/dark_more.png");
+			path = "images/dark_two.png";
+		return ImageString(path);
 	}
 
 	@Override
@@ -51,5 +56,10 @@ public class ColorThemeStandard implements IColorTheme {
 	public ImageIcon getnoToken() {
 		return new ImageIcon("images/empty.png");
 	}
-
+	
+	private ImageIcon ImageString(String path) {
+		ImageIcon ico = new ImageIcon(path);
+		ico.setImage(ico.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT));
+		return ico;
+	}
 }

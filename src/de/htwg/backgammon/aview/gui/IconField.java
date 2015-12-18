@@ -20,8 +20,8 @@ public class IconField extends JPanel {
 		this.mp = mp;
 
 		for (int i = 0; i < 6; i++) {
-			labels[2 * i] = new Field(one, id[2*i]+1, mp);
-			labels[2 * i + 1] = new Field(two,id[2*i+1]+1, mp);
+			labels[2 * i] = new Field(one, id[2 * i] + 1, mp);
+			labels[2 * i + 1] = new Field(two, id[2 * i + 1] + 1, mp);
 		}
 		labels[12] = new Field(new ImageIcon("images/whitespace.png"), 12, mp);
 		for (int i = 0; i < 13; i++) {
@@ -42,19 +42,43 @@ public class IconField extends JPanel {
 			});
 		}
 	}
-	//gain necessary informations to update some JLabels
-	public void doUpdate(int[] whitestones, int[] blackstones, int offset){
+
+	// gain necessary informations to update some JLabels
+	public void doUpdate(int[] whitestones, int[] blackstones, int offset) {
+		if (offset > 1)
+			doUpdateBot(whitestones, blackstones, offset);
+		else
+			doUpdateTop(whitestones, blackstones);
+	}
+
+	private void doUpdateTop(int[] whitestones, int[] blackstones) {
 		int number;
-		for(int i=0;i<12;i++){
-			number = blackstones[i+offset];
-			if(number > 0)
+		for (int i = 0; i < 12; i++) {
+			number = blackstones[i];
+			if (number > 0)
 				labels[i].foreground.setIcon(mp.ct.getDarkToken(number));
-			else{
-				number = whitestones[i+offset];
-				if(number > 0)
+			else {
+				number = whitestones[i];
+				if (number > 0)
 					labels[i].foreground.setIcon(mp.ct.getLightToken(number));
 				else
 					labels[i].foreground.setIcon(mp.ct.getnoToken());
+			}
+		}
+	}
+
+	private void doUpdateBot(int[] whitestones, int[] blackstones, int offset) {
+		int number;
+		for (int i = 0; i < 12; i++) {
+			number = blackstones[i + offset];
+			if (number > 0)
+				labels[offset-i].foreground.setIcon(mp.ct.getDarkToken(number));
+			else {
+				number = whitestones[i + offset];
+				if (number > 0)
+					labels[offset-i].foreground.setIcon(mp.ct.getLightToken(number));
+				else
+					labels[offset-i].foreground.setIcon(mp.ct.getnoToken());
 			}
 		}
 	}
