@@ -21,6 +21,7 @@ public class MainPanel extends JPanel implements Observer{
 	Controller contr;
 	
 	public MainPanel(Controller c){
+		super();
 		contr = c;
 		c.add(this);
 		size = 24;

@@ -1,29 +1,48 @@
 package de.htwg.backgammon.aview.gui;
 
+import java.awt.Color;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 import de.htwg.backgammon.controller.Controller;
 
 
-public class Gui {
+public class Gui extends JFrame{
 
 	public MainPanel mainPanel; // Public just for tests
 	private Controller c;
 	
 	public Gui(Controller c) {
+		super("Backgammon");
 		this.c = c;
-		JFrame mainFrame = new JFrame("Backgammon");
 		mainPanel = new MainPanel(c);
-		JLabel hallo = new JLabel();
-		hallo.setText("hallo");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		mainFrame.setJMenuBar(new myMenuBar());
-		mainFrame.add(mainPanel);
-		mainFrame.pack();
-		mainFrame.setResizable(false);
-		mainFrame.setVisible(true);
+		JLayeredPane lp = getLayeredPane();
+		
+		this.setJMenuBar(new myMenuBar());
+		lp.add(mainPanel, new Integer(3));
+		lp.add(mainPanel);
+		this.pack();
+		this.setResizable(false);
+		this.setVisible(true);
 		initplayers();
+		
+//		super("LayeredPane Demonstration");
+//	    this.pack();
+//	    setDefaultCloseOperation(EXIT_ON_CLOSE);
+//
+//	    JLayeredPane lp = getLayeredPane();
+//
+//	    JButton top = new JButton();
+//	    top.setBackground(Color.white);
+//	    top.setBounds(20, 20, 50, 50);
+//
+//	    lp.add(top, new Integer(3));
+//	    this.setVisible(true);
 	}
 
 	//TODO spielernamen eingeben

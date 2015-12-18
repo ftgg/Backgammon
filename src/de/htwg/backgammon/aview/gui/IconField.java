@@ -44,9 +44,10 @@ public class IconField extends JPanel {
 	}
 	//gain necessary informations to update some JLabels
 	public void doUpdate(int[] blackstones, int offset){
-		for(int i=0+offset;i<12+offset;i++){
-			if(blackstones[i] > 0)
+		for(int i=0;i<12;i++){
+			if(blackstones[i+offset] > 0)
 				labels[i].setIcon(new ImageIcon("images/dark_one_light.png"));
 		}
 	}
+
 }
