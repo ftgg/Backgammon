@@ -35,7 +35,6 @@ public class myMenuBar extends JMenuBar {
 	                public void actionPerformed(ActionEvent e)
 	                {
 	                	//TODO
-	                    System.out.println("noch nicht unterstützt");
 	                }
 	            }
 	        );
@@ -50,7 +49,6 @@ public class myMenuBar extends JMenuBar {
 	                public void actionPerformed(ActionEvent e)
 	                {
 	                	//TODO
-	                    System.out.println("noch nicht unterstützt");
 	                }
 	            }
 	        );
@@ -60,7 +58,6 @@ public class myMenuBar extends JMenuBar {
 	                public void actionPerformed(ActionEvent e)
 	                {
 	                	//TODO
-	                    System.out.println("noch nicht unterstützt");
 	                }
 	            }
 	        );
