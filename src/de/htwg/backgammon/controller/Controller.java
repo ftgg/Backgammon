@@ -200,11 +200,8 @@ public class Controller extends Subject {
 	}
 
 	
-	// ab hier änderungen, vorsicht weil git merge und so
 	// TODO gui wurde geklickt.
 	public void setclick(int id) {
-
-		System.out.println("click: " + id);
 		if (lastclick == -1) {
 			lastclick = id;
 		} else {
@@ -214,7 +211,7 @@ public class Controller extends Subject {
 		}
 	}
 
-	private String toStr(int a, int b) {
+	public String toStr(int a, int b) {
 		String first;
 		if (a == 24 || a == 24)
 			first = "b ";
