@@ -114,20 +114,22 @@ public class GameState implements Event {
 	//TEST
 	public static GameState getTestGameState(int i){
 		if(i == 2){
-			return new GameState(new int[] { 1,0,0,0,0,0,0,0 },new int[]{ 0,0,0,0,0,0,0,1},1);
+			return new GameState(new int[] { 1,0,0,0,0,0,0,0 },new int[]{ 0,0,0,0,0,0,0,1},1,0);
 		}else if (i == 1){
-			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1);
+			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1,0);
+		}else if (i == 3){ // mit stein auf Bar
+			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1,1);
 		}
 		return getDefaultGameState();
 	}
 	
 	//For testStates
-	private GameState(int[] whiteStones, int[] blackStones, int onPitch){
+	private GameState(int[] whiteStones, int[] blackStones, int onPitch, int whiteBar){
 		int[] zuege = {0,0,0,0};
 		this.zuege = zuege;
 		this.blackStones = blackStones;
 		this.whiteStones = whiteStones;
-		this.whiteBar = 0;
+		this.whiteBar = whiteBar;
 		this.blackBar = 0;
 		this.whiteStonesOnPitch = onPitch;
 		this.blackStonesOnPitch = onPitch;

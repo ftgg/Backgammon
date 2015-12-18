@@ -24,7 +24,7 @@ public class Controller extends Subject {
 	private ActionParser actionparser;
 	
 	public Controller() {
-		sf = new Pitch();// Standartgröße = original größe
+		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße = original größe
 		w = new Dice();
 		createMoveVerifier();
 		CreateMemento();
@@ -105,7 +105,6 @@ public class Controller extends Subject {
 			win = true;
 		}
 
-		//removeThrow(a, b);
 		if (zuegeEmpty())
 			spielerwechsel();
 		gs = new GameState(sf, zuege, msg, current, win);

@@ -9,7 +9,6 @@ public class DiceResultVerifier extends MoveVerifier {
 	
 	@Override
 	public boolean checkMove(int a, int b, int[] zuege, IPitch sf, IPlayer s, IPlayer s1, IPlayer s2) {
-		//System.out.println("Dice Verifier: "+ inDiceResult(a,b,zuege,sf,s));
 		System.out.println(successor.checkMove(a, b, zuege, sf, s, s1, s2));
 		return  successor.checkMove(a, b, zuege, sf, s, s1, s2) && inDiceResult(a,b,zuege,sf,s);
 	}
@@ -24,14 +23,14 @@ public class DiceResultVerifier extends MoveVerifier {
 			max = Math.max(max, i);
 		}
 		
-		if(!indiceResult){
+		if(!indiceResult && a != IPitch.BAR){
 			removeThrow(value,zuege);
 			return true;
 		}else if(max >= value && b == IPitch.EXIT){
 			removeThrow(max,zuege);
 			return true;
-		}else if(a == IPitch.BAR){
-			removeThrow(value + 1,zuege);
+		}else if(!indiceResult && a == IPitch.BAR){
+			removeThrow(value ,zuege);
 			return true;
 		}	
 		
@@ -42,9 +41,10 @@ public class DiceResultVerifier extends MoveVerifier {
 		int start = sf.getSize();
 		int end = -1;
 		if (current.getColor() == TokenColor.WHITE) {
-			start = 0;
+			start = -1;
 			end = sf.getSize();
 		}
+		
 		if (a == IPitch.BAR)
 			a = start;
 		else if (b == IPitch.EXIT)

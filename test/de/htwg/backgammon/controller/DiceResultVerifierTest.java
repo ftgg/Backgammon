@@ -38,11 +38,10 @@ public class DiceResultVerifierTest {
 
 	@Test
 	public void testgetDistance() {
-		assertEquals(5, drv.getDistance(Pitch.BAR, 5,sf,spielerw));
+		assertEquals(6, drv.getDistance(Pitch.BAR, 5,sf,spielerw));
 		assertEquals(5, drv.getDistance(19, Pitch.EXIT,sf,spielerw));
 
 		assertEquals(3, drv.getDistance(Pitch.BAR, 21,sf,spielerb));
 		assertEquals(3, drv.getDistance(2, Pitch.EXIT,sf,spielerb));
 	}
-
 }
