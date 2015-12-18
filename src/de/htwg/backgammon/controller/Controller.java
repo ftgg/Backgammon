@@ -154,4 +154,14 @@ public class Controller extends Subject {
 		return current;
 	}
 
+	Caretaker states;
+	
+	private void CreateMemento(){
+		states = new Caretaker();
+	}
+	
+	private void SetMemento(GameState gs){
+		states.addState(new Memento(gs));
+	}
+	
 }

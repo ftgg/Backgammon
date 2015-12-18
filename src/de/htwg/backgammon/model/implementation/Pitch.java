@@ -80,7 +80,7 @@ public class Pitch implements IPitch, TestPitch {
 		for(int i = 0; i < count; i++)
 			t.add(new Token(c));
 	}
-	
+
 	
 	
 	private void createTriangles(int size){

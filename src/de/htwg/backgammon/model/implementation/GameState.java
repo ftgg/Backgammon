@@ -17,7 +17,7 @@ public class GameState implements Event {
 	private IPlayer current;
 	private boolean gamefinished = false;
 
-	public GameState(Pitch sf, int[] z, IPlayer s) {
+	public GameState(IPitch sf, int[] z, IPlayer s) {
 		this(sf, z, "Update", s, false);
 	}
 
