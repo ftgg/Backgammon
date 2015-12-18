@@ -21,13 +21,11 @@ public class Gui extends JFrame{
 		mainPanel = new MainPanel(c);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		JLayeredPane lp = getLayeredPane();
-		
 		this.setJMenuBar(new myMenuBar());
-		lp.add(mainPanel, new Integer(3));
-		lp.add(mainPanel);
+		
+		this.add(mainPanel);
 		this.pack();
-		this.setResizable(false);
+		//this.setResizable(false);
 		this.setVisible(true);
 		initplayers();
 		
