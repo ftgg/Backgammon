@@ -58,8 +58,8 @@ public class MainPanel extends JPanel implements Observer{
 	}
 	
 	private void spreadUpdate(){
-		top.doUpdate(gs.getBlackStones(),0);
+		top.doUpdate(gs.getWhiteStones(),gs.getBlackStones(),0);
 		//TODO mid
-		bot.doUpdate(gs.getBlackStones(),12);
+		bot.doUpdate(gs.getWhiteStones(),gs.getBlackStones(),12);
 	}
 }

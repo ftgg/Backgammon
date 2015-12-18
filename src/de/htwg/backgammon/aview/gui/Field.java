@@ -15,7 +15,7 @@ public class Field extends JPanel{
 	private int id;
 	private JLayeredPane layeredPane;
 	private JLabel background;
-	private JLabel foreground;
+	public JLabel foreground;
 	public MainPanel mp;
 	
 
