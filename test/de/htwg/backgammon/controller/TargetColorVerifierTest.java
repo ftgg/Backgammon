@@ -21,7 +21,7 @@ public class TargetColorVerifierTest {
 		tcv = new TargetColorVerifier();
 		spielerb = new Player("b",TokenColor.BLACK);
 		spielerw = new Player("a",TokenColor.WHITE);
-		sf = new Pitch(6);
+		sf = new Pitch();
 	}
 
 	@Test

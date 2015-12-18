@@ -23,7 +23,7 @@ public class DiceResultVerifierTest {
 		drv = new DiceResultVerifier();
 		spielerb = new Player("b",TokenColor.BLACK);
 		spielerw = new Player("a",TokenColor.WHITE);
-		sf = new Pitch(6);
+		sf = new Pitch();
 		w = new Dice();
 	}
 

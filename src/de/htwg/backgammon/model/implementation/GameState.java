@@ -10,6 +10,8 @@ public class GameState implements Event {
 	/*Restorefunctions in Controller, to restore GameState*/
 	private int[] whiteStones;
 	private int[] blackStones;
+	private int whiteStonesOnPitch = 0;
+	private int blackStonesOnPitch = 0;
 	private int blackBar;
 	private int whiteBar;
 	private int[] zuege;
@@ -64,6 +66,15 @@ public class GameState implements Event {
 	public int getWhiteBar() {
 		return whiteBar;
 	}
+	
+	public int getWhiteStonesOnPitch(){
+		return whiteStonesOnPitch + whiteBar;
+	}
+	
+	public int getBlackStonesOnPitch(){
+		return blackStonesOnPitch + blackBar;
+	}
+	
 
 	private void fillArrays(IPitch sf) {
 		for (int i = 0; i < sf.getSize(); i++) {
@@ -73,12 +84,57 @@ public class GameState implements Event {
 				blackStones[i] = 0;
 			} else if (d.getColor() == TokenColor.BLACK) {
 				blackStones[i] = d.count();
+				blackStonesOnPitch += blackStones[i];
 				whiteStones[i] = 0;
 			} else {
 				whiteStones[i] = 0;
+				whiteStonesOnPitch += whiteStones[i];
 				blackStones[i] = 0;
 			}
 		}
 	}
+	
+	public static GameState getDefaultGameState(){
+		return new GameState(); 
+	}
+	
+	private GameState(){
+		int[] whiteStones = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
+		int[] blackStones = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
+		int[] zuege = {0,0,0,0};
+		this.zuege = zuege;
+		this.blackStones = blackStones;
+		this.whiteStones = whiteStones;
+		this.whiteBar = 0;
+		this.blackBar = 0;
+		current = null;
+		gamefinished = false;
+	}
+	
+	//TEST
+	public static GameState getTestGameState(int i){
+		if(i == 2){
+			return new GameState(new int[] { 1,0,0,0,0,0,0,0 },new int[]{ 0,0,0,0,0,0,0,1},1);
+		}else if (i == 1){
+			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1);
+		}
+		return getDefaultGameState();
+	}
+	
+	//For testStates
+	private GameState(int[] whiteStones, int[] blackStones, int onPitch){
+		int[] zuege = {0,0,0,0};
+		this.zuege = zuege;
+		this.blackStones = blackStones;
+		this.whiteStones = whiteStones;
+		this.whiteBar = 0;
+		this.blackBar = 0;
+		this.whiteStonesOnPitch = onPitch;
+		this.blackStonesOnPitch = onPitch;
+		current = null;
+		gamefinished = false;
+	}
+	
+	
 
 }

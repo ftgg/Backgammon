@@ -29,7 +29,7 @@ public class BackgammonStringBuilderTest {
 		player = new Player("Jan", TokenColor.WHITE);
 		black = new Player("Helga", TokenColor.BLACK);
 		sf = new Pitch();
-		sfS = new Pitch(1);
+		sfS = new Pitch(GameState.getTestGameState(1));
 		gsS = new GameState(sfS, zuege, "no message", black, false);
 		gs = new GameState(sf, zuege, "no message", player, false);
 	}

@@ -18,7 +18,7 @@ public class DirectioinVerifierTest {
 	@Before
 	public void setUp() throws Exception {
 		dv = new DirectionVerifier();
-		sf = new Pitch(6);
+		sf = new Pitch();
 		s1 = new Player("w",TokenColor.WHITE);
 		s2 = new Player("b",TokenColor.BLACK);
 	}

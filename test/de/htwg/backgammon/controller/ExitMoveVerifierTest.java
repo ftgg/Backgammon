@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.TokenColor;
+import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
 
@@ -19,7 +20,7 @@ public class ExitMoveVerifierTest {
 	@Before
 	public void setUp() throws Exception {
 		ev = new ExitMoveVerifier();
-		sf = new Pitch(1);
+		sf = new Pitch(GameState.getTestGameState(1));
 		s1 = new Player("b", TokenColor.BLACK);
 	}
 

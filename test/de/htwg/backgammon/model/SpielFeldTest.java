@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
 
@@ -19,7 +20,7 @@ public class SpielFeldTest {
 	public void setUp() throws Exception {
 		size = 2;
 		sfstd = new Pitch();
-		sfs = new Pitch(size);
+		sfs = new Pitch(GameState.getTestGameState(size));
 		spielerw = new Player("Jan", TokenColor.WHITE);
 		spielerb = new Player("Herbert", TokenColor.BLACK);
 	}

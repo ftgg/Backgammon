@@ -35,7 +35,7 @@ public class Controller extends Subject {
 	 * @param a
 	 */
 	public Controller(int i) {
-		sf = new Pitch(i);
+		sf = new Pitch(GameState.getTestGameState(i));
 		w = new Dice();
 		createMoveVerifier();
 		actionparser = new ActionParser();

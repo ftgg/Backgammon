@@ -27,43 +27,20 @@ public class Pitch implements IPitch, TestPitch {
 	 * Creates a pitch with 24 Fields like the real Backgammon-Field
 	 */
 	public Pitch() {
-		this(6);
+		this(GameState.getDefaultGameState());
 	}
 
-	/**
-	 * creates a pitch witch 4 * Base size. Base size is the number of Fields in
-	 * each quarter of the Field
-	 * 
-	 * @param size
-	 *            the number of Fields in each Base
-	 */
-	public Pitch(int size) {
+	public Pitch(GameState gs){
 		barblack = new Triangle();
 		barwhite = new Triangle();
 		dreiecke = new LinkedList<ITriangle>();
-		Map<Integer, Integer> initpos = new TreeMap<>();
-		createTriangles(size * 4);
-		if (size * 4 == 24) {
-			initpos.put(0, 2);
-			initpos.put(11, 5);
-			initpos.put(16, 3);
-			initpos.put(18, 5);
-			fill(initpos);
-		} else {
-			initpos.put(0, 1);
-			fill(initpos);
-		}
-
-	}
-	
-	public Pitch(GameState gs){
 		createTriangles(gs.getBlackStones().length);
 		initPitch(gs.getBlackStones(), TokenColor.BLACK);
 		initPitch(gs.getWhiteStones(), TokenColor.WHITE);
 		initBar(barblack,gs.getBlackBar(),TokenColor.BLACK);
 		initBar(barwhite,gs.getWhiteBar(),TokenColor.WHITE);
-		stonesOnField[0] = gs.getBlackStones().length + gs.getBlackBar();
-		stonesOnField[1] = gs.getWhiteStones().length + gs.getWhiteBar();
+		stonesOnField[0] = gs.getBlackStonesOnPitch();
+		stonesOnField[1] = gs.getWhiteStonesOnPitch();
 	}
 	
 	private void initBar(ITriangle t, int a, TokenColor c){
@@ -89,20 +66,6 @@ public class Pitch implements IPitch, TestPitch {
 		}
 	}
 	
-	
-
-	private void fill(Map<Integer, Integer> initpos) {
-		TokenColor color = TokenColor.WHITE;
-		for (int invers = 0; invers < 2; invers++) {
-			for (Map.Entry<Integer, Integer> current : initpos.entrySet()) {
-				for (int i = 0; current.getValue() > i; i++) {
-					dreiecke.get(Math.abs(current.getKey() - (dreiecke.size() - 1) * invers)).add(new Token(color));
-					stonesOnField[invers] = stonesOnField[invers] + 1;
-				}
-			}
-			color = TokenColor.BLACK;
-		}
-	}
 
 	@Override
 	public int[] getTokensOnTriangle() {
