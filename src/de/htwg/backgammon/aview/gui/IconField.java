@@ -44,13 +44,18 @@ public class IconField extends JPanel {
 	}
 	//gain necessary informations to update some JLabels
 	public void doUpdate(int[] whitestones, int[] blackstones, int offset){
+		int number;
 		for(int i=0;i<12;i++){
-			if(blackstones[i+offset] > 0)
-				labels[i].foreground.setIcon(mp.ct.getDarkToken());
-		}
-		for(int i=0;i<12;i++){
-			if(whitestones[i+offset] > 0)
-				labels[i].foreground.setIcon(mp.ct.getLightToken());
+			number = blackstones[i+offset];
+			if(number > 0)
+				labels[i].foreground.setIcon(mp.ct.getDarkToken(number));
+			else{
+				number = whitestones[i+offset];
+				if(number > 0)
+					labels[i].foreground.setIcon(mp.ct.getLightToken(number));
+				else
+					labels[i].foreground.setIcon(mp.ct.getnoToken());
+			}
 		}
 	}
 

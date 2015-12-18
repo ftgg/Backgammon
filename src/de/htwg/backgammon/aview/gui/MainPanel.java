@@ -58,6 +58,7 @@ public class MainPanel extends JPanel implements Observer{
 	}
 	
 	private void spreadUpdate(){
+		System.out.println(gs.getZuege()[0] +" "+gs.getZuege()[1]);
 		top.doUpdate(gs.getWhiteStones(),gs.getBlackStones(),0);
 		//TODO mid
 		bot.doUpdate(gs.getWhiteStones(),gs.getBlackStones(),12);

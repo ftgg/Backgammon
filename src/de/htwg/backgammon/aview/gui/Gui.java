@@ -29,18 +29,6 @@ public class Gui extends JFrame{
 		this.setVisible(true);
 		initplayers();
 		
-//		super("LayeredPane Demonstration");
-//	    this.pack();
-//	    setDefaultCloseOperation(EXIT_ON_CLOSE);
-//
-//	    JLayeredPane lp = getLayeredPane();
-//
-//	    JButton top = new JButton();
-//	    top.setBackground(Color.white);
-//	    top.setBounds(20, 20, 50, 50);
-//
-//	    lp.add(top, new Integer(3));
-//	    this.setVisible(true);
 	}
 
 	//TODO spielernamen eingeben

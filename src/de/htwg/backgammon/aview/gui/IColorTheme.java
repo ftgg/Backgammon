@@ -10,7 +10,7 @@ public interface IColorTheme {
 	public ImageIcon getLightTriangleTop();
 	public ImageIcon getBar();
 	public ImageIcon getnoToken();
-	public ImageIcon getDarkToken();
-	public ImageIcon getLightToken();
+	public ImageIcon getDarkToken(int number);
+	public ImageIcon getLightToken(int number);
 	
 }

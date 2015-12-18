@@ -2,7 +2,7 @@ package de.htwg.backgammon.aview.gui;
 
 import javax.swing.ImageIcon;
 
-public class ColorThemeStandard implements IColorTheme{
+public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getDarkTriangle() {
@@ -30,13 +30,21 @@ public class ColorThemeStandard implements IColorTheme{
 	}
 
 	@Override
-	public ImageIcon getDarkToken() {
-		return new ImageIcon("images/dark_token.png");
+	public ImageIcon getDarkToken(int number) {
+		if (number == 1)
+			return new ImageIcon("images/dark_one.png");
+		if (number == 2)
+			return new ImageIcon("images/dark_two.png");
+		return new ImageIcon("images/dark_more.png");
 	}
 
 	@Override
-	public ImageIcon getLightToken() {
-		return new ImageIcon("images/light_token.png");
+	public ImageIcon getLightToken(int number) {
+		if (number == 1)
+			return new ImageIcon("images/light_one.png");
+		if (number == 2)
+			return new ImageIcon("images/light_two.png");
+		return new ImageIcon("images/light_more.png");
 	}
 
 	@Override
