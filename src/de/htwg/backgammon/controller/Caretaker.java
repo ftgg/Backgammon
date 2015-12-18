@@ -14,7 +14,7 @@ public class Caretaker implements Iterable<Memento>{
 		queue.addLast(m);
 	}
 	
-	public Memento getState(){
+	public Memento getLastState(){
 		return queue.removeLast();
 	}
 

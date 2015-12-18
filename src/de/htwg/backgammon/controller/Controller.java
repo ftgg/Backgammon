@@ -1,6 +1,8 @@
 package de.htwg.backgammon.controller;
 
 
+import java.util.Iterator;
+
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
@@ -25,6 +27,7 @@ public class Controller extends Subject {
 		sf = new Pitch();// Standartgröße = original größe
 		w = new Dice();
 		createMoveVerifier();
+		CreateMemento();
 		actionparser = new ActionParser();
 		wuerfeln();
 	}
@@ -40,24 +43,32 @@ public class Controller extends Subject {
 		createMoveVerifier();
 		actionparser = new ActionParser();
 		wuerfeln();
+		CreateMemento();
 		setSpieler("Weiss", "Schwarz");
 	}
 
 	public void setSpieler(String n1, String n2) {
+		GameState gs;
 		s1 = new Player(n1, TokenColor.WHITE);
 		s2 = new Player(n2, TokenColor.BLACK);
 		current = s1;
-		notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false));
+		gs = new GameState(sf, zuege, "Spiel Beginnt", current, false);
+		SetMemento(gs);
+		notifyObs(gs);
 	}
 
 	public void doAction(String s) {
 		int[] act = actionparser.parse(s);
+		GameState gs;
 		if (act[0] == -3 || act[1] == -3) {
-			notifyObs(new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false));
+			gs = new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false);
+			notifyObs(gs);
 			return;
 		} else if (act[0] == NEXT) {
 			spielerwechsel();
-			notifyObs(new GameState(sf, zuege, "SpielerWechsel", current, false));
+			gs = new GameState(sf, zuege, "SpielerWechsel", current, false);
+			SetMemento(gs);
+			notifyObs(gs);
 			return;
 		}
 		spielZug(act[0], act[1]);
@@ -81,9 +92,11 @@ public class Controller extends Subject {
 
 	public int spielZug(int a, int b) {
 		boolean win = false;
+		GameState gs;
 		String msg = "";
 		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1,s2)) {
-			notifyObs(new GameState(sf, zuege, "Nicht möglicher Zug!", current, false));
+			gs = new GameState(sf, zuege, "Nicht möglicher Zug!", current, false);
+			notifyObs(gs);
 			return -3;
 		}
 		int result = sf.move(a, b, current);
@@ -95,8 +108,9 @@ public class Controller extends Subject {
 		//removeThrow(a, b);
 		if (zuegeEmpty())
 			spielerwechsel();
-
-		notifyObs(new GameState(sf, zuege, msg, current, win));
+		gs = new GameState(sf, zuege, msg, current, win);
+		SetMemento(gs);
+		notifyObs(gs);
 		return result;
 	}
 
@@ -163,5 +177,27 @@ public class Controller extends Subject {
 	private void SetMemento(GameState gs){
 		states.addState(new Memento(gs));
 	}
+	
+	public void undo(){
+		GameState gs = states.getLastState().getGameState();
+		loadGameState(gs);
+	}
+	
+	private void loadGameState(GameState gs){
+		this.sf = new Pitch(gs);
+		this.zuege = gs.getZuege();
+		this.current = gs.getCurrent();
+	}
+	
+	public void PlayGame() throws InterruptedException{
+		Iterator<Memento> iterator = states.iterator();
+		Memento m;
+		while(iterator.hasNext()){
+			m = iterator.next();
+			notifyObs(m.getGameState());
+			Thread.sleep(500);
+		}
+	}
+
 	
 }
