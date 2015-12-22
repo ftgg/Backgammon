@@ -15,7 +15,7 @@ public class IconField extends JPanel {
 							// whitespace
 	private MainPanel mp;
 
-	public IconField(ImageIcon one, ImageIcon two, MainPanel mp, int[] id) {
+	public IconField(ImageIcon one, ImageIcon two, MainPanel mp, int[] id,int offset) {
 
 		index = new int[] { 11, 10, 9, 8, 7, 6, 12, 5, 4, 3, 2, 1, 0 };
 		this.setLayout(new GridLayout(1, 0));
@@ -27,7 +27,7 @@ public class IconField extends JPanel {
 		}
 		labels[12] = new Field(new ImageIcon("images/whitespace.png"), 12, mp);
 		for (int i = 0; i < 13; i++) {
-			this.add(labels[index[i]]);
+			this.add(labels[index[Math.abs(offset-i)]]);
 		}
 		initActionListeners();
 	}

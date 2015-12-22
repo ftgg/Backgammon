@@ -12,6 +12,7 @@ public class Backgammon {
 		Controller c = new Controller();
 		//new Tui(c);
 		new Gui(c);
+//		new Test();
 	}
 
 }

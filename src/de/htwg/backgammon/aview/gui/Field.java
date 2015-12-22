@@ -1,6 +1,7 @@
 package de.htwg.backgammon.aview.gui;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -44,7 +45,7 @@ public class Field extends JPanel {
 	}
 
 	private ImageIcon scaleIcon(ImageIcon icon, int width) {
-		return scaleIcon(icon, new Dimension(width, width));
+		return scaleIcon(icon, new Dimension((int) (width / 1.5), (int) (width / 1.5)));
 	}
 
 	private ImageIcon scaleIcon(ImageIcon icon, Dimension dimension) {
@@ -59,20 +60,17 @@ public class Field extends JPanel {
 	}
 
 	public void setTokens(int n, ImageIcon token) {
+		for (Component c : layeredPane.getComponentsInLayer(2))
+			layeredPane.remove(c);
+		this.repaint();
 		token = scaleIcon(token, this.getSize().width);
-		JLayeredPane layeredTokenPane = new JLayeredPane();
-		layeredTokenPane.setPreferredSize(this.getSize());
-		layeredTokenPane.setLayout(null);
 		for (int i = 0; i < n; i++) {
 			JLabel newLabel = new JLabel(token);
-			layeredTokenPane.add(newLabel, new Integer(i / 5 + 1));
-			// newLabel.setBounds(0, 0 + (i % 5) * token.getIconHeight() + ((i /
-			// 5) * token.getIconHeight() / 2) % 2,
-			// token.getIconWidth(), token.getIconHeight());
-			newLabel.setBounds(0, 0, token.getIconWidth(), token.getIconHeight());
+			layeredPane.add(newLabel, new Integer(2), 0);
+			newLabel.setBounds(0 + (int)((this.getWidth() - token.getIconWidth()) / 2.5),
+					0 + (i % 5) * (int) (token.getIconHeight() / 1.3) + ((i / 5) * token.getIconHeight() / 2) % 2,
+					token.getIconWidth(), token.getIconHeight());
 		}
-		layeredPane.add(layeredTokenPane, new Integer(2), 0);
-		layeredPane.moveToFront(layeredTokenPane);
 
 	}
 

@@ -1,6 +1,10 @@
 package de.htwg.backgammon.aview.gui;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
@@ -11,8 +15,6 @@ public class ColorThemeStandard implements IColorTheme {
 		return ImageString("images/d_dunkel.png");
 	}
 
-
-
 	@Override
 	public ImageIcon getLightTriangle() {
 		return ImageString("images/d_hell.png");
@@ -20,12 +22,23 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getDarkTriangleTop() {
-		return ImageString("images/d_dunkel.png");
+		return rotateTriangle("images/d_dunkel.png");
+	}
+	
+	private ImageIcon rotateTriangle(String s){
+		ImageIcon i = ImageString(s);
+		BufferedImage bi = new BufferedImage(i.getIconWidth(),i.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = bi.createGraphics();
+		AffineTransform at = AffineTransform.getRotateInstance(Math.PI, i.getIconWidth() / 2.0, i.getIconWidth() / 2.0);
+		at.translate(0, -500);
+		g2.drawImage(i.getImage(),at, null);
+		g2.dispose();
+		return new ImageIcon(bi);
 	}
 
 	@Override
 	public ImageIcon getLightTriangleTop() {
-		return ImageString("images/d_hell.png");
+		return rotateTriangle("images/d_hell.png");
 	}
 
 	@Override
@@ -47,7 +60,7 @@ public class ColorThemeStandard implements IColorTheme {
 	public ImageIcon getnoToken() {
 		return new ImageIcon("images/empty.png");
 	}
-	
+
 	private ImageIcon ImageString(String path) {
 		ImageIcon ico = new ImageIcon(path);
 		return ico;

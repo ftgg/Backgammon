@@ -38,10 +38,10 @@ public class MainPanel extends JPanel implements Observer{
 		final ImageIcon topone = ct.getDarkTriangleTop();
 		final ImageIcon toptwo = ct.getLightTriangleTop();
 		
-		top = new IconField(topone, toptwo,this,new int[]{0,1,2,3,4,5,6,7,8,9,10,11,24});
+		top = new IconField(topone, toptwo,this,new int[]{0,1,2,3,4,5,6,7,8,9,10,11,24},0);
 		mid = new JPanel();
-		mid.add(new JLabel(new ImageIcon("images/nomessage.png")));
-		bot = new IconField(botone, bottwo,this,new int[]{23,22,21,20,19,18,17,16,15,14,13,12,25});
+		mid.add(new JLabel(new ImageIcon("images/nomessage.png")));//[]{23,22,21,20,19,18,17,16,15,14,13,12,25}
+		bot = new IconField(botone, bottwo,this,new int[]{12,13,14,15,16,17,18,19,20,21,22,23,25},12);
 		
 		this.add(top, BorderLayout.NORTH);
 		this.add(mid, BorderLayout.CENTER);
