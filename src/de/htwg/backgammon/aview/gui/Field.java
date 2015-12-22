@@ -3,13 +3,14 @@ package de.htwg.backgammon.aview.gui;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-public class Field extends JPanel{
+public class Field extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
@@ -17,34 +18,62 @@ public class Field extends JPanel{
 	private JLabel background;
 	public JLabel foreground;
 	public MainPanel mp;
-	
 
 	public Field(ImageIcon icon, int id, MainPanel mp) {
 		super();
 		this.id = id;
 		this.mp = mp;
-		
+		Dimension dim = new Dimension(100, 300);
 		layeredPane = new JLayeredPane();
-		layeredPane.setPreferredSize(new Dimension(100, 300));
+		layeredPane.setPreferredSize(dim);
 		layeredPane.setLayout(null);
-		
-		background = new JLabel(icon);
-		foreground = new JLabel(mp.ct.getnoToken());
-		layeredPane.add(background, new Integer(1),0);
+
+		background = new JLabel(scaleIcon(icon, dim));
+		// foreground = new JLabel(scaleIcon(mp.ct.getDarkToken(), dim.width));
+		layeredPane.add(background, new Integer(1), 0);
 		layeredPane.moveToBack(background);
-		layeredPane.add(foreground, new Integer(2),0);
-		layeredPane.moveToFront(foreground);
-		
+		// layeredPane.add(foreground, new Integer(2), 0);
+		// layeredPane.moveToFront(foreground);
+
 		background.setBounds(0, 0, 100, 300);
-		foreground.setBounds(0, 0, 100, 300);
-		
-//		this.add(background);
-//		this.add(foreground);
+		// foreground.setBounds(0, 0, 100, 300);
+
+		// this.add(background);
+		// this.add(foreground);
 		this.add(layeredPane);
 	}
 
-	public int getID(){
+	private ImageIcon scaleIcon(ImageIcon icon, int width) {
+		return scaleIcon(icon, new Dimension(width, width));
+	}
+
+	private ImageIcon scaleIcon(ImageIcon icon, Dimension dimension) {
+		Image img = icon.getImage();
+		ImageIcon ii = new ImageIcon(
+				img.getScaledInstance(dimension.width, dimension.height, java.awt.Image.SCALE_SMOOTH));
+		return ii;
+	}
+
+	public int getID() {
 		return id;
 	}
-	
+
+	public void setTokens(int n, ImageIcon token) {
+		token = scaleIcon(token, this.getSize().width);
+		JLayeredPane layeredTokenPane = new JLayeredPane();
+		layeredTokenPane.setPreferredSize(this.getSize());
+		layeredTokenPane.setLayout(null);
+		for (int i = 0; i < n; i++) {
+			JLabel newLabel = new JLabel(token);
+			layeredTokenPane.add(newLabel, new Integer(i / 5 + 1));
+			// newLabel.setBounds(0, 0 + (i % 5) * token.getIconHeight() + ((i /
+			// 5) * token.getIconHeight() / 2) % 2,
+			// token.getIconWidth(), token.getIconHeight());
+			newLabel.setBounds(0, 0, token.getIconWidth(), token.getIconHeight());
+		}
+		layeredPane.add(layeredTokenPane, new Integer(2), 0);
+		layeredPane.moveToFront(layeredTokenPane);
+
+	}
+
 }

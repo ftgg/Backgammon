@@ -89,8 +89,8 @@ public class ControllerTest {
 		c.setclick(1);
 		c.setclick(2);
 		assertEquals(c.toStr(1, 2),"1 2");
-		assertEquals(c.toStr(24, 2),"b 2");
-		assertEquals(c.toStr(1, 24),"1 h");
+		assertEquals(c.toStr(25, 2),"b 2");
+		assertEquals(c.toStr(1, 25),"1 h");
 	}
 
 

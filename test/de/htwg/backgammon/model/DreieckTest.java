@@ -77,7 +77,7 @@ public class DreieckTest {
 	public void unsecure(){
 		d.clear();
 		d.add(new Token(TokenColor.WHITE));
-		assertTrue(d.count() < 2 == d.unsecure());
+		assertSame(d.count() < 2 , d.unsecure());
 	}
 	
 }

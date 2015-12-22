@@ -1,6 +1,7 @@
 package de.htwg.backgammon.aview.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -52,7 +53,6 @@ public class MainPanel extends JPanel implements Observer{
 	public void update(Event e) {
 		if (e instanceof GameState) {
 			gs = (GameState) e;
-			System.out.println(gs.getZuege());
 			spreadUpdate();
 		}
 	}

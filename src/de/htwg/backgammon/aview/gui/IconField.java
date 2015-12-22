@@ -1,6 +1,7 @@
 package de.htwg.backgammon.aview.gui;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,6 +16,7 @@ public class IconField extends JPanel {
 	private MainPanel mp;
 
 	public IconField(ImageIcon one, ImageIcon two, MainPanel mp, int[] id) {
+
 		index = new int[] { 11, 10, 9, 8, 7, 6, 12, 5, 4, 3, 2, 1, 0 };
 		this.setLayout(new GridLayout(1, 0));
 		this.mp = mp;
@@ -36,7 +38,7 @@ public class IconField extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					if (e.getSource() instanceof Field) {
 						Field f = (Field) e.getSource();
-						System.out.println("click: "+f.getID());
+						System.out.println("click: " + f.getID());
 						mp.contr.setclick(f.getID());
 					}
 				}
@@ -56,14 +58,14 @@ public class IconField extends JPanel {
 		int number;
 		for (int i = 0; i < 12; i++) {
 			number = blackstones[i];
-			if (number > 0)
-				labels[i].foreground.setIcon(mp.ct.getDarkToken(number));
-			else {
+			if (number > 0) {
+				labels[i].setTokens(number,mp.ct.getDarkToken());
+			} else {
 				number = whitestones[i];
 				if (number > 0)
-					labels[i].foreground.setIcon(mp.ct.getLightToken(number));
+					labels[i].setTokens(number,mp.ct.getLightToken());
 				else
-					labels[i].foreground.setIcon(mp.ct.getnoToken());
+					labels[i].setTokens(number,mp.ct.getnoToken());
 			}
 		}
 	}
@@ -73,13 +75,13 @@ public class IconField extends JPanel {
 		for (int i = 0; i < 12; i++) {
 			number = blackstones[i + offset];
 			if (number > 0)
-				labels[i].foreground.setIcon(mp.ct.getDarkToken(number));
+				labels[i].setTokens(number,mp.ct.getDarkToken());
 			else {
 				number = whitestones[i + offset];
 				if (number > 0)
-					labels[i].foreground.setIcon(mp.ct.getLightToken(number));
+					labels[i].setTokens(number,mp.ct.getLightToken());
 				else
-					labels[i].foreground.setIcon(mp.ct.getnoToken());
+					labels[i].setTokens(number,mp.ct.getnoToken());
 			}
 		}
 	}
