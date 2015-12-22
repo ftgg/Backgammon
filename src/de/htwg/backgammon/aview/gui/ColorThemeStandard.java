@@ -34,22 +34,13 @@ public class ColorThemeStandard implements IColorTheme {
 	}
 
 	@Override
-	public ImageIcon getDarkToken(int number) {
-		String path = "images/empty.png";
-//		if (number == 1)
-//			path = "images/dark_one.png";
-//		if (number == 2)
-//			path = "images/dark_two.png";
-		return ImageString(path);
+	public ImageIcon getDarkToken() {
+		return ImageString("images/Token-Dark.png");
 	}
 
 	@Override
-	public ImageIcon getLightToken(int number) {
-//		if (number == 1)
-//			return new ImageIcon("images/light_one.png");
-//		if (number == 2)
-//			return new ImageIcon("images/light_two.png");
-		return ImageString("images/empty.png");
+	public ImageIcon getLightToken() {
+		return ImageString("images/Token-White.png");
 	}
 
 	@Override
@@ -59,7 +50,6 @@ public class ColorThemeStandard implements IColorTheme {
 	
 	private ImageIcon ImageString(String path) {
 		ImageIcon ico = new ImageIcon(path);
-		ico.setImage(ico.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT));
 		return ico;
 	}
 }
