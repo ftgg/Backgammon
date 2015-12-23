@@ -49,7 +49,7 @@ public class Tui implements Observer {
 	}
 
 	private void eingabe() {
-		print(gs.getCurrent().getName() + " ist am Zug:");
+		print(gs.getCurrent() + " ist am Zug:");
 		String input;
 		input = sc.next();
 		contr.doAction(input);
