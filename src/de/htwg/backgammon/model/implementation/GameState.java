@@ -17,13 +17,15 @@ public class GameState implements Event {
 	private int[] zuege;
 	private String message;
 	private IPlayer current;
+	private IPlayer s1;
+	private IPlayer s2;
 	private boolean gamefinished = false;
 
-	public GameState(IPitch sf, int[] z, IPlayer s) {
-		this(sf, z, "Update", s, false);
+	public GameState(IPitch sf, int[] z, IPlayer s, IPlayer s1, IPlayer s2) {
+		this(sf, z, "Update", s, false, s1, s2);
 	}
 
-	public GameState(IPitch sf, int[] z, String m, IPlayer s, boolean w) {
+	public GameState(IPitch sf, int[] z, String m, IPlayer s, boolean w, IPlayer s1, IPlayer s2) {
 		zuege = z;
 		message = m;
 		blackStones = new int[sf.getSize()];
@@ -37,6 +39,10 @@ public class GameState implements Event {
 
 	public boolean getGameFinished(){
 		return gamefinished;
+	}
+	
+	public IPlayer[] getPlayer(){
+		return new IPlayer[]{s1,s2};
 	}
 	
 	public IPlayer getCurrent() {

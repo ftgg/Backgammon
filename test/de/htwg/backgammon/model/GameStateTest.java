@@ -21,7 +21,7 @@ public class GameStateTest extends TestCase {
 		sf = new Pitch();
 		spielerw = new Player("Hund", TokenColor.WHITE);
 		spielerb = new Player("Hund", TokenColor.BLACK);
-		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw);
+		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw,spielerw,spielerb);
 
 	}
 
@@ -64,7 +64,7 @@ public class GameStateTest extends TestCase {
 		sf.move(5, 6, spielerb); //Schwarz schlägt Weiss
 		assertFalse(sf.isBarEmpty(spielerw));
 		assertTrue(sf.isBarEmpty(spielerb));
-		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spielerw, false);
+		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spielerw, false,spielerw,spielerb);
 		assertEquals(0, gs.getBlackBar());
 		assertEquals(1, gs.getWhiteBar());
 	}
