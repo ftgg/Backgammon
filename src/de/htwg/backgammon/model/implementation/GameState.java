@@ -155,7 +155,6 @@ public class GameState implements Event,Serializable {
 		this.whiteStonesOnPitch = onPitch;
 		this.blackStonesOnPitch = onPitch;
 		current = TokenColor.WHITE;
-		current = null;
 		gamefinished = false;
 	}
 	
