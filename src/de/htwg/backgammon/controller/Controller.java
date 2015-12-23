@@ -35,7 +35,7 @@ public class Controller extends Subject {
 	private int lastclick; // only need with gui
 
 	public Controller() {
-		sf = new Pitch(GameState.getTestGameState(4));// Standartgröße = original größe
+		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße = original größe
 		w = new Dice();
 		lastclick = -1;
 		createMoveVerifier();
