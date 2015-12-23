@@ -6,13 +6,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 import de.htwg.backgammon.controller.Controller;
+import de.htwg.backgammon.model.implementation.InitPlayersState;
+import de.htwg.backgammon.util.Event;
+import de.htwg.backgammon.util.Observer;
 
 
-public class Gui extends JFrame{
+public class Gui extends JFrame implements Observer{
 
 	public MainPanel mainPanel; // Public just for tests
+	private InitPlayersState ps;
 	protected Controller c;
 	
 	public Gui(Controller c) {
@@ -27,12 +32,28 @@ public class Gui extends JFrame{
 		this.pack();
 		//this.setResizable(false);
 		this.setVisible(true);
-		initplayers();
-		
+//		initplayers();	
 	}
 
 	//TODO spielernamen eingeben
 	private void initplayers(){
 		c.setSpieler("White", "Black");
+	}
+
+	@Override
+	public void update(Event e) {
+		if(e instanceof InitPlayersState){
+			ps = (InitPlayersState) e;
+			getPName();
+		}
+	}
+	
+	public void getPName(){
+		String s1 = JOptionPane.showInputDialog(null,"Spieler Name:",
+                "Eingabe",
+                JOptionPane.PLAIN_MESSAGE);
+		if(ps.getStatus() == 2)
+//			return;
+		c.setPlayer(s1);
 	}
 }

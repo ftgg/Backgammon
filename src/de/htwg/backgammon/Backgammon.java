@@ -6,13 +6,15 @@ import de.htwg.backgammon.controller.Controller;
 
 public class Backgammon {
 
-	private Backgammon(){}
-	
+	private Backgammon() {
+	}
+
 	public static void main(String[] args) {
 		Controller c = new Controller();
 		new Tui(c);
-//		new Gui(c);
-//		new Test();
+		// new Gui(c);
+		// new Test();
+		c.create();
 	}
 
 }
