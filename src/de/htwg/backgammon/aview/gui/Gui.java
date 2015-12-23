@@ -13,7 +13,7 @@ import de.htwg.backgammon.controller.Controller;
 public class Gui extends JFrame{
 
 	public MainPanel mainPanel; // Public just for tests
-	private Controller c;
+	protected Controller c;
 	
 	public Gui(Controller c) {
 		super("Backgammon");
@@ -21,7 +21,7 @@ public class Gui extends JFrame{
 		mainPanel = new MainPanel(c);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		this.setJMenuBar(new myMenuBar());
+		this.setJMenuBar(new myMenuBar(this));
 		
 		this.add(mainPanel);
 		this.pack();

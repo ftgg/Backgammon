@@ -25,7 +25,7 @@ public class IconField extends JPanel {
 			labels[2 * i] = new Field(one, id[2 * i] + 1, mp);
 			labels[2 * i + 1] = new Field(two, id[2 * i + 1] + 1, mp);
 		}
-		labels[12] = new Field(new ImageIcon("images/whitespace.png"), 12, mp);
+		labels[12] = new Field(new ImageIcon("images/whitespace.png"), 25, mp);
 		for (int i = 0; i < 13; i++) {
 			this.add(labels[index[Math.abs(offset-i)]]);
 		}
@@ -33,7 +33,7 @@ public class IconField extends JPanel {
 	}
 
 	private void initActionListeners() {
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 13; i++) {
 			labels[i].addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					if (e.getSource() instanceof Field) {
@@ -47,43 +47,46 @@ public class IconField extends JPanel {
 	}
 
 	// gain necessary informations to update some JLabels
-	public void doUpdate(int[] whitestones, int[] blackstones, int offset) {
+	public void doUpdate(int[] whitestones, int[] blackstones,int bar, int offset) {
 		if (offset > 1)
-			doUpdateBot(whitestones, blackstones, offset);
+			doUpdateBot(whitestones, blackstones,bar, offset);
 		else
-			doUpdateTop(whitestones, blackstones);
+			doUpdateTop(whitestones, blackstones,bar);
 	}
 
-	private void doUpdateTop(int[] whitestones, int[] blackstones) {
+	private void doUpdateTop(int[] whitestones, int[] blackstones, int bar) {
 		int number;
 		for (int i = 0; i < 12; i++) {
 			number = blackstones[i];
 			if (number > 0) {
-				labels[i].setTokens(number,mp.ct.getDarkToken());
+				labels[i].setTokens(number,mp.ct.getDarkToken(),0);
 			} else {
 				number = whitestones[i];
 				if (number > 0)
-					labels[i].setTokens(number,mp.ct.getLightToken());
+					labels[i].setTokens(number,mp.ct.getLightToken(),0);
 				else
-					labels[i].setTokens(number,mp.ct.getnoToken());
+					labels[i].setTokens(number,mp.ct.getnoToken(),0);
 			}
 		}
+		labels[12].setTokens(bar, mp.ct.getLightToken(),0);
 	}
 
-	private void doUpdateBot(int[] whitestones, int[] blackstones, int offset) {
+	private void doUpdateBot(int[] whitestones, int[] blackstones, int bar, int offset) {
 		int number;
+		int xOffset = labels[0].getHeight() - 80;
 		for (int i = 0; i < 12; i++) {
 			number = blackstones[i + offset];
 			if (number > 0)
-				labels[i].setTokens(number,mp.ct.getDarkToken());
+				labels[i].setTokens(number,mp.ct.getDarkToken(),xOffset);
 			else {
 				number = whitestones[i + offset];
 				if (number > 0)
-					labels[i].setTokens(number,mp.ct.getLightToken());
+					labels[i].setTokens(number,mp.ct.getLightToken(),xOffset);
 				else
-					labels[i].setTokens(number,mp.ct.getnoToken());
+					labels[i].setTokens(number,mp.ct.getnoToken(),xOffset);
 			}
 		}
+		labels[12].setTokens(bar, mp.ct.getDarkToken(),xOffset);
 	}
 
 }

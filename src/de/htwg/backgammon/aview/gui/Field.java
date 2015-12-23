@@ -30,17 +30,10 @@ public class Field extends JPanel {
 		layeredPane.setLayout(null);
 
 		background = new JLabel(scaleIcon(icon, dim));
-		// foreground = new JLabel(scaleIcon(mp.ct.getDarkToken(), dim.width));
 		layeredPane.add(background, new Integer(1), 0);
 		layeredPane.moveToBack(background);
-		// layeredPane.add(foreground, new Integer(2), 0);
-		// layeredPane.moveToFront(foreground);
 
 		background.setBounds(0, 0, 100, 300);
-		// foreground.setBounds(0, 0, 100, 300);
-
-		// this.add(background);
-		// this.add(foreground);
 		this.add(layeredPane);
 	}
 
@@ -59,7 +52,7 @@ public class Field extends JPanel {
 		return id;
 	}
 
-	public void setTokens(int n, ImageIcon token) {
+	public void setTokens(int n, ImageIcon token,int offset) {
 		for (Component c : layeredPane.getComponentsInLayer(2))
 			layeredPane.remove(c);
 		this.repaint();
@@ -67,8 +60,8 @@ public class Field extends JPanel {
 		for (int i = 0; i < n; i++) {
 			JLabel newLabel = new JLabel(token);
 			layeredPane.add(newLabel, new Integer(2), 0);
-			newLabel.setBounds(0 + (int)((this.getWidth() - token.getIconWidth()) / 2.5),
-					0 + (i % 5) * (int) (token.getIconHeight() / 1.3) + ((i / 5) * token.getIconHeight() / 2) % 2,
+			newLabel.setBounds(((int)((this.getWidth() - token.getIconWidth()) / 2.5)),
+					Math.abs(offset - ((i % 5) * (int) (token.getIconHeight() / 1.3) + ((i / 5) * token.getIconHeight() / 2) % 2)),
 					token.getIconWidth(), token.getIconHeight());
 		}
 

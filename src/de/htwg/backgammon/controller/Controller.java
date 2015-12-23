@@ -200,7 +200,6 @@ public class Controller extends Subject {
 	}
 
 	
-	// TODO gui wurde geklickt.
 	public void setclick(int id) {
 		if (lastclick == -1) {
 			lastclick = id;
