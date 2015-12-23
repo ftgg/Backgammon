@@ -5,9 +5,13 @@ import java.util.Deque;
 import java.util.Iterator;
 
 public class Caretaker implements Iterable<Memento>{
-	private Deque<Memento> queue;
+	private ArrayDeque<Memento> queue;
 	public Caretaker(){
 		queue = new ArrayDeque<Memento>();
+	}
+	
+	public Caretaker(ArrayDeque<Memento> queue){
+		this.queue = queue;
 	}
 	
 	public void addState(Memento m){
@@ -16,6 +20,14 @@ public class Caretaker implements Iterable<Memento>{
 	
 	public Memento getLastState(){
 		return queue.removeLast();
+	}
+	
+	public Memento readLastState(){
+		return queue.pollLast();
+	}
+	
+	public ArrayDeque<Memento> getStack(){
+		return queue;
 	}
 
 	@Override

@@ -2,6 +2,14 @@ package de.htwg.backgammon.controller;
 
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayDeque;
 import java.util.Iterator;
 
 import de.htwg.backgammon.model.IPitch;
@@ -27,7 +35,7 @@ public class Controller extends Subject {
 	private int lastclick; // only need with gui
 
 	public Controller() {
-		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße = original größe
+		sf = new Pitch(GameState.getTestGameState(4));// Standartgröße = original größe
 		w = new Dice();
 		lastclick = -1;
 		createMoveVerifier();
@@ -178,13 +186,48 @@ public class Controller extends Subject {
 	public void undo(){
 		GameState gs = states.getLastState().getGameState();
 		loadGameState(gs);
-		notifyObs(gs);
 	}
 	
 	private void loadGameState(GameState gs){
 		this.sf = new Pitch(gs);
 		this.zuege = gs.getZuege();
 		this.current = gs.getCurrent();
+		s1 = gs.getPlayer()[0];
+		s2 = gs.getPlayer()[1];
+		notifyObs(gs);
+	}
+	
+	public void saveGame(File f){
+		try{
+			FileOutputStream fout = new FileOutputStream(f);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(states.getStack());
+			out.close();
+			fout.close();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void loadGame(File f){
+		try{
+			FileInputStream fileIn = new FileInputStream(f);
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			states = new Caretaker((ArrayDeque<Memento>)in.readObject());
+		}catch (IOException e){
+			e.printStackTrace();
+			return;
+		}catch (ClassNotFoundException c){
+			System.out.println("Class not Found!");
+			c.printStackTrace();
+			return;
+		}
+		GameState g = states.readLastState().getGameState();
+		loadGameState(g);
+		
 	}
 	
 	public void PlayGame() throws InterruptedException{

@@ -2,11 +2,14 @@ package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.ITriangle;
 import de.htwg.backgammon.util.Event;
+
+import java.io.Serializable;
+
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 
-public class GameState implements Event {
+public class GameState implements Event,Serializable {
 	/*Restorefunctions in Controller, to restore GameState*/
 	private int[] whiteStones;
 	private int[] blackStones;
@@ -125,6 +128,9 @@ public class GameState implements Event {
 			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1,0);
 		}else if (i == 3){ // mit stein auf Bar
 			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1,1);
+		}else if (i == 4){
+			return new GameState(new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,3,2,1,3},
+					new int[]{4,3,2,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},0,0);
 		}
 		return getDefaultGameState();
 	}
