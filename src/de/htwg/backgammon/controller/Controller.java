@@ -42,11 +42,12 @@ public class Controller extends Subject {
 		CreateMemento();
 		actionparser = new ActionParser();
 	}
-	
-	public void create(){
-		notifyObs(new InitPlayersState(0)); // TODO will namen
-		System.out.println("Observer sollen mir namen gebeb");
+
+	public void create() {
 		wuerfeln();
+		notifyObs(new InitPlayersState(0)); // TODO will namen
+		// System.out.println("Observer sollen mir namen gebeb");
+
 	}
 
 	/**
@@ -67,15 +68,14 @@ public class Controller extends Subject {
 	public void setPlayer(String name) {
 		if (s1 == null) {
 			s1 = new Player(name, TokenColor.WHITE);
+			current = s1;
 			notifyObs(new InitPlayersState(1)); // TODO will noch ein Namen
-		} else {
-			s2 = new Player(name, TokenColor.WHITE);
+		} else if (s2 == null) {
+			s2 = new Player(name, TokenColor.BLACK);
 			notifyObs(new InitPlayersState(2));
-			notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2)); // TODO
-																							// ok,
-																							// spiel
-																							// kann
-																							// starten
+			GameState gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
+			SetMemento(gs);
+			notifyObs(gs); // TODO ok, spiel kann starten
 		}
 	}
 

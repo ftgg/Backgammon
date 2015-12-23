@@ -3,7 +3,6 @@ package de.htwg.backgammon.aview;
 import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.GameState;
 
-
 public class BackgammonStringBuilder implements TuiSB {
 
 	public BackgammonStringBuilder() {
@@ -20,7 +19,7 @@ public class BackgammonStringBuilder implements TuiSB {
 		for (int i = 0; i < 4; i++) {
 			appendDiced(a[i], sb);
 		}
-		sb.append("\n");
+		sb.append("\n" + gs.getCurrent() + " ist am Zug:");
 		return sb;
 	}
 

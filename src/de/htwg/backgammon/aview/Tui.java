@@ -20,43 +20,44 @@ public class Tui implements Observer {
 		System.out.println("Tui startet");
 		contr = c;
 		contr.add(this);
-//		initNames();	
-//		running();
+		// initNames();
+		// running();
 	}
 
 	protected Tui() {
 		// constructor for tests
 	}
 
-	private void initNames() {
-		String s1;
-		String s2;
-		print("Hallo, bitte zwei Spielernamen angeben:");
-		print("Name Spieler Weiss:");
+	// private void initNames() {
+	// String s1;
+	// String s2;
+	// print("Hallo, bitte zwei Spielernamen angeben:");
+	// print("Name Spieler Weiss:");
+	//
+	// s1 = sc.next();
+	// print("Name Spieler Schwarz:");
+	// s2 = sc.next();
+	//
+	// print("Viel Spass " + s1 + " und " + s2);
+	// contr.setSpieler(s1, s2);
+	// }
 
-		s1 = sc.next();
-		print("Name Spieler Schwarz:");
-		s2 = sc.next();
+	// private void running() {
+	// System.out.println("running");
+	// while (!gs.getGameFinished()) {
+	// print(gs.getMessage());
+	// printField();
+	// eingabe();
+	// }
+	// print(gs.getMessage());
+	// }
 
-		print("Viel Spass " + s1 + " und " + s2);
-		contr.setSpieler(s1, s2);
-	}
-
-	private void running() {
-		while (!gs.getGameFinished()) {
-			print(gs.getMessage());
-			printField();
-			eingabe();
-		}
-		print(gs.getMessage());
-	}
-
-	private void eingabe() {
-		print(gs.getCurrent() + " ist am Zug:");
-		String input;
-		input = sc.next();
-		contr.doAction(input);
-	}
+	// private void eingabe() {
+	// print(gs.getCurrent() + " ist am Zug:");
+	// String input;
+	// input = sc.next();
+	// contr.doAction(input);
+	// }
 
 	public void printField() {
 		print(bStringBuilder.getStringBuilder(gs).toString());
@@ -65,29 +66,35 @@ public class Tui implements Observer {
 
 	@Override
 	public void update(Event e) {
-		System.out.println("update");
 		if (e instanceof GameState) {
 			GameState old = gs;
 			gs = (GameState) e;
-			if(old == null)
-				running();
-		}
-		else if (e instanceof InitPlayersState){
-			System.out.println("Ich muss name geben");
+			printField();
+		} else if (e instanceof InitPlayersState) {
 			ps = (InitPlayersState) e;
 			getName();
 		}
 	}
 
-	public void getName(){
-		print("Spieler Name:");
-		String s1 = sc.next();
-		if(ps.getStatus() == 2)
+	public void getName() {
+		if (ps.getStatus() == 2) {
 			return;
-		contr.setPlayer(s1);
+		}
+		print("Spieler Name:");
+		String name = sc.next();
+		// if(ps.getStatus() == 2)
+		// return;
+		contr.setPlayer(name);
 	}
-	
+
 	public void print(String msg) {
 		System.out.println(msg);
+	}
+
+	public boolean processInputLine(String next) {
+		print(gs.getMessage());
+		printField();
+		contr.doAction(next);
+		return !gs.getGameFinished();
 	}
 }

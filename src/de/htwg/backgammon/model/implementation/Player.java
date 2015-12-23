@@ -37,13 +37,19 @@ public class Player implements IPlayer, Serializable {
 	public String getName() {
 		return name;
 	}
-	@Override 
-	public boolean equals(Object o){
-		if(o instanceof Player){
-			Player p = (Player)o;
-			if(p.getColor() == this.color)
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Player) {
+			Player p = (Player) o;
+			if (p.getColor() == this.color)
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "Player(" + color + ") :" + name;
 	}
 }
