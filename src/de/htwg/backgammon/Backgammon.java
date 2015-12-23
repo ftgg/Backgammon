@@ -12,23 +12,22 @@ public class Backgammon {
 	private static Gui gui;
 	private static Tui tui;
 	private static Controller c;
-	
-	
+
 	private Backgammon() {
 	}
 
 	public static void main(String[] args) {
 		c = new Controller();
-		tui =new Tui(c);
-		gui =new Gui(c);
-		
+		tui = new Tui(c);
+		gui = new Gui(c);
+
 		c.create();
-		
+
 		boolean continu = true;
-		while(continu){
+		while (continu) {
 			continu = tui.processInputLine(sc.nextLine());
 		}
-		
+
 	}
 
 }

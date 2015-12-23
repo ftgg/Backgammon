@@ -260,7 +260,8 @@ public class Controller extends Subject {
 
 		while (iterator.hasNext()) {
 			m = iterator.next();
-			notifyObs(m.getGameState());
+			loadGameState(m.getGameState());
+			
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
