@@ -25,7 +25,9 @@ public class IconField extends JPanel {
 			labels[2 * i] = new Field(one, id[2 * i] + 1, mp);
 			labels[2 * i + 1] = new Field(two, id[2 * i + 1] + 1, mp);
 		}
-		labels[12] = new Field(new ImageIcon("images/whitespace.png"), 25, mp);
+		labels[12] = new Field(mp.ct.getBar(), 25, mp);
+		if(offset == 0)
+			labels[12] = new Field(mp.ct.getBarTop(), 25, mp);
 		for (int i = 0; i < 13; i++) {
 			this.add(labels[index[Math.abs(offset-i)]]);
 		}

@@ -45,7 +45,6 @@ public class MainPanel extends JPanel implements Observer {
 		this.add(top, BorderLayout.NORTH);
 		this.add(mid, BorderLayout.CENTER);
 		this.add(bot, BorderLayout.SOUTH);
-		// top.doUpdate(new int[]{0,0,0,0,0,0,0,1,1,1,1,0,0},0); klappt
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class MainPanel extends JPanel implements Observer {
 	private void spreadUpdate() {
 		System.out.println(gs.getZuege()[0] + " " + gs.getZuege()[1]);
 		top.doUpdate(gs.getWhiteStones(), gs.getBlackStones(), gs.getWhiteBar(), 0);
-//		mid.setIcon(ct.getDice(gs.getZuege()[0]));
+		mid.doUpdate(gs.getZuege());
 		bot.doUpdate(gs.getWhiteStones(), gs.getBlackStones(), gs.getBlackBar(), 12);
 		this.repaint();
 	}

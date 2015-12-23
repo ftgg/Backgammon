@@ -16,11 +16,13 @@ import de.htwg.backgammon.util.Observer;
 public class Gui extends JFrame implements Observer {
 
 	public MainPanel mainPanel; // Public just for tests
+	private JLayeredPane pitch;
 	private InitPlayersState ps;
 	protected Controller c;
 
 	public Gui(Controller c) {
 		super("Backgammon");
+		pitch = new JLayeredPane();
 		this.c = c;
 		c.add(this);
 		mainPanel = new MainPanel(c);

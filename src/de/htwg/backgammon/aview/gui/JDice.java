@@ -29,14 +29,15 @@ public class JDice extends JPanel {
 		int height = mp.ct.getDice(1).getIconHeight();
 		// System.out.println("Hallo: " + (d1.getWidth() + 10) * 4 + " // " +
 		// d1.getHeight()+" // "+mp.ct.getDice(1).getIconWidth());
-		layeredPane.setPreferredSize(new Dimension(4*width, height));
+		layeredPane.setPreferredSize(new Dimension(4 * width, height));
 		layeredPane.setLayout(new FlowLayout());
 
 		layeredPane.add(d4, new Integer(1), 0);
 		layeredPane.add(d2, new Integer(1), 0);
 		layeredPane.add(d1, new Integer(1), 0);
 		layeredPane.add(d3, new Integer(1), 0);
-		
+		doUpdate(new int[] { 1, 2, 0, 5 });
+		doUpdate(new int[] { 1, 2, 3, 4 });
 		this.add(layeredPane);
 	}
 
