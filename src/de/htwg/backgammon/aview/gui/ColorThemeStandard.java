@@ -24,14 +24,14 @@ public class ColorThemeStandard implements IColorTheme {
 	public ImageIcon getDarkTriangleTop() {
 		return rotateTriangle("images/d_dunkel.png");
 	}
-	
-	private ImageIcon rotateTriangle(String s){
+
+	private ImageIcon rotateTriangle(String s) {
 		ImageIcon i = ImageString(s);
-		BufferedImage bi = new BufferedImage(i.getIconWidth(),i.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage bi = new BufferedImage(i.getIconWidth(), i.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = bi.createGraphics();
 		AffineTransform at = AffineTransform.getRotateInstance(Math.PI, i.getIconWidth() / 2.0, i.getIconWidth() / 2.0);
 		at.translate(0, -500);
-		g2.drawImage(i.getImage(),at, null);
+		g2.drawImage(i.getImage(), at, null);
 		g2.dispose();
 		return new ImageIcon(bi);
 	}
@@ -43,7 +43,11 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getBar() {
-		return ImageString("images/empty.png");
+		return ImageString("images/Bar.png");
+	}
+	@Override
+	public ImageIcon getBarTop() {
+		return rotateTriangle("images/Bar.png");
 	}
 
 	@Override
@@ -68,7 +72,9 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getDice(int n) {
-		String s ="images/"+n+".png";
-		return new ImageIcon(s);
+		String s = "images/" + n + ".png";
+		ImageIcon i = new ImageIcon(s);
+		i.setImage(i.getImage().getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
+		return i;
 	}
 }
