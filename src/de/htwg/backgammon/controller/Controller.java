@@ -217,8 +217,9 @@ public class Controller extends Subject {
 			FileInputStream fileIn = new FileInputStream(f);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			states = new Caretaker((ArrayDeque<Memento>)in.readObject());
+			in.close();
 		}catch (IOException e){
-			e.printStackTrace();
+//			e.printStackTrace();
 			return;
 		}catch (ClassNotFoundException c){
 			System.out.println("Class not Found!");
@@ -227,7 +228,6 @@ public class Controller extends Subject {
 		}
 		GameState g = states.readLastState().getGameState();
 		loadGameState(g);
-		
 	}
 	
 	public void PlayGame() throws InterruptedException{
