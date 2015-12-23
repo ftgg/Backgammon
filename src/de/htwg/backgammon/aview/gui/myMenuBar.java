@@ -15,8 +15,10 @@ public class myMenuBar extends JMenuBar {
 	private JMenuItem undo;
 	private JMenuItem replay;
 	private JMenuItem colorTheme;
+	private Gui gui;
 
-	public myMenuBar() {
+	public myMenuBar(Gui gui) {
+		this.gui = gui;
 		data = new JMenu("Datei");
 		data.setMnemonic(KeyEvent.VK_D);
 		data.getAccessibleContext().setAccessibleDescription("Descriptions are for noobs!");
@@ -48,7 +50,7 @@ public class myMenuBar extends JMenuBar {
 	            new ActionListener(){
 	                public void actionPerformed(ActionEvent e)
 	                {
-	                	//TODO
+	                	gui.c.undo();
 	                }
 	            }
 	        );
