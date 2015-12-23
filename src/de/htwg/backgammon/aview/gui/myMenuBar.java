@@ -71,7 +71,7 @@ public class myMenuBar extends JMenuBar {
 		save = new JMenuItem("Speichern");
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int returnVal = fc.showOpenDialog(null);
+				int returnVal = fc.showSaveDialog(null);
 
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
