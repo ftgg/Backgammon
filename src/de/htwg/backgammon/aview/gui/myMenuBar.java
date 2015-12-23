@@ -53,7 +53,7 @@ public class myMenuBar extends JMenuBar {
 		replay = new JMenuItem("Wiederholung");
 		replay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gui.c.playGame();
+				gui.c.replayGame();
 			}
 		});
 		load = new JMenuItem("Laden");
