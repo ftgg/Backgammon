@@ -65,4 +65,10 @@ public class ColorThemeStandard implements IColorTheme {
 		ImageIcon ico = new ImageIcon(path);
 		return ico;
 	}
+
+	@Override
+	public ImageIcon getDice(int n) {
+		String s ="images/"+n+".png";
+		return new ImageIcon(s);
+	}
 }

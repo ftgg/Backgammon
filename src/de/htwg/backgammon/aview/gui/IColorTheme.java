@@ -12,5 +12,5 @@ public interface IColorTheme {
 	public ImageIcon getnoToken();
 	public ImageIcon getDarkToken();
 	public ImageIcon getLightToken();
-	
+	public ImageIcon getDice(int n);
 }
