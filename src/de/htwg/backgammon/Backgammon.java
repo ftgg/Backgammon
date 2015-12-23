@@ -10,7 +10,7 @@ public class Backgammon {
 	
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		//new Tui(c);
+		new Tui(c);
 		new Gui(c);
 //		new Test();
 	}

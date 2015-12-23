@@ -19,9 +19,11 @@ public class GameState implements Event,Serializable {
 	private int whiteBar;
 	private int[] zuege;
 	private String message;
-	private IPlayer current;
-	private IPlayer s1;
-	private IPlayer s2;
+	private TokenColor current;
+	private TokenColor p1c;
+	private TokenColor p2c;
+	private String p1n;
+	private String p2n;
 	private boolean gamefinished = false;
 
 	public GameState(IPitch sf, int[] z, IPlayer s, IPlayer s1, IPlayer s2) {
@@ -35,7 +37,12 @@ public class GameState implements Event,Serializable {
 		whiteStones = new int[sf.getSize()];
 		this.whiteBar = sf.getBarCount(TokenColor.WHITE);
 		this.blackBar = sf.getBarCount(TokenColor.BLACK);
-		current = s;
+		current = s.getColor();
+		p1c = s1.getColor();
+		p1n = s1.getName();
+		p2c = s2.getColor();
+		p2n = s2.getName();
+		
 		gamefinished = w;
 		fillArrays(sf);
 	}
@@ -45,11 +52,13 @@ public class GameState implements Event,Serializable {
 	}
 	
 	public IPlayer[] getPlayer(){
-		return new IPlayer[]{s1,s2};
+		return new IPlayer[]{new Player(p1n,p1c),new Player(p2n,p2c)};
 	}
 	
 	public IPlayer getCurrent() {
-		return current;
+		if(current == p1c)
+			return new Player(p1n,p1c);
+		return new Player(p2n,p2c);
 	}
 
 	public int[] getWhiteStones() {
@@ -145,6 +154,7 @@ public class GameState implements Event,Serializable {
 		this.blackBar = 0;
 		this.whiteStonesOnPitch = onPitch;
 		this.blackStonesOnPitch = onPitch;
+		current = TokenColor.WHITE;
 		current = null;
 		gamefinished = false;
 	}

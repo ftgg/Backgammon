@@ -194,6 +194,7 @@ public class Controller extends Subject {
 		this.current = gs.getCurrent();
 		s1 = gs.getPlayer()[0];
 		s2 = gs.getPlayer()[1];
+		System.out.println(s1);
 		System.out.println(s1.getName());
 		System.out.println(s2.getName());
 		System.out.println(zuege.toString());

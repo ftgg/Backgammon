@@ -50,7 +50,9 @@ public class GameStateTest extends TestCase {
 	@Test
 	public void testMessageAndSpieler() {
 		assertEquals("Update", gs.getMessage());
-		assertEquals(spielerw,gs.getCurrent());
+		System.out.println(spielerw.getColor());
+		System.out.println(gs.getCurrent().getColor());
+		assertTrue(spielerw.equals(gs.getCurrent()));
 	}
 
 	@Test
