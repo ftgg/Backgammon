@@ -21,6 +21,7 @@ public class Backgammon {
 		c = new Controller();
 		tui =new Tui(c);
 		gui =new Gui(c);
+		
 		c.create();
 		
 		boolean continu = true;

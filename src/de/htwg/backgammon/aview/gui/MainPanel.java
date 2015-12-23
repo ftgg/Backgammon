@@ -62,5 +62,6 @@ public class MainPanel extends JPanel implements Observer{
 		top.doUpdate(gs.getWhiteStones(),gs.getBlackStones(),gs.getWhiteBar(),0);
 		//TODO mid
 		bot.doUpdate(gs.getWhiteStones(),gs.getBlackStones(),gs.getBlackBar(),12);
+		this.repaint();
 	}
 }
