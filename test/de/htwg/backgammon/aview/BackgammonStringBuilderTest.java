@@ -30,8 +30,8 @@ public class BackgammonStringBuilderTest {
 		black = new Player("Helga", TokenColor.BLACK);
 		sf = new Pitch();
 		sfS = new Pitch(GameState.getTestGameState(1));
-		gsS = new GameState(sfS, zuege, "no message", black, false);
-		gs = new GameState(sf, zuege, "no message", player, false);
+		gsS = new GameState(sfS, zuege, "no message", black, false,player,black);
+		gs = new GameState(sf, zuege, "no message", player, false, player,black);
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class BackgammonStringBuilderTest {
 		assertEquals(sb.toString(), scaledres);
 		sf.move(0, 11, player);
 		sf.move(23, 12, black);
-		gs = new GameState(sf, zuege, "no message", player, false);
+		gs = new GameState(sf, zuege, "no message", player, false,player,black);
 		assertEquals(bs.getStringBuilder(gs).toString(),withX);
 	}
 

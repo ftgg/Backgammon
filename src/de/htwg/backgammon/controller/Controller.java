@@ -23,7 +23,7 @@ public class Controller extends Subject {
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
-
+	private Caretaker states;
 	private int lastclick; // only need with gui
 
 	public Controller() {
@@ -56,7 +56,7 @@ public class Controller extends Subject {
 		s1 = new Player(n1, TokenColor.WHITE);
 		s2 = new Player(n2, TokenColor.BLACK);
 		current = s1;
-		gs = new GameState(sf, zuege, "Spiel Beginnt", current, false);
+		gs = new GameState(sf, zuege, "Spiel Beginnt", current, false,s1,s2);
 		SetMemento(gs);
 		notifyObs(gs);
 	}
@@ -65,12 +65,12 @@ public class Controller extends Subject {
 		int[] act = actionparser.parse(s);
 		GameState gs;
 		if (act[0] == -3 || act[1] == -3) {
-			gs = new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false);
+			gs = new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false,s1,s2);
 			notifyObs(gs);
 			return;
 		} else if (act[0] == NEXT) {
 			spielerwechsel();
-			gs = new GameState(sf, zuege, "SpielerWechsel", current, false);
+			gs = new GameState(sf, zuege, "SpielerWechsel", current, false,s1,s2);
 			SetMemento(gs);
 			notifyObs(gs);
 			return;
@@ -98,7 +98,7 @@ public class Controller extends Subject {
 		GameState gs;
 		String msg = "";
 		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1,s2)) {
-			gs = new GameState(sf, zuege, "Nicht möglicher Zug!", current, false);
+			gs = new GameState(sf, zuege, "Nicht möglicher Zug!", current, false,s1,s2);
 			notifyObs(gs);
 			return -3;
 		}
@@ -110,7 +110,7 @@ public class Controller extends Subject {
 
 		if (zuegeEmpty())
 			spielerwechsel();
-		gs = new GameState(sf, zuege, msg, current, win);
+		gs = new GameState(sf, zuege, msg, current, win,s1,s2);
 		SetMemento(gs);
 		notifyObs(gs);
 		return result;
@@ -167,9 +167,6 @@ public class Controller extends Subject {
 		return current;
 	}
 
-
-	Caretaker states;
-	
 	private void CreateMemento(){
 		states = new Caretaker();
 	}
@@ -181,6 +178,7 @@ public class Controller extends Subject {
 	public void undo(){
 		GameState gs = states.getLastState().getGameState();
 		loadGameState(gs);
+		notifyObs(gs);
 	}
 	
 	private void loadGameState(GameState gs){
