@@ -41,13 +41,12 @@ public class Controller extends Subject {
 		createMoveVerifier();
 		CreateMemento();
 		actionparser = new ActionParser();
+		wuerfeln();
 	}
 
 	public void create() {
-		wuerfeln();
 		notifyObs(new InitPlayersState(0)); // TODO will namen
 		// System.out.println("Observer sollen mir namen gebeb");
-
 	}
 
 	/**
