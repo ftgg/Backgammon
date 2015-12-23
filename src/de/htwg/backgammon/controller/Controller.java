@@ -230,13 +230,17 @@ public class Controller extends Subject {
 		loadGameState(g);
 	}
 	
-	public void PlayGame() throws InterruptedException{
+	public void playGame(){
 		Iterator<Memento> iterator = states.iterator();
 		Memento m;
+		
 		while(iterator.hasNext()){
 			m = iterator.next();
 			notifyObs(m.getGameState());
-			Thread.sleep(500);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+			}
 		}
 	}
 
