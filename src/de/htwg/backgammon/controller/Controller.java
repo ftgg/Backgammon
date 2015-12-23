@@ -1,5 +1,7 @@
 package de.htwg.backgammon.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
 import java.util.Iterator;
+
+import javax.swing.Timer;
 
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
@@ -254,19 +258,22 @@ public class Controller extends Subject {
 		loadGameState(g);
 	}
 
+	Timer t;
+
 	public void replayGame() {
 		Iterator<Memento> iterator = states.iterator();
-		Memento m;
 
-		while (iterator.hasNext()) {
-			m = iterator.next();
-			loadGameState(m.getGameState());
-			
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
+		t = new Timer(500, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!iterator.hasNext()){
+					t.stop();
+					return;
+				}
+				Memento m = iterator.next();
+				loadGameState(m.getGameState());
 			}
-		}
+		});
+		t.start();
 	}
 
 	public void setclick(int id) {

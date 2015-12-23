@@ -19,6 +19,10 @@ public class Caretaker implements Iterable<Memento>{
 	}
 	
 	public Memento getLastState(){
+		if(queue.size() == 1){
+			return queue.peekLast();
+		}
+			
 		return queue.removeLast();
 	}
 	
