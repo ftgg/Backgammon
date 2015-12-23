@@ -2,11 +2,14 @@ package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.ITriangle;
 import de.htwg.backgammon.util.Event;
+
+import java.io.Serializable;
+
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 
-public class GameState implements Event {
+public class GameState implements Event,Serializable {
 	/*Restorefunctions in Controller, to restore GameState*/
 	private int[] whiteStones;
 	private int[] blackStones;
