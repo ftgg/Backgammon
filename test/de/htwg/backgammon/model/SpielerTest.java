@@ -26,6 +26,7 @@ public class SpielerTest extends TestCase {
 		// assertEquals(name, s.getName());
 		assertEquals(name2, s2.getName());
 		assertEquals(name3, s3.getName());
+		assertEquals(s3.toString(), "Player(BLACK): Max");
 	}
 
 	@Test
@@ -33,6 +34,5 @@ public class SpielerTest extends TestCase {
 		assertEquals(TokenColor.WHITE, s2.getColor());
 		assertEquals(TokenColor.BLACK, s3.getColor());
 	}
-	
 
 }

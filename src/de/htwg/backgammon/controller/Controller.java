@@ -1,7 +1,5 @@
 package de.htwg.backgammon.controller;
 
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,6 +17,7 @@ import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
 import de.htwg.backgammon.model.implementation.Dice;
 import de.htwg.backgammon.model.implementation.GameState;
+import de.htwg.backgammon.model.implementation.InitPlayersState;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
@@ -35,12 +34,18 @@ public class Controller extends Subject {
 	private int lastclick; // only need with gui
 
 	public Controller() {
-		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße = original größe
+		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße =
+														// original größe
 		w = new Dice();
 		lastclick = -1;
 		createMoveVerifier();
 		CreateMemento();
 		actionparser = new ActionParser();
+	}
+	
+	public void create(){
+		notifyObs(new InitPlayersState(0)); // TODO will namen
+		System.out.println("Observer sollen mir namen gebeb");
 		wuerfeln();
 	}
 
@@ -59,12 +64,27 @@ public class Controller extends Subject {
 		setSpieler("Weiss", "Schwarz");
 	}
 
+	public void setPlayer(String name) {
+		if (s1 == null) {
+			s1 = new Player(name, TokenColor.WHITE);
+			notifyObs(new InitPlayersState(1)); // TODO will noch ein Namen
+		} else {
+			s2 = new Player(name, TokenColor.WHITE);
+			notifyObs(new InitPlayersState(2));
+			notifyObs(new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2)); // TODO
+																							// ok,
+																							// spiel
+																							// kann
+																							// starten
+		}
+	}
+
 	public void setSpieler(String n1, String n2) {
 		GameState gs;
 		s1 = new Player(n1, TokenColor.WHITE);
 		s2 = new Player(n2, TokenColor.BLACK);
 		current = s1;
-		gs = new GameState(sf, zuege, "Spiel Beginnt", current, false,s1,s2);
+		gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
 		SetMemento(gs);
 		notifyObs(gs);
 	}
@@ -73,12 +93,12 @@ public class Controller extends Subject {
 		int[] act = actionparser.parse(s);
 		GameState gs;
 		if (act[0] == -3 || act[1] == -3) {
-			gs = new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false,s1,s2);
+			gs = new GameState(sf, zuege, "Fehlerhafte Eingabe!", current, false, s1, s2);
 			notifyObs(gs);
 			return;
 		} else if (act[0] == NEXT) {
 			spielerwechsel();
-			gs = new GameState(sf, zuege, "SpielerWechsel", current, false,s1,s2);
+			gs = new GameState(sf, zuege, "SpielerWechsel", current, false, s1, s2);
 			SetMemento(gs);
 			notifyObs(gs);
 			return;
@@ -105,8 +125,8 @@ public class Controller extends Subject {
 		boolean win = false;
 		GameState gs;
 		String msg = "";
-		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1,s2)) {
-			gs = new GameState(sf, zuege, "Nicht möglicher Zug!", current, false,s1,s2);
+		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1, s2)) {
+			gs = new GameState(sf, zuege, "Nicht möglicher Zug!", current, false, s1, s2);
 			notifyObs(gs);
 			return -3;
 		}
@@ -118,7 +138,7 @@ public class Controller extends Subject {
 
 		if (zuegeEmpty())
 			spielerwechsel();
-		gs = new GameState(sf, zuege, msg, current, win,s1,s2);
+		gs = new GameState(sf, zuege, msg, current, win, s1, s2);
 		SetMemento(gs);
 		notifyObs(gs);
 		return result;
@@ -175,20 +195,20 @@ public class Controller extends Subject {
 		return current;
 	}
 
-	private void CreateMemento(){
+	private void CreateMemento() {
 		states = new Caretaker();
 	}
-	
-	private void SetMemento(GameState gs){
+
+	private void SetMemento(GameState gs) {
 		states.addState(new Memento(gs));
 	}
-	
-	public void undo(){
+
+	public void undo() {
 		GameState gs = states.getLastState().getGameState();
 		loadGameState(gs);
 	}
-	
-	private void loadGameState(GameState gs){
+
+	private void loadGameState(GameState gs) {
 		this.sf = new Pitch(gs);
 		this.zuege = gs.getZuege();
 		this.current = gs.getCurrent();
@@ -200,9 +220,9 @@ public class Controller extends Subject {
 		System.out.println(zuege.toString());
 		notifyObs(gs);
 	}
-	
-	public void saveGame(File f){
-		try{
+
+	public void saveGame(File f) {
+		try {
 			FileOutputStream fout = new FileOutputStream(f);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
 			out.writeObject(states.getStack());
@@ -214,18 +234,18 @@ public class Controller extends Subject {
 			return;
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public void loadGame(File f){
-		try{
+	public void loadGame(File f) {
+		try {
 			FileInputStream fileIn = new FileInputStream(f);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
-			states = new Caretaker((ArrayDeque<Memento>)in.readObject());
+			states = new Caretaker((ArrayDeque<Memento>) in.readObject());
 			in.close();
-		}catch (IOException e){
-//			e.printStackTrace();
+		} catch (IOException e) {
+			// e.printStackTrace();
 			return;
-		}catch (ClassNotFoundException c){
+		} catch (ClassNotFoundException c) {
 			System.out.println("Class not Found!");
 			c.printStackTrace();
 			return;
@@ -233,12 +253,12 @@ public class Controller extends Subject {
 		GameState g = states.readLastState().getGameState();
 		loadGameState(g);
 	}
-	
-	public void replayGame(){
+
+	public void replayGame() {
 		Iterator<Memento> iterator = states.iterator();
 		Memento m;
-		
-		while(iterator.hasNext()){
+
+		while (iterator.hasNext()) {
 			m = iterator.next();
 			notifyObs(m.getGameState());
 			try {
@@ -248,7 +268,6 @@ public class Controller extends Subject {
 		}
 	}
 
-	
 	public void setclick(int id) {
 		if (lastclick == -1) {
 			lastclick = id;
@@ -259,7 +278,7 @@ public class Controller extends Subject {
 		}
 	}
 
-	//25 is bar or home
+	// 25 is bar or home
 	public String toStr(int a, int b) {
 		String first;
 		if (a == 25 || a == 25)

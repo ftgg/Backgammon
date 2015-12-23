@@ -5,7 +5,7 @@ import java.io.Serializable;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 
-public class Player implements IPlayer,Serializable {
+public class Player implements IPlayer, Serializable {
 
 	private String name;
 	private TokenColor color;
