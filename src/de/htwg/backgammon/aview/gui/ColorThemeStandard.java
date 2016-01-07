@@ -45,6 +45,7 @@ public class ColorThemeStandard implements IColorTheme {
 	public ImageIcon getBar() {
 		return ImageString("images/Bar.png");
 	}
+
 	@Override
 	public ImageIcon getBarTop() {
 		return rotateTriangle("images/Bar.png");
@@ -66,8 +67,7 @@ public class ColorThemeStandard implements IColorTheme {
 	}
 
 	private ImageIcon ImageString(String path) {
-		ImageIcon ico = new ImageIcon(path);
-		return ico;
+		return new ImageIcon(path);
 	}
 
 	@Override
@@ -76,5 +76,14 @@ public class ColorThemeStandard implements IColorTheme {
 		ImageIcon i = new ImageIcon(s);
 		i.setImage(i.getImage().getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
 		return i;
+	}
+
+	@Override
+	public ImageIcon getSelected(SelectIcon pos) {
+		String name = pos.toString();
+		String s = "images/" + name + ".png";
+		if (name.contains("TOP"))
+			return rotateTriangle(s);
+		return new ImageIcon(s);
 	}
 }

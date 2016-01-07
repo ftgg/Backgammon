@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import de.htwg.backgammon.controller.Controller;
 import de.htwg.backgammon.model.implementation.GameState;
+import de.htwg.backgammon.model.implementation.SelectState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 
@@ -58,7 +59,48 @@ public class MainPanel extends JPanel implements Observer {
 		if (e instanceof GameState) {
 			gs = (GameState) e;
 			spreadUpdate();
+		} else if (e instanceof SelectState) {
+			SelectState s = (SelectState) e;
+			setclick(s);
 		}
+	}
+
+	private void setclick(SelectState s) {
+		if (s.isTop())
+			top.select(s.getIndex(), getIcon(s));
+		else
+			bot.select(s.getIndex(), getIcon(s));
+	}
+
+	//TODO if(works){reduce complexity}
+	private ImageIcon getIcon(SelectState s) {
+		ImageIcon setit;
+		if (s.isTop()) {
+			if (s.getIndex() % 2 == 0) {
+				if (s.getSelect())
+					setit = ct.getSelected(SelectIcon.LIGHTTOP);
+				else
+					setit = ct.getLightTriangleTop();
+			} else {
+				if (s.getSelect())
+					setit = ct.getSelected(SelectIcon.DARKTOP);
+				else
+					setit = ct.getDarkTriangle();
+			}
+		} else {
+			if (s.getIndex() % 2 == 0) {
+				if (s.getSelect())
+					setit = ct.getSelected(SelectIcon.DARKBOT);
+				else
+					setit = ct.getDarkTriangle();
+			} else {
+				if (s.getSelect())
+					setit = ct.getSelected(SelectIcon.LIGHTTOP);
+				else
+					setit = ct.getLightTriangle();
+			}
+		}
+		return setit;
 	}
 
 	private void spreadUpdate() {

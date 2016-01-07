@@ -19,6 +19,7 @@ import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
+import de.htwg.backgammon.model.implementation.SelectState;
 import de.htwg.backgammon.model.implementation.Dice;
 import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.model.implementation.InitPlayersState;
@@ -278,9 +279,11 @@ public class Controller extends Subject {
 	public void setclick(int id) {
 		if (lastclick == -1) {
 			lastclick = id;
+			notifyObs(new SelectState(id, id < 12, true));
 		} else {
 			System.out.println(toStr(lastclick, id));
 			doAction(toStr(lastclick, id));
+			notifyObs(new SelectState(id, id < 12, false));
 			lastclick = -1;
 		}
 	}

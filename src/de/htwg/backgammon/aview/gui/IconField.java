@@ -97,4 +97,8 @@ public class IconField extends JPanel {
 			f.myresize();
 	}
 
+	public void select(int index, ImageIcon i) {
+		labels[index].setIcon(i);
+	}
+
 }
