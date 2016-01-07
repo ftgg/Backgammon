@@ -79,7 +79,7 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getSelected(SelectIcon pos) {
-		// TODO Auto-generated method stub
-		return new ImageIcon("images/empty.png");
+		String s = "images/"+pos+".png";
+		return new ImageIcon(s);
 	}
 }
