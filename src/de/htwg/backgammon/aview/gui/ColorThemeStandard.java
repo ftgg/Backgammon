@@ -66,8 +66,7 @@ public class ColorThemeStandard implements IColorTheme {
 	}
 
 	private ImageIcon ImageString(String path) {
-		ImageIcon ico = new ImageIcon(path);
-		return ico;
+		return new ImageIcon(path);
 	}
 
 	@Override
@@ -76,5 +75,11 @@ public class ColorThemeStandard implements IColorTheme {
 		ImageIcon i = new ImageIcon(s);
 		i.setImage(i.getImage().getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
 		return i;
+	}
+
+	@Override
+	public ImageIcon getSelected(SelectIcon pos) {
+		// TODO Auto-generated method stub
+		return new ImageIcon("images/empty.png");
 	}
 }

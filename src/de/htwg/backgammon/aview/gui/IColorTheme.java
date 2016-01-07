@@ -13,5 +13,6 @@ public interface IColorTheme {
 	public ImageIcon getDarkToken();
 	public ImageIcon getLightToken();
 	public ImageIcon getDice(int n);
-	ImageIcon getBarTop();
+	public ImageIcon getSelected(SelectIcon pos);
+	public ImageIcon getBarTop();
 }
