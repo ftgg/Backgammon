@@ -1,5 +1,6 @@
 package de.htwg.backgammon.aview.gui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -19,6 +20,7 @@ public class IconField extends JPanel {
 
 		index = new int[] { 11, 10, 9, 8, 7, 6, 12, 5, 4, 3, 2, 1, 0 };
 		this.setLayout(new GridLayout(1, 0));
+		this.setBackground(new Color(0,0,0,0));
 		this.mp = mp;
 
 		for (int i = 0; i < 6; i++) {
@@ -92,10 +94,6 @@ public class IconField extends JPanel {
 		labels[12].setTokens(bar, mp.ct.getDarkToken(), xOffset);
 	}
 
-	public void resize() {
-		for (Field f : labels)
-			f.myresize();
-	}
 
 	public void select(int index, ImageIcon i) {
 		labels[index].setIcon(i);

@@ -1,11 +1,14 @@
 package de.htwg.backgammon.aview.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,7 +29,8 @@ public class Gui extends JFrame implements Observer  {
 	private JLayeredPane pitch;
 	private InitPlayersState ps;
 	protected Controller c;
-
+	public static final int winX = 1300;
+	public static final int winY = 800;
 	public Gui(Controller c) {
 		super("Backgammon");
 		this.c = c;
@@ -35,21 +39,27 @@ public class Gui extends JFrame implements Observer  {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		pitch = new JLayeredPane();
-
-		pitch.setPreferredSize(new Dimension(1000,500));
+		
+		pitch.setPreferredSize(new Dimension(winX,winY));
 		pitch.setLayout(null);
-		mainPanel.setBounds(0, 0, 1000, 500);
-		pitch.add(mainPanel, new Integer(1), 0);
-		this.setPreferredSize(new Dimension(1000,500));
+		mainPanel.setOpaque(false);
+		mainPanel.setBackground(new Color(0,0,0,0));
+		pitch.add(mainPanel, new Integer(2), 0);
+		ImageIcon ico = new ImageIcon("images/Background.png");
+		JLabel bg = new JLabel(ico);
+		bg.setBounds(0, 0, 2500, 1700);
+		pitch.add(bg, new Integer(1), 0);
+		pitch.moveToBack(bg);
 		
-		System.out.println(this.getSize());
-		
+		this.setPreferredSize(new Dimension(winX,winY));
+		this.getContentPane().setLayout(new BorderLayout());
 		
 		this.setJMenuBar(new myMenuBar(this));
-		this.add(pitch);
-		this.pack();
-		// this.setResizable(false);
+		this.add(pitch,BorderLayout.CENTER);
+		
 		this.setVisible(true);
+		this.pack();
+		this.repaint();
 		// initplayers();
 		
 		this.addComponentListener(new ComponentListener() {
@@ -67,19 +77,33 @@ public class Gui extends JFrame implements Observer  {
 
 			@Override
 			public void componentResized(ComponentEvent e) {
-				//pitch.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
 				mainPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight()-60);
 				mainPanel.resize();
-				pitch.repaint();
-				mainPanel.repaint();
+				//pitch.repaint();
+				//mainPanel.repaint();
 			}
 
 			@Override
 			public void componentShown(ComponentEvent e) {
-				
 			}
 		});
-		
+		this.addWindowStateListener(new WindowStateListener() {
+
+			@Override
+			public void windowStateChanged(WindowEvent arg0) {
+				   // minimized
+				   if ((arg0.getNewState() & JFrame.NORMAL) == JFrame.NORMAL){
+					   mainPanel.setSize(arg0.getComponent().getWidth(), arg0.getComponent().getHeight()-60);
+					   mainPanel.resize();
+				   }
+				   // maximized
+				   else if ((arg0.getNewState() & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH){
+					   mainPanel.setSize(arg0.getComponent().getWidth(), arg0.getComponent().getHeight()-60);
+					   mainPanel.resize();
+				   }
+			}
+			
+		});
 		
 	}
 
@@ -107,4 +131,6 @@ public class Gui extends JFrame implements Observer  {
 			// return;
 			c.setPlayer(s1);
 	}
+	
+	
 }

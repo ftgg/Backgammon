@@ -1,11 +1,17 @@
 package de.htwg.backgammon.aview.gui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -19,11 +25,13 @@ public class Field extends JPanel {
 	private JLabel background;
 	public JLabel foreground;
 	public MainPanel mp;
-
+	private ImageIcon currentIco;
+	
 	public Field(ImageIcon icon, int id, MainPanel mp) {
 		super();
 		this.id = id;
 		this.mp = mp;
+		this.setBackground(new Color(0,0,0,0));
 		Dimension dim = new Dimension(100, 300);
 		layeredPane = new JLayeredPane();
 		layeredPane.setPreferredSize(dim);
@@ -32,7 +40,8 @@ public class Field extends JPanel {
 		background = new JLabel(scaleIcon(icon, dim));
 		layeredPane.add(background, new Integer(1), 0);
 		layeredPane.moveToBack(background);
-
+		
+		currentIco = icon;
 		background.setBounds(0, 0, 100, 300);
 		this.add(layeredPane);
 	}
@@ -67,20 +76,9 @@ public class Field extends JPanel {
 
 	}
 	
-	public final double DicePt = 12.5;
-    public void myresize(){
-    	int heightofField = (int)(mp.getHeight() / 2) * (int)(100 - DicePt / 2)/100;
-		this.setSize(mp.getWidth() / 13, heightofField);
-		layeredPane.setSize(this.getSize());
-		ImageIcon img = scaleIcon((ImageIcon)background.getIcon(),new Dimension(mp.getWidth() / 13, heightofField));
-		background.setIcon(img);
-		this.repaint();
-		//this.setBounds(0,mp.getHeight(),100,300);
-		System.out.println(this.getSize().getSize().toString());
-	}
-
 	public void setIcon(ImageIcon i) {
 		//TODO DIMENSION new Dimension(this.getHeight(), this.getWidth())
+		currentIco = i;
 		background = new JLabel(scaleIcon(i, new Dimension(100, 300)));
 	}
 

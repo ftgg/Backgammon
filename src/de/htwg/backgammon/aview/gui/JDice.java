@@ -1,8 +1,11 @@
 package de.htwg.backgammon.aview.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -27,8 +30,7 @@ public class JDice extends JPanel {
 		layeredPane = new JLayeredPane();
 		int width = (mp.ct.getDice(1).getIconWidth() + 5 * 4);
 		int height = mp.ct.getDice(1).getIconHeight();
-		// System.out.println("Hallo: " + (d1.getWidth() + 10) * 4 + " // " +
-		// d1.getHeight()+" // "+mp.ct.getDice(1).getIconWidth());
+		this.setLayout(null);
 		layeredPane.setPreferredSize(new Dimension(4 * width, height));
 		layeredPane.setLayout(new FlowLayout());
 
@@ -36,6 +38,8 @@ public class JDice extends JPanel {
 		layeredPane.add(d2, new Integer(1), 0);
 		layeredPane.add(d1, new Integer(1), 0);
 		layeredPane.add(d3, new Integer(1), 0);
+		
+		layeredPane.setBounds(Gui.winX / 2 + 200,Gui.winY / 2 - 360, 400, 120);
 		doUpdate(new int[] { 1, 2, 0, 5 });
 		doUpdate(new int[] { 1, 2, 3, 4 });
 		this.add(layeredPane);
@@ -46,5 +50,9 @@ public class JDice extends JPanel {
 		d2.setIcon(mp.ct.getDice(numbers[1]));
 		d3.setIcon(mp.ct.getDice(numbers[2]));
 		d4.setIcon(mp.ct.getDice(numbers[3]));
+	}
+	
+	public void repos(){
+		layeredPane.setBounds(mp.getWidth() / 2 -200, mp.getHeight() / 2 -360 , 400, 120);
 	}
 }
