@@ -67,4 +67,9 @@ public class Field extends JPanel {
 
 	}
 
+	public void setIcon(ImageIcon i) {
+		//TODO DIMENSION new Dimension(this.getHeight(), this.getWidth())
+		background = new JLabel(scaleIcon(i, new Dimension(100, 300)));
+	}
+
 }

@@ -91,4 +91,8 @@ public class IconField extends JPanel {
 		labels[12].setTokens(bar, mp.ct.getDarkToken(),xOffset);
 	}
 
+	public void select(int index, ImageIcon i) {
+		labels[index].setIcon(i);
+	}
+
 }
