@@ -10,6 +10,32 @@ import javax.swing.ImageIcon;
 
 public class ColorThemeStandard implements IColorTheme {
 
+	private ImageIcon[] icons;
+
+	
+	public ColorThemeStandard(){
+		icons = new ImageIcon[12];
+		icons[0] = getLightTriangleTop();
+		icons[1] = getSelected(SelectIcon.LIGHTTOP);
+		
+		icons[2] = getLightTriangle();
+		icons[3] = getSelected(SelectIcon.LIGHTBOT);
+		
+		icons[4] = getDarkTriangleTop();
+		icons[5] = getSelected(SelectIcon.DARKTOP);
+		
+		icons[6] = getDarkTriangle();
+		icons[7] = getSelected(SelectIcon.DARKBOT);
+		
+		icons[8] = getBarTop();
+		icons[9] = getSelected(SelectIcon.BARTOP);
+		
+		icons[10] = getBar();
+		icons[11] = getSelected(SelectIcon.BARBOT);
+
+	}
+	
+	
 	@Override
 	public ImageIcon getDarkTriangle() {
 		return ImageString("images/d_dunkel.png");
@@ -82,8 +108,15 @@ public class ColorThemeStandard implements IColorTheme {
 	public ImageIcon getSelected(SelectIcon pos) {
 		String name = pos.toString();
 		String s = "images/" + name + ".png";
+		System.out.println("greifen zu auf: " + s);
 		if (name.contains("TOP"))
-			return rotateTriangle(s);
+			return rotateTriangle(s.replace("TOP", "BOT"));
 		return new ImageIcon(s);
+	}
+
+	@Override
+	public ImageIcon get(int n) {
+		assert(n >= icons.length ||n < 0);
+		return icons[n];
 	}
 }

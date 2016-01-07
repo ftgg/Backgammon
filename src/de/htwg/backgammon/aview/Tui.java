@@ -84,7 +84,7 @@ public class Tui implements Observer {
 		String name = sc.next();
 		// if(ps.getStatus() == 2)
 		// return;
-		contr.setPlayer(name);
+		//contr.setPlayer(name);
 	}
 
 	public void print(String msg) {

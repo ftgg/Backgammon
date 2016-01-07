@@ -25,12 +25,14 @@ public class Field extends JPanel {
 	private JLabel background;
 	public JLabel foreground;
 	public MainPanel mp;
-	private ImageIcon currentIco;
+	private int icoType;
 	
-	public Field(ImageIcon icon, int id, MainPanel mp) {
+	public Field(int id, MainPanel mp,int icoType) {
 		super();
+		ImageIcon icon = mp.ct.get(icoType);
 		this.id = id;
 		this.mp = mp;
+		this.icoType = icoType;
 		this.setBackground(new Color(0,0,0,0));
 		Dimension dim = new Dimension(100, 300);
 		layeredPane = new JLayeredPane();
@@ -40,8 +42,7 @@ public class Field extends JPanel {
 		background = new JLabel(scaleIcon(icon, dim));
 		layeredPane.add(background, new Integer(1), 0);
 		layeredPane.moveToBack(background);
-		
-		currentIco = icon;
+
 		background.setBounds(0, 0, 100, 300);
 		this.add(layeredPane);
 	}
@@ -65,7 +66,7 @@ public class Field extends JPanel {
 		for (Component c : layeredPane.getComponentsInLayer(2))
 			layeredPane.remove(c);
 		this.repaint();
-		token = scaleIcon(token, this.getSize().width);
+		token = scaleIcon(token, 100);
 		for (int i = 0; i < n; i++) {
 			JLabel newLabel = new JLabel(token);
 			layeredPane.add(newLabel, new Integer(2), 0);
@@ -78,8 +79,13 @@ public class Field extends JPanel {
 	
 	public void setIcon(ImageIcon i) {
 		//TODO DIMENSION new Dimension(this.getHeight(), this.getWidth())
-		currentIco = i;
-		background = new JLabel(scaleIcon(i, new Dimension(100, 300)));
+//		background = new JLabel(scaleIcon(i, new Dimension(100, 300)));
+		background.setIcon(scaleIcon(i,new Dimension(100,300)));
+		this.repaint();
+	}
+
+	public void updateIcon(int b) {
+		setIcon(mp.ct.get(icoType + b));
 	}
 
 }

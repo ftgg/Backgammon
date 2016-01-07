@@ -41,17 +41,14 @@ public class Controller extends Subject {
 	public Controller() {
 		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße =
 														// original größe
+		
 		w = new Dice();
 		lastclick = -1;
 		createMoveVerifier();
 		CreateMemento();
 		actionparser = new ActionParser();
 		wuerfeln();
-	}
-
-	public void create() {
-		notifyObs(new InitPlayersState(0)); // TODO will namen
-		// System.out.println("Observer sollen mir namen gebeb");
+		setSpieler("Frau Weiss", "Herr Schwarz");
 	}
 
 	/**
@@ -66,29 +63,31 @@ public class Controller extends Subject {
 		actionparser = new ActionParser();
 		wuerfeln();
 		CreateMemento();
-		setSpieler("Weiss", "Schwarz");
+		setSpieler("Frau Weiss", "Herr Schwarz");
 	}
 
-	public void setPlayer(String name) {
-		if (s1 == null) {
-			s1 = new Player(name, TokenColor.WHITE);
-			current = s1;
-			notifyObs(new InitPlayersState(1)); // TODO will noch ein Namen
-		} else if (s2 == null) {
-			s2 = new Player(name, TokenColor.BLACK);
-			notifyObs(new InitPlayersState(2));
-			GameState gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
-			SetMemento(gs);
-			notifyObs(gs); // TODO ok, spiel kann starten
-		}
-	}
+//	public void setPlayer(String name) {
+//		if (s1 == null) {
+//			s1 = new Player(name, TokenColor.WHITE);
+//			current = s1;
+//			notifyObs(new InitPlayersState(1)); // TODO will noch ein Namen
+//		} else if (s2 == null) {
+//			s2 = new Player(name, TokenColor.BLACK);
+//			notifyObs(new InitPlayersState(2));
+//			GameState gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
+//			SetMemento(gs);
+//			notifyObs(gs); // TODO ok, spiel kann starten
+//		}
+//	}
 
 	public void setSpieler(String n1, String n2) {
-		GameState gs;
 		s1 = new Player(n1, TokenColor.WHITE);
 		s2 = new Player(n2, TokenColor.BLACK);
 		current = s1;
-		gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
+	}
+	
+	public void start(){
+		GameState gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
 		SetMemento(gs);
 		notifyObs(gs);
 	}
@@ -279,11 +278,15 @@ public class Controller extends Subject {
 	public void setclick(int id) {
 		if (lastclick == -1) {
 			lastclick = id;
-			notifyObs(new SelectState(id, id < 12, true));
+			notifyObs(new SelectState(id, id < 12, 1));
 		} else {
 			System.out.println(toStr(lastclick, id));
+//			if(lastclick == 25)
+//				lastclick = 13;
+//			if(lastclick == 26)
+//				lastclick = 12+13;
 			doAction(toStr(lastclick, id));
-			notifyObs(new SelectState(id, id < 12, false));
+			notifyObs(new SelectState(lastclick, id < 12 || id == 25, 0));
 			lastclick = -1;
 		}
 	}
@@ -291,11 +294,11 @@ public class Controller extends Subject {
 	// 25 is bar or home
 	public String toStr(int a, int b) {
 		String first;
-		if (a == 25 || a == 25)
+		if (a == 25 || a == 26)
 			first = "b ";
 		else
 			first = a + " ";
-		if (b == 25 || b == 25)
+		if (b == 25 || b == 26)
 			return first + "h";
 		return first + b;
 	}

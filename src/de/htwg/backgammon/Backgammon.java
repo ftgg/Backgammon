@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import de.htwg.backgammon.aview.Tui;
 import de.htwg.backgammon.aview.gui.Gui;
+import de.htwg.backgammon.aview.gui.SelectIcon;
 import de.htwg.backgammon.controller.Controller;
 
 public class Backgammon {
@@ -20,9 +21,7 @@ public class Backgammon {
 		c = new Controller();
 		tui = new Tui(c);
 		gui = new Gui(c);
-
-		c.create();
-
+		c.start();
 		boolean continu = true;
 		while (continu) {
 			continu = tui.processInputLine(sc.nextLine());

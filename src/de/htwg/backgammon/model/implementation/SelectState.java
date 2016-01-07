@@ -6,12 +6,12 @@ import de.htwg.backgammon.util.Event;
 
 public class SelectState implements Event {
 
-	private int index;
-	private boolean top;
-	private boolean select;
+	private final int index;
+	private final boolean top;
+	private final int select;
 
 
-	public SelectState(int index, boolean top, boolean b) {
+	public SelectState(int index, boolean top, int b) {
 		this.index = index;
 		this.top = top;
 		this.select = b;
@@ -25,7 +25,7 @@ public class SelectState implements Event {
 		return top;
 	}
 	
-	public boolean getSelect() {
+	public int getSelect() {
 		return select;
 	}
 }

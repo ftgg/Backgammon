@@ -117,20 +117,20 @@ public class Gui extends JFrame implements Observer  {
 		if (e instanceof InitPlayersState) {
 			System.out.println("GUI UPDATE");
 			ps = (InitPlayersState) e;
-			if (ps.getStatus() != 2)
-				getPName();
+			//if (ps.getStatus() != 2)
+				//getPName();
 		}
 	}
 	
 	
 	
-
-	public void getPName() {
-		String s1 = JOptionPane.showInputDialog(null, "Spieler Name:", "Eingabe", JOptionPane.PLAIN_MESSAGE);
-		if (ps.getStatus() == 2)
-			// return;
-			c.setPlayer(s1);
-	}
-	
+//
+//	public void getPName() {
+//		String s1 = JOptionPane.showInputDialog(null, "Spieler Name:", "Eingabe", JOptionPane.PLAIN_MESSAGE);
+//		if (ps.getStatus() == 2)
+//			// return;
+//			c.setPlayer(s1);
+//	}
+//	
 	
 }

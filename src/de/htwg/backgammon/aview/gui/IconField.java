@@ -11,25 +11,26 @@ import javax.swing.JPanel;
 
 public class IconField extends JPanel {
 
+
 	private Field[] labels = new Field[13];
 	private int[] index; // cuz last JLabel should be in Center, last is
 							// whitespace
 	private MainPanel mp;
 
-	public IconField(ImageIcon one, ImageIcon two, MainPanel mp, int[] id, int offset) {
-
+	public IconField(int top, MainPanel mp, int[] id, int offset) {
+		//0 = top 2 = bot
 		index = new int[] { 11, 10, 9, 8, 7, 6, 12, 5, 4, 3, 2, 1, 0 };
 		this.setLayout(new GridLayout(1, 0));
 		this.setBackground(new Color(0,0,0,0));
 		this.mp = mp;
 
 		for (int i = 0; i < 6; i++) {
-			labels[2 * i] = new Field(one, id[2 * i] + 1, mp);
-			labels[2 * i + 1] = new Field(two, id[2 * i + 1] + 1, mp);
+			labels[2 * i] = new Field(id[2 * i] + 1, mp,(int)SelectIcon.DARKTOP.ordinal() + top);
+			labels[2 * i + 1] = new Field(id[2 * i + 1] + 1, mp,(int)SelectIcon.LIGHTTOP.ordinal() + top);
 		}
-		labels[12] = new Field(mp.ct.getBar(), 25, mp);
+		labels[12] = new Field( id[id.length - 1], mp,(int)SelectIcon.BARBOT.ordinal());
 		if (offset == 0)
-			labels[12] = new Field(mp.ct.getBarTop(), 25, mp);
+			labels[12] = new Field( 25, mp,(int)SelectIcon.BARTOP.ordinal());
 
 		for (int i = 0; i < 13; i++) {
 			this.add(labels[index[Math.abs(offset - i)]]);
@@ -94,9 +95,11 @@ public class IconField extends JPanel {
 		labels[12].setTokens(bar, mp.ct.getDarkToken(), xOffset);
 	}
 
-
-	public void select(int index, ImageIcon i) {
-		labels[index].setIcon(i);
+//TODO : SELECT!! 
+	public void select(int in, int b) {
+		if(in > 12)
+			in = 12;
+		labels[in].updateIcon(b);
 	}
 
 }

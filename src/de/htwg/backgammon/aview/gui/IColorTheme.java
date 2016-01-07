@@ -4,6 +4,8 @@ import javax.swing.ImageIcon;
 
 public interface IColorTheme {
 
+	public ImageIcon get(int n);
+	
 	public ImageIcon getDarkTriangle();
 	public ImageIcon getLightTriangle();
 	public ImageIcon getDarkTriangleTop();

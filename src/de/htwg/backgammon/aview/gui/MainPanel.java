@@ -42,16 +42,16 @@ public class MainPanel extends JPanel implements Observer {
 		final ImageIcon topone = ct.getDarkTriangleTop();
 		final ImageIcon toptwo = ct.getLightTriangleTop();
 
-		top = new IconField(topone, toptwo, this, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 24 }, 0);
+		top = new IconField(0,this, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 26 }, 0);
 		mid = new JDice(this);
-		bot = new IconField(botone, bottwo, this, new int[] { 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25 }, 12);
-		//this.setBorder(BorderFactory.createLineBorder(Color.BLACK,10));
-		top.setBackground(new Color(0,0,0,0));
-		bot.setBackground(new Color(0,0,0,0));
-		mid.setBackground(new Color(0,0,0,0));
-		this.add(top,BorderLayout.NORTH);
-		this.add(mid,BorderLayout.CENTER);
-		this.add(bot,BorderLayout.SOUTH);
+		bot = new IconField(2,this, new int[] { 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 26 }, 12);
+		// this.setBorder(BorderFactory.createLineBorder(Color.BLACK,10));
+		top.setBackground(new Color(0, 0, 0, 0));
+		bot.setBackground(new Color(0, 0, 0, 0));
+		mid.setBackground(new Color(0, 0, 0, 0));
+		this.add(top, BorderLayout.NORTH);
+		this.add(mid, BorderLayout.CENTER);
+		this.add(bot, BorderLayout.SOUTH);
 	}
 
 	@Override
@@ -67,41 +67,45 @@ public class MainPanel extends JPanel implements Observer {
 
 	private void setclick(SelectState s) {
 		if (s.isTop())
-			top.select(s.getIndex(), getIcon(s));
+			top.select(s.getIndex()-1,s.getSelect());
 		else
-			bot.select(s.getIndex(), getIcon(s));
+			bot.select(s.getIndex() - 13, s.getSelect());
 	}
-
-	//TODO if(works){reduce complexity}
-	private ImageIcon getIcon(SelectState s) {
-		ImageIcon setit;
-		if (s.isTop()) {
-			if (s.getIndex() % 2 == 0) {
-				if (s.getSelect())
-					setit = ct.getSelected(SelectIcon.LIGHTTOP);
-				else
-					setit = ct.getLightTriangleTop();
-			} else {
-				if (s.getSelect())
-					setit = ct.getSelected(SelectIcon.DARKTOP);
-				else
-					setit = ct.getDarkTriangle();
-			}
-		} else {
-			if (s.getIndex() % 2 == 0) {
-				if (s.getSelect())
-					setit = ct.getSelected(SelectIcon.DARKBOT);
-				else
-					setit = ct.getDarkTriangle();
-			} else {
-				if (s.getSelect())
-					setit = ct.getSelected(SelectIcon.LIGHTTOP);
-				else
-					setit = ct.getLightTriangle();
-			}
-		}
-		return setit;
-	}
+	
+	// TODO if(works){reduce complexity}
+//	private ImageIcon getIcon(SelectState s) {
+//		ImageIcon setit;
+//		if (s.getIndex() == 25)
+//			setit = ct.getSelected(SelectIcon.BARBOT);
+//		else if (s.getIndex() == 24)
+//			setit = ct.getSelected(SelectIcon.BARTOP);
+//		else if (s.isTop()) {
+//			if (s.getIndex() % 2 == 0) {
+//				if (s.getSelect())
+//					setit = ct.getSelected(SelectIcon.LIGHTTOP);
+//				else
+//					setit = ct.getLightTriangleTop();
+//			} else {
+//				if (s.getSelect())
+//					setit = ct.getSelected(SelectIcon.DARKTOP);
+//				else
+//					setit = ct.getDarkTriangleTop();
+//			}
+//		} else {
+//			if (s.getIndex() % 2 == 0) {
+//				if (s.getSelect())
+//					setit = ct.getSelected(SelectIcon.LIGHTBOT);
+//				else
+//					setit = ct.getDarkTriangle();
+//			} else {
+//				if (s.getSelect())
+//					setit = ct.getSelected(SelectIcon.DARKBOT);
+//				else
+//					setit = ct.getLightTriangle();
+//			}
+//		}
+//		return setit;
+//	}
 
 	private void spreadUpdate() {
 		System.out.println(gs.getZuege()[0] + " " + gs.getZuege()[1]);
@@ -110,8 +114,8 @@ public class MainPanel extends JPanel implements Observer {
 		bot.doUpdate(gs.getWhiteStones(), gs.getBlackStones(), gs.getBlackBar(), 12);
 		this.repaint();
 	}
-	
-    public void resize(){
-    	mid.repos();
-    }
+
+	public void resize() {
+		mid.repos();
+	}
 }
