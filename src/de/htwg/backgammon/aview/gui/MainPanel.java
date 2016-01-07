@@ -1,6 +1,7 @@
 package de.htwg.backgammon.aview.gui;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.BorderFactory;
@@ -33,6 +34,7 @@ public class MainPanel extends JPanel implements Observer {
 		c.add(this);
 		size = 24;
 		this.setLayout(new BorderLayout());
+
 		final ImageIcon botone = ct.getDarkTriangle();
 		final ImageIcon bottwo = ct.getLightTriangle();
 		final ImageIcon topone = ct.getDarkTriangleTop();
@@ -41,10 +43,14 @@ public class MainPanel extends JPanel implements Observer {
 		top = new IconField(topone, toptwo, this, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 24 }, 0);
 		mid = new JDice(this);
 		bot = new IconField(botone, bottwo, this, new int[] { 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25 }, 12);
-
-		this.add(top, BorderLayout.NORTH);
-		this.add(mid, BorderLayout.CENTER);
-		this.add(bot, BorderLayout.SOUTH);
+		
+		top.setBounds(0,0,800,300);
+		mid.setBounds(0, top.getHeight(), top.getWidth(), 50);
+		bot.setBounds(0,mid.getHeight() + top.getHeight(),top.getWidth(),top.getHeight());
+		
+		this.add(top,BorderLayout.NORTH);
+		this.add(mid,BorderLayout.CENTER);
+		this.add(bot,BorderLayout.SOUTH);
 	}
 
 	@Override
@@ -62,4 +68,15 @@ public class MainPanel extends JPanel implements Observer {
 		bot.doUpdate(gs.getWhiteStones(), gs.getBlackStones(), gs.getBlackBar(), 12);
 		this.repaint();
 	}
+	
+	private final double DicePt = 12.5;
+    public void resize(){
+    	int heightofField = (int)(this.getHeight() / 2) * (int)(100 - DicePt / 2)/100;
+    	//top.setBounds(0,0,this.getWidth(),heightofField);
+		//mid.setBounds(this.getWidth() / 2, top.getHeight(), this.getWidth() / 4, (int)(this.getHeight() * (DicePt/100)));
+		//bot.setBounds(0,this.getHeight() - heightofField ,this.getWidth(),heightofField);
+		top.resize();
+    	//bot.resize();
+		//System.out.println(this.getHeight() - heightofField);
+    }
 }

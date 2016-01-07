@@ -15,7 +15,7 @@ public class IconField extends JPanel {
 							// whitespace
 	private MainPanel mp;
 
-	public IconField(ImageIcon one, ImageIcon two, MainPanel mp, int[] id,int offset) {
+	public IconField(ImageIcon one, ImageIcon two, MainPanel mp, int[] id, int offset) {
 
 		index = new int[] { 11, 10, 9, 8, 7, 6, 12, 5, 4, 3, 2, 1, 0 };
 		this.setLayout(new GridLayout(1, 0));
@@ -26,10 +26,11 @@ public class IconField extends JPanel {
 			labels[2 * i + 1] = new Field(two, id[2 * i + 1] + 1, mp);
 		}
 		labels[12] = new Field(mp.ct.getBar(), 25, mp);
-		if(offset == 0)
+		if (offset == 0)
 			labels[12] = new Field(mp.ct.getBarTop(), 25, mp);
+
 		for (int i = 0; i < 13; i++) {
-			this.add(labels[index[Math.abs(offset-i)]]);
+			this.add(labels[index[Math.abs(offset - i)]]);
 		}
 		initActionListeners();
 	}
@@ -49,11 +50,11 @@ public class IconField extends JPanel {
 	}
 
 	// gain necessary informations to update some JLabels
-	public void doUpdate(int[] whitestones, int[] blackstones,int bar, int offset) {
+	public void doUpdate(int[] whitestones, int[] blackstones, int bar, int offset) {
 		if (offset > 1)
-			doUpdateBot(whitestones, blackstones,bar, offset);
+			doUpdateBot(whitestones, blackstones, bar, offset);
 		else
-			doUpdateTop(whitestones, blackstones,bar);
+			doUpdateTop(whitestones, blackstones, bar);
 	}
 
 	private void doUpdateTop(int[] whitestones, int[] blackstones, int bar) {
@@ -61,16 +62,16 @@ public class IconField extends JPanel {
 		for (int i = 0; i < 12; i++) {
 			number = blackstones[i];
 			if (number > 0) {
-				labels[i].setTokens(number,mp.ct.getDarkToken(),0);
+				labels[i].setTokens(number, mp.ct.getDarkToken(), 0);
 			} else {
 				number = whitestones[i];
 				if (number > 0)
-					labels[i].setTokens(number,mp.ct.getLightToken(),0);
+					labels[i].setTokens(number, mp.ct.getLightToken(), 0);
 				else
-					labels[i].setTokens(number,mp.ct.getnoToken(),0);
+					labels[i].setTokens(number, mp.ct.getnoToken(), 0);
 			}
 		}
-		labels[12].setTokens(bar, mp.ct.getLightToken(),0);
+		labels[12].setTokens(bar, mp.ct.getLightToken(), 0);
 	}
 
 	private void doUpdateBot(int[] whitestones, int[] blackstones, int bar, int offset) {
@@ -79,16 +80,21 @@ public class IconField extends JPanel {
 		for (int i = 0; i < 12; i++) {
 			number = blackstones[i + offset];
 			if (number > 0)
-				labels[i].setTokens(number,mp.ct.getDarkToken(),xOffset);
+				labels[i].setTokens(number, mp.ct.getDarkToken(), xOffset);
 			else {
 				number = whitestones[i + offset];
 				if (number > 0)
-					labels[i].setTokens(number,mp.ct.getLightToken(),xOffset);
+					labels[i].setTokens(number, mp.ct.getLightToken(), xOffset);
 				else
-					labels[i].setTokens(number,mp.ct.getnoToken(),xOffset);
+					labels[i].setTokens(number, mp.ct.getnoToken(), xOffset);
 			}
 		}
-		labels[12].setTokens(bar, mp.ct.getDarkToken(),xOffset);
+		labels[12].setTokens(bar, mp.ct.getDarkToken(), xOffset);
+	}
+
+	public void resize() {
+		for (Field f : labels)
+			f.myresize();
 	}
 
 }

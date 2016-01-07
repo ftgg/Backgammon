@@ -66,5 +66,17 @@ public class Field extends JPanel {
 		}
 
 	}
+	
+	public final double DicePt = 12.5;
+    public void myresize(){
+    	int heightofField = (int)(mp.getHeight() / 2) * (int)(100 - DicePt / 2)/100;
+		this.setSize(mp.getWidth() / 13, heightofField);
+		layeredPane.setSize(this.getSize());
+		ImageIcon img = scaleIcon((ImageIcon)background.getIcon(),new Dimension(mp.getWidth() / 13, heightofField));
+		background.setIcon(img);
+		this.repaint();
+		//this.setBounds(0,mp.getHeight(),100,300);
+		System.out.println(this.getSize().getSize().toString());
+	}
 
 }

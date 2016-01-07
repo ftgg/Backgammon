@@ -67,15 +67,15 @@ public class Gui extends JFrame implements Observer  {
 
 			@Override
 			public void componentResized(ComponentEvent e) {
-				pitch.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
-				mainPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
+				//pitch.setSize(e.getComponent().getWidth(), e.getComponent().getHeight());
+				mainPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight()-60);
+				mainPanel.resize();
 				pitch.repaint();
 				mainPanel.repaint();
 			}
 
 			@Override
 			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
