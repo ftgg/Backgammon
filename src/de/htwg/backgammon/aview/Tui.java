@@ -2,16 +2,21 @@ package de.htwg.backgammon.aview;
 
 import java.util.Scanner;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import de.htwg.backgammon.controller.Controller;
 import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
+
 
 public class Tui implements Observer {
 	private GameState gs;
 	private Controller contr;
 	private TuiSB bStringBuilder = new BackgammonStringBuilder();
 	private Scanner sc = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
+	private static final Logger LOGGER = LogManager.getLogger(Tui.class.getName());
 
 	public Tui(Controller c) {
 		System.out.println("Tui startet");
@@ -37,7 +42,8 @@ public class Tui implements Observer {
 	}
 
 	public void print(String msg) {
-		System.out.println(msg);
+		LOGGER.info("\n" + msg);
+		//System.out.println(msg);
 	}
 
 	public boolean processInputLine(String next) {
