@@ -1,15 +1,10 @@
 package de.htwg.backgammon.model.implementation;
 
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
-
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
-import de.htwg.backgammon.model.ITriangle;
 import de.htwg.backgammon.model.TestPitch;
 import de.htwg.backgammon.model.TokenColor;
-
 import java.util.List;
 
 /**
@@ -18,9 +13,9 @@ import java.util.List;
 
 public class Pitch implements IPitch, TestPitch {
 
-	private List<ITriangle> dreiecke;
-	private ITriangle barblack; // Bar of Player one (White)
-	private ITriangle barwhite; // Bar of Player two (Black)
+	private List<Triangle> dreiecke;
+	private Triangle barblack; // Bar of Player one (White)
+	private Triangle barwhite; // Bar of Player two (Black)
 	private int[] stonesOnField = { 0, 0 }; // Black 0 , White 1
 
 	/**
@@ -33,7 +28,7 @@ public class Pitch implements IPitch, TestPitch {
 	public Pitch(GameState gs){
 		barblack = new Triangle();
 		barwhite = new Triangle();
-		dreiecke = new LinkedList<ITriangle>();
+		dreiecke = new LinkedList<Triangle>();
 		createTriangles(gs.getBlackStones().length);
 		initPitch(gs.getBlackStones(), TokenColor.BLACK);
 		initPitch(gs.getWhiteStones(), TokenColor.WHITE);
@@ -43,7 +38,7 @@ public class Pitch implements IPitch, TestPitch {
 		stonesOnField[1] = gs.getWhiteStonesOnPitch();
 	}
 	
-	private void initBar(ITriangle t, int a, TokenColor c){
+	private void initBar(Triangle t, int a, TokenColor c){
 		initTriangle(t,a,c);
 	}
 	
@@ -53,7 +48,7 @@ public class Pitch implements IPitch, TestPitch {
 		}
 	}
 	
-	private void initTriangle(ITriangle t, int count, TokenColor c){
+	private void initTriangle(Triangle t, int count, TokenColor c){
 		for(int i = 0; i < count; i++)
 			t.add(new Token(c));
 	}
@@ -77,7 +72,7 @@ public class Pitch implements IPitch, TestPitch {
 		return dreiecke.size();
 	}
 
-	private ITriangle getDreiecke(int i) {
+	public Triangle getTriangle(int i) {
 		return dreiecke.get(i);
 	}
 
@@ -139,19 +134,24 @@ public class Pitch implements IPitch, TestPitch {
 		return athome;
 	}
 
+
+
 	@Override
-	public ITriangle getBarblack() {
+	public TokenColor getTriangleColor(int i) {
+		return dreiecke.get(i).getColor();
+	}
+
+	@Override
+	public boolean getTriangleUnsecure(int i) {
+		return dreiecke.get(i).unsecure();
+	}
+
+	public Triangle getBarBlack(){
 		return barblack;
 	}
-
-	@Override
-	public ITriangle getBarwhite() {
+	
+	public Triangle getBarWhite(){
 		return barwhite;
 	}
-
-	@Override
-	public ITriangle getTriangle(int i) {
-		return getDreiecke(i);
-	}
-
+	
 }

@@ -1,9 +1,8 @@
 package de.htwg.backgammon.model.implementation;
 
-import de.htwg.backgammon.model.IToken;
 import de.htwg.backgammon.model.TokenColor;
 
-public class Token implements IToken {
+public class Token{
 
 	private TokenColor color;
 
@@ -14,7 +13,7 @@ public class Token implements IToken {
 		this.color = color;
 	}
 
-	@Override
+	
 	public TokenColor getColor() {
 		return color;
 	}

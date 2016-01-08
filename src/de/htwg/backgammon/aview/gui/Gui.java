@@ -58,9 +58,7 @@ public class Gui extends JFrame  {
 		
 		this.setVisible(true);
 		this.pack();
-		this.repaint();
-		// initplayers();
-		
+		this.repaint();		
 		this.addComponentListener(new ComponentListener() {
 			@Override
 			public void componentHidden(ComponentEvent e) {
@@ -105,9 +103,5 @@ public class Gui extends JFrame  {
 		
 	}
 
-	// TODO spielernamen eingeben
-	private void initplayers() {
-		c.setSpieler("White", "Black");
-	}
 
 }

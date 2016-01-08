@@ -1,5 +1,7 @@
 package de.htwg.backgammon.model;
 
+import de.htwg.backgammon.model.implementation.Triangle;
+
 /**
  * approved exclusively for use of tests
  * 
@@ -17,5 +19,4 @@ public interface TestPitch extends IPitch {
 	 */
 	public int[] getTokensOnTriangle();
 	
-
 }

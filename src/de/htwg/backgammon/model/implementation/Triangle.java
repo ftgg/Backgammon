@@ -3,27 +3,27 @@ package de.htwg.backgammon.model.implementation;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import de.htwg.backgammon.model.IToken;
+
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.ITriangle;
 
-public class Triangle implements ITriangle {
 
-	private Deque<IToken> content;
+public class Triangle {
+
+	private Deque<Token> content;
 	private int size;
 	private TokenColor color;
 	private boolean unsecure = true;
 
 	public Triangle() {
-		content = new ArrayDeque<IToken>();
+		content = new ArrayDeque<Token>();
 		size = 0;
 		color = TokenColor.NONE;
 	}
 
-	@Override
-	public IToken add(IToken s) {
+	
+	public Token add(Token s) {
 		// Unsicherers Feld und anderer Stein.
-		IToken old;
+		Token old;
 		if (unsecure() && s.getColor() != color && !content.isEmpty()) {
 			old = content.pop();
 			content.push(s);
@@ -44,17 +44,17 @@ public class Triangle implements ITriangle {
 		return null;
 	}
 
-	@Override
+	
 	public boolean unsecure() {
 		return unsecure;
 	}
 
-	@Override
-	public IToken remove() {
+	
+	public Token remove() {
 		if (content.isEmpty())
 			return null;
 
-		IToken r = content.pop();
+		Token r = content.pop();
 		size--;
 		if (size < 2)
 			unsecure = true;
@@ -64,22 +64,22 @@ public class Triangle implements ITriangle {
 
 	}
 
-	@Override
+	
 	public int count() {
 		return size;
 	}
 
-	@Override
+	
 	public TokenColor getColor() {
 		return color;
 	}
 
-	@Override
+	
 	public boolean isEmpty() {
 		return content.isEmpty();
 	}
 
-	@Override
+	
 	public void clear() {
 		size = 0;
 		unsecure = true;

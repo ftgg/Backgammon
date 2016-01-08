@@ -13,10 +13,10 @@ public class TargetColorVerifier extends MoveVerifier {
 
 	public boolean isTargetColorValid(int a, int b, IPlayer s, IPitch sf) {
 		// there is a token of the current player in field a
-		if (a != IPitch.BAR && sf.getTriangle(a).getColor() != s.getColor())
+		if (a != IPitch.BAR && sf.getTriangleColor(a)!= s.getColor())
 			return false;
 		// field b is attackable or own
-		return (b == IPitch.EXIT || sf.getTriangle(b).unsecure() || sf.getTriangle(b).getColor() == s.getColor());
+		return (b == IPitch.EXIT || sf.getTriangleUnsecure(b) || sf.getTriangleColor(b) == s.getColor());
 	}
 
 }

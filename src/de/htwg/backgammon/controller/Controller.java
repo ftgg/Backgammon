@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import de.htwg.backgammon.model.IDice;
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
@@ -22,7 +23,6 @@ import de.htwg.backgammon.model.implementation.Player;
 import de.htwg.backgammon.model.implementation.SelectState;
 import de.htwg.backgammon.model.implementation.Dice;
 import de.htwg.backgammon.model.implementation.GameState;
-import de.htwg.backgammon.model.implementation.InitPlayersState;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
@@ -31,24 +31,24 @@ public class Controller extends Subject {
 	private IPlayer s2;
 	private IPlayer current;
 	private IPitch sf;
-	private Dice w;
+	private IDice w;
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
 	private Caretaker states;
-	private int lastclick; // only need with gui
-
+	private int lastclick = -1; // only need with gui
+	
 	public Controller() {
-		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße =
-														// original größe
-		
+		sf = new Pitch(GameState.getDefaultGameState());
 		w = new Dice();
-		lastclick = -1;
+		s1 = new Player("Frau Weiss", TokenColor.WHITE);
+		s2 = new Player("Herr Schwarz", TokenColor.BLACK);
+
 		createMoveVerifier();
 		CreateMemento();
 		actionparser = new ActionParser();
 		wuerfeln();
-		setSpieler("Frau Weiss", "Herr Schwarz");
+		current = s1;
 	}
 
 	/**
@@ -59,19 +59,16 @@ public class Controller extends Subject {
 	public Controller(int i) {
 		sf = new Pitch(GameState.getTestGameState(i));
 		w = new Dice();
+		s1 = new Player("Frau Weiss", TokenColor.WHITE);
+		s2 = new Player("Herr Schwarz", TokenColor.BLACK);
 		createMoveVerifier();
 		actionparser = new ActionParser();
 		wuerfeln();
-		CreateMemento();
-		setSpieler("Frau Weiss", "Herr Schwarz");
-	}
-
-
-	public void setSpieler(String n1, String n2) {
-		s1 = new Player(n1, TokenColor.WHITE);
-		s2 = new Player(n2, TokenColor.BLACK);
 		current = s1;
+		CreateMemento();
 	}
+
+
 	
 	public void start(){
 		GameState gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
@@ -97,7 +94,7 @@ public class Controller extends Subject {
 	}
 
 	public void wuerfeln() {
-		w.wuerfeln();
+		w.rollTheDice();
 		if (w.isDoublets()) {
 			zuege[0] = w.getCurrentCubeNumbers()[0];
 			zuege[1] = w.getCurrentCubeNumbers()[1];
@@ -233,7 +230,7 @@ public class Controller extends Subject {
 			states = new Caretaker((ArrayDeque<Memento>) in.readObject());
 			in.close();
 		} catch (IOException e) {
-			// e.printStackTrace();
+		   // e.printStackTrace();
 			return;
 		} catch (ClassNotFoundException c) {
 			System.out.println("Class not Found!");
