@@ -28,7 +28,7 @@ public class Gui extends JFrame {
 	private JLayeredPane pitch;
 	protected Controller c;
 	public static final int winX = 1300;
-	public static final int winY = 800;
+	public static final int winY = 850;
 
 	public Gui(Controller c) {
 		super("Backgammon");

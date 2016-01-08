@@ -66,7 +66,6 @@ public class MainPanel extends JPanel implements Observer {
 	}
 
 	private void setclick(SelectState s) {
-		System.out.println(s.isTop() + " " + s.getIndex());
 		if (s.isTop())
 			top.select(s.getIndex() - 1,s.getSelect());
 		else
@@ -75,12 +74,11 @@ public class MainPanel extends JPanel implements Observer {
 	
 
 	private void spreadUpdate() {
-		System.out.println(gs.getZuege()[0] + " " + gs.getZuege()[1]);
 		top.doUpdate(gs.getWhiteStones(), gs.getBlackStones(), gs.getWhiteBar(), 0);
 		mid.doUpdate(gs.getZuege());
 		bot.doUpdate(gs.getWhiteStones(), gs.getBlackStones(), gs.getBlackBar(), 12);
+		mid.setInfo(gs.getMessage());	
 		this.repaint();
-		
 	}
 
 	public void resize() {

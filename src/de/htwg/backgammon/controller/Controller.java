@@ -55,7 +55,7 @@ public class Controller extends Subject {
 	}
 	
 	
-	Controller(int i) {
+	public Controller(int i) {
 		sf = new Pitch(GameState.getTestGameState(i));
 		w = new Dice();
 		s1 = new Player("Frau Weiss", TokenColor.WHITE);
@@ -65,12 +65,14 @@ public class Controller extends Subject {
 		wuerfeln();
 		current = s1;
 		CreateMemento();
+		start();
 	}
 
 
 	
 	public void start(){
-		GameState gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
+		GameState gs = new GameState(sf, zuege, 
+	current.getName() + " ist am Zug!", current, false, s1, s2);
 		SetMemento(gs);
 		notifyObs(gs);
 	}
@@ -84,7 +86,7 @@ public class Controller extends Subject {
 			return;
 		} else if (act[0] == NEXT) {
 			spielerwechsel();
-			gs = new GameState(sf, zuege, "SpielerWechsel", current, false, s1, s2);
+			gs = new GameState(sf, zuege, current.getName() + " ist am Zug", current, false, s1, s2);
 			SetMemento(gs);
 			notifyObs(gs);
 			return;
@@ -153,8 +155,10 @@ public class Controller extends Subject {
 		ExitMoveVerifier emv = new ExitMoveVerifier();
 		TargetColorVerifier tcv = new TargetColorVerifier();
 		DirectionVerifier dv = new DirectionVerifier();
+		IndexVerifier idv = new IndexVerifier();
 		moveVerifier = drv;
-		drv.successor = bv;
+		drv.successor = idv;
+		idv.successor = bv;
 		bv.successor = emv;
 		emv.successor = tcv;
 		tcv.successor = dv;
@@ -257,22 +261,22 @@ public class Controller extends Subject {
 			lastclick = id;
 			notifyObs(new SelectState(id, id <= 12 || id == 25, 1));
 		} else {
-			doAction(toStr(lastclick, id));
+			doAction(convertToMoveString(lastclick, id));
 			notifyObs(new SelectState(lastclick, lastclick <= 12 || lastclick == 25, 0));
 			lastclick = -1;
 		}
 	}
+	
+	public void next(){
+		doAction("n");
+	}
 
-	// 25 is bar or home
-	public String toStr(int a, int b) {
-		String first;
-		if (a == 25 || a == 26)
-			first = "b ";
-		else
-			first = a + " ";
-		if (b == 25 || b == 26)
-			return first + "h";
-		return first + b;
+	public String convertToMoveString(int a, int b) {
+		if (a == b && a < 25)
+			return a + " h";
+		if(a == 25 || a == 26)
+			return "b " + b;
+		return a + " " + b;
 	}
 	
 	public GameState getCurrentGameState() {

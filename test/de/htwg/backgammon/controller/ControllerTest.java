@@ -92,9 +92,9 @@ public class ControllerTest {
 	public void Testsetclick(){
 		c.setclick(1);
 		c.setclick(2);
-		assertEquals(c.toStr(1, 2),"1 2");
-		assertEquals(c.toStr(25, 2),"b 2");
-		assertEquals(c.toStr(1, 25),"1 h");
+		assertEquals(c.convertToMoveString(1, 12),"1 12");
+		assertEquals(c.convertToMoveString(1, 1),"1 h");
+		assertEquals(c.convertToMoveString(24, 24),"24 h");
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class ControllerTest {
 		minC = new Controller(1);
 		minC.doAction("1 2");
 		GameState gs = minC.getCurrentGameState();
-		minC.doAction("1 3");
+		minC.doAction("2 3");
 		minC.undo();
 		GameState gs2 = minC.getCurrentGameState();
 		assertSame(gs,gs2);

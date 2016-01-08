@@ -31,7 +31,7 @@ public class Backgammon {
 		
 		IPlayer s1 = new Player("Frau Weiss", TokenColor.WHITE);
 		IPlayer s2 = new Player("Herr Schwarz", TokenColor.BLACK);
-		
+		//c = new Controller(4);
 		c = new Controller(pitch,dice,s1,s2);
 		tui = new Tui(c);
 		gui = new Gui(c);
@@ -42,6 +42,7 @@ public class Backgammon {
 		while (continu) {
 			continu = tui.processInputLine(sc.nextLine());
 		}
+
 
 	}
 

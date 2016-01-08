@@ -144,8 +144,8 @@ public class GameState implements Event,Serializable {
 		}else if (i == 3){ // mit stein auf Bar
 			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1,1);
 		}else if (i == 4){
-			return new GameState(new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,3,2,1,3},
-					new int[]{4,3,2,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},0,0);
+			return new GameState(new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
+					new int[]{1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},2,0);
 		}
 		return getDefaultGameState();
 	}
