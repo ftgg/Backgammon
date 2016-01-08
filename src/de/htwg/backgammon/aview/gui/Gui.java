@@ -23,7 +23,7 @@ import de.htwg.backgammon.model.implementation.InitPlayersState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 
-public class Gui extends JFrame implements Observer  {
+public class Gui extends JFrame  {
 
 	public MainPanel mainPanel; // Public just for tests
 	private JLayeredPane pitch;
@@ -34,7 +34,6 @@ public class Gui extends JFrame implements Observer  {
 	public Gui(Controller c) {
 		super("Backgammon");
 		this.c = c;
-		c.add(this);
 		mainPanel = new MainPanel(c);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -111,25 +110,4 @@ public class Gui extends JFrame implements Observer  {
 		c.setSpieler("White", "Black");
 	}
 
-	@Override
-	public void update(Event e) {
-		if (e instanceof InitPlayersState) {
-			System.out.println("GUI UPDATE");
-			ps = (InitPlayersState) e;
-			//if (ps.getStatus() != 2)
-				//getPName();
-		}
-	}
-	
-	
-	
-//
-//	public void getPName() {
-//		String s1 = JOptionPane.showInputDialog(null, "Spieler Name:", "Eingabe", JOptionPane.PLAIN_MESSAGE);
-//		if (ps.getStatus() == 2)
-//			// return;
-//			c.setPlayer(s1);
-//	}
-//	
-	
 }
