@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Field extends JPanel {
@@ -74,14 +75,15 @@ public class Field extends JPanel {
 					Math.abs(offset - ((i % 5) * (int) (token.getIconHeight() / 1.3) + ((i / 5) * token.getIconHeight() / 2) % 2)),
 					token.getIconWidth(), token.getIconHeight());
 		}
-
 	}
 	
-	public void setIcon(ImageIcon i) {
+	public void setIcon(ImageIcon icon) {
 		//TODO DIMENSION new Dimension(this.getHeight(), this.getWidth())
 //		background = new JLabel(scaleIcon(i, new Dimension(100, 300)));
-		background.setIcon(scaleIcon(i,new Dimension(100,300)));
-		this.repaint();
+		ImageIcon scaledicon = scaleIcon(icon,new Dimension(100,300));
+		background.setIcon(scaledicon);
+		mp.repaint();
+		
 	}
 
 	public void updateIcon(int b) {

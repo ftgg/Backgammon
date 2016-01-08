@@ -99,6 +99,7 @@ public class IconField extends JPanel {
 	public void select(int in, int b) {
 		if(in > 12)
 			in = 12;
+		System.out.println(in);
 		labels[in].updateIcon(b);
 	}
 

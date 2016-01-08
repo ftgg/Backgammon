@@ -79,8 +79,7 @@ public class Gui extends JFrame implements Observer  {
 			public void componentResized(ComponentEvent e) {
 				mainPanel.setSize(e.getComponent().getWidth(), e.getComponent().getHeight()-60);
 				mainPanel.resize();
-				//pitch.repaint();
-				//mainPanel.repaint();
+				mainPanel.repaint();
 			}
 
 			@Override

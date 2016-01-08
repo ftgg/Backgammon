@@ -278,15 +278,10 @@ public class Controller extends Subject {
 	public void setclick(int id) {
 		if (lastclick == -1) {
 			lastclick = id;
-			notifyObs(new SelectState(id, id < 12, 1));
+			notifyObs(new SelectState(id, id <= 12 || id == 25, 1));
 		} else {
-			System.out.println(toStr(lastclick, id));
-//			if(lastclick == 25)
-//				lastclick = 13;
-//			if(lastclick == 26)
-//				lastclick = 12+13;
 			doAction(toStr(lastclick, id));
-			notifyObs(new SelectState(lastclick, id < 12 || id == 25, 0));
+			notifyObs(new SelectState(lastclick, lastclick <= 12 || lastclick == 25, 0));
 			lastclick = -1;
 		}
 	}
