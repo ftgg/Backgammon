@@ -43,7 +43,6 @@ public class Tui implements Observer {
 
 	public void print(String msg) {
 		LOGGER.info("\n" + msg);
-		//System.out.println(msg);
 	}
 
 	public boolean processInputLine(String next) {

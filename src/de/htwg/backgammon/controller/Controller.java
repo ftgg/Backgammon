@@ -37,7 +37,9 @@ public class Controller extends Subject {
 	private ActionParser actionparser;
 	private Caretaker states;
 	private int lastclick = -1;
+	private GameState currentGameState;
 	
+
 	@Inject
 	public Controller(IPitch p, IDice d, IPlayer s1, IPlayer s2) {
 		sf = p;
@@ -158,11 +160,7 @@ public class Controller extends Subject {
 		tcv.successor = dv;
 	}
 
-	/**
-	 * NUR für tests, nicht zum gebrauch gedacht =)
-	 * 
-	 * @return Wuerfelergebnis
-	 */
+	
 	public int[] getWuerfelC() {
 		return w.getCurrentCubeNumbers();
 	}
@@ -185,6 +183,7 @@ public class Controller extends Subject {
 
 	private void SetMemento(GameState gs) {
 		states.addState(new Memento(gs));
+		currentGameState = gs;
 	}
 
 	public void undo() {
@@ -198,10 +197,7 @@ public class Controller extends Subject {
 		this.current = gs.getCurrent();
 		s1 = gs.getPlayer()[0];
 		s2 = gs.getPlayer()[1];
-		System.out.println(s1);
-		System.out.println(s1.getName());
-		System.out.println(s2.getName());
-		System.out.println(zuege.toString());
+		currentGameState = gs;
 		notifyObs(gs);
 	}
 
@@ -234,7 +230,7 @@ public class Controller extends Subject {
 			c.printStackTrace();
 			return;
 		}
-		GameState g = states.readLastState().getGameState();
+		GameState g = states.getLastState().getGameState();
 		loadGameState(g);
 	}
 
@@ -277,5 +273,9 @@ public class Controller extends Subject {
 		if (b == 25 || b == 26)
 			return first + "h";
 		return first + b;
+	}
+	
+	public GameState getCurrentGameState() {
+		return currentGameState;
 	}
 }

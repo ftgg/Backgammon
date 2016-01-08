@@ -8,6 +8,7 @@ import org.junit.Test;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.Dice;
+import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
 
@@ -96,7 +97,17 @@ public class ControllerTest {
 		assertEquals(c.toStr(1, 25),"1 h");
 	}
 
-
+	@Test
+	public void undo(){
+		minC = new Controller(1);
+		minC.doAction("1 2");
+		GameState gs = minC.getCurrentGameState();
+		minC.doAction("1 3");
+		minC.undo();
+		GameState gs2 = minC.getCurrentGameState();
+		assertSame(gs,gs2);
+		
+	}
 
 
 	
