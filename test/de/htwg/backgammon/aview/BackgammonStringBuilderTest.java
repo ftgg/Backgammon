@@ -53,12 +53,12 @@ public class BackgammonStringBuilderTest {
 
 	@Test
 	public void testgetInformations() {
-		String returnval = "Steine auf der Bar: 0\nWürfel: " + number + " \n";
+		String returnval = "Steine auf der Bar: 0\nWürfel: " + number + " \nPlayer(WHITE) :Jan ist am Zug:";
 		BackgammonStringBuilder bs = new BackgammonStringBuilder();
 		StringBuilder sb = bs.getInformations(gs);
 		assertEquals(sb.toString(), returnval);
 		sb = bs.getInformations(gsS);
-		assertEquals(sb.toString(), returnval);
+		assertNotEquals(sb.toString(), returnval);
 	}
 
 }

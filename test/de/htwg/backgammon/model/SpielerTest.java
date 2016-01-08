@@ -26,7 +26,7 @@ public class SpielerTest extends TestCase {
 		// assertEquals(name, s.getName());
 		assertEquals(name2, s2.getName());
 		assertEquals(name3, s3.getName());
-		assertEquals(s3.toString(), "Player(BLACK): Max");
+		assertEquals(s3.toString(), "Player(BLACK) :Max");
 	}
 
 	@Test
