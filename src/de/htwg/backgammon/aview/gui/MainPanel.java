@@ -13,8 +13,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import de.htwg.backgammon.controller.Controller;
+import de.htwg.backgammon.controller.SelectState;
 import de.htwg.backgammon.model.implementation.GameState;
-import de.htwg.backgammon.model.implementation.SelectState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 

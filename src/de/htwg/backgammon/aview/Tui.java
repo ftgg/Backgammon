@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import de.htwg.backgammon.controller.Controller;
 import de.htwg.backgammon.model.implementation.GameState;
-import de.htwg.backgammon.model.implementation.InitPlayersState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 

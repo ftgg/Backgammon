@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
+import de.htwg.backgammon.model.implementation.Dice;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
 
 
 public class ControllerTest {
@@ -44,11 +47,11 @@ public class ControllerTest {
 	}
 
 
-
-
 	@Test
 	public void testController() {
-		Controller c2 = new Controller();
+		Controller c2 = new Controller(new Pitch(), new Dice(), 
+				new Player("S1", TokenColor.BLACK), 
+				new Player("S2", TokenColor.WHITE));
 		assertNotNull(c2.getWuerfelC());
 	}
 

@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,13 +13,14 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import com.google.inject.Inject;
+
 import de.htwg.backgammon.model.IDice;
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
-import de.htwg.backgammon.model.implementation.SelectState;
 import de.htwg.backgammon.model.implementation.Dice;
 import de.htwg.backgammon.model.implementation.GameState;
 import de.htwg.backgammon.util.Subject;
@@ -36,13 +36,14 @@ public class Controller extends Subject {
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
 	private Caretaker states;
-	private int lastclick = -1; // only need with gui
+	private int lastclick = -1;
 	
-	public Controller() {
-		sf = new Pitch(GameState.getDefaultGameState());
-		w = new Dice();
-		s1 = new Player("Frau Weiss", TokenColor.WHITE);
-		s2 = new Player("Herr Schwarz", TokenColor.BLACK);
+	@Inject
+	public Controller(IPitch p, IDice d, IPlayer s1, IPlayer s2) {
+		sf = p;
+		w = d;
+		this.s1 = s1;
+		this.s2 = s2;
 
 		createMoveVerifier();
 		CreateMemento();
@@ -50,13 +51,9 @@ public class Controller extends Subject {
 		wuerfeln();
 		current = s1;
 	}
-
-	/**
-	 * Controller für Test umgebung
-	 * 
-	 * @param a
-	 */
-	public Controller(int i) {
+	
+	
+	Controller(int i) {
 		sf = new Pitch(GameState.getTestGameState(i));
 		w = new Dice();
 		s1 = new Player("Frau Weiss", TokenColor.WHITE);

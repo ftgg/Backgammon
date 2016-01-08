@@ -1,4 +1,4 @@
-package de.htwg.backgammon.model.implementation;
+package de.htwg.backgammon.controller;
 
 import javax.swing.ImageIcon;
 
