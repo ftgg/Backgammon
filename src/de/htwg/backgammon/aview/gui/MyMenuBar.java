@@ -16,7 +16,6 @@ public class MyMenuBar extends JMenuBar {
 	private JMenu data;
 	private JMenu game;
 	private JButton next;
-	private JMenuItem close;
 	private JMenuItem undo;
 	private JMenuItem replay;
 	private JMenuItem load;
@@ -39,13 +38,6 @@ public class MyMenuBar extends JMenuBar {
 		data = new JMenu("Datei");
 		data.setMnemonic(KeyEvent.VK_D);
 		data.getAccessibleContext().setAccessibleDescription("Descriptions are for noobs!");
-		close = new JMenuItem("Beenden");
-		close.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
 		colorTheme = new JMenuItem("Schema");
 		colorTheme.addActionListener(new ActionListener() {
 			@Override
@@ -53,7 +45,6 @@ public class MyMenuBar extends JMenuBar {
 				// not implemented yet because its to late for more features
 			}
 		});
-		data.add(close);
 		data.add(colorTheme);
 
 		game = new JMenu("Spiel");
