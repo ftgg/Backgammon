@@ -9,7 +9,6 @@ public class Tui implements Observer {
 	private GameState gs;
 	private Controller contr;
 	private TuiSB bStringBuilder = new BackgammonStringBuilder();
-	//private Scanner sc = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
 
 	public Tui(Controller c) {
 		System.out.println("Tui startet");
@@ -28,7 +27,6 @@ public class Tui implements Observer {
 	@Override
 	public void update(Event e) {
 		if (e instanceof GameState) {
-			GameState old = gs;
 			gs = (GameState) e;
 			printField();
 		}
