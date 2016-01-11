@@ -9,7 +9,6 @@ public class DiceResultVerifier extends MoveVerifier {
 	
 	@Override
 	public boolean checkMove(int a, int b, int[] zuege, IPitch sf, IPlayer s, IPlayer s1, IPlayer s2) {
-//		System.out.println(successor.checkMove(a, b, zuege, sf, s, s1, s2));
 		return  successor.checkMove(a, b, zuege, sf, s, s1, s2) && inDiceResult(a,b,zuege,sf,s);
 	}
 	

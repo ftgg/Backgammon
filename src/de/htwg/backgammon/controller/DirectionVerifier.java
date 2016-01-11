@@ -9,7 +9,6 @@ public class DirectionVerifier extends MoveVerifier {
 
 	@Override
 	public boolean checkMove(int a, int b, int[] zuege, IPitch sf, IPlayer s, IPlayer s1, IPlayer s2) {
-//		System.out.println("Direction Verifier: "+ isDirectionValid(a,b,s));
 		return isDirectionValid(a,b,s);
 	}
 	

@@ -1,7 +1,6 @@
 package de.htwg.backgammon.controller;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Iterator;
 
 public class Caretaker implements Iterable<Memento>{
