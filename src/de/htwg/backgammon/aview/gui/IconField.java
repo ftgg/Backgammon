@@ -92,10 +92,10 @@ public class IconField extends JPanel {
 	}
 
 	public void select(int in, int b) {
-		int index = in;
+		int labelindex = in;
 		if(in > 12)
-			index = 12;
-		labels[index].updateIcon(b);
+			labelindex = 12;
+		labels[labelindex].updateIcon(b);
 	}
 
 }

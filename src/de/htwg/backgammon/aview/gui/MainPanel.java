@@ -3,7 +3,6 @@ package de.htwg.backgammon.aview.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.htwg.backgammon.controller.Controller;
