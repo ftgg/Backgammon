@@ -1,5 +1,7 @@
 package de.htwg.backgammon.controller;
 
+import de.htwg.backgammon.aview.Tui;
+
 public abstract class ParseUnit {
 	ParseUnit successor;
 	ActionParser actp;
@@ -8,7 +10,7 @@ public abstract class ParseUnit {
 		actp = a;
 	}
 	
-	public abstract void parse(String s[]);
+	public abstract void parse(String[] s);
 	
 	int parseInt(String s) {
 		int a;
@@ -21,7 +23,5 @@ public abstract class ParseUnit {
 			return -3;
 		return a - 1;
 	}
-	
-	
 	
 }

@@ -14,7 +14,9 @@ public class BarVerifier extends MoveVerifier {
 		boolean isBarEmpty = sf.isBarEmpty(c);
 		boolean aisbar = a == IPitch.BAR;
 		boolean indexInHome = sf.indexInHome(b, otherPlayer(c,s1,s2));
-		return (isBarEmpty && !aisbar || aisbar && indexInHome && !isBarEmpty);
+		boolean notBar = isBarEmpty && !aisbar;
+		boolean isBarConstraints = aisbar && indexInHome && !isBarEmpty;
+		return notBar || isBarConstraints;
 	}
 	
 	IPlayer otherPlayer(IPlayer c, IPlayer s1, IPlayer s2) {

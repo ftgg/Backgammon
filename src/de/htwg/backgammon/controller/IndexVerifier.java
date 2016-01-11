@@ -31,11 +31,11 @@ public class IndexVerifier extends MoveVerifier {
 	}
 	
 	private boolean aIsValid(int a, IPitch sf){
-		return (aInRange(a,sf) || aIsBar(a));
+		return aInRange(a,sf) || aIsBar(a);
 	}
 	
 	private boolean bIsValid(int b, IPitch sf){
-		return (bInRange(b,sf) ||  bIsExit(b));
+		return bInRange(b,sf) ||  bIsExit(b);
 	}
 
 }

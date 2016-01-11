@@ -3,6 +3,7 @@ package de.htwg.backgammon.controller;
 import static org.junit.Assert.*;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class CareTakerTest {
 	public void getStackTest(){
 		GameState gs = GameState.getDefaultGameState();
 		ct.addState(new Memento(gs));
-		ArrayDeque<Memento> m = ct.getStack();
+		Deque<Memento> m = ct.getStack();
 		assertSame(gs, m.getLast().getGameState());
 	}
 

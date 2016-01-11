@@ -1,8 +1,8 @@
 package de.htwg.backgammon.controller;
 
 public class ActionParser {
-	String ActionString[];
-	int res[];
+	String[] ActionString;
+	int[] res;
 	ParseUnit parseunit;
 	ActionParser(){
 		res = new int[] {-3,-3};
