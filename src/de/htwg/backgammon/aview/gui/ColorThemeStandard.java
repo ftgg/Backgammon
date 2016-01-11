@@ -1,8 +1,6 @@
 package de.htwg.backgammon.aview.gui;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -38,12 +36,12 @@ public class ColorThemeStandard implements IColorTheme {
 	
 	@Override
 	public ImageIcon getDarkTriangle() {
-		return ImageString("images/d_dunkel.png");
+		return imageString("images/d_dunkel.png");
 	}
 
 	@Override
 	public ImageIcon getLightTriangle() {
-		return ImageString("images/d_hell.png");
+		return imageString("images/d_hell.png");
 	}
 
 	@Override
@@ -52,7 +50,7 @@ public class ColorThemeStandard implements IColorTheme {
 	}
 
 	private ImageIcon rotateTriangle(String s) {
-		ImageIcon i = ImageString(s);
+		ImageIcon i = imageString(s);
 		BufferedImage bi = new BufferedImage(i.getIconWidth(), i.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = bi.createGraphics();
 		AffineTransform at = AffineTransform.getRotateInstance(Math.PI, i.getIconWidth() / 2.0, i.getIconWidth() / 2.0);
@@ -69,7 +67,7 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getBar() {
-		return ImageString("images/Bar.png");
+		return imageString("images/Bar.png");
 	}
 
 	@Override
@@ -79,12 +77,12 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon getDarkToken() {
-		return ImageString("images/Token-Dark.png");
+		return imageString("images/Token-Dark.png");
 	}
 
 	@Override
 	public ImageIcon getLightToken() {
-		return ImageString("images/Token-White.png");
+		return imageString("images/Token-White.png");
 	}
 
 	@Override
@@ -92,7 +90,7 @@ public class ColorThemeStandard implements IColorTheme {
 		return new ImageIcon("images/empty.png");
 	}
 
-	private ImageIcon ImageString(String path) {
+	private ImageIcon imageString(String path) {
 		return new ImageIcon(path);
 	}
 
@@ -108,7 +106,6 @@ public class ColorThemeStandard implements IColorTheme {
 	public ImageIcon getSelected(SelectIcon pos) {
 		String name = pos.toString();
 		String s = "images/" + name + ".png";
-		System.out.println("greifen zu auf: " + s);
 		if (name.contains("TOP"))
 			return rotateTriangle(s.replace("TOP", "BOT"));
 		return new ImageIcon(s);
@@ -116,7 +113,7 @@ public class ColorThemeStandard implements IColorTheme {
 
 	@Override
 	public ImageIcon get(int n) {
-		assert(n >= icons.length ||n < 0);
+		assert n >= icons.length ||n < 0;
 		return icons[n];
 	}
 }

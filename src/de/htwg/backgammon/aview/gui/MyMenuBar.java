@@ -12,7 +12,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class myMenuBar extends JMenuBar {
+public class MyMenuBar extends JMenuBar {
 	private JMenu data;
 	private JMenu game;
 	private JButton next;
@@ -22,16 +22,15 @@ public class myMenuBar extends JMenuBar {
 	private JMenuItem load;
 	private JMenuItem save;
 	private JMenuItem colorTheme;
-	private Gui gui;
 	private final JFileChooser fc = new JFileChooser();
 
-	public myMenuBar(Gui gui) {
-		this.gui = gui;
+	public MyMenuBar(Gui gui) {
 		
 		next = new JButton("Next");
 		next.setPreferredSize(new Dimension(15,this.getHeight()));
 		next.setMnemonic(KeyEvent.VK_N);
 		next.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				gui.c.next();
 			}
@@ -42,14 +41,16 @@ public class myMenuBar extends JMenuBar {
 		data.getAccessibleContext().setAccessibleDescription("Descriptions are for noobs!");
 		close = new JMenuItem("Beenden");
 		close.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 		colorTheme = new JMenuItem("Schema");
 		colorTheme.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				// not implemented yet because its to late for more features
 			}
 		});
 		data.add(close);
@@ -59,37 +60,39 @@ public class myMenuBar extends JMenuBar {
 		game.setMnemonic(KeyEvent.VK_S);
 		undo = new JMenuItem("Rückgängig");
 		undo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				gui.c.undo();
 			}
 		});
 		replay = new JMenuItem("Wiederholung");
 		replay.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				gui.c.replayGame();
 			}
 		});
 		load = new JMenuItem("Laden");
 		load.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int returnVal = fc.showOpenDialog(null);
 
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					gui.c.loadGame(file);
-				} else {
 				}
 			}
 		});
 		save = new JMenuItem("Speichern");
 		save.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int returnVal = fc.showSaveDialog(null);
 
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					gui.c.saveGame(file);
-				} else {
 				}
 			}
 		});

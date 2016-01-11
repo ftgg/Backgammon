@@ -1,21 +1,13 @@
 package de.htwg.backgammon.aview.gui;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Field extends JPanel {
@@ -24,17 +16,16 @@ public class Field extends JPanel {
 	private int id;
 	private JLayeredPane layeredPane;
 	private JLabel background;
-	public JLabel foreground;
-	public MainPanel mp;
+	private MainPanel mp;
 	private int icoType;
-	
-	public Field(int id, MainPanel mp,int icoType) {
+
+	public Field(int id, MainPanel mp, int icoType) {
 		super();
 		ImageIcon icon = mp.ct.get(icoType);
 		this.id = id;
 		this.mp = mp;
 		this.icoType = icoType;
-		this.setBackground(new Color(0,0,0,0));
+		this.setBackground(new Color(0, 0, 0, 0));
 		Dimension dim = new Dimension(100, 300);
 		layeredPane = new JLayeredPane();
 		layeredPane.setPreferredSize(dim);
@@ -54,36 +45,32 @@ public class Field extends JPanel {
 
 	private ImageIcon scaleIcon(ImageIcon icon, Dimension dimension) {
 		Image img = icon.getImage();
-		ImageIcon ii = new ImageIcon(
-				img.getScaledInstance(dimension.width, dimension.height, java.awt.Image.SCALE_SMOOTH));
-		return ii;
+		return new ImageIcon(img.getScaledInstance(dimension.width, dimension.height, java.awt.Image.SCALE_SMOOTH));
 	}
 
 	public int getID() {
 		return id;
 	}
 
-	public void setTokens(int n, ImageIcon token,int offset) {
+	public void setTokens(int n, ImageIcon token, int offset) {
 		for (Component c : layeredPane.getComponentsInLayer(2))
 			layeredPane.remove(c);
 		this.repaint();
-		token = scaleIcon(token, 100);
+		ImageIcon scaledtoken = scaleIcon(token, 100);
 		for (int i = 0; i < n; i++) {
-			JLabel newLabel = new JLabel(token);
+			JLabel newLabel = new JLabel(scaledtoken);
 			layeredPane.add(newLabel, new Integer(2), 0);
-			newLabel.setBounds(((int)((this.getWidth() - token.getIconWidth()) / 2.5)),
-					Math.abs(offset - ((i % 5) * (int) (token.getIconHeight() / 1.3) + ((i / 5) * token.getIconHeight() / 2) % 2)),
-					token.getIconWidth(), token.getIconHeight());
+			newLabel.setBounds((int) ((this.getWidth() - scaledtoken.getIconWidth()) / 2.5), Math.abs(offset
+					- ((i % 5) * (int) (scaledtoken.getIconHeight() / 1.3) + ((i / 5) * scaledtoken.getIconHeight() / 2) % 2)),
+					scaledtoken.getIconWidth(), scaledtoken.getIconHeight());
 		}
 	}
-	
+
 	public void setIcon(ImageIcon icon) {
-		//TODO DIMENSION new Dimension(this.getHeight(), this.getWidth())
-//		background = new JLabel(scaleIcon(i, new Dimension(100, 300)));
-		ImageIcon scaledicon = scaleIcon(icon,new Dimension(100,300));
+		ImageIcon scaledicon = scaleIcon(icon, new Dimension(100, 300));
 		background.setIcon(scaledicon);
 		mp.repaint();
-		
+
 	}
 
 	public void updateIcon(int b) {
