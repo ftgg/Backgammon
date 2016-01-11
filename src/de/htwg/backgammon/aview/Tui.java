@@ -1,7 +1,5 @@
 package de.htwg.backgammon.aview;
 
-import java.util.Scanner;
-
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -15,7 +13,6 @@ public class Tui implements Observer {
 	private GameState gs;
 	private Controller contr;
 	private TuiSB bStringBuilder = new BackgammonStringBuilder();
-	private Scanner sc = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
 	private static final Logger LOGGER = LogManager.getLogger(Tui.class.getName());
 
 	public Tui(Controller c) {
@@ -35,7 +32,6 @@ public class Tui implements Observer {
 	@Override
 	public void update(Event e) {
 		if (e instanceof GameState) {
-			GameState old = gs;
 			gs = (GameState) e;
 			printField();
 		}
