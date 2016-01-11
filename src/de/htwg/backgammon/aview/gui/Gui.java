@@ -3,32 +3,25 @@ package de.htwg.backgammon.aview.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import de.htwg.backgammon.controller.Controller;
-import de.htwg.backgammon.util.Event;
-import de.htwg.backgammon.util.Observer;
 
 public class Gui extends JFrame {
 
-	public MainPanel mainPanel; // Public just for tests
+	private MainPanel mainPanel;
 	private JLayeredPane pitch;
 	protected Controller c;
-	public static final int winX = 1300;
-	public static final int winY = 850;
+	public static final int WINX = 1300;
+	public static final int WINY = 850;
 
 	public Gui(Controller c) {
 		super("Backgammon");
@@ -38,7 +31,7 @@ public class Gui extends JFrame {
 
 		pitch = new JLayeredPane();
 
-		pitch.setPreferredSize(new Dimension(winX, winY));
+		pitch.setPreferredSize(new Dimension(WINX, WINY));
 		pitch.setLayout(null);
 		mainPanel.setOpaque(false);
 		mainPanel.setBackground(new Color(0, 0, 0, 0));
@@ -49,10 +42,10 @@ public class Gui extends JFrame {
 		pitch.add(bg, new Integer(1), 0);
 		pitch.moveToBack(bg);
 
-		this.setPreferredSize(new Dimension(winX, winY));
+		this.setPreferredSize(new Dimension(WINX, WINY));
 		this.getContentPane().setLayout(new BorderLayout());
 
-		this.setJMenuBar(new myMenuBar(this));
+		this.setJMenuBar(new MyMenuBar(this));
 		this.add(pitch, BorderLayout.CENTER);
 
 		this.setVisible(true);
@@ -61,10 +54,12 @@ public class Gui extends JFrame {
 		this.addComponentListener(new ComponentListener() {
 			@Override
 			public void componentHidden(ComponentEvent e) {
+				//Do nothing because not needed
 			}
 
 			@Override
 			public void componentMoved(ComponentEvent e) {
+				//Do nothing because not needed
 			}
 
 			@Override
@@ -76,6 +71,7 @@ public class Gui extends JFrame {
 
 			@Override
 			public void componentShown(ComponentEvent e) {
+				//Do nothing because not needed
 			}
 		});
 		this.addWindowStateListener(new WindowStateListener() {
