@@ -14,14 +14,14 @@ public class GameStateTest extends TestCase {
 
 	GameState gs;
 	Pitch sf;
-	Player spielerw , spielerb;
+	Player spielerw, spielerb;
 
 	@Before
 	public void setUp() throws Exception {
 		sf = new Pitch();
 		spielerw = new Player("Hund", TokenColor.WHITE);
 		spielerb = new Player("Hund", TokenColor.BLACK);
-		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw,spielerw,spielerb);
+		gs = new GameState(sf, new int[] { 0, 1, 2, 3 }, spielerw, spielerw, spielerb);
 
 	}
 
@@ -36,10 +36,15 @@ public class GameStateTest extends TestCase {
 	}
 
 	@Test
-	public void testGameNotFinished(){
+	public void testGameNotFinished() {
 		assertFalse(gs.getGameFinished());
+		for (int i = 0; i < 5; i++) {
+			gs = GameState.getTestGameState(i);
+			assertNotNull(gs);
+		}
+
 	}
-	
+
 	@Test
 	public void testZuege() {
 		for (int i = 0; i < 4; i++) {
@@ -61,15 +66,14 @@ public class GameStateTest extends TestCase {
 
 		assertEquals(0, gs.getWhiteBar());
 		assertEquals(0, gs.getBlackBar());
-		
+
 		sf.move(0, 6, spielerw);
-		sf.move(5, 6, spielerb); //Schwarz schlägt Weiss
+		sf.move(5, 6, spielerb); // Schwarz schlägt Weiss
 		assertFalse(sf.isBarEmpty(spielerw));
 		assertTrue(sf.isBarEmpty(spielerb));
-		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spielerw, false,spielerw,spielerb);
+		gs = new GameState(sf, new int[] { 1, 1, 1, 1 }, "NEIN", spielerw, false, spielerw, spielerb);
 		assertEquals(0, gs.getBlackBar());
 		assertEquals(1, gs.getWhiteBar());
 	}
-	
 
 }

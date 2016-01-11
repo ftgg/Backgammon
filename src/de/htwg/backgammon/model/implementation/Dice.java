@@ -38,13 +38,11 @@ public class Dice implements IDice {
 		return current;
 	}
 
-	// TODO auch nur im Test?
 	@Override
 	public int getMax() {
 		return max;
 	}
 
-	// TODO auch nur im Test?
 	@Override
 	public int getMin() {
 		return min;
@@ -57,7 +55,6 @@ public class Dice implements IDice {
 
 	@Override
 	public int[] getCurrentCubeNumbers() {
-		// TODO brauch ich das nur im Test?
 		return current;
 	}
 

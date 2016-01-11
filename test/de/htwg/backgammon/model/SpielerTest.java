@@ -34,5 +34,12 @@ public class SpielerTest extends TestCase {
 		assertEquals(TokenColor.WHITE, s2.getColor());
 		assertEquals(TokenColor.BLACK, s3.getColor());
 	}
+	
+	@Test
+	public void testEquals(){
+		assertEquals(s.hashCode(),new Player(name, TokenColor.NONE).hashCode());
+		assertFalse(s.equals(new Integer(2)));
+		assertFalse(s.equals(s2));
+	}
 
 }

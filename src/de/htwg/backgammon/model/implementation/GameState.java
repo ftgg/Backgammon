@@ -123,19 +123,18 @@ public class GameState implements Event,Serializable {
 	}
 	
 	private GameState(){
-		int[] whiteStones = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
-		int[] blackStones = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
-		int[] zuege = {0,0,0,0};
-		this.zuege = zuege;
-		this.blackStones = blackStones;
-		this.whiteStones = whiteStones;
+		int[] newwhiteStones = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
+		int[] newblackStones = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
+		int[] newzuege = {0,0,0,0};
+		this.zuege = newzuege;
+		this.blackStones = newblackStones;
+		this.whiteStones = newwhiteStones;
 		this.whiteBar = 0;
 		this.blackBar = 0;
 		current = null;
 		gamefinished = false;
 	}
 	
-	//TEST
 	public static GameState getTestGameState(int i){
 		if(i == 2){
 			return new GameState(new int[] { 1,0,0,0,0,0,0,0 },new int[]{ 0,0,0,0,0,0,0,1},1,0);
@@ -152,8 +151,8 @@ public class GameState implements Event,Serializable {
 	
 	//For testStates
 	private GameState(int[] whiteStones, int[] blackStones, int onPitch, int whiteBar){
-		int[] zuege = {0,0,0,0};
-		this.zuege = zuege;
+		int[] newzuege = {0,0,0,0};
+		this.zuege = newzuege;
 		this.blackStones = blackStones;
 		this.whiteStones = whiteStones;
 		this.whiteBar = whiteBar;

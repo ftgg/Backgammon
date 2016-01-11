@@ -12,15 +12,6 @@ public abstract class AbstractMove {
 	Triangle currentbar;
 	Triangle otherbar;
 	
-	public static AbstractMove createMoveObject(int a, int b, Player s, Pitch sf, int[] stonesOnField){
-		if(a == IPitch.BAR)
-			return new BarMove(a,b,s,sf);
-		if(b == IPitch.EXIT)
-			return new ExitMove(a,b,s,sf,stonesOnField);
-		return new StandardMove(a,b,s,sf);
-	}
-	
-	
 	protected AbstractMove(int a, int b, Player s, Pitch sf){
 		this.a = a;
 		this.b = b;
@@ -35,8 +26,15 @@ public abstract class AbstractMove {
 			otherbar = sf.getBarWhite();
 		}
 	}
-
-
+	
+	public static AbstractMove createMoveObject(int a, int b, Player s, Pitch sf, int[] stonesOnField){
+		if(a == IPitch.BAR)
+			return new BarMove(a,b,s,sf);
+		if(b == IPitch.EXIT)
+			return new ExitMove(a,b,s,sf,stonesOnField);
+		return new StandardMove(a,b,s,sf);
+	}
+	
 	public abstract int move();
 	
 

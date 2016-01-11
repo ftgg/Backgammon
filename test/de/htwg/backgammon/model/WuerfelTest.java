@@ -18,6 +18,19 @@ public class WuerfelTest extends TestCase {
 			Dice C = new Dice(-2, 5);
 			fail("Excetion");
 		} catch (Exception e) {
+		}
+		
+		try {
+			Dice C = new Dice(8, 2);
+			fail("Excetion");
+		} catch (Exception e) {
+
+		}
+		
+		try {
+			Dice C = new Dice(1, -15);
+			fail("Excetion");
+		} catch (Exception e) {
 
 		}
 	}
@@ -30,7 +43,7 @@ public class WuerfelTest extends TestCase {
 	@Test
 	public void testisPasch() {
 		for (int i = 0; i < 37; i++) {
-			w.wuerfeln();
+			w.rollTheDice();
 			assertSame(w.isDoublets(), w.getCurrentCubeNumbers()[0] == w.getCurrentCubeNumbers()[1]);
 		}
 	}

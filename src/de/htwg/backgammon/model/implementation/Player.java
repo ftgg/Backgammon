@@ -11,7 +11,7 @@ public class Player implements IPlayer, Serializable {
 	private TokenColor color;
 
 	/**
-	 * Player construktor set playername and player color
+	 * Player constructor set playername and player color
 	 * 
 	 * @param name
 	 *            name of this player
@@ -52,4 +52,10 @@ public class Player implements IPlayer, Serializable {
 	public String toString() {
 		return "Player(" + color + ") :" + name;
 	}
+	
+	@Override
+	  public int hashCode() {
+	    return this.color.hashCode();
+	  }
+
 }

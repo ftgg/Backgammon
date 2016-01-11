@@ -11,8 +11,8 @@ public class BarMove extends AbstractMove {
 		Token attack;
 		Token beaten;
 
-		attack = (Token) currentbar.remove();
-		beaten = (Token) sf.getTriangle(b).add(attack);
+		attack = currentbar.remove();
+		beaten = sf.getTriangle(b).add(attack);
 		return putOnBar(beaten);
 	}
 
