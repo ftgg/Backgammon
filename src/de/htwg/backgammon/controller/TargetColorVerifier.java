@@ -13,7 +13,7 @@ public class TargetColorVerifier extends MoveVerifier {
 	public boolean isTargetColorValid(int a, int b, IPlayer s, IPitch sf) {
 		if (a != IPitch.BAR && sf.getTriangleColor(a)!= s.getColor())
 			return false;
-		return (b == IPitch.EXIT || sf.getTriangleUnsecure(b) || sf.getTriangleColor(b) == s.getColor());
+		return b == IPitch.EXIT || sf.getTriangleUnsecure(b) || sf.getTriangleColor(b) == s.getColor();
 	}
 
 }

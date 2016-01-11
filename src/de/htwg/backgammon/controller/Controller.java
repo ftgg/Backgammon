@@ -13,8 +13,12 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.inject.Inject;
 
+import de.htwg.backgammon.aview.Tui;
 import de.htwg.backgammon.model.IDice;
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
@@ -38,7 +42,7 @@ public class Controller extends Subject {
 	private Caretaker states;
 	private int lastclick = -1;
 	private GameState currentGameState;
-	
+	private static final Logger LOGGER = LogManager.getLogger(Controller.class.getName());
 
 	@Inject
 	public Controller(IPitch p, IDice d, IPlayer s1, IPlayer s2) {
@@ -48,7 +52,7 @@ public class Controller extends Subject {
 		this.s2 = s2;
 
 		createMoveVerifier();
-		CreateMemento();
+		createMemento();
 		actionparser = new ActionParser();
 		wuerfeln();
 		current = s1;
@@ -64,7 +68,7 @@ public class Controller extends Subject {
 		actionparser = new ActionParser();
 		wuerfeln();
 		current = s1;
-		CreateMemento();
+		createMemento();
 		start();
 	}
 
@@ -73,7 +77,7 @@ public class Controller extends Subject {
 	public void start(){
 		GameState gs = new GameState(sf, zuege, 
 	current.getName() + " ist am Zug!", current, false, s1, s2);
-		SetMemento(gs);
+		setMemento(gs);
 		notifyObs(gs);
 	}
 
@@ -87,7 +91,7 @@ public class Controller extends Subject {
 		} else if (act[0] == NEXT) {
 			spielerwechsel();
 			gs = new GameState(sf, zuege, current.getName() + " ist am Zug", current, false, s1, s2);
-			SetMemento(gs);
+			setMemento(gs);
 			notifyObs(gs);
 			return;
 		}
@@ -127,7 +131,7 @@ public class Controller extends Subject {
 		if (zuegeEmpty())
 			spielerwechsel();
 		gs = new GameState(sf, zuege, msg, current, win, s1, s2);
-		SetMemento(gs);
+		setMemento(gs);
 		notifyObs(gs);
 		return result;
 	}
@@ -150,7 +154,6 @@ public class Controller extends Subject {
 
 	private void createMoveVerifier() {
 		BarVerifier bv = new BarVerifier();
-		;
 		DiceResultVerifier drv = new DiceResultVerifier();
 		ExitMoveVerifier emv = new ExitMoveVerifier();
 		TargetColorVerifier tcv = new TargetColorVerifier();
@@ -181,11 +184,11 @@ public class Controller extends Subject {
 		return current;
 	}
 
-	private void CreateMemento() {
+	private void createMemento() {
 		states = new Caretaker();
 	}
 
-	private void SetMemento(GameState gs) {
+	private void setMemento(GameState gs) {
 		states.addState(new Memento(gs));
 		currentGameState = gs;
 	}
@@ -213,8 +216,7 @@ public class Controller extends Subject {
 			out.close();
 			fout.close();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
+			LOGGER.info(e.getMessage());
 			return;
 		}
 	}
@@ -227,11 +229,10 @@ public class Controller extends Subject {
 			states = new Caretaker((ArrayDeque<Memento>) in.readObject());
 			in.close();
 		} catch (IOException e) {
-		   // e.printStackTrace();
+			LOGGER.info(e.getMessage());
 			return;
 		} catch (ClassNotFoundException c) {
-			System.out.println("Class not Found!");
-			c.printStackTrace();
+			LOGGER.info(c.getMessage());
 			return;
 		}
 		GameState g = states.getLastState().getGameState();
@@ -244,6 +245,7 @@ public class Controller extends Subject {
 		Iterator<Memento> iterator = states.iterator();
 
 		t = new Timer(500, new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!iterator.hasNext()){
 					t.stop();

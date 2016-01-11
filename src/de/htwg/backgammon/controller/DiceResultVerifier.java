@@ -22,22 +22,37 @@ public class DiceResultVerifier extends MoveVerifier {
 			max = Math.max(max, i);
 		}
 		
-		if(!indiceResult && a != IPitch.BAR){
+		if(noneBar(a, indiceResult)){
 			removeThrow(value,zuege);
 			return true;
-		}else if(max >= value && b == IPitch.EXIT){
+		}else if(isExit(max, value, b)){
 			removeThrow(max,zuege);
 			return true;
-		}else if(!indiceResult && a == IPitch.BAR){
+		}else if(isBar(a, indiceResult)){
 			removeThrow(value ,zuege);
 			return true;
 		}	
 		
 		return false;
 	}
+	
+	private boolean isBar(int a, boolean indiceResult){
+		return !indiceResult && a == IPitch.BAR;
+	}
+	
+	private boolean isExit(int max,int value,int b){
+		return max >= value && b == IPitch.EXIT;
+	}
+	
+	private boolean noneBar(int a, boolean indiceResult){
+		return !indiceResult && a != IPitch.BAR;
+	}
+	
 
-	public int getDistance(int a, int b, IPitch sf, IPlayer current) {
+	public int getDistance(int a_, int b_, IPitch sf, IPlayer current) {
 		int start = sf.getSize();
+		int a = a_;
+		int b = b_;
 		int end = -1;
 		if (current.getColor() == TokenColor.WHITE) {
 			start = -1;
@@ -50,10 +65,8 @@ public class DiceResultVerifier extends MoveVerifier {
 			b = end;
 		return Math.abs(b - a);
 	}
-
-	/**
-	 * deleates the current move from zuege
-	 */
+	
+	
 	protected void removeThrow(int a, int[] zuege) {
 		for (int i = 0; i < 4; i++)
 			if (zuege[i] == a) {

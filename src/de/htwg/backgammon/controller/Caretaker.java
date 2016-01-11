@@ -2,14 +2,15 @@ package de.htwg.backgammon.controller;
 
 import java.util.ArrayDeque;
 import java.util.Iterator;
+import java.util.Deque;
 
 public class Caretaker implements Iterable<Memento>{
-	private ArrayDeque<Memento> queue;
+	private Deque<Memento> queue;
 	public Caretaker(){
 		queue = new ArrayDeque<Memento>();
 	}
 	
-	public Caretaker(ArrayDeque<Memento> queue){
+	public Caretaker(Deque<Memento> queue){
 		this.queue = queue;
 	}
 	
@@ -25,7 +26,7 @@ public class Caretaker implements Iterable<Memento>{
 	}
 	
 	
-	public ArrayDeque<Memento> getStack(){
+	public Deque<Memento> getStack(){
 		return queue;
 	}
 

@@ -1,7 +1,5 @@
 package de.htwg.backgammon.controller;
 
-import javax.swing.ImageIcon;
-
 import de.htwg.backgammon.util.Event;
 
 public class SelectState implements Event {
