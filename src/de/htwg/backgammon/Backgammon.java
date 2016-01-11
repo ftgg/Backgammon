@@ -17,7 +17,6 @@ import de.htwg.backgammon.model.implementation.Player;
 public class Backgammon {
 
 	private static Scanner sc = new Scanner(System.in);
-	private static Gui gui;
 	private static Tui tui;
 	private static Controller c;
 
@@ -34,7 +33,7 @@ public class Backgammon {
 		//c = new Controller(4);
 		c = new Controller(pitch,dice,s1,s2);
 		tui = new Tui(c);
-		gui = new Gui(c);
+		new Gui(c);
 		c.start();
 		
 		
@@ -42,7 +41,6 @@ public class Backgammon {
 		while (continu) {
 			continu = tui.processInputLine(sc.nextLine());
 		}
-
 
 	}
 

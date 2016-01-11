@@ -16,7 +16,6 @@ public class Tui implements Observer {
 	private static final Logger LOGGER = LogManager.getLogger(Tui.class.getName());
 
 	public Tui(Controller c) {
-		System.out.println("Tui startet");
 		contr = c;
 		contr.add(this);
 	}
