@@ -104,9 +104,9 @@ public class BackgammonStringBuilder implements TuiSB {
 
 	private char color(int depth, int i, int[] w, int[] b) {
 		if (w[i] >= depth) {
-			return chosechar('W', w[i], depth);
+			return getcharfrom(depth, w[i], 'W');
 		} else if (b[i] >= depth) {
-			return chosechar('B', b[i], depth);
+			return getcharfrom(depth, b[i], 'B');
 		}
 		return ' ';
 	}
@@ -128,16 +128,17 @@ public class BackgammonStringBuilder implements TuiSB {
 		}
 	}
 
-	private int setCharAt(int startI, int pos, int number, int zeile, StringBuilder sb) {
+	private int setCharAt(int startI, int pos, final int number, int zeile, StringBuilder sb) {
+		int num = number;
 		if (pos == 0)
 			sb.setCharAt(startI, ' ');
 		else if (pos == 1) {
 			sb.setCharAt(startI, getchar(number));
 		} else {
 			sb.setCharAt(startI, String.valueOf(number % 10).toCharArray()[0]);
-			number = newnumber(number, zeile);
+			num = newnumber(number, zeile);
 		}
-		return number;
+		return num;
 	}
 
 	private int newnumber(int number, int zeile) {
@@ -151,5 +152,9 @@ public class BackgammonStringBuilder implements TuiSB {
 		if (number < 10)
 			return ' ';
 		return String.valueOf(number).toCharArray()[0];
+	}
+
+	private char getcharfrom(int depth, int coloronField, char color) {
+		return chosechar(color, coloronField, depth);
 	}
 }
