@@ -1,10 +1,7 @@
 package de.htwg.backgammon.aview;
 
-import java.util.Scanner;
-
 import de.htwg.backgammon.controller.Controller;
 import de.htwg.backgammon.model.implementation.GameState;
-import de.htwg.backgammon.model.implementation.InitPlayersState;
 import de.htwg.backgammon.util.Event;
 import de.htwg.backgammon.util.Observer;
 
@@ -12,7 +9,7 @@ public class Tui implements Observer {
 	private GameState gs;
 	private Controller contr;
 	private TuiSB bStringBuilder = new BackgammonStringBuilder();
-	private Scanner sc = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
+	//private Scanner sc = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
 
 	public Tui(Controller c) {
 		System.out.println("Tui startet");
