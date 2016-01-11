@@ -38,6 +38,7 @@ public class Controller extends Subject {
 	private Caretaker states;
 	private int lastclick = -1;
 	private GameState currentGameState;
+	private Timer t;
 	private static final Logger LOGGER = LogManager.getLogger(Controller.class.getName());
 
 	@Inject
@@ -110,20 +111,24 @@ public class Controller extends Subject {
 	}
 
 	public int spielZug(int a, int b) {
-		boolean win = false;
 		GameState gs;
-		String msg = "";
 		if (!moveVerifier.checkMove(a, b, zuege, sf, current, s1, s2)) {
 			gs = new GameState(sf, zuege, "Nicht möglicher Zug!", current, false, s1, s2);
 			notifyObs(gs);
 			return -3;
 		}
+		return doMove(a,b);
+	}
+	
+	int doMove(int a, int b){
+		boolean win = false;
+		GameState gs;
+		String msg = "";
 		int result = sf.move(a, b, current);
 		if (result == 111) {
 			msg = current.getName() + " hat gewonnen!";
 			win = true;
 		}
-
 		if (zuegeEmpty())
 			spielerwechsel();
 		gs = new GameState(sf, zuege, msg, current, win, s1, s2);
@@ -131,6 +136,7 @@ public class Controller extends Subject {
 		notifyObs(gs);
 		return result;
 	}
+	
 
 	public boolean zuegeEmpty() {
 		for (int c : zuege) {
@@ -224,18 +230,15 @@ public class Controller extends Subject {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			states = new Caretaker((ArrayDeque<Memento>) in.readObject());
 			in.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			LOGGER.info(e.getMessage());
-			return;
-		} catch (ClassNotFoundException c) {
-			LOGGER.info(c.getMessage());
 			return;
 		}
 		GameState g = states.getLastState().getGameState();
 		loadGameState(g);
 	}
 
-	Timer t;
+	
 	public void replayGame() {
 		Iterator<Memento> iterator = states.iterator();
 
