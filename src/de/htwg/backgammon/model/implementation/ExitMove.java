@@ -20,6 +20,7 @@ public class ExitMove extends AbstractMove {
 		if (s.getColor() == TokenColor.WHITE)
 			i = 1;
 		stonesOnField[i] = stonesOnField[i] - 1;
+		sf.getTriangle(a).remove();
 		return stonesOnField[i] == 0 ? 111 : 0;
 	}
 }

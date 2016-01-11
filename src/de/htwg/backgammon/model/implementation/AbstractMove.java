@@ -1,9 +1,7 @@
 package de.htwg.backgammon.model.implementation;
 
 import de.htwg.backgammon.model.IPitch;
-import de.htwg.backgammon.model.IToken;
 import de.htwg.backgammon.model.TokenColor;
-import de.htwg.backgammon.model.ITriangle;
 
 public abstract class AbstractMove {
 
@@ -11,8 +9,8 @@ public abstract class AbstractMove {
 	int a;
 	int b;
 	Player s;
-	ITriangle currentbar;
-	ITriangle otherbar;
+	Triangle currentbar;
+	Triangle otherbar;
 	
 	public static AbstractMove createMoveObject(int a, int b, Player s, Pitch sf, int[] stonesOnField){
 		if(a == IPitch.BAR)
@@ -30,11 +28,11 @@ public abstract class AbstractMove {
 		this.sf = sf;
 		
 		if (s.getColor() == TokenColor.WHITE){
-			currentbar = sf.getBarwhite();
-			otherbar = sf.getBarblack();
+			currentbar = sf.getBarWhite();
+			otherbar = sf.getBarBlack();
 		}else{
-			currentbar = sf.getBarblack();
-			otherbar = sf.getBarwhite();
+			currentbar = sf.getBarBlack();
+			otherbar = sf.getBarWhite();
 		}
 	}
 
@@ -42,7 +40,7 @@ public abstract class AbstractMove {
 	public abstract int move();
 	
 
-	protected int putOnBar(IToken beaten){
+	protected int putOnBar(Token beaten){
 		if (beaten == null) // target field was empty
 			return 0;
 		otherbar.add(beaten);

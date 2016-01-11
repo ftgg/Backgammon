@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,15 +13,16 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import com.google.inject.Inject;
+
+import de.htwg.backgammon.model.IDice;
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
 import de.htwg.backgammon.model.implementation.Pitch;
 import de.htwg.backgammon.model.implementation.Player;
-import de.htwg.backgammon.model.implementation.SelectState;
 import de.htwg.backgammon.model.implementation.Dice;
 import de.htwg.backgammon.model.implementation.GameState;
-import de.htwg.backgammon.model.implementation.InitPlayersState;
 import de.htwg.backgammon.util.Subject;
 
 public class Controller extends Subject {
@@ -31,50 +31,48 @@ public class Controller extends Subject {
 	private IPlayer s2;
 	private IPlayer current;
 	private IPitch sf;
-	private Dice w;
+	private IDice w;
 	private int[] zuege = { 0, 0, 0, 0 };
 	private MoveVerifier moveVerifier;
 	private ActionParser actionparser;
 	private Caretaker states;
-	private int lastclick; // only need with gui
+	private int lastclick = -1;
+	private GameState currentGameState;
+	
 
-	public Controller() {
-		sf = new Pitch(GameState.getDefaultGameState());// Standartgröße =
-														// original größe
-		
-		w = new Dice();
-		lastclick = -1;
+	@Inject
+	public Controller(IPitch p, IDice d, IPlayer s1, IPlayer s2) {
+		sf = p;
+		w = d;
+		this.s1 = s1;
+		this.s2 = s2;
+
 		createMoveVerifier();
 		CreateMemento();
 		actionparser = new ActionParser();
 		wuerfeln();
-		setSpieler("Frau Weiss", "Herr Schwarz");
-	}
-
-	/**
-	 * Controller für Test umgebung
-	 * 
-	 * @param a
-	 */
-	public Controller(int i) {
-		sf = new Pitch(GameState.getTestGameState(i));
-		w = new Dice();
-		createMoveVerifier();
-		actionparser = new ActionParser();
-		wuerfeln();
-		CreateMemento();
-		setSpieler("Frau Weiss", "Herr Schwarz");
-	}
-
-
-	public void setSpieler(String n1, String n2) {
-		s1 = new Player(n1, TokenColor.WHITE);
-		s2 = new Player(n2, TokenColor.BLACK);
 		current = s1;
 	}
 	
+	
+	public Controller(int i) {
+		sf = new Pitch(GameState.getTestGameState(i));
+		w = new Dice();
+		s1 = new Player("Frau Weiss", TokenColor.WHITE);
+		s2 = new Player("Herr Schwarz", TokenColor.BLACK);
+		createMoveVerifier();
+		actionparser = new ActionParser();
+		wuerfeln();
+		current = s1;
+		CreateMemento();
+		start();
+	}
+
+
+	
 	public void start(){
-		GameState gs = new GameState(sf, zuege, "Spiel Beginnt", current, false, s1, s2);
+		GameState gs = new GameState(sf, zuege, 
+	current.getName() + " ist am Zug!", current, false, s1, s2);
 		SetMemento(gs);
 		notifyObs(gs);
 	}
@@ -88,7 +86,7 @@ public class Controller extends Subject {
 			return;
 		} else if (act[0] == NEXT) {
 			spielerwechsel();
-			gs = new GameState(sf, zuege, "SpielerWechsel", current, false, s1, s2);
+			gs = new GameState(sf, zuege, current.getName() + " ist am Zug", current, false, s1, s2);
 			SetMemento(gs);
 			notifyObs(gs);
 			return;
@@ -97,7 +95,7 @@ public class Controller extends Subject {
 	}
 
 	public void wuerfeln() {
-		w.wuerfeln();
+		w.rollTheDice();
 		if (w.isDoublets()) {
 			zuege[0] = w.getCurrentCubeNumbers()[0];
 			zuege[1] = w.getCurrentCubeNumbers()[1];
@@ -157,18 +155,16 @@ public class Controller extends Subject {
 		ExitMoveVerifier emv = new ExitMoveVerifier();
 		TargetColorVerifier tcv = new TargetColorVerifier();
 		DirectionVerifier dv = new DirectionVerifier();
+		IndexVerifier idv = new IndexVerifier();
 		moveVerifier = drv;
-		drv.successor = bv;
+		drv.successor = idv;
+		idv.successor = bv;
 		bv.successor = emv;
 		emv.successor = tcv;
 		tcv.successor = dv;
 	}
 
-	/**
-	 * NUR für tests, nicht zum gebrauch gedacht =)
-	 * 
-	 * @return Wuerfelergebnis
-	 */
+	
 	public int[] getWuerfelC() {
 		return w.getCurrentCubeNumbers();
 	}
@@ -191,6 +187,7 @@ public class Controller extends Subject {
 
 	private void SetMemento(GameState gs) {
 		states.addState(new Memento(gs));
+		currentGameState = gs;
 	}
 
 	public void undo() {
@@ -204,10 +201,7 @@ public class Controller extends Subject {
 		this.current = gs.getCurrent();
 		s1 = gs.getPlayer()[0];
 		s2 = gs.getPlayer()[1];
-		System.out.println(s1);
-		System.out.println(s1.getName());
-		System.out.println(s2.getName());
-		System.out.println(zuege.toString());
+		currentGameState = gs;
 		notifyObs(gs);
 	}
 
@@ -233,14 +227,14 @@ public class Controller extends Subject {
 			states = new Caretaker((ArrayDeque<Memento>) in.readObject());
 			in.close();
 		} catch (IOException e) {
-			// e.printStackTrace();
+		   // e.printStackTrace();
 			return;
 		} catch (ClassNotFoundException c) {
 			System.out.println("Class not Found!");
 			c.printStackTrace();
 			return;
 		}
-		GameState g = states.readLastState().getGameState();
+		GameState g = states.getLastState().getGameState();
 		loadGameState(g);
 	}
 
@@ -267,21 +261,25 @@ public class Controller extends Subject {
 			lastclick = id;
 			notifyObs(new SelectState(id, id <= 12 || id == 25, 1));
 		} else {
-			doAction(toStr(lastclick, id));
+			doAction(convertToMoveString(lastclick, id));
 			notifyObs(new SelectState(lastclick, lastclick <= 12 || lastclick == 25, 0));
 			lastclick = -1;
 		}
 	}
+	
+	public void next(){
+		doAction("n");
+	}
 
-	// 25 is bar or home
-	public String toStr(int a, int b) {
-		String first;
-		if (a == 25 || a == 26)
-			first = "b ";
-		else
-			first = a + " ";
-		if (b == 25 || b == 26)
-			return first + "h";
-		return first + b;
+	public String convertToMoveString(int a, int b) {
+		if (a == b && a < 25)
+			return a + " h";
+		if(a == 25 || a == 26)
+			return "b " + b;
+		return a + " " + b;
+	}
+	
+	public GameState getCurrentGameState() {
+		return currentGameState;
 	}
 }

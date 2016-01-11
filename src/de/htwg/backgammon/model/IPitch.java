@@ -1,7 +1,5 @@
 package de.htwg.backgammon.model;
 
-import de.htwg.backgammon.model.ITriangle;
-
 public interface IPitch {
 	public static final int EXIT = -1;
 	public static final int BAR = -2;
@@ -13,14 +11,9 @@ public interface IPitch {
 	 */
 	public int getSize();
 
-	/**
-	 * return the selected triangle (on index i)
-	 * 
-	 * @param i
-	 *            index
-	 * @return triangle on index i
-	 */
-	public ITriangle getTriangle(int i);
+	public TokenColor getTriangleColor(int i);
+	
+	public boolean getTriangleUnsecure(int i);
 
 	/**
 	 * returns true if there is no token on the selected triangle
@@ -84,10 +77,4 @@ public interface IPitch {
 	 */
 	public boolean allHome(IPlayer current);
 
-	/**
-	 * @return bar
-	 */
-	public ITriangle getBarblack();
-
-	public ITriangle getBarwhite();
 }

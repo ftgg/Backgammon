@@ -7,6 +7,10 @@ import org.junit.Test;
 
 import de.htwg.backgammon.model.IPlayer;
 import de.htwg.backgammon.model.TokenColor;
+import de.htwg.backgammon.model.implementation.Dice;
+import de.htwg.backgammon.model.implementation.GameState;
+import de.htwg.backgammon.model.implementation.Pitch;
+import de.htwg.backgammon.model.implementation.Player;
 
 
 public class ControllerTest {
@@ -44,11 +48,11 @@ public class ControllerTest {
 	}
 
 
-
-
 	@Test
 	public void testController() {
-		Controller c2 = new Controller();
+		Controller c2 = new Controller(new Pitch(), new Dice(), 
+				new Player("S1", TokenColor.BLACK), 
+				new Player("S2", TokenColor.WHITE));
 		assertNotNull(c2.getWuerfelC());
 	}
 
@@ -88,12 +92,22 @@ public class ControllerTest {
 	public void Testsetclick(){
 		c.setclick(1);
 		c.setclick(2);
-		assertEquals(c.toStr(1, 2),"1 2");
-		assertEquals(c.toStr(25, 2),"b 2");
-		assertEquals(c.toStr(1, 25),"1 h");
+		assertEquals(c.convertToMoveString(1, 12),"1 12");
+		assertEquals(c.convertToMoveString(1, 1),"1 h");
+		assertEquals(c.convertToMoveString(24, 24),"24 h");
 	}
 
-
+	@Test
+	public void undo(){
+		minC = new Controller(1);
+		minC.doAction("1 2");
+		GameState gs = minC.getCurrentGameState();
+		minC.doAction("2 3");
+		minC.undo();
+		GameState gs2 = minC.getCurrentGameState();
+		assertSame(gs,gs2);
+		
+	}
 
 
 	

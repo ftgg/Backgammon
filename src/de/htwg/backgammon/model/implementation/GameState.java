@@ -1,6 +1,6 @@
 package de.htwg.backgammon.model.implementation;
 
-import de.htwg.backgammon.model.ITriangle;
+
 import de.htwg.backgammon.util.Event;
 
 import java.io.Serializable;
@@ -95,8 +95,14 @@ public class GameState implements Event,Serializable {
 	
 
 	private void fillArrays(IPitch sf) {
+		Triangle d;
 		for (int i = 0; i < sf.getSize(); i++) {
-			ITriangle d = sf.getTriangle(i);
+			if(sf instanceof Pitch){
+				d = ((Pitch)sf).getTriangle(i);
+			}else{
+				throw new ClassCastException();
+			}
+			
 			if (d.getColor() == TokenColor.WHITE) {
 				whiteStones[i] = d.count();
 				blackStones[i] = 0;
@@ -138,8 +144,8 @@ public class GameState implements Event,Serializable {
 		}else if (i == 3){ // mit stein auf Bar
 			return new GameState(new int[] { 1,0,0,0 },new int[]{ 0,0,0,1 },1,1);
 		}else if (i == 4){
-			return new GameState(new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,3,2,1,3},
-					new int[]{4,3,2,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},0,0);
+			return new GameState(new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
+					new int[]{1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},2,0);
 		}
 		return getDefaultGameState();
 	}

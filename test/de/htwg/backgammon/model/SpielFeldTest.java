@@ -12,7 +12,7 @@ import de.htwg.backgammon.model.implementation.Player;
 
 public class SpielFeldTest {
 
-	private TestPitch sfstd, sfs;
+	private Pitch sfstd, sfs;
 	private int size; // size of (pitch/4)
 	private Player spielerw, spielerb;
 
@@ -57,7 +57,7 @@ public class SpielFeldTest {
 		Integer[] posw = { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0, 0 };
 		Integer[] posb = { 0, 0, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 };
 		for (int i = 0; i < 24; i++) {
-			if (sfstd.getTriangle(i).getColor() == TokenColor.WHITE)
+			if (sfstd.getTriangleColor(i) == TokenColor.WHITE)
 				assertSame(posw[i], sfstd.countOfTriangle(i));
 			else
 				assertSame(posb[i], sfstd.countOfTriangle(i));
@@ -79,12 +79,12 @@ public class SpielFeldTest {
 		
 		assertSame(1, sfs.move(0,7,spielerw));
 		assertFalse(sfs.isBarEmpty(spielerb));
-		assertSame(1 , sfs.getBarblack().count());
-		assertSame(0 , sfs.getBarwhite().count());
-		assertSame(TokenColor.NONE, sfs.getBarwhite().getColor());
+		assertSame(1 , sfs.getBarBlack().count());
+		assertSame(0 , sfs.getBarWhite().count());
+		assertSame(TokenColor.NONE, sfs.getBarWhite().getColor());
 		assertSame(1, sfs.move(IPitch.BAR,7,spielerb));
-		assertSame(0 , sfs.getBarblack().count());
-		assertSame(1 , sfs.getBarwhite().count());
+		assertSame(0 , sfs.getBarBlack().count());
+		assertSame(1 , sfs.getBarWhite().count());
 		assertSame(0, sfs.move(IPitch.BAR,3,spielerw));
 	}
 

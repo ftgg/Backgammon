@@ -22,13 +22,9 @@ public class Caretaker implements Iterable<Memento>{
 		if(queue.size() == 1){
 			return queue.peekLast();
 		}
-			
 		return queue.removeLast();
 	}
 	
-	public Memento readLastState(){
-		return queue.pollLast();
-	}
 	
 	public ArrayDeque<Memento> getStack(){
 		return queue;

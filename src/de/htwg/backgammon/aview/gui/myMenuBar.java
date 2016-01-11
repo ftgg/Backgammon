@@ -1,10 +1,12 @@
 package de.htwg.backgammon.aview.gui;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -13,6 +15,7 @@ import javax.swing.JMenuItem;
 public class myMenuBar extends JMenuBar {
 	private JMenu data;
 	private JMenu game;
+	private JButton next;
 	private JMenuItem close;
 	private JMenuItem undo;
 	private JMenuItem replay;
@@ -24,6 +27,16 @@ public class myMenuBar extends JMenuBar {
 
 	public myMenuBar(Gui gui) {
 		this.gui = gui;
+		
+		next = new JButton("Next");
+		next.setPreferredSize(new Dimension(15,this.getHeight()));
+		next.setMnemonic(KeyEvent.VK_N);
+		next.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gui.c.next();
+			}
+		});
+	
 		data = new JMenu("Datei");
 		data.setMnemonic(KeyEvent.VK_D);
 		data.getAccessibleContext().setAccessibleDescription("Descriptions are for noobs!");
@@ -84,8 +97,9 @@ public class myMenuBar extends JMenuBar {
 		game.add(replay);
 		game.add(load);
 		game.add(save);
-
+		
 		this.add(data);
 		this.add(game);
+		this.add(next);
 	}
 }
