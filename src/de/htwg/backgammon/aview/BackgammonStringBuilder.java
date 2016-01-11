@@ -80,11 +80,15 @@ public class BackgammonStringBuilder implements TuiSB {
 		int pos;
 		for (int i = 0; i < size; i++) {
 			pos = i % 3;
-			if (pos == 2) {
-				sb.setCharAt(start + i, getWoB((weiss.length / 2 - 1) - i / 3, zeile, weiss, schwarz));
-			} else {
-				sb.setCharAt(start + i, ' ');
-			}
+			setCharAt(pos, start + i, zeile, (weiss.length / 2 - 1) - i / 3, weiss, schwarz, sb);
+		}
+	}
+
+	private void setCharAt(int pos, int startI, int zeile, int arg, int[] weiss, int[] schwarz, StringBuilder sb) {
+		if (pos == 2) {
+			sb.setCharAt(startI, getWoB(arg, zeile, weiss, schwarz));
+		} else {
+			sb.setCharAt(startI, ' ');
 		}
 	}
 
@@ -114,24 +118,26 @@ public class BackgammonStringBuilder implements TuiSB {
 	}
 
 	private void printNumbers(int zeile, int size, final int absnumber, StringBuilder sb) {
-		// ich bin in Zeile zeile und habe eine Zeilenlänge von size, an der
-		// stelle size steht das nullzeichen!
 		int number = absnumber;
 		int start = (zeile - 1) * (size + 1);
 		int pos;
 
-		// zahlen von (size-1*3) bis 1
 		for (int i = 0; i < size; i++) {
 			pos = i % 3;
-			if (pos == 0)
-				sb.setCharAt(start + i, ' ');
-			else if (pos == 1) {
-				sb.setCharAt(start + i, getchar(number));
-			} else {
-				sb.setCharAt(start + i, String.valueOf(number % 10).toCharArray()[0]);
-				number = newnumber(number, zeile);
-			}
+			number = setCharAt(start + i, pos, number, zeile, sb);
 		}
+	}
+
+	private int setCharAt(int startI, int pos, int number, int zeile, StringBuilder sb) {
+		if (pos == 0)
+			sb.setCharAt(startI, ' ');
+		else if (pos == 1) {
+			sb.setCharAt(startI, getchar(number));
+		} else {
+			sb.setCharAt(startI, String.valueOf(number % 10).toCharArray()[0]);
+			number = newnumber(number, zeile);
+		}
+		return number;
 	}
 
 	private int newnumber(int number, int zeile) {
