@@ -10,31 +10,31 @@ public class IndexVerifier extends MoveVerifier {
 		return isIndexValid(a,b,sf) && successor.checkMove(a, b, zuege, sf, s, s1, s2);
 	}
 	
-	private boolean isIndexValid(int a, int b, IPitch sf){
+	boolean isIndexValid(int a, int b, IPitch sf){
 		return aIsValid(a,sf) && bIsValid(b, sf);
 	}
 	
-	private boolean aIsBar(int a){
+	boolean aIsBar(int a){
 		return a == IPitch.BAR;
 	}
 	
-	private boolean aInRange(int a, IPitch sf){
+	boolean aInRange(int a, IPitch sf){
 		return a < sf.getSize() && a >= 0;
 	}
 	
-	private boolean bIsExit(int b){
+	boolean bIsExit(int b){
 		return b == IPitch.EXIT;
 	}
 	
-	private boolean bInRange(int b, IPitch sf){
+	boolean bInRange(int b, IPitch sf){
 		return b >=0 && b < sf.getSize();
 	}
 	
-	private boolean aIsValid(int a, IPitch sf){
+	boolean aIsValid(int a, IPitch sf){
 		return aInRange(a,sf) || aIsBar(a);
 	}
 	
-	private boolean bIsValid(int b, IPitch sf){
+	boolean bIsValid(int b, IPitch sf){
 		return bInRange(b,sf) ||  bIsExit(b);
 	}
 

@@ -4,6 +4,7 @@ package de.htwg.backgammon.model.implementation;
 import de.htwg.backgammon.util.Event;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
@@ -26,6 +27,19 @@ public class GameState implements Event,Serializable {
 	private String p2n;
 	private boolean gamefinished = false;
 
+	@Override
+	public boolean equals(Object o){
+		GameState gs;
+		if(o instanceof GameState)
+			return false;
+		gs = (GameState)o;
+		
+		boolean arrayEq = Arrays.equals(whiteStones, gs.whiteStones) && Arrays.equals(blackStones, gs.blackStones);
+		
+		return false;
+	}
+	
+	
 	public GameState(IPitch sf, int[] z, IPlayer s, IPlayer s1, IPlayer s2) {
 		this(sf, z, "Update", s, false, s1, s2);
 	}

@@ -12,13 +12,9 @@ import java.util.ArrayDeque;
 import java.util.Iterator;
 
 import javax.swing.Timer;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import com.google.inject.Inject;
-
-import de.htwg.backgammon.aview.Tui;
 import de.htwg.backgammon.model.IDice;
 import de.htwg.backgammon.model.IPitch;
 import de.htwg.backgammon.model.IPlayer;
@@ -240,7 +236,6 @@ public class Controller extends Subject {
 	}
 
 	Timer t;
-
 	public void replayGame() {
 		Iterator<Memento> iterator = states.iterator();
 
