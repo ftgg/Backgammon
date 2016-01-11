@@ -13,7 +13,7 @@ public class BackgammonStringBuilder implements TuiSB {
 	public StringBuilder getInformations(GameState gs) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Steine auf der Bar: ");
-		sb.append(Bar(gs));
+		sb.append(bar(gs));
 		sb.append("\nWürfel: ");
 		int[] a = gs.getZuege();
 		for (int i = 0; i < 4; i++) {
@@ -28,7 +28,7 @@ public class BackgammonStringBuilder implements TuiSB {
 			sb.append(diceResult).append(" ");
 	}
 
-	private int Bar(GameState gs) {
+	private int bar(GameState gs) {
 		if (gs.getCurrent().getColor() == TokenColor.WHITE)
 			return gs.getWhiteBar();
 		return gs.getBlackBar();
@@ -135,9 +135,10 @@ public class BackgammonStringBuilder implements TuiSB {
 	}
 
 	private int newnumber(int number, int zeile) {
+		int num = number;
 		if (zeile == 2)
-			return --number;
-		return ++number;
+			return --num;
+		return ++num;
 	}
 
 	private char getchar(int number) {

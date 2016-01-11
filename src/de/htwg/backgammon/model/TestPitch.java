@@ -1,7 +1,5 @@
 package de.htwg.backgammon.model;
 
-import de.htwg.backgammon.model.implementation.Triangle;
-
 /**
  * approved exclusively for use of tests
  * 
