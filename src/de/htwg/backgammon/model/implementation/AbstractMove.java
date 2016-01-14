@@ -39,7 +39,7 @@ public abstract class AbstractMove {
 	
 
 	protected int putOnBar(Token beaten){
-		if (beaten == null) // target field was empty
+		if (beaten == null) 
 			return 0;
 		otherbar.add(beaten);
 		return 1;
