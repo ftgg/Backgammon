@@ -114,7 +114,6 @@ public class ControllerTest {
 		
 	}
 	
-	@Test
 	public void saveLoadGameTest(){
 		Controller cc = new Controller(4);
 		File f = new File("/test");
